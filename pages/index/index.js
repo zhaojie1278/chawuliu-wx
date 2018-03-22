@@ -76,13 +76,8 @@ Page({
       }
     ]
   },
-  //事件处理函数
-  bindViewTap: function() {
-    wx.navigateTo({
-      url: '../logs/logs'
-    })
-  },
   onLoad: function () {
+    // console.error(app.globalData);
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -110,7 +105,8 @@ Page({
       })
     }
 
-    this.getNowLocation();
+    this.getNowLocation(); // 获取当前位置
+    this.getTuis();
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -119,6 +115,48 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  getTuis: function(e) {
+    
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    var that = this;
+    wx.request({
+      url: 'https://wxwl.weiyueweb.com/admin/login/index.html',
+      data: {
+        bodydata: ['a','b',123,321]
+      },
+      method: 'GET',
+      dataType: 'json',
+      header: {
+        sign: '123123',
+        ver: 'v1'
+      },
+      success: function(data){
+        wx.hideLoading();
+        if(data.statusCode === 404) {
+          wx.showToast({
+            title: '抱歉，专线数据请求错误',
+            icon: 'none',
+            // icon: 'loading',
+            duration: 2000
+          })
+        }
+        console.log('success')
+        console.log(data)
+      },
+      fail: function(data) {
+        console.log('fail');
+        coonsole.log(data);
+      },
+      complete: function(data) {
+        console.log('complete');
+        console.log(data)
+      }
+    })
+    console.log();
   },
   calling:function(event){
     var that = this;
