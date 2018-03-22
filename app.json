@@ -1,0 +1,49 @@
+{
+  "pages":[
+    "pages/index/index",
+    "pages/zhuanxian/index",
+    "pages/zhuanxian/add",
+    "pages/contact/index",
+    "pages/contact/company",
+    "pages/contact/detail",
+    "pages/logs/logs"
+  ],
+  "window":{
+    "backgroundTextStyle":"light",
+    "navigationBarBackgroundColor": "#3573fa",
+    "navigationBarTitleText": "物流查询平台",
+    "navigationBarTextStyle":"#fff"
+  },
+  "tabBar": {
+    "color": "#7f8389",
+    "selectedColor": "#4a81fa",
+    "backgroundColor": "#f7f7fa",
+    "borderStyle": "black",
+    "list": [
+      {
+        "selectedIconPath": "images/tabBar/home02.png",
+        "iconPath": "images/tabBar/home01.png",
+        "pagePath": "pages/index/index",
+        "text": "首页"
+      },
+      {
+        "selectedIconPath": "images/tabBar/search02.png",
+        "iconPath": "images/tabBar/search01.png",
+        "pagePath": "pages/zhuanxian/index",
+        "text": "专线查询"
+      },
+      {
+        "selectedIconPath": "images/tabBar/publish02.png",
+        "iconPath": "images/tabBar/publish01.png",
+        "pagePath": "pages/zhuanxian/add",
+        "text": "发布专线"
+      },
+      {
+        "selectedIconPath": "images/tabBar/my02.png",
+        "iconPath": "images/tabBar/my01.png",
+        "pagePath": "pages/contact/index",
+        "text": "个人中心"
+      }
+    ]
+  }
+}

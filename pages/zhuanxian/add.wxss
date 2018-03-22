@@ -1,0 +1,39 @@
+
+/* pages/contact/company.wxss */
+
+.view-mg {
+  padding: 0 20rpx;
+  height:100rpx;
+  line-height:100rpx;
+  background:#fff;
+  border-bottom:1px solid #efefef;
+}
+
+.view-mg .locationClass {
+  color:#333;
+}
+
+.view-mg .lbl-left {
+  width:23%;
+  float:left;
+  color:#333;
+  font-size:0.9em;
+}
+
+.contact-info {
+  color:#3573fa; 
+  background:#f7f7fa; 
+  height: 80rpx; 
+  line-height: 80rpx; 
+  font-size:0.9em;
+}
+
+.view-mg .inp {
+  padding:27rpx 10rpx 0rpx;
+  font-size:0.8rem;
+  /* color:#999; */
+}
+
+.view-mg .btnsub {
+  background: #3573fa;
+}

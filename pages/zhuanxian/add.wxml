@@ -1,0 +1,41 @@
+<!--index.wxml-->
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <input name="rid" hidden value="{{rid}}"/>
+    <view class="view-mg">
+        <text class="lbl-left">出发地</text>
+        <input class="inp" id="start" name="start" maxlength="20" placeholder="请选择起始地" placeholder-class="locationClass" type="text" value="{{item.start}}" />
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">目的地</text>
+        <input class="inp" id="point" name="point" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point}}"/>
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">重货价格</text>
+        <input class="inp" id="zhonghuo" name="zhonghuo" maxlength="8" placeholder="请输入重货价格(元/吨)" type="digit" value="{{item.zhonghuo}}"/>
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">泡货价格</text>
+        <input class="inp" id="paohuo" name="paohuo" maxlength="8" placeholder="请输入泡货价格(元/方)" type="digit" value="{{item.paohuo}}"/>
+    </view>
+    <!--联系人信息-->
+    <view  class="view-mg contact-info">发货联系人信息</view>
+    <view class="view-mg">
+        <text class="lbl-left">联系人</text>
+        <input class="inp" id="nickname" name="nickname" maxlength="20" placeholder="请输入联系人" type="text" value="{{item.nickname}}"/>
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">电话</text>
+        <input class="inp" id="phone" name="phone" maxlength="11" placeholder="请输入电话" type="text" value="{{item.phone}}"/>
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">地址</text>
+        <input class="inp" id="address" name="address" maxlength="60" placeholder="请输入地址" type="text" value="{{item.address}}"/>
+    </view>
+    <view class="h-10" style="background:#f7f7fa"></view>
+    <view class="view-mg">
+        <button class="btnsub" type="primary" size="{{defaultsize}}" loading="{{loading}}" plain="{{plain}}"
+              disabled="{{disabled}}" form-type="{{form_type}}">保  存</button>
+    </view>
+  </form>
+</view>

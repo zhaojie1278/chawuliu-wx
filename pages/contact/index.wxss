@@ -1,0 +1,69 @@
+
+/* pages/contact/index.wxss */
+.userinfo{
+    height:100px;
+    padding: 50px;
+    text-align: center;
+    background: #3573fa;
+}
+.userinfo-txt {
+  display:flex;
+  flex-direction:row;
+  justify-content: center;
+}
+.userinfo-txt view.icon {
+  top:0rpx;
+  color:#fff;
+}
+.userinfo-avatar {
+  width: 160rpx;
+  height: 160rpx;
+  margin: 20rpx 20rpx 5rpx;
+  border-radius: 50%;
+  border:2px solid #fff;
+}
+.userinfo-nickname {
+    font-size:1em;
+    color:#fff;
+}
+
+.usermotto {
+  background: #fff;
+}
+
+.icon{
+  width:40rpx;
+  height:40rpx;
+  float: left;
+  font-size: 1.4em;
+  padding-left: 20rpx;
+  top: 20rpx;
+  color:#3573fa;
+  position: relative;
+}
+.cell {
+  height:100rpx;
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+.cell .body{
+  width: calc(100% - 80rpx);
+  float: right;
+  height: 100%;
+  line-height: 100rpx;
+  font-size:0.8em;
+  color:#444;
+}
+.cell .body .intro{
+  color:#999;
+  font-size:0.8em;
+  margin-left:15rpx;
+}
+.cell .body .i{
+  width: 50rpx;
+  height: 100%;
+  float: right;
+  color: #ccc;
+  font-weight: 900;
+  font-size: .8em;
+}

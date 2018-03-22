@@ -1,0 +1,113 @@
+/**index.wxss**/
+/* .lunbo {
+  
+}
+
+.lunbo-swiper {
+  
+} */
+
+image {
+  width:100%;
+}
+
+.navigator {
+  display:flex;
+  padding:40rpx 10rpx;
+  background:#fff;
+}
+
+.navigator .navhover .title {
+  color:#3573fa;
+}
+/* 
+.navigator view {
+  background:#fff;
+} */
+.navigator navigator {
+  width:50%;
+  text-align:center;
+  flex-direction:column;
+}
+
+.navigator navigator .icon {
+  width:55rpx;
+  height:50rpx;
+  padding:15rpx;
+  border-radius:50%;
+  color:#fff;
+}
+
+.navigator navigator .title {
+  font-size:0.8em;
+  margin-top: 15rpx;
+}
+
+/* 查询地址 */
+.search-zhuanxian {
+  padding: 20rpx;
+}
+.search-zhuanxian input {
+  font-size:1em;
+}
+
+.search-zhuanxian .tosel_inp{
+  background-color:#3573fa;
+}
+
+.search-zhuanxian .areas {
+  width: 100%;
+  display: flex;
+}
+
+.search-zhuanxian .areas-direction {
+  width: 20%;
+  height:93rpx;
+  line-height:93rpx;
+  text-align:center;
+}
+
+.search-zhuanxian .areas-direction .icon {
+  color:#3573fa;
+}
+
+.search-zhuanxian navigator {
+  width:40%;
+  text-align:center;
+  flex-direction:column;
+}
+
+.search-zhuanxian .btn-zhuanxian {
+  background-color:#fff;
+  width:100%;
+  /* border: 1px solid #dbdbdb; */
+}
+
+.search-zhuanxian .search {
+  margin-top: 20rpx;
+}
+
+/*专线推荐*/
+.tuijian-nav {
+  padding: 5rpx 20rpx;
+  background: #fff;
+  font-size: 0.9em;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-bottom: 5rpx;
+}
+
+.tuijian-list {
+  margin-top: 2rpx;
+  padding: 10rpx 20rpx;
+  height: 180rpx;
+}
+.tuijian-list .icon {
+  width:23%;
+  padding:5rpx 10rpx;
+  box-sizing:border-box;
+  flex-direction:column;
+}
+.tuijian-list img {
+  border-radius: 29px;
+}

@@ -1,0 +1,45 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="userinfo">
+    <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+    <block wx:else>
+      <image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" background-size="cover"></image>
+      <view class="userinfo-txt">
+        <view class="userinfo-nickname">{{userInfo.nickName}}</view>
+        <!--<view class="icon iconfont icon-shezhi"></view>-->
+      </view>
+    </block>
+  </view>
+  <view class="h-10"></view>
+  <view class="usermotto" >
+    <navigator class="cell" url="{{url1}}">
+        <view class="icon iconfont icon-tuandui"></view>
+        <view class="body">
+            <text>我的公司信息</text>
+            <text class="i">></text>
+        </view>
+    </navigator>
+    <navigator class="cell" url="{{url2}}">
+        <view class="icon iconfont icon-yaoqingma"></view>
+        <view class="body">
+            <text>我的邀请奖励</text>
+            <text class="i">></text>
+        </view>
+    </navigator>
+    <navigator class="cell" url="{{url3}}">
+        <view class="icon iconfont icon-shoucang"></view>
+        <view class="body">
+            <text>我的收藏</text>
+            <text class="i">></text>
+        </view>
+    </navigator>
+    <navigator class="cell" url="{{url4}}">
+        <view class="icon iconfont icon-mianfeizixun"></view>
+        <view class="body">
+            <text>联系客服</text>
+            <text class="intro">(客服工作事件9:00-17:00)</text>
+            <text class="i">></text>
+        </view>
+    </navigator>
+  </view>
+</view>

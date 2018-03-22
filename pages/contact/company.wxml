@@ -1,0 +1,57 @@
+<!--index.wxml-->
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <input name="rid" hidden value="{{rid}}"/>
+    <view class="view-mg">
+        <text class="lbl-left">公司名称</text>
+        <input class="inp" id="company" name="company" maxlength="50" placeholder="请输入公司名称" type="text" value="{{company}}" />
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">联系人</text>
+        <input class="inp" id="nickname" name="nickname" maxlength="20" placeholder="请输入联系人姓名" type="text" value="{{nickname}}"/>
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">手机号码</text>
+        <input class="inp" id="phone" name="phone" maxlength="11" placeholder="请输入手机号码" type="number" value="{{phone}}"/>
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">公司地址</text>
+        <input class="inp" id="address" name="address" maxlength="60" placeholder="请输入公司地址" type="text" value="{{address}}"/>
+    </view>
+    <!--
+        <view class="view-mg" style="height:300rpx;">
+            <view class="lbl-line"><text>公司介绍</text></view>
+            <view class="area_box">
+            <textarea name="guest_remark" class="textarea" placeholder="请填写" cursor-spacing="2" maxlength="{{50}}" fixed="{{false}}" bindinput="bindWordLimit" value=""/>
+            </view>
+        </view>
+    -->
+    <view class="view-mg" style="height:900rpx; background:#f7f7fa;">
+        <text class="lbl-line">公司图片</text><text style="color:#999;margin-left:20rpx;">(至少一张)</text>
+        <view class="company-img" style="padding-top:0rpx;">
+            <view class="f-i" id='0'>
+                <view class="company-img-i"><image bindtap="ylImg" data-src="{{companyimg.img0}}" src="{{companyimg.img0}}" id="img0"></image></view>
+                <view class="company-img-txt">门头照片</view>
+            </view>
+            <view class="f-i" id='1'>
+                <view class="company-img-i"><image bindtap="ylImg" data-src="{{companyimg.img1}}" src="{{companyimg.img1}}" id="img1"></image></view>
+                <view class="company-img-txt">场地照片</view>
+            </view>
+        </view>
+        <view class="company-img">
+            <view class="f-i" id='2'>
+                <view class="company-img-i"><image bindtap="ylImg" data-src="{{companyimg.img2}}" src="{{companyimg.img2}}" id="img2"></image></view>
+                <view class="company-img-txt">办公照片</view>
+            </view>
+            <view class="f-i" id='3'>
+                <view class="company-img-i"><image bindtap="ylImg" data-src="{{companyimg.img3}}" src="{{companyimg.img3}}" id="img3"></image></view>
+                <view class="company-img-txt">其他照片</view>
+            </view>
+        </view>
+    </view>
+    <view class="view-mg" style="padding-bottom: 30rpx;">
+        <button class="btnsub" type="primary" size="{{defaultsize}}" loading="{{loading}}" plain="{{plain}}"
+              disabled="{{disabled}}" form-type="{{form_type}}">提  交</button>
+    </view>
+  </form>
+</view>

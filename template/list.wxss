@@ -1,0 +1,91 @@
+
+/* list */
+/*
+.list{
+	 padding: 10rpx 0rpx; 
+}
+*/
+
+.list .item{
+	margin-bottom: 20rpx;
+	background: #fff;
+}
+
+.list .item .info {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+  	align-items: center;
+	border-bottom: 1px solid #eee;
+}
+
+.list .item-left {
+	display: flex;
+	flex-direction: row;
+}
+.list .item .icon{
+	/* width:40%; */
+	padding: 28rpx 20rpx;
+	/* box-sizing: border-box; */
+}
+.list .item .icon image{
+	width: 150rpx;
+	height: 150rpx;
+	border: 0px solid #ccc;
+	box-sizing: border-box;
+	display: block;
+	overflow: hidden;
+	border-radius: 100rpx;
+}
+
+.list .item .body {
+	display: flex;
+	flex-direction: column;
+	/* align-items:center; */
+	justify-content: center;
+}
+
+.list .item .body .title {
+	margin-bottom: 10rpx;
+	font-size: 1em;
+}
+
+.list .item .body .describe {
+	font-size: 0.8em;
+	color: #666666;
+}
+.list .item .bohao {
+  margin-right:20rpx;
+}
+.list .item .bohao .icon {
+  padding:15rpx;
+  border-radius:50%;
+  color:#fff;
+}
+.list .item .address {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	  align-items: center;
+	  height:100rpx;
+	  line-height: 100rpx;
+}
+
+.list .item .iconaddress {
+	color:#5186fb;
+	top:4rpx;
+	position:relative;
+	margin-right:2rpx;
+}
+
+.list .item .addmap {
+	justify-content:flex-start;
+	padding: 15rpx 10rpx 15rpx 20rpx;
+	width: 500rpx;
+}
+
+.list .item .addresstxt {
+	font-size: 0.8em;
+	color:#666666;
+	padding-right: 20rpx;
+}
