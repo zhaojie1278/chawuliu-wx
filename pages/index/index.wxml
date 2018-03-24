@@ -2,7 +2,7 @@
 <view class='lunbo'>  
   <swiper class='lunbo-swiper' indicator-dots="{{indicatorDots}}"    
           autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}" indicator-color="{{indicatorColor}}" indicator-active-color="{{indicatorActiveColor}}">    
-          <block wx:for="{{imgUrls}}" wx:key="{{index}}">    
+          <block wx:for="{{imgUrls}}" wx:key="index">    
               <swiper-item>    
                   <!--<navigator url="{{item.link}}" hover-class="navigator-hover">-->
                       <image src="{{item.url}}" class="slide-image" width="355" height="150"/>    

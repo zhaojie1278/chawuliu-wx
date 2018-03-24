@@ -19,51 +19,12 @@ Page({
       {
         id:0,
         image: "../../images/testimg/1.jpg",
-        title: "大江物流",
-        pic:   "￥2000-4000/天",
-        message:"合肥-上海",
-        date:  "01-04",
-        time:  "6天/周",
-        city:  "广州 白云区",
-        trade: "互联网/IT",
-        phone: '13966780466'
+        company: "大江物流",
+        phone: '13966780466',
+        address: '合肥购物广场物流园1234',
+        start:'合肥',
+        point:'杭州'
       },
-      {
-        id:1,
-        image: "../../images/testimg/2.jpg",
-        title: "飞速物流",
-        pic:   "￥100-200/天",
-        message:"合肥-杭州",
-        date:  "03-04",
-        time:  "5天/周",
-        city:  "广州 天河区",
-        trade: "其他",
-        phone: '13966780466'
-      },
-      {
-        id:1,
-        image: "../../images/testimg/3.jpg",
-        title: "新元物流",
-        pic:   "￥1000-3000/天",
-        message:"合肥-深圳",
-        date:  "05-04",
-        time:  "5天/周",
-        city:  "广州 白云区",
-        trade: "服务/中介",
-        phone: '13966780466'
-      },
-      {
-        id:1,
-        image: "../../images/testimg/4.jpg",
-        title: "新时达物流",
-        pic:   "￥4000-5000/天",
-        message:"合肥-广州",
-        date:  "05-04",
-        time:  "5天/周",
-        city:  "成都 高新区",
-        trade: "金融",
-        phone: '13966780466'
-      }
     ],
     navTxts:navTxts,
     navid:0
@@ -102,7 +63,8 @@ Page({
       })
     }
 
-    this.getNowLocation();
+    this.getNowLocation(); // 获取当前位置
+    this.getSearches(); // 获取查询专线
   },
   getUserInfo: function(e) {
     console.log(e)
@@ -111,6 +73,55 @@ Page({
       userInfo: e.detail.userInfo,
       hasUserInfo: true
     })
+  },
+  getSearches: function(e) {
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    var that = this;
+    wx.request({
+      url: app.globalData.config.service.zhuanxianUrl+'/search',
+      method: 'POST',
+      dataType: 'json',
+      header: {
+        sign: 'sign123123',
+        ver: 'v1',
+        "content-type": "application/x-www-form-urlencoded"
+      },
+      data: {
+        bodydata: ['a','b',123,321]
+      },
+      success: function(res){
+        wx.hideLoading();
+        console.log(res);
+        if(res.data.status !== 1) {
+          wx.showToast({
+            title: '抱歉，专线数据请求错误',
+            icon: 'none',
+            // icon: 'loading',
+            duration: 2000
+          })
+        }
+        console.log('success123')
+        that.setData({list:res.data.data.list})
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '抱歉，数据地址请求错误.v01',
+          icon: 'none',
+          // icon: 'loading',
+          duration: 2000
+        })
+        console.log('fail');
+        // coonsole.log(res);
+      },
+      complete: function(res) {
+        console.log('complete');
+        // console.log(res)
+      }
+    })
+    // console.log();
   },
   calling:function(event){
     var that = this;

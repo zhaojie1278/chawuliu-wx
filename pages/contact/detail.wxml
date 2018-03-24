@@ -3,14 +3,18 @@
     <view class="info">
         <view class="item-left">
             <view class="icon">
-                <image src="{{item.image}}" />
+                <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+                <block wx:else>
+                <image src="{{userInfo.avatarUrl}}" background-size="cover"/>
+                </block>
             </view>
             <view class="body">
-                <view class="title"><text class="nowrap">{{item.title}} </text></view>
+                <view class="title"><text class="nowrap">{{item.company}} </text></view>
                 <view class="describe">
-                    <text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin-right: 15rpx;"></text>
-                    <block wx:for="{{item.message}}">
-                    <text class="nowrap" style="margin-right: 15rpx;">{{item}}</text>
+                    <text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin-right: 10rpx;"></text>
+                    <block wx:for="{{item.zhuanxians[0]}}" wx:key="id" wx:for-item="zx3">
+                    <text wx:if="{{index==0}}" class="nowrap" style="margin-right: 10rpx;">{{zx3.start + '-' + zx3.point}}</text>
+                    <text wx:else="{{index==1}}" class="nowrap">{{zx3.start + '-' + zx3.point}}</text>
                     </block>
                 </view>
             </view>
@@ -22,7 +26,7 @@
     <view class="address">
         <view class="addmap nowrap">
             <text class="iconaddress iconfont icon-ditu icon-min"></text>
-            <text class="addresstxt">合肥市同林北路123东A-011231231212332</text>
+            <text class="addresstxt">{{item.address}}</text>
         </view>
         <view class="addresstxt">
             <!--距离 12.18 Km-->
@@ -33,15 +37,25 @@
     <view class="msg-intro">
         <view class="title">公司介绍</view>
         <view class="detail">
-        鑫源物流自成立以来，秉承“诚信为本，信誉第一”的经营理念，以“安全、快捷、准确、方便”为宗旨,以市场为导向，鑫源物流竭诚为客户提供优质满意的服务，鑫源物流 努力打造物流行业一流品牌，鑫源物流 欢迎您光临指导。
+        {{item.descri}}
         </view>
         <view class="zhuanxians">
             <view class="title">公司运营专线有：</view>
             <view class="detail">
-            <view><text>合肥-上海专线；</text><text class="detail2">合肥-无锡专线；</text></view>
-            <view><text>合肥-江阴专线；</text><text class="detail2">合肥-张家口专线；</text></view>
-            <view><text>合肥-上海专线；</text><text class="detail2">合肥-无锡专线；</text></view>
-            <view><text>合肥-江阴专线；</text><text class="detail2">合肥-张家口专线；</text></view>
+                <block wx:for="{{item.zhuanxians}}" wx:for-item="zx" wx:key="id">
+                <view>
+                    <block wx:for="{{zx}}" wx:for-item="zxsingle" wx:for-index="zxindex" wx:key="zxindex">
+                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}-{{zxsingle.point}}专线；</text>
+                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}-{{zxsingle.point}}专线；</text>
+                    </block>
+                </view>
+                </block>
+            <!--
+                <view><text>合肥-上海专线；</text><text class="detail2">合肥-无锡专线；</text></view>
+                <view><text>合肥-江阴专线；</text><text class="detail2">合肥-张家口专线；</text></view>
+                <view><text>合肥-上海专线；</text><text class="detail2">合肥-无锡专线；</text></view>
+                <view><text>合肥-江阴专线；</text><text class="detail2">合肥-张家口专线；</text></view>
+                -->
             </view>
         </view>
     </view>
@@ -51,21 +65,18 @@
         <view class="title">图片介绍</view>
         <view class="images">
             <view>
-                <image src="../../images/testimg/1.jpg" bindtap="ylImg" data-src="../../images/testimg/1.jpg"></image>
+                <image src="{{item.img1}}" bindtap="ylImg" data-src="{{item.img1}}"></image>
             </view>
             <view>
-                <image src="../../images/testimg/2.jpg" bindtap="ylImg" data-src="../../images/testimg/2.jpg"></image>
-            </view>
-            <view>
-                <image src="../../images/testimg/3.jpg" bindtap="ylImg" data-src="../../images/testimg/3.jpg"></image>
+                <image src="{{item.img2}}" bindtap="ylImg" data-src="{{item.img2}}"></image>
             </view>
         </view>
         <view class="images">
             <view>
-                <image src="../../images/testimg/1.jpg" bindtap="ylImg" data-src="../../images/testimg/1.jpg"></image>
+                <image src="{{item.img3}}" bindtap="ylImg" data-src="{{item.img3}}"></image>
             </view>
             <view>
-                <image src="../../images/testimg/2.jpg" bindtap="ylImg" data-src="../../images/testimg/2.jpg"></image>
+                <image src="{{item.img4}}" bindtap="ylImg" data-src="{{item.img4}}"></image>
             </view>
         </view>
         

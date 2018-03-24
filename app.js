@@ -1,4 +1,8 @@
 //app.js
+
+var config = require('./config')
+// console.log(config);
+
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -35,6 +39,7 @@ App({
   },
   globalData: {
     userInfo: null,
-    baiduAk:'pdDY8jZw89lTn8OHEA6rS8aWaDNmSEc4'
+    baiduAk:'pdDY8jZw89lTn8OHEA6rS8aWaDNmSEc4',
+    config:config
   }
 })

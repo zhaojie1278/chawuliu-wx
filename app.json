@@ -4,8 +4,8 @@
     "pages/zhuanxian/index",
     "pages/zhuanxian/add",
     "pages/contact/index",
-    "pages/contact/company",
     "pages/contact/detail",
+    "pages/contact/company",
     "pages/logs/logs"
   ],
   "window":{

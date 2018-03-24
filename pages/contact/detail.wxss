@@ -15,7 +15,8 @@
 
 .item-left {
 	display: flex;
-	flex-direction: row;
+  flex-direction: row;
+  width: 250rpx;
 }
 
 .item .icon{
@@ -122,6 +123,9 @@
 .item .msg-intro .zhuanxians .detail {
   padding: 0 20rpx 25rpx;
 }
+/* 
+.item .msg-intro .zhuanxians .detail1 {
+} */
 
 .item .msg-intro .zhuanxians .detail2 {
   margin-left: 30rpx;

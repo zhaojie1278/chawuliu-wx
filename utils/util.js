@@ -17,3 +17,15 @@ const formatNumber = n => {
 module.exports = {
   formatTime: formatTime
 }
+
+/** navigateBack with an unexist webviewId */
+/* function buttonClicked(self) {
+  self.setData({
+    buttonClicked: true
+  })
+  setTimeout(function () {
+    self.setData({
+      buttonClicked: false
+    })
+  }, 500)
+} */
