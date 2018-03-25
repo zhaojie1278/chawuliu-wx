@@ -92,8 +92,10 @@ App({
         console.log(sharedRes)
       },
       fail: function(sharedFailRes) {
+        /* 
         sharedFailRes = sharedFailRes.errMsg.split(':');
         util.showError('转发失败：'+sharedFailRes[1])
+         */
       }
     }
   },

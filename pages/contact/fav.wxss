@@ -1,0 +1,51 @@
+
+/* pages/contact/fav.wxss */
+
+/* 未收藏 */
+.nofav {
+  height: 200rpx;
+  line-height: 200rpx;
+  width: 100%;
+  text-align: center;
+  font-size:0.8em;
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+.icon{
+  width:40rpx;
+  height:40rpx;
+  float: left;
+  font-size: 1.4em;
+  padding-left: 20rpx;
+  top: 20rpx;
+  color:#3573fa;
+  position: relative;
+}
+
+.cell {
+  height:100rpx;
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+.cell .body{
+  width: calc(100% - 80rpx);
+  float: right;
+  height: 100%;
+  line-height: 100rpx;
+  font-size:0.8em;
+  color:#444;
+}
+.cell .body .intro{
+  color:#999;
+  font-size:0.8em;
+  margin-left:15rpx;
+}
+.cell .body .i{
+  width: 50rpx;
+  height: 100%;
+  float: right;
+  color: #ccc;
+  font-weight: 900;
+  font-size: .8em;
+}

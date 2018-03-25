@@ -36,6 +36,14 @@ var showSuccess = text => wx.showToast({
 })
 
 // 显示成功提示
+var showMaskSuccess = text => wx.showToast({
+  title: text,
+  icon: 'success',
+  duration: 2000,
+  mask: true
+})
+
+// 显示成功提示
 var showError = text => wx.showToast({
   title: text,
   icon: 'none',
@@ -53,10 +61,10 @@ var showModel = (title, content) => {
   })
 }
 
-module.exports = { formatTime, showBusy, showSuccess, showModel }
+// module.exports = { formatTime, showBusy, showSuccess, showModel }
 
 module.exports = {
-  formatTime, showMaskTip1500, showBusy, showSuccess, showError, showModel
+  formatTime, showMaskTip1500, showBusy, showSuccess, showMaskSuccess, showError, showModel
 }
 
 /** navigateBack with an unexist webviewId */

@@ -209,6 +209,11 @@
 /* 去除button边框 */
 .bottom .share-btn:after{border:none;}
 
+.bottom .fav {
+  color:#ff865e;
+  text-align: left;
+}
+
 .bottom .contact-us {
   color:#fff;
   background: #ff865e;

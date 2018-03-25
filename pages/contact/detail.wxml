@@ -3,10 +3,7 @@
     <view class="info">
         <view class="item-left">
             <view class="icon">
-                <button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
-                <block wx:else>
-                <image src="{{userInfo.avatarUrl}}" background-size="cover"/>
-                </block>
+                <image src="{{item.image}}" background-size="cover"/>
             </view>
             <view class="body">
                 <view class="title"><text class="nowrap">{{item.company}} </text></view>
@@ -84,6 +81,10 @@
 </view>
 <view class='bottom'>
     <view><button class="share-btn" open-type="share"><text class='icon-min iconfont icon-fenxiang'></text><text>分享</text></button></view>
-    <view bindtap="favcompany" id='favcompany' data-id="{{item.id}}"><text class='icon-min iconfont icon-shoucang'></text><text>收藏</text></view>
+    <view bindtap="favcompany" id='favcompany' data-id="{{item.id}}" data-isfav="{{item.isfav ? 1:0}}" class="{{item.isfav ? 'fav' : ''}}">
+        <text class="{{item.isfav ? 'fav icon-min iconfont icon-shoucang' : 'icon-min iconfont icon-shoucang'}}"></text>
+        <text wx:if="{{item.isfav}}">已收藏</text>
+        <text wx:else>收藏</text>
+    </view>
     <view class="contact-us" bindtap="calling" data-phone-number="{{item.phone}}"><text class='icon-min iconfont icon-mianfeizixun'></text><text>联系我们</text></view>
 </view>

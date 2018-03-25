@@ -42,10 +42,23 @@ Page({
           point:'上海5'
         }],
       ],
-      phone:"13912341234"
+      isfav:false
     }
   },
   onLoad: function ($query) {
+
+    var pages = getCurrentPages();
+    // console.log(pages)
+    if(pages.length > 1){
+        //上一个页面实例对象
+        var prePage = pages[pages.length - 2];
+
+        console.log(prePage.route);
+        //关键在这里
+        // prePage.changeData(e.detail.value)
+    }
+
+    
     // console.log(this.data);
     // 加载中
     wx.showLoading({
@@ -59,12 +72,27 @@ Page({
     that.getUserInfoThis();
 
     var cid = $query.id
+    var openid = wx.getStorageSync('openid')
+    if (!openid) {
+      util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
+      return;
+    }
 
     wx.request({
-      url: app.globalData.config.service.contactUrl+'/'+cid,
-      type: 'json',
-      success: function(res) {
-        if (res.data.status !== 1) {
+      url: app.globalData.config.service.contactUrl,
+      data: {
+        cid: cid,
+        openid: openid
+      },
+      method: 'POST',
+      dataType: 'json',
+      header: {
+        sign: 'sign123123',
+        ver: 'v1',
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success (res) {
+        if (res.data.status !== 1) {       
           wx.showToast({
             title: '抱歉，请求失败，' + res.data.message,
             icon: 'none',
@@ -76,6 +104,16 @@ Page({
           })
         }
         console.log(res);
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '抱歉，数据地址请求错误.v04',
+          icon: 'none',
+          // icon: 'loading',
+          duration: 2000
+        })
+        console.log('fail');
+        // coonsole.log(res);
       }
     })
     
@@ -144,12 +182,14 @@ Page({
     }
   },
   favcompany: function(e) {
+    var that = this
     var openid = wx.getStorageSync('openid')
     if (!openid) {
       util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
       return;
     }
-    var companyid = e.currentTarget.dataset.id;
+    var cid = e.currentTarget.dataset.id;
+    var isfav = e.currentTarget.dataset.isfav;
     
     wx.showLoading({
         title: '请求中..',
@@ -160,7 +200,8 @@ Page({
       url: app.globalData.config.service.contactUrl + '/favcompany',
       data: {
         openid: openid,
-        companyid: companyid
+        cid: cid,
+        isfav: isfav
       },
       method: 'POST',
       header: {
@@ -171,7 +212,13 @@ Page({
         if (res.data.status != 1) {
           util.showError('收藏失败，请稍后重试')
         } else {
-          util.showSuccess('收藏成功')
+          var isfavMsg = isfav ? '已取消收藏' : '收藏成功'
+          util.showMaskSuccess(isfavMsg)
+          var itemData = that.data.item;
+          itemData.isfav = !isfav;
+          that.setData({
+            item : itemData
+          })
         }
       },
       fail: function() {

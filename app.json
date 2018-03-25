@@ -6,6 +6,7 @@
     "pages/contact/index",
     "pages/contact/detail",
     "pages/contact/company",
+    "pages/contact/fav",
     "pages/logs/logs"
   ],
   "window":{

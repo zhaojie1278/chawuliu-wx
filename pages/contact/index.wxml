@@ -19,6 +19,7 @@
             <text class="i">></text>
         </view>
     </navigator>
+    <!--
     <navigator class="cell" url="{{url2}}">
         <view class="icon iconfont icon-yaoqingma"></view>
         <view class="body">
@@ -26,6 +27,7 @@
             <text class="i">></text>
         </view>
     </navigator>
+    -->
     <navigator class="cell" url="{{url3}}">
         <view class="icon iconfont icon-shoucang"></view>
         <view class="body">
