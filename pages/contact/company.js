@@ -1,36 +1,107 @@
 //index.js
 //获取应用实例
 const app = getApp()
+var util = require('../../utils/util.js')
 
 Page({
   data: {
     userInfo: {},
-    companyimg:{
-      img0:'../../images/company/default.jpg',
-      img1:'../../images/company/default.jpg',
-      img2:'../../images/company/default.jpg',
-      img3:'../../images/company/default.jpg'
+    item: {
+      id: 0
     },
-    imglist:[]
+    companyimg:{
+      img1:'',
+      img2:'',
+      img3:'',
+      img4:'',
+    },
+    defaultimg: '../../images/company/default.jpg',
+    imglist:{},
+    form_type: 'submit',
+    disabled: false,
+    plain: false,
+    loading: false,
+    defaultsize: 'default'
   },
   onLoad: function () {
+    var that = this
     // 获取已保存信息
     wx.showLoading({
         title: '加载中..',
         mask: true
     })
-    
 
+    // 获取公司信息
+    var openid = wx.getStorageSync('openid');
+    if (!openid) {
+      util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
+      return;
+    }
+    wx.request({
+      url: app.globalData.config.service.contactUrl+'/companyinfo',
+      data: {
+        openid: openid
+      },
+      method: 'POST',
+      dataType: 'json',
+      header: {
+        sign: 'sign123123',
+        ver: 'v1',
+        'content-type': 'application/x-www-form-urlencoded'
+      },
+      success: function(res){
+        wx.hideLoading();
+        // console.log(res);
+        if(res.data.status == 1) {
+          var companyimgs = {
+            'img1':res.data.data.domainimg1,
+            'img2':res.data.data.domainimg2,
+            'img3':res.data.data.domainimg3,
+            'img4':res.data.data.domainimg4,
+          }
+          var imglists = {
+            'img1':res.data.data.img1,
+            'img2':res.data.data.img2,
+            'img3':res.data.data.img3,
+            'img4':res.data.data.img4,
+          }
+          
+          that.setData({
+            item: res.data.data,
+            companyimg: companyimgs,
+            imglist: imglists
+          })
+        }
+        // console.log(that.data);
+      },
+      fail: function(res) {
+        wx.showToast({
+          title: '抱歉，数据地址请求错误.v02',
+          icon: 'none',
+          // icon: 'loading',
+          duration: 2000
+        })
+        console.log('fail');
+        // coonsole.log(res);
+      },
+      complete: function(res) {
+        // console.log('complete');
+        // console.log(res)
+      }
+    })
+    
     // wx.request({ 
-      wx.hideLoading();
+    // wx.hideLoading();
+  },
+  onShareAppMessage: function (res) { // 转发
+    return app.shareFun(res)
   },
   //点击选择图片
   checkImg:function(imgId){
     // console.log(imgId);
     // console.log('点击选择图片');
     self=this
-    var companyImgs = self.data.companyimg;
-    // console.log( companyImgs);
+    console.log(self);
     
     wx.chooseImage({
     count: 1, // 默认9
@@ -39,11 +110,50 @@ Page({
     success: function (res) {
       // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
       var tempFilePaths = res.tempFilePaths
-      companyImgs[imgId] = tempFilePaths[0];
-      self.setData({
-        imglist:companyImgs,
-        companyimg:companyImgs
+
+      console.log(res)
+
+      // 上传到服务器
+      wx.uploadFile({
+        url: app.globalData.config.service.uploadUrl, //仅为示例，非真实的接口地址
+        filePath: tempFilePaths[0],
+        name: 'file',
+        header: {
+          'content-type': 'multipart/form-data'
+        },
+        formData:{
+          'imgid': '123123'
+        },
+        success: function(res){
+          var data = res.data
+          // console.log(res);
+          var jsonData = JSON.parse(data)
+          // console.log(jsonData);
+          // console.log(jsonData.status);
+
+          if (jsonData.status != 1) {
+            util.showError('抱歉，上传失败，请稍后重试')
+          } else {
+            var companyImgs = self.data.companyimg;
+            var imglist = self.data.imglist;
+
+            var imgUploadUrl = jsonData.data.imgurl
+            imglist[imgId] = imgUploadUrl;
+            console.log(imglist)
+
+            // 设置本地展示
+            companyImgs[imgId] = tempFilePaths[0];
+            self.setData({
+              imglist:imglist,
+              companyimg:companyImgs
+            })
+          }
+        },
+        fail: function() {
+          util.showError('上传失败')
+        }
       })
+
     }
     })
   },
@@ -75,91 +185,92 @@ Page({
     }*/
   },
   formSubmit:function(e){
+    wx.showLoading({
+      title: '正在提交...',
+      mask:true
+    })
+
     self=this
     //图片
     var imglist = self.data.imglist
-    //提问内容
-    var content=e.detail.value.content;
-    if(content==''){
-     wx.showToast({
-      title: '内容不能为空',
-      icon: 'loading',
-      duration: 1000,
-      mask:true
-     })
-    }
-    wx.showLoading({
-     title: '正在提交...',
-     mask:true
-    })
-    //添加问题
-    wx.request({
-     url: 'https://xxxxxxxxxx/index.PHP?g=user&m=center&a=createwt',
-     data: {
-      content:content
-     },
-     method: 'GET', // OPTIONS, GET, HEAD, POST, PUT, DELETE, TRACE, CONNECT
-     header: app.globalData.header, // 设置请求的 header
-     success: function (res) {
-      // success
-      if(typeof(res.data)=='number'){
-       if (imglist != '') {
-        //开始插入图片
-        for(var i=0;i<imglist.length;i++){
-         //上传至服务器
-         wx.uploadFile({
-          url: 'https://xxxxxxxx/index.php?g=user&m=center&a=upload', //仅为示例，非真实的接口地址
-          filePath: imglist[0],
-          name: 'files',
-          formData: {
-           'wtid': res.data
-          },
-          header: app.globalData.header,
-          success: function (res) {
-           if(i>=imglist.length){
-            self.setData({
-             imglist:[]
-            })
-            wx.hideLoading();
-            wx.showToast({
-             title: '提问成功',
-             icon: 'success',
-             duration: 2000,
-             mask: true
-            })
-            wx.navigateBack({
-             delta: 1
-            })
-           }
-          }
-         })
-        }
-        console.log(imglist);
-       }else{
-        wx.hideLoading();
-        wx.showToast({
-         title: '提问成功',
-         icon: 'success',
-         duration: 2000,
-         mask: true
-        })
-        wx.navigateBack({
-         delta: 1
-        })
-       }
-      }else{
-       wx.hideLoading();
-       wx.showToast({
-        title: res.data,
-        icon: 'loading',
-        duration: 1000,
-        mask: true
-       })
+
+    // console.log(e)
+
+    // 提交校验
+    var formdata = e.detail.value
+    if(formdata.company==''){
+      util.showMaskTip1500('公司名称不能为空')
+    } else if (formdata.nickname == '') {
+      util.showMaskTip1500('联系人不能为空')
+    } else if (formdata.phone == '') {
+      util.showMaskTip1500('手机号码不能为空')
+    } else if (formdata.address == '') {
+      util.showMaskTip1500('公司地址不能为空')
+    } else if (formdata.img4 == '' && formdata.img1 == '' && formdata.img2 == '' && formdata.img3 == '') { // 图片地址至少一张
+      util.showMaskTip1500('请至少选择一张图片')
+    } else {
+      var openid = wx.getStorageSync('openid');
+      if (!openid) {
+        util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
+        return;
       }
-     },
-     fail: function (res) {
-      self.onLoad();
-     }
-    })
+
+      formdata.openid = openid
+
+      //提交
+      var reqUrl = app.globalData.config.service.contactUrl;
+      if (formdata.id == 0) {
+        formdata.fromooid = app.globalData.ooid
+        reqUrl = reqUrl + '/addcompany'
+      } else {
+        reqUrl = reqUrl + '/updatecompany'
+      }
+      wx.request({
+        url: reqUrl,
+        method: 'POST',
+        dataType: 'json',
+        header: {
+          sign: 'sign123123',
+          ver: 'v1',
+          "content-type": "application/x-www-form-urlencoded"
+        },
+        data: formdata,
+        success: function(res){
+          wx.hideLoading();
+          if(res.data.status !== 1) {
+            // try {
+              util.showError(res.data.message)
+            /* } catch(e) {
+              console.log(e)
+            } */
+          } else {
+            wx.showToast({
+              title: '保存成功',
+              icon: 'success',
+              duration: 2000,
+              mask: true,
+              success: function(res) {
+                // console.log(res)
+                setTimeout(
+                  function() {
+                    wx.switchTab({
+                      url: '/pages/contact/index'
+                    })
+                },1000)
+              }
+            })
+          }
+        },
+        fail: function(res) {
+          util.showError('抱歉，数据地址请求错误.v02')
+          console.log('fail');
+          // coonsole.log(res);
+        },
+        complete: function(res) {
+          console.log('complete');
+          // console.log(res)
+        }
+      })
+    }
   }
 })

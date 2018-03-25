@@ -1,6 +1,7 @@
 //index.js
 //获取应用实例
 const app = getApp()
+var util = require('../../utils/util')
 
 Page({
   data: {
@@ -81,6 +82,9 @@ Page({
     // wx.request({ 
       wx.hideLoading();
   },
+  onShareAppMessage: function (res) { // 转发
+    return app.shareFun(res)
+  },
   calling:function(event){
     var that = this;
     // console.log(that.data);
@@ -139,12 +143,44 @@ Page({
       })
     }
   },
-  getUserInfo: function(e) {
-    // console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
+  favcompany: function(e) {
+    var openid = wx.getStorageSync('openid')
+    if (!openid) {
+      util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
+      return;
+    }
+    var companyid = e.currentTarget.dataset.id;
+    
+    wx.showLoading({
+        title: '请求中..',
+        mask: true
+    })
+
+    wx.request({
+      url: app.globalData.config.service.contactUrl + '/favcompany',
+      data: {
+        openid: openid,
+        companyid: companyid
+      },
+      method: 'POST',
+      header: {
+        'content-type' : 'application/x-www-form-urlencoded'
+      },
+      success: function(res) {
+        wx.hideLoading()
+        if (res.data.status != 1) {
+          util.showError('收藏失败，请稍后重试')
+        } else {
+          util.showSuccess('收藏成功')
+        }
+      },
+      fail: function() {
+        wx.showToast({
+          title: '请求失败 v03',
+          icon: 'none',
+          duration: 2000
+        })
+      }
     })
   }
 })

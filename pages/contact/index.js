@@ -15,11 +15,13 @@ Page({
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
+      console.log('1')
       this.setData({
         userInfo: app.globalData.userInfo,
         hasUserInfo: true
       })
     } else if (this.data.canIUse){
+      console.log('2')
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
       // 所以此处加入 callback 以防止这种情况
       app.userInfoReadyCallback = res => {
@@ -29,6 +31,7 @@ Page({
         })
       }
     } else {
+      console.log('3')
       // 在没有 open-type=getUserInfo 版本的兼容处理
       wx.getUserInfo({
         success: res => {
@@ -40,6 +43,9 @@ Page({
         }
       })
     }
+  },
+  onShareAppMessage: function (res) { // 转发
+    return app.shareFun(res)
   },
   getUserInfo: function(e) {
     // console.log(e)

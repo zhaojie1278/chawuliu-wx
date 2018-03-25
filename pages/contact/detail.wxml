@@ -14,7 +14,7 @@
                     <text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin-right: 10rpx;"></text>
                     <block wx:for="{{item.zhuanxians[0]}}" wx:key="id" wx:for-item="zx3">
                     <text wx:if="{{index==0}}" class="nowrap" style="margin-right: 10rpx;">{{zx3.start + '-' + zx3.point}}</text>
-                    <text wx:else="{{index==1}}" class="nowrap">{{zx3.start + '-' + zx3.point}}</text>
+                    <text wx:elif="{{index==1}}" class="nowrap">{{zx3.start + '-' + zx3.point}}</text>
                     </block>
                 </view>
             </view>
@@ -65,25 +65,25 @@
         <view class="title">图片介绍</view>
         <view class="images">
             <view>
-                <image src="{{item.img1}}" bindtap="ylImg" data-src="{{item.img1}}"></image>
+                <image src="{{item.domainimg1}}" bindtap="ylImg" data-src="{{item.domainimg1}}"></image>
             </view>
             <view>
-                <image src="{{item.img2}}" bindtap="ylImg" data-src="{{item.img2}}"></image>
+                <image src="{{item.domainimg2}}" bindtap="ylImg" data-src="{{item.domainimg2}}"></image>
             </view>
         </view>
         <view class="images">
             <view>
-                <image src="{{item.img3}}" bindtap="ylImg" data-src="{{item.img3}}"></image>
+                <image src="{{item.domainimg3}}" bindtap="ylImg" data-src="{{item.domainimg3}}"></image>
             </view>
             <view>
-                <image src="{{item.img4}}" bindtap="ylImg" data-src="{{item.img4}}"></image>
+                <image src="{{item.domainimg4}}" bindtap="ylImg" data-src="{{item.domainimg4}}"></image>
             </view>
         </view>
         
     </view>
 </view>
 <view class='bottom'>
-    <view><text class='icon-min iconfont icon-fenxiang'></text><text>分享</text></view>
-    <view><text class='icon-min iconfont icon-shoucang'></text><text>收藏</text></view>
+    <view><button class="share-btn" open-type="share"><text class='icon-min iconfont icon-fenxiang'></text><text>分享</text></button></view>
+    <view bindtap="favcompany" id='favcompany' data-id="{{item.id}}"><text class='icon-min iconfont icon-shoucang'></text><text>收藏</text></view>
     <view class="contact-us" bindtap="calling" data-phone-number="{{item.phone}}"><text class='icon-min iconfont icon-mianfeizixun'></text><text>联系我们</text></view>
 </view>

@@ -11,6 +11,7 @@ var navTxts = [
 ]
 Page({
   data: {
+    canIUse: false,
     startCity:'合肥',
     pointCity:'杭州',
     userInfo: {},
@@ -66,6 +67,9 @@ Page({
     this.getNowLocation(); // 获取当前位置
     this.getSearches(); // 获取查询专线
   },
+  onShareAppMessage: function (res) { // 转发
+    return app.shareFun(res)
+  },
   getUserInfo: function(e) {
     console.log(e)
     app.globalData.userInfo = e.detail.userInfo
@@ -94,7 +98,8 @@ Page({
       },
       success: function(res){
         wx.hideLoading();
-        console.log(res);
+        // console.log(res);
+        // console.log('res.data.status:'+res.data.status);
         if(res.data.status !== 1) {
           wx.showToast({
             title: '抱歉，专线数据请求错误',

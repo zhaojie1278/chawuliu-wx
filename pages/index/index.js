@@ -1,14 +1,14 @@
-//index.js
+    //index.js
 //获取应用实例
 const app = getApp()
+var util = require('../../utils/util')
 // console.log(app);
 Page({
   data: {
+    canIUse: false,
     startCity:'合肥',
     pointCity:'杭州',
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     imgUrls: [  {    
         link:'/pages/index/index',    
         url:'../../images/lunbo/1.jpg'     
@@ -37,12 +37,18 @@ Page({
       },
     ]
   },
-  onLoad: function () {
-    // console.error(app.globalData);
+  onLoad: function (e) {
+    /* 是否邀请进入 */
+    var ooid = e.ooid
+    // console.log('app.globalData::'+JSON.stringify(app.globalData));
+    if (ooid) {
+      // 获取邀请人 openid 并设置到 app.globalData
+      app.globalData.ooid = ooid
+    }
+    // console.log('app.globalData::'+JSON.stringify(app.globalData));
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
-        hasUserInfo: true
       })
     } else if (this.data.canIUse){
       // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
@@ -50,7 +56,6 @@ Page({
       app.userInfoReadyCallback = res => {
         this.setData({
           userInfo: res.userInfo,
-          hasUserInfo: true
         })
       }
     } else {
@@ -60,21 +65,21 @@ Page({
           app.globalData.userInfo = res.userInfo
           this.setData({
             userInfo: res.userInfo,
-            hasUserInfo: true
           })
         }
       })
     }
-
     this.getNowLocation(); // 获取当前位置
     this.getTuis(); // 获取推荐专线
   },
+  onShareAppMessage: function (res) { // 转发
+    return app.shareFun(res)
+  },
   getUserInfo: function(e) {
-    console.log(e)
+    // console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
-      hasUserInfo: true
     })
   },
   getTuis: function(e) {
@@ -96,7 +101,7 @@ Page({
       },
       success: function(res){
         wx.hideLoading();
-        console.log(res);
+        // console.log(res);
         if(res.data.status !== 1) {
           wx.showToast({
             title: '抱歉，专线数据请求错误',
@@ -119,7 +124,7 @@ Page({
         // coonsole.log(res);
       },
       complete: function(res) {
-        console.log('complete');
+        // console.log('complete');
         // console.log(res)
       }
     })
@@ -136,7 +141,7 @@ Page({
         // console.log("拨打电话成功！")  
       },  
       fail:function(){  
-        console.log("拨打电话失败！")  
+        // console.log("拨打电话失败！")  
       }  
     })  
   },

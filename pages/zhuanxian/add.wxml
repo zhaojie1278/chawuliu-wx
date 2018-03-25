@@ -1,22 +1,24 @@
 <!--index.wxml-->
 <view class="container">
   <form bindsubmit="formSubmit" bindreset="formReset">
-    <input name="rid" hidden value="{{rid}}"/>
+    <input name="cid" hidden value="{{item.cid}}"/>
     <view class="view-mg">
         <text class="lbl-left">出发地</text>
+        <input name="start_prov" hidden value="{{item.start_prov}}"/>
         <input class="inp" id="start" name="start" maxlength="20" placeholder="请选择起始地" placeholder-class="locationClass" type="text" value="{{item.start}}" />
     </view>
     <view class="view-mg">
         <text class="lbl-left">目的地</text>
+        <input name="point_prov" hidden value="{{item.point_prov}}"/>
         <input class="inp" id="point" name="point" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point}}"/>
     </view>
     <view class="view-mg">
         <text class="lbl-left">重货价格</text>
-        <input class="inp" id="zhonghuo" name="zhonghuo" maxlength="8" placeholder="请输入重货价格(元/吨)" type="digit" value="{{item.zhonghuo}}"/>
+        <input class="inp" id="zhonghuo" name="price_zhonghuo" maxlength="8" placeholder="请输入重货价格(元/吨)" type="digit" value="{{item.price_zhonghuo}}"/>
     </view>
     <view class="view-mg">
         <text class="lbl-left">泡货价格</text>
-        <input class="inp" id="paohuo" name="paohuo" maxlength="8" placeholder="请输入泡货价格(元/方)" type="digit" value="{{item.paohuo}}"/>
+        <input class="inp" id="paohuo" name="price_paohuo" maxlength="8" placeholder="请输入泡货价格(元/方)" type="digit" value="{{item.price_paohuo}}"/>
     </view>
     <!--联系人信息-->
     <view  class="view-mg contact-info">发货联系人信息</view>

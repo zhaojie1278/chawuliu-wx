@@ -1,6 +1,7 @@
 //app.js
 
 var config = require('./config')
+var util = require('./utils/util.js')
 // console.log(config);
 
 App({
@@ -10,12 +11,48 @@ App({
     logs.unshift(Date.now())
     wx.setStorageSync('logs', logs)
 
-    // 登录
-    wx.login({
-      success: res => {
-        // 发送 res.code 到后台换取 openId, sessionKey, unionId
+    // 校验用户当前session_key是否有效。
+    wx.checkSession({
+      success: function(sucres) {
+        // session_key未过期
+        console.log('checksession success')
+        // console.log(sucres);
+      },
+      fail: function (failres) {
+        // console.log(failres);
+        // session_key过期
+        // 登录
+        // https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
+        wx.login({
+          success: res => {
+          // 发送 res.code 到后台换取 openId, sessionKey, unionId
+          if(res.code){
+            wx.request({
+              url: config.service.openIdUrl, //仅为示例，并非真实的接口地址
+              method:'POST',
+              header: {
+                // 'content-type': 'application/json' 
+                "content-type": "application/x-www-form-urlencoded" // post 需增加
+              },
+              data: {
+                code: res.code
+              },
+              success: function(res) {
+                // console.log(res);
+                var data = res.data;
+                if(data.status === 0){
+                  util.showModel('用户信息获取失败', '请稍后重试')
+                } else {
+                  wx.setStorage({key:"openid",data:data.data.openid});
+                }
+              }
+            })
+          }
+          }
+        })
       }
     })
+
     // 获取用户信息
     wx.getSetting({
       success: res => {
@@ -40,6 +77,24 @@ App({
   globalData: {
     userInfo: null,
     baiduAk:'pdDY8jZw89lTn8OHEA6rS8aWaDNmSEc4',
-    config:config
-  }
+    config:config,
+    ooid:0, // 邀请人 openid
+  },
+  shareFun (res) { // 转发函数
+    console.log(res);
+    var openid = wx.getStorageSync('openid')
+    console.log('oid:'+openid)
+    return {
+      title: '邀请您一起免费加入专业的物流专线实名认证社群',
+      path: '/page/index/index?ooid='+openid,
+      success: function(sharedRes) {
+        // 转发成功
+        console.log(sharedRes)
+      },
+      fail: function(sharedFailRes) {
+        sharedFailRes = sharedFailRes.errMsg.split(':');
+        util.showError('转发失败：'+sharedFailRes[1])
+      }
+    }
+  },
 })
