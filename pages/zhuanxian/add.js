@@ -151,11 +151,19 @@ Page({
               duration: 2000,
               mask: true,
               success: function(res) {
+                self.setData({
+                  'item.start_prov': '',
+                  'item.start': '',
+                  'item.point_prov': '',
+                  'item.point': '',
+                  'item.price_zhonghuo': '',
+                  'item.price_paohuo': '',
+                })
                 // console.log(res)
                 setTimeout(
                   function() {
                     wx.switchTab({
-                      url: '/pages/index/index'
+                      url: '/pages/contact/index'
                     })
                 },1000)
               }
@@ -175,12 +183,13 @@ Page({
     }
   },
   toSelectStart (e) {
-    // TODO province
+    // 选择出发地
     wx.navigateTo({
       url:"../city/index?direction=item.start"
     })
   },
   toSelectPoint (e) {
+    // 选择目的地
     wx.navigateTo({
       url:"../city/index?direction=item.point"
     })
