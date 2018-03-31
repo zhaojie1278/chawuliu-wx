@@ -1,7 +1,7 @@
 <!--index.wxml-->
 <view class="container">
-    <block wx:if="{{list.length>0}}">
-    <navigator wx:for="{{list}}" hidden="{{item.isshow}}" wx:key="{{item.cid}}" class="cell" url="./detail?id={{item.id}}">
+    <block wx:if="{{list.length>0 && emptyshow==false}}">
+    <navigator wx:for="{{list}}" hidden="{{item.ishidden}}" wx:key="{{item.cid}}" class="cell" url="./detail?id={{item.id}}&favItemIndex={{index}}">
         <view class="icon iconfont icon-shoucang"></view>
         <view class="body">
             <text>{{item.company}}</text>

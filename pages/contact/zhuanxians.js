@@ -14,7 +14,7 @@ Page({
         id: 3,
         start: '合肥',
         point: '杭州',
-        isshow: true
+        ishidden: true
       } */
     ]
   },
@@ -131,7 +131,7 @@ Page({
             mask: true,
             success: function(res) {
               var nowDataList = self.data.list
-              nowDataList[delParams.index].isshow = true
+              nowDataList[delParams.index].ishidden = true
               // 隐藏当前删除的专线
               self.setData({
                 list: nowDataList

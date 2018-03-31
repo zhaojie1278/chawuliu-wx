@@ -10,18 +10,20 @@ Page({
       id: 0
     },
     list: [
-      {
+      /* {
         cid: 3,
         nickname: "测试3",
         phone: "13966661234",
         company: "大江派公司",
         address: "合肥市蜀山区2",
-        isshow: true
-      }
-    ]
+        ishidden: false
+      } */
+    ],
+    emptyshow: false
   },
   onLoad: function () {
     var pages = getCurrentPages();
+    console.log(pages)
     console.log('pages.length::'+pages.length);
     var that = this
     // 获取已保存信息
@@ -73,6 +75,37 @@ Page({
     
     // wx.request({ 
     // wx.hideLoading();
+  },
+  changeFavitemHidden (e) {
+    // 动态展示/隐藏收藏列表项
+    console.log('changeFavitemHidden')
+    // 选中的城市值赋值
+    // console.log(e)
+    var favItemIndex = e.favItemIndex
+    var changedList = this.data.list
+    var changedListLen = changedList.length
+    var emptyshow = false
+    if (e.isDoUnfav) {
+      var ishiddenCount = 0;
+      for(var i=0;i<changedListLen;i++) {
+        if (changedList[i].ishidden) {
+          ishiddenCount+=1
+        }
+      }
+      // console.log('ishidden::'+ishiddenCount)
+      changedList[favItemIndex].ishidden = true
+      if (changedListLen == 1 || (changedListLen-ishiddenCount) == 1) {
+        // changedList = []
+        emptyshow = true
+      }
+    } else {
+      changedList[favItemIndex].ishidden = false
+    }
+    this.setData({
+      list: changedList,
+      emptyshow: emptyshow
+    })
+    // console.log(this.data)
   },
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)

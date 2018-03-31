@@ -42,23 +42,11 @@ Page({
           point:'上海5'
         }],
       ],
-      isfav:false
+      isfav:false,
+      favItemIndex: -1 // 收藏列表界面打开时传递
     }
   },
   onLoad: function ($query) {
-
-    var pages = getCurrentPages();
-    // console.log(pages)
-    if(pages.length > 1){
-        //上一个页面实例对象
-        var prePage = pages[pages.length - 2];
-
-        console.log(prePage.route);
-        //关键在这里
-        // prePage.changeData(e.detail.value)
-    }
-
-    
     // console.log(this.data);
     // 加载中
     wx.showLoading({
@@ -72,6 +60,12 @@ Page({
     that.getUserInfoThis();
 
     var cid = $query.id
+    var favItemIndex = $query.favItemIndex
+    if(undefined != favItemIndex) {
+      that.setData({
+        favItemIndex: favItemIndex
+      })
+    }
     var openid = wx.getStorageSync('openid')
     if (!openid) {
       util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
@@ -214,11 +208,33 @@ Page({
         } else {
           var isfavMsg = isfav ? '已取消收藏' : '收藏成功'
           util.showMaskSuccess(isfavMsg)
+          // console.log('thatthatthatthat')
+          // console.log(that)
           var itemData = that.data.item;
           itemData.isfav = !isfav;
           that.setData({
             item : itemData
           })
+
+          // 处理收藏列表动态展示
+          var pages = getCurrentPages();
+          // console.log(pages)
+          if(pages.length > 1){
+              //上一个页面实例对象
+              var prePage = pages[pages.length - 2];
+              console.log('prePage.route::'+prePage.route)
+              if (prePage.route && prePage.route == 'pages/contact/fav') {
+                // 如果是收藏列表界面至此界面
+                var returnData = {
+                  isDoUnfav: isfav,
+                  favItemIndex: that.data.favItemIndex,
+                }
+                prePage.changeFavitemHidden(returnData)
+              }
+              //关键在这里
+              // prePage.changeData(e.detail.value)
+          }
+          
         }
       },
       fail: function() {
