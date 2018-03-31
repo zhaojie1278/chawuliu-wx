@@ -1,0 +1,15 @@
+<!--index.wxml-->
+<view class="container">
+    <block wx:if="{{list.length>0}}">
+    <view wx:for="{{list}}" hidden="{{item.isshow}}" wx:key="{{item.id}}" class="cell">
+        <view class="icon iconfont icon-huhuan"></view>
+        <view class="body">
+            <text class="zhuanxian">{{item.start + '-' + item.point}}</text>
+            <text class="del" bindtap="delZhuanxian" data-index="{{index}}" data-zxid="{{item.id}}" data-cid="{{item.cid}}">删除</text>
+        </view>
+    </view>
+    </block>
+    <block wx:else>
+    <view class="nofav"><text>暂无</text></view>
+    </block>
+</view>
