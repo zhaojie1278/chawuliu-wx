@@ -103,7 +103,7 @@ Page({
             item: res.data.data
           })
         }
-        console.log(res);
+        // console.log(res);
       },
       fail: function(res) {
         wx.showToast({

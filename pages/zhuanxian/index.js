@@ -87,7 +87,7 @@ Page({
   },
   searchzhuanxian (e) {
     // 本业内查询专线，按照精品专线发布时间/普通专线发布时间倒序排序
-    console.log(e)
+    // console.log(e)
     var start = e.currentTarget.dataset.start
     var point = e.currentTarget.dataset.point
     var params = {
@@ -101,7 +101,7 @@ Page({
     console.log('getSearches')
     var start = ''
     var point = ''
-    console.log(e)
+    // console.log(e)
     if (undefined!=e) {
       if (e.start == undefined) {
         util.showMaskTip1500('请选择出发地')
@@ -153,7 +153,7 @@ Page({
           return
         }
         console.log('getSearches --- in')
-        console.log(res)
+        // console.log(res)
         that.setData({list:res.data.data.list})
       },
       fail: function(res) {

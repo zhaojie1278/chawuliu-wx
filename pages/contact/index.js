@@ -12,6 +12,7 @@ Page({
     url2:'',
     url3:'./fav',
     url4:'',
+    url5:'./zhuanxians',
   },
   onLoad: function () {
     if (app.globalData.userInfo) {

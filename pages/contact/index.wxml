@@ -35,6 +35,13 @@
             <text class="i">></text>
         </view>
     </navigator>
+    <navigator class="cell" url="{{url5}}">
+        <view class="icon iconfont icon-huhuan"></view>
+        <view class="body">
+            <text>我的专线</text>
+            <text class="i">></text>
+        </view>
+    </navigator>
     <view class="cell" url="{{url4}}">
         <view class="icon iconfont icon-mianfeizixun"></view>
         <view class="body">

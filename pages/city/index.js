@@ -215,7 +215,7 @@ Page({
         isCityShow: true
       })
     }
-    console.log(that.data);
+    // console.log(that.data);
   },
   returnProvinceFun () {
     this.setData({
@@ -237,7 +237,7 @@ Page({
       city: city
     }
     prePage.changeCity(returnData)
-    console.log(prePage)
+    // console.log(prePage)
     console.log('sureCity done')
     // 返回上一页
     wx.navigateBack()
