@@ -1,33 +1,38 @@
 
 <template name="list">
     <view class="list">
-        <navigator class="item" wx:for="{{list}}" wx:key="item" url="{{url?url:'../contact/detail'}}?id={{item.cid}}">
-            <view class="info">
-                <view class="item-left">
-                    <view class="icon">
-                        <image src="{{item.image}}" />
-                    </view>
-                    <view class="body">
-                        <view class="title"><text class="nowrap">{{item.company}} </text></view>
-                        <view class="describe">
-                        <text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin-right: 15rpx;"></text>
-                        <text class="nowrap">{{item.start}}-{{item.point}}</text>
+        <block wx:if="{{list.length != 0}}">
+            <navigator class="item" wx:for="{{list}}" wx:key="item" url="{{url?url:'../contact/detail'}}?id={{item.cid}}">
+                <view class="info">
+                    <view class="item-left">
+                        <view class="icon">
+                            <image src="{{item.image}}" />
+                        </view>
+                        <view class="body">
+                            <view class="title"><text class="nowrap">{{item.company}} </text></view>
+                            <view class="describe">
+                            <text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin-right: 15rpx;"></text>
+                            <text class="nowrap">{{item.start}}-{{item.point}}</text>
+                            </view>
                         </view>
                     </view>
+                    <view class="bohao" catchtap="calling" data-phone-number="{{item.phone}}">
+                        <text class="icon iconfont icon-bohao icon-large" style="background:#ff865e;"></text>
+                    </view>
                 </view>
-                <view class="bohao" catchtap="calling" data-phone-number="{{item.phone}}">
-                    <text class="icon iconfont icon-bohao icon-large" style="background:#ff865e;"></text>
+                <view class="address">
+                    <view class="addmap nowrap">
+                        <text class="iconaddress iconfont icon-ditu icon-min"></text>
+                        <text class="addresstxt">{{item.address}}</text>
+                    </view>
+                    <view class="addresstxt">
+                        <!--距离 12.18 Km-->
+                    </view>
                 </view>
-            </view>
-            <view class="address">
-                <view class="addmap nowrap">
-                    <text class="iconaddress iconfont icon-ditu icon-min"></text>
-                    <text class="addresstxt">{{item.address}}</text>
-                </view>
-                <view class="addresstxt">
-                    <!--距离 12.18 Km-->
-                </view>
-            </view>
-        </navigator>
+            </navigator>
+        </block>
+        <block wx:else>
+            <view class="listempty">暂无</view>
+        </block>
     </view>
 </template>

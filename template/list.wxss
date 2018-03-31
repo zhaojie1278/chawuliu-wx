@@ -89,3 +89,13 @@
 	color:#666666;
 	padding-right: 20rpx;
 }
+.list .listempty {
+	font-size: 0.9em;
+	height:100rpx;
+	line-height: 100rpx;
+	text-align: center;
+	background: #fff;
+	color:#666666;
+	margin-bottom: 15rpx;
+	border: 1rpx solid #fff;
+}

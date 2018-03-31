@@ -67,7 +67,7 @@
     <text class="icon iconfont icon-huhuan icon-middle"></text>
     </view>
     <navigator url="../city/index?direction=pointCity">
-        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointCity}}</button>
+        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointCity ? pointCity:'目的地'}}</button>
     </navigator>
   </view>
     <view class="search">

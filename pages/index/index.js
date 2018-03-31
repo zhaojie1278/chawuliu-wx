@@ -10,7 +10,7 @@ Page({
     startProv:'',
     startCity:'合肥',
     pointProv:'',
-    pointCity:'杭州',
+    pointCity:'',
     nowCity: '',
     userInfo: {},
     imgUrls: [  {    
@@ -30,7 +30,7 @@ Page({
     indicatorColor:'#998a89',
     indicatorActiveColor:'#fff',
     list: [
-      {
+      /* {
         id:0,
         image: "../../images/testimg/1.jpg",
         company: "大江物流",
@@ -38,7 +38,7 @@ Page({
         address: '合肥购物广场物流园1234',
         start:'合肥',
         point:'杭州'
-      },
+      }, */
     ]
   },
   onLoad: function (e) {
@@ -73,8 +73,12 @@ Page({
         }
       })
     }
-    this.getNowLocation(); // 获取当前位置
-    this.getTuis(); // 获取推荐专线
+
+    // 是否查询线路操作
+    var getLocParam = {
+      isgetZhuanxian: true
+    }
+    this.getNowLocation(getLocParam); // 获取当前位置
   },
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
@@ -98,24 +102,47 @@ Page({
     this.getTuis(params);
   },
   getTuis: function(e) {
+    var that = this;
     console.log('getTuis')
-    if (e!=undefined) {
-      console.log(e.start)
-      console.log(e.point)
+    var start = ''
+    var point = ''
+    if (undefined!=e) {
+      if (e.start == undefined) {
+        util.showMaskTip1500('请选择出发地')
+        return
+      } else {
+        start = e.start
+      }
+      // console.log(e.point)
+      if (undefined == e.point) {
+        util.showMaskTip1500('请选择目的地')
+        return
+      } else {
+        point = e.point
+      }
+    } else {
+      // 默认不带条件查询
+      start = that.data.startCity
+      point = '';
     }
+
+    // console.log(that)
+    // console.log(start)
+    
     wx.showLoading({
       title: '加载中',
       mask: true
     })
-    var that = this;
     wx.request({
       url: app.globalData.config.service.zhuanxianUrl+'/tui',
       data: {
-        bodydata: ['a','b',123,321]
+        'start': start,
+        'point': point
       },
-      method: 'GET',
+      method: 'POST',
       dataType: 'json',
       header: {
+        'content-type': 'application/x-www-form-urlencoded',
         sign: 'sign123123',
         ver: 'v1'
       },
@@ -129,6 +156,7 @@ Page({
             // icon: 'loading',
             duration: 2000
           })
+          return
         }
         // console.log('success123')
         that.setData({list:res.data.data.list})
@@ -165,7 +193,7 @@ Page({
       }  
     })  
   },
-  getNowLocation: function(event) {
+  getNowLocation: function(e) {
     var that = this;
     wx.getLocation({
       type: 'wgs84',
@@ -189,10 +217,18 @@ Page({
               if (cityStr.indexOf('市')!=-1){
                 cityStr = cityStr.replace('市','')
               }
+            
               that.setData({
                 nowCity:cityStr,
                 startCity:cityStr
               })
+
+              // 获取当前位置后再查找专线
+              if(undefined != e) {
+                if (undefined != e.isgetZhuanxian) {
+                  that.getTuis(); // 获取推荐专线
+                }
+              }
             }
           }
         })

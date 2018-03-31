@@ -17,19 +17,21 @@
     <text class="icon iconfont icon-huhuan icon-middle" style="color:#3573fa;"></text>
     </view>
     <navigator url="../city/index?direction=pointCity">
-        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointCity}}</button>
+        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointCity ? pointCity:'目的地'}}</button>
     </navigator>
   </view>
   <view class="search">
-        <button class="tosel_inp" type="primary" size="default" loading="{{false}}" bindtap="getSearches">查询线路</button>
+        <button class="tosel_inp" type="primary" data-start="{{startCity}}" data-point="{{pointCity}}" data-start-prov="{{startProv}}" data-point-prov="{{pointProv}}" size="default" loading="{{false}}" bindtap="searchzhuanxian">查询线路</button>
       </view>
 </view>
 
 <!--专线推荐-->
+<!--
 <view class="tuijian-nav">
 <text style="float:left; color:#6f95fb">精品专线推荐</text>
 <text style="float:right">{{nowCity}}</text><text class="iconfont icon-add icon-min" style="float:right;"></text>
 </view>
+-->
 
 <!-- 模板引用 -->
 <import src="../../template/list.wxml"/>
