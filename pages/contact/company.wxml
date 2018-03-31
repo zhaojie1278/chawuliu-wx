@@ -21,7 +21,7 @@
     <view class="view-mg" style="height:300rpx;">
         <view class="lbl-line"><text>公司介绍</text></view>
         <view class="area_box">
-        <textarea name="descri" class="textarea" placeholder="请填写" maxlength="{{50}}" fixed="{{false}}" value="{{item.descri}}"/>
+        <textarea name="descri" class="textarea" placeholder="请填写" maxlength="50" fixed="{{false}}" value="{{item.descri}}"/>
         </view>
     </view>
     <view class="view-mg" style="height:900rpx; background:#f7f7fa;">

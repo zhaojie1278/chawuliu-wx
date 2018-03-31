@@ -16,7 +16,8 @@ Page({
         point: '杭州',
         ishidden: true
       } */
-    ]
+    ],
+    emptyshow: false
   },
   onLoad: function () {
     var pages = getCurrentPages();
@@ -30,7 +31,7 @@ Page({
 
     // 获取公司信息
     var openid = wx.getStorageSync('openid');
-    console.log('openid::'+openid)
+    // console.log('openid::'+openid)
     if (!openid) {
       util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
       return;
@@ -86,8 +87,8 @@ Page({
     wx.showModal({
       title: '提示',
       content: '确定要删除吗？',
-      success: function (sm) {
-        if (sm.confirm) {
+      success: function (res) {
+        if (res.confirm) {
           that.delAct(delParams)
         }
       }
@@ -97,15 +98,12 @@ Page({
   delAct (delParams) {
     // 删除专线操作
     var self = this
-    // 删除专线
-    console.log(delParams)
-
+    // console.log(delParams)
     // 获取已保存信息
     wx.showLoading({
-      title: '加载中..',
-      mask: true
-  })
-
+        title: '加载中..',
+        mask: true
+    })
     wx.request({
       url: app.globalData.config.service.contactUrl + '/delzx',
       data: {
@@ -120,10 +118,11 @@ Page({
         ver: 'v1',
       },
       success (res) {
-        console.log(res)
+        // console.log(res)
         if(res.data.status != 1) {
           util.showError(res.data.message)
         } else {
+          wx.hideLoading()
           wx.showToast({
             title: '删除成功',
             icon: 'success',
@@ -131,10 +130,25 @@ Page({
             mask: true,
             success: function(res) {
               var nowDataList = self.data.list
+              
+              var changedListLen = nowDataList.length
+              var emptyshow = false
+              var ishiddenCount = 0;
+              for(var i=0;i<changedListLen;i++) {
+                if (nowDataList[i].ishidden) {
+                  ishiddenCount+=1
+                }
+              }
               nowDataList[delParams.index].ishidden = true
+              if (changedListLen == 1 || (changedListLen-ishiddenCount) == 1) {
+                // changedList = []
+                emptyshow = true
+              }
+
               // 隐藏当前删除的专线
               self.setData({
-                list: nowDataList
+                list: nowDataList,
+                emptyshow: emptyshow
               })
             }
           })

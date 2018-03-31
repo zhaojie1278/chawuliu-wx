@@ -34,7 +34,7 @@ Page({
 
     // 获取公司信息
     var openid = wx.getStorageSync('openid');
-    console.log('openid::'+openid)
+    // console.log('openid::'+openid)
     if (!openid) {
       util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
       return;

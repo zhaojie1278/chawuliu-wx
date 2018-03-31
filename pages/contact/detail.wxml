@@ -23,7 +23,7 @@
     <view class="address">
         <view class="addmap nowrap">
             <text class="iconaddress iconfont icon-ditu icon-min"></text>
-            <text class="addresstxt">{{item.address}}</text>
+            <text class="addresstxt">{{item.address ? item.address : '暂未设置'}}</text>
         </view>
         <view class="addresstxt">
             <!--距离 12.18 Km-->

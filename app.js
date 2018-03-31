@@ -16,10 +16,10 @@ App({
     wx.checkSession({
       success: function(sucres) {
         // session_key未过期
-        console.log('checksession success')
+        // console.log('checksession success')
         // console.log(sucres);
         var openid = wx.getStorageSync('openid')
-        console.log('openid::'+openid);
+        // console.log('openid::'+openid);
         if (!openid) {
           wx.login({
             success: res => {

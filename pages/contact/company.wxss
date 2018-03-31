@@ -32,8 +32,11 @@
 
 .textarea{
   text-align: left;
-  width:100%;
-  font-size:0.8rem;
+  width: 100%;
+  font-size: 0.75rem;
+  color: #777777;
+  padding-left: 10rpx;
+  line-height: 40rpx;
 }
 
 .view-mg .company-img {
