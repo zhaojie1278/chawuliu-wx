@@ -31,6 +31,8 @@ Page({
         title: '加载中..',
         mask: true
     })
+
+    console.log('a');
     
     var that = this
 
@@ -169,6 +171,34 @@ Page({
           console.log('complete');
           // console.log(res)
         }
+      })
+    }
+  },
+  toSelectStart (e) {
+    // TODO province
+    wx.navigateTo({
+      url:"../city/index?direction=item.start"
+    })
+  },
+  toSelectPoint (e) {
+    wx.navigateTo({
+      url:"../city/index?direction=item.point"
+    })
+  },
+  changeCity (e) {
+    console.log('changeCity')
+    // 选中的城市值赋值
+    console.log(e)
+    var setCityDirection = e.direction
+    if (setCityDirection == 'item.start') {
+      this.setData({
+        'item.start': e.city,
+        'item.start_prov': e.prov
+      })
+    } else {
+      this.setData({
+        'item.point': e.city,
+        'item.point_prov': e.prov
       })
     }
   }

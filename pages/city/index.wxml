@@ -1,0 +1,25 @@
+<!--index.wxml-->
+<view class="container">
+    <view class="txt">
+        <text class="all-city">所有城市</text>
+        <text class="return" hidden="{{hideReturn}}" bindtap="returnProvinceFun">返回省份</text>
+    </view>
+    <view class="p table {{isProvinceShow ? 'show' : 'hidden'}}">
+        <block wx:for="{{provinces}}" wx:key="{{index}}" wx:for-item="item_group">
+            <view class="tr">
+                <view wx:for="{{item_group}}" wx:key="{{fullName}}" class="td" data-province-code="{{item.code}}" data-province="{{item.fullName}}" bindtap="getCity">
+                <text>{{item.fullName}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+    <view class="c table {{isCityShow ? 'show' : 'hidden'}}">
+        <block wx:for="{{citys}}" wx:key="{{index}}" wx:for-item="item_group">
+            <view class="tr">
+                <view wx:for="{{item_group}}" wx:key="{{fullName}}" class="td" data-city="{{item.fullNameDot}}" data-prov="{{setedProv}}" bindtap="sureCity">
+                <text>{{item.fullNameDot}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+</view>

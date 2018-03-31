@@ -2,6 +2,7 @@
 
 var config = require('./config')
 var util = require('./utils/util.js')
+
 // console.log(config);
 
 App({
@@ -17,6 +18,43 @@ App({
         // session_key未过期
         console.log('checksession success')
         // console.log(sucres);
+        var openid = wx.getStorageSync('openid')
+        console.log('openid::'+openid);
+        if (!openid) {
+          wx.login({
+            success: res => {
+            // 发送 res.code 到后台换取 openId, sessionKey, unionId
+            if(res.code){
+              wx.request({
+                url: config.service.openIdUrl, //仅为示例，并非真实的接口地址
+                method:'POST',
+                header: {
+                  // 'content-type': 'application/json' 
+                  "content-type": "application/x-www-form-urlencoded" // post 需增加
+                },
+                data: {
+                  code: res.code
+                },
+                success: function(res) {
+                  console.log('oopenid url acc suc:');
+                  console.log(res)
+                  // console.log(res);
+                  var data = res.data;
+                  if(data.status === 0){
+                    util.showModel('用户信息获取失败', '请稍后重试')
+                  } else {
+                    wx.setStorage({key:"openid",data:data.data.openid});
+                  }
+                },
+                fail: function(res) {
+                  console.log('oopenid url acc fail:');
+                  console.log(res)
+                }
+              })
+            }
+            }
+          })
+        }
       },
       fail: function (failres) {
         // console.log(failres);
@@ -38,6 +76,8 @@ App({
                 code: res.code
               },
               success: function(res) {
+                console.log('oopenid url acc suc:');
+                console.log(res)
                 // console.log(res);
                 var data = res.data;
                 if(data.status === 0){
@@ -45,6 +85,10 @@ App({
                 } else {
                   wx.setStorage({key:"openid",data:data.data.openid});
                 }
+              },
+              fail: function(res) {
+                console.log('oopenid url acc fail:');
+                console.log(res)
               }
             })
           }
@@ -98,5 +142,5 @@ App({
          */
       }
     }
-  },
+  }
 })

@@ -60,20 +60,19 @@
 <!--查询地址-->
 <view class="search-zhuanxian">
   <view class="areas">
-    <navigator url="../zhuanxian/area">
+    <navigator url="../city/index?direction=startCity">
         <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startCity}}</button>
     </navigator>
     <view class="areas-direction">
     <text class="icon iconfont icon-huhuan icon-middle"></text>
     </view>
-    <navigator url="../zhuanxian/area">
+    <navigator url="../city/index?direction=pointCity">
         <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointCity}}</button>
     </navigator>
   </view>
-  <view class="search">
-        <button class="tosel_inp" type="primary" size="default" loading="{{false}}"
-                form-type="submit">查询线路</button>
-      </view>
+    <view class="search">
+        <button class="tosel_inp" type="primary" data-start="{{startCity}}" data-point="{{pointCity}}" data-start-prov="{{startProv}}" data-point-prov="{{pointProv}}" size="default" loading="{{false}}" bindtap="searchzhuanxian">查询线路</button>
+    </view>
 </view>
 
 <!--专线推荐-->
@@ -85,4 +84,3 @@
 <!-- 模板引用 -->
 <import src="../../template/list.wxml"/>
 <template is="list" data="{{list}}"/>
-

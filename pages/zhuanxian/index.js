@@ -14,6 +14,7 @@ Page({
     canIUse: false,
     startCity:'合肥',
     pointCity:'杭州',
+    nowCity: '',
     userInfo: {},
     isTaped: false,
     list: [
@@ -109,6 +110,7 @@ Page({
           })
         }
         console.log('success123')
+        console.log(res)
         that.setData({list:res.data.data.list})
       },
       fail: function(res) {
@@ -175,5 +177,22 @@ Page({
         })
       }
     })
+  },
+  changeCity (e) {
+    console.log('changeCity')
+    // 选中的城市值赋值
+    console.log(e)
+    var setCityDirection = e.direction
+    if (setCityDirection == 'startCity') {
+      this.setData({
+        startCity: e.city,
+        startProv: e.prov
+      })
+    } else {
+      this.setData({
+        pointCity: e.city,
+        pointProv: e.prov
+      })
+    }
   }
 })

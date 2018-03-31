@@ -1,0 +1,46 @@
+/**index.wxss**/
+.container {
+    font-size: 0.9em;
+    padding: 24rpx;
+    background: #fff;
+
+}
+.show {
+    display: block;
+}
+.hidden {
+    display: none;
+}
+.return {
+    float: right;
+    color: #6f95fb;
+}
+.txt {
+    font-size: 0.9rem;
+    padding-bottom: 25rpx;
+    color: #666666;
+}
+.table {
+    border:1px solid #dadada;
+    border-right: 0;
+    border-bottom: 0;
+}
+.tr {
+    width: 100%;
+    display: flex;
+    /* flex-wrap: wrap; */
+    justify-content: start;
+    /* align-items: center; */
+}
+.th,.td {
+    padding:20rpx;
+    border-bottom: 1px solid #dadada;
+    border-right: 1px solid #dadada;
+    text-align: center;
+    width:175rpx;
+    color: #000000;
+}
+.th {
+    font-weight: 400;
+    background-color: #dadada
+}

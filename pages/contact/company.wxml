@@ -18,14 +18,12 @@
         <text class="lbl-left">公司地址</text>
         <input class="inp" id="address" name="address" maxlength="100" placeholder="请输入公司地址" type="text" value="{{item.address}}"/>
     </view>
-    <!--
-        <view class="view-mg" style="height:300rpx;">
-            <view class="lbl-line"><text>公司介绍</text></view>
-            <view class="area_box">
-            <textarea name="guest_remark" class="textarea" placeholder="请填写" cursor-spacing="2" maxlength="{{50}}" fixed="{{false}}" bindinput="bindWordLimit" value=""/>
-            </view>
+    <view class="view-mg" style="height:300rpx;">
+        <view class="lbl-line"><text>公司介绍</text></view>
+        <view class="area_box">
+        <textarea name="descri" class="textarea" placeholder="请填写" maxlength="{{50}}" fixed="{{false}}" value="{{item.descri}}"/>
         </view>
-    -->
+    </view>
     <view class="view-mg" style="height:900rpx; background:#f7f7fa;">
         <text class="lbl-line">公司图片</text><text style="color:#999;margin-left:20rpx;">(至少一张)</text>
         <view class="company-img" style="padding-top:0rpx;">

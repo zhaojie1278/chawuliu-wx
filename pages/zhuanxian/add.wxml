@@ -5,12 +5,14 @@
     <view class="view-mg">
         <text class="lbl-left">出发地</text>
         <input name="start_prov" hidden value="{{item.start_prov}}"/>
-        <input class="inp" id="start" name="start" maxlength="20" placeholder="请选择起始地" placeholder-class="locationClass" type="text" value="{{item.start}}" />
+        <input name="start" hidden value="{{item.start}}"/>
+        <input class="inp" id="start" name="start_inp" maxlength="20" placeholder="请选择起始地" placeholder-class="locationClass" type="text" value="{{item.start}}" catchtap="toSelectStart"/>
     </view>
     <view class="view-mg">
         <text class="lbl-left">目的地</text>
         <input name="point_prov" hidden value="{{item.point_prov}}"/>
-        <input class="inp" id="point" name="point" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point}}"/>
+        <input name="point" hidden value="{{item.point}}"/>
+        <input class="inp" id="point" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point}}" catchtap="toSelectPoint"/>
     </view>
     <view class="view-mg">
         <text class="lbl-left">重货价格</text>

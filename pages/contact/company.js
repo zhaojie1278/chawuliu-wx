@@ -125,14 +125,16 @@ Page({
           'imgid': '123123'
         },
         success: function(res){
+          console.log('upload res::')
+          console.log(res)
           var data = res.data
           // console.log(res);
           var jsonData = JSON.parse(data)
-          // console.log(jsonData);
+          console.log(jsonData);
           // console.log(jsonData.status);
 
           if (jsonData.status != 1) {
-            util.showError('抱歉，上传失败，请稍后重试')
+            util.showError(jsonData.message)
           } else {
             var companyImgs = self.data.companyimg;
             var imglist = self.data.imglist;

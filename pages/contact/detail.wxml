@@ -34,7 +34,7 @@
     <view class="msg-intro">
         <view class="title">公司介绍</view>
         <view class="detail">
-        {{item.descri}}
+        {{item.descri ? item.descri : '无'}}
         </view>
         <view class="zhuanxians">
             <view class="title">公司运营专线有：</view>

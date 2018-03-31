@@ -10,19 +10,18 @@
 <!--查询地址-->
 <view class="search-zhuanxian">
   <view class="areas">
-    <navigator url="../zhuanxian/area">
+    <navigator url="../city/index?direction=startCity">
         <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startCity}}</button>
     </navigator>
     <view class="areas-direction">
     <text class="icon iconfont icon-huhuan icon-middle" style="color:#3573fa;"></text>
     </view>
-    <navigator url="../zhuanxian/area">
+    <navigator url="../city/index?direction=pointCity">
         <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointCity}}</button>
     </navigator>
   </view>
   <view class="search">
-        <button class="tosel_inp" type="primary" size="default" loading="{{false}}"
-                form-type="submit">查询线路</button>
+        <button class="tosel_inp" type="primary" size="default" loading="{{false}}" bindtap="getSearches">查询线路</button>
       </view>
 </view>
 

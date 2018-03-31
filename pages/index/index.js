@@ -1,13 +1,17 @@
-    //index.js
+//index.js
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util')
+
 // console.log(app);
 Page({
   data: {
     canIUse: false,
+    startProv:'',
     startCity:'合肥',
+    pointProv:'',
     pointCity:'杭州',
+    nowCity: '',
     userInfo: {},
     imgUrls: [  {    
         link:'/pages/index/index',    
@@ -82,7 +86,23 @@ Page({
       userInfo: e.detail.userInfo,
     })
   },
+  searchzhuanxian (e) {
+    // 本业内查询专线，按照精品专线发布时间/普通专线发布时间倒序排序
+    console.log(e)
+    var start = e.currentTarget.dataset.start
+    var point = e.currentTarget.dataset.point
+    var params = {
+      start: start,
+      point: point
+    }
+    this.getTuis(params);
+  },
   getTuis: function(e) {
+    console.log('getTuis')
+    if (e!=undefined) {
+      console.log(e.start)
+      console.log(e.point)
+    }
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -178,5 +198,22 @@ Page({
         })
       }
     })
+  },
+  changeCity (e) {
+    console.log('changeCity')
+    // 选中的城市值赋值
+    console.log(e)
+    var setCityDirection = e.direction
+    if (setCityDirection == 'startCity') {
+      this.setData({
+        startCity: e.city,
+        startProv: e.prov
+      })
+    } else {
+      this.setData({
+        pointCity: e.city,
+        pointProv: e.prov
+      })
+    }
   }
 })
