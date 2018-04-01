@@ -2,6 +2,8 @@
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util')
+// var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
+
 
 Page({
   data: {
@@ -16,8 +18,11 @@ Page({
       nickname:'',
       phone:'',
       address:'',
-      cid: 0
+      cid: 0,
+      cats: [],
+      catname: ''
     },
+    defAreaCat: 0,
     form_type: 'submit',
     disabled: false,
     plain: false,
@@ -32,8 +37,6 @@ Page({
         mask: true
     })
 
-    console.log('a');
-    
     var that = this
 
     // 判断是否已添加公司信息
@@ -78,7 +81,10 @@ Page({
           itemVal.nickname = res.data.data.nickname;
           itemVal.phone = res.data.data.phone;
           itemVal.address = res.data.data.address;
+          itemVal.cats = res.data.data.cats;
+          itemVal.catname = itemVal.cats[that.data.defAreaCat]
           that.setData({item:itemVal})
+          console.log(that)
         }
       },
       fail: function(res) {
@@ -160,12 +166,13 @@ Page({
                   'item.price_paohuo': '',
                 })
                 // console.log(res)
-                setTimeout(
+                // 添加成功后跳转
+                /* setTimeout(
                   function() {
                     wx.switchTab({
                       url: '/pages/contact/index'
                     })
-                },1000)
+                },1000) */
               }
             })
           }
@@ -210,5 +217,11 @@ Page({
         'item.point_prov': e.prov
       })
     }
+  },
+  bindCatsChange (e) {
+    this.setData({
+      "item.catname": this.data.item.cats[e.detail.value]
+    })
+    console.log(this.data.item.catname)
   }
 })

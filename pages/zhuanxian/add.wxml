@@ -3,6 +3,15 @@
   <form bindsubmit="formSubmit" bindreset="formReset">
     <input name="cid" hidden value="{{item.cid}}"/>
     <view class="view-mg">
+        <text class="lbl-left">专线类型</text>
+        <input name="catname" hidden value="{{item.catname}}"/>
+        <picker bindchange="bindCatsChange" value="{{defAreaCat}}" range="{{item.cats}}">
+            <view class="picker-cat">
+            {{item.catname}}
+            </view>
+        </picker>
+    </view>
+    <view class="view-mg">
         <text class="lbl-left">出发地</text>
         <input name="start_prov" hidden value="{{item.start_prov}}"/>
         <input name="start" hidden value="{{item.start}}"/>

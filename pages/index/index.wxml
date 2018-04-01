@@ -61,7 +61,7 @@
 <view class="search-zhuanxian">
   <view class="areas">
     <navigator url="../city/index?direction=startCity">
-        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startCity}}</button>
+        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startCity ? startCity: '出发地'}}</button>
     </navigator>
     <view class="areas-direction">
     <text class="icon iconfont icon-huhuan icon-middle"></text>

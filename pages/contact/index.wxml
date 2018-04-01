@@ -47,7 +47,7 @@
         <view class="body">
             <button class="contact-btn" open-type="contact" session-from="weapp">
             <text>联系客服</text>
-            <text class="intro">(客服工作事件9:00-17:00)</text>
+            <text class="intro">(客服工作时间9:00-17:00)</text>
             <text class="i">></text>
             </button>
         </view>

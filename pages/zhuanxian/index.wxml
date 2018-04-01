@@ -3,7 +3,7 @@
 <!--导航-->
 <view  class="navigator">
     <block wx:for="{{navTxts}}" wx:key="{{index}}">  
-    <view bindtap="bindNavTaped" class="{{navid==item.id?'viewdef-taped':'viewdef'}}" data-navid="{{item.id}}" hover-class="onhover">{{item.txt}}</view>
+    <view bindtap="bindNavTaped" class="{{areacatid==item.id?'viewdef-taped':'viewdef'}}" data-areacatid="{{item.id}}" hover-class="onhover">{{item.txt}}</view>
     </block>
 </view>
 
@@ -11,7 +11,7 @@
 <view class="search-zhuanxian">
   <view class="areas">
     <navigator url="../city/index?direction=startCity">
-        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startCity}}</button>
+        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startCity ? startCity: '出发地'}}</button>
     </navigator>
     <view class="areas-direction">
     <text class="icon iconfont icon-huhuan icon-middle" style="color:#3573fa;"></text>
@@ -21,7 +21,7 @@
     </navigator>
   </view>
   <view class="search">
-        <button class="tosel_inp" type="primary" data-start="{{startCity}}" data-point="{{pointCity}}" data-start-prov="{{startProv}}" data-point-prov="{{pointProv}}" size="default" loading="{{false}}" bindtap="searchzhuanxian">查询线路</button>
+        <button class="tosel_inp" type="primary" data-areacat="{{areacatid}}" data-start="{{startCity}}" data-point="{{pointCity}}" data-start-prov="{{startProv}}" data-point-prov="{{pointProv}}" size="default" loading="{{false}}" bindtap="searchzhuanxian">查询线路</button>
       </view>
 </view>
 

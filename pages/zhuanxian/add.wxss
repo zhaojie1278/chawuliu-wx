@@ -37,3 +37,11 @@
 .view-mg .btnsub {
   background: #3573fa;
 }
+
+/* 专线地区类型选择器 */
+.view-mg .picker-cat {
+  font-size: 0.8rem;
+  padding: 0 10rpx 0;
+  float: left;
+  color: #666666;
+}

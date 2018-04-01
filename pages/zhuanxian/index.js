@@ -4,20 +4,20 @@ const app = getApp()
 var util = require("../../utils/util")
 
 var navTxts = [
-  {id:0,txt:'省内物流'},
   {id:1,txt:'省际物流'},
-  {id:2,txt:'空运'},
-  {id:3,txt:'海运'},
-  {id:4,txt:'配载调车'}
+  {id:2,txt:'省内物流'},
+  {id:3,txt:'空运'},
+  {id:4,txt:'海运'},
+  {id:5,txt:'配载调车'}
 ]
 Page({
   data: {
     canIUse: false,
     startProv:'',
-    startCity:'合肥',
+    startCity:'',
     pointProv:'',
     pointCity:'',
-    nowCity: '',
+    nowCity: '定位中...',
     userInfo: {},
     isTaped: false,
     list: [
@@ -32,12 +32,12 @@ Page({
       }, */
     ],
     navTxts:navTxts,
-    navid:0
+    areacatid:1
   },
   bindNavTaped:function(e) {
-    var id = parseInt(e.currentTarget.dataset.navid)  
+    var id = parseInt(e.currentTarget.dataset.areacatid)  
     this.setData({  
-      navid: id  
+      areacatid: id  
     })  
   },
   onLoad: function () {
@@ -90,9 +90,11 @@ Page({
     // console.log(e)
     var start = e.currentTarget.dataset.start
     var point = e.currentTarget.dataset.point
+    var areacat = e.currentTarget.dataset.areacat
     var params = {
       start: start,
-      point: point
+      point: point,
+      areacatid: areacat
     }
     this.getSearches(params);
   },
@@ -101,6 +103,7 @@ Page({
     console.log('getSearches')
     var start = ''
     var point = ''
+    var areacatid = 0
     // console.log(e)
     if (undefined!=e) {
       if (e.start == undefined) {
@@ -116,10 +119,14 @@ Page({
       } else {
         point = e.point
       }
+
+      if(undefined != e.areacatid) {
+        areacatid = e.areacatid
+      }
     } else {
       // 默认不带条件查询
       start = that.data.startCity
-      point = '';
+      areacatid = that.data.areacatid
     }
 
     wx.showLoading({
@@ -136,13 +143,14 @@ Page({
         "content-type": "application/x-www-form-urlencoded"
       },
       data: {
-        'start': start,
-        'point': point
+        start: start,
+        point: point,
+        areacatid: areacatid
       },
       success: function(res){
         wx.hideLoading();
         // console.log(res);
-        // console.log('res.data.status:'+res.data.status);
+        console.log('res.data.status:'+res.data.status);
         if(res.data.status !== 1) {
           wx.showToast({
             title: '抱歉，专线数据请求错误',

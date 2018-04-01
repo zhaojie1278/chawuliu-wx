@@ -8,10 +8,10 @@ Page({
   data: {
     canIUse: false,
     startProv:'',
-    startCity:'合肥',
+    startCity:'',
     pointProv:'',
     pointCity:'',
-    nowCity: '',
+    nowCity: '定位中...',
     userInfo: {},
     imgUrls: [  {    
         link:'/pages/index/index',    
