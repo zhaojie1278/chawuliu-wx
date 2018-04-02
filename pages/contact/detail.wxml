@@ -8,10 +8,9 @@
             <view class="body">
                 <view class="title"><text class="nowrap">{{item.company}} </text></view>
                 <view class="describe">
-                    <text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin-right: 10rpx;"></text>
                     <block wx:for="{{item.zhuanxians[0]}}" wx:key="id" wx:for-item="zx3">
-                    <text wx:if="{{index==0}}" class="nowrap" style="margin-right: 10rpx;">{{zx3.start + '-' + zx3.point}}</text>
-                    <text wx:elif="{{index==1}}" class="nowrap">{{zx3.start + '-' + zx3.point}}</text>
+                    <text wx:if="{{index==0}}" class="nowrap" style="margin-right: 10rpx;">{{zx3.start}}<text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin: 0 5rpx;"></text>{{zx3.point}}</text>
+                    <text wx:elif="{{index==1}}" class="nowrap">{{zx3.start}}<text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin:0 5rpx;"></text>{{zx3.point}}</text>
                     </block>
                 </view>
             </view>
@@ -42,8 +41,8 @@
                 <block wx:for="{{item.zhuanxians}}" wx:for-item="zx" wx:key="id">
                 <view>
                     <block wx:for="{{zx}}" wx:for-item="zxsingle" wx:for-index="zxindex" wx:key="zxindex">
-                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}-{{zxsingle.point}}专线；</text>
-                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}-{{zxsingle.point}}专线；</text>
+                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsKeyVal[zxsingle.cat]}}专线；</text>
+                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsKeyVal[zxsingle.cat]}}专线；</text>
                     </block>
                 </view>
                 </block>

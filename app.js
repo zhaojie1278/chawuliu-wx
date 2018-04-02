@@ -4,6 +4,23 @@ var config = require('./config')
 var util = require('./utils/util.js')
 
 // console.log(config);
+/* 专线类型 */
+var zxCats = [
+  {id:1,txt:'省际物流'},
+  {id:2,txt:'省内物流'},
+  {id:3,txt:'空运'},
+  {id:4,txt:'海运'},
+  {id:5,txt:'配载调车'},
+  {id:6,txt:'市内倒短车'},
+]
+
+var zxCatsKeyVal = new Array(6)
+zxCatsKeyVal[1] = '省际物流'
+zxCatsKeyVal[2] = '省内物流'
+zxCatsKeyVal[3] = '空运'
+zxCatsKeyVal[4] = '海运'
+zxCatsKeyVal[5] = '配载调车'
+zxCatsKeyVal[6] = '市内倒短车'
 
 App({
   onLaunch: function () {
@@ -123,6 +140,8 @@ App({
     baiduAk:'pdDY8jZw89lTn8OHEA6rS8aWaDNmSEc4',
     config:config,
     ooid:0, // 邀请人 openid
+    zxCats: zxCats,
+    zxCatsKeyVal: zxCatsKeyVal
   },
   shareFun (res) { // 转发函数
     console.log(res);

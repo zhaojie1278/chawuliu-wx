@@ -2,9 +2,8 @@
 <view class="container">
     <block wx:if="{{list.length>0 && emptyshow==false}}">
     <view wx:for="{{list}}" hidden="{{item.ishidden}}" wx:key="{{item.id}}" class="cell">
-        <view class="icon iconfont icon-huhuan"></view>
         <view class="body">
-            <text class="zhuanxian">{{item.start + '-' + item.point}}</text>
+            <text class="zhuanxian">{{item.start}}<text class="icon iconfont icon-huhuan"></text>{{item.point + ' - ' + zxCatsKeyVal[item.cat]}}</text>
             <text class="del" bindtap="delZhuanxian" data-index="{{index}}" data-zxid="{{item.id}}" data-cid="{{item.cid}}">删除</text>
         </view>
     </view>

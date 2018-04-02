@@ -1,8 +1,10 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/index/kuaidi100",
     "pages/zhuanxian/index",
     "pages/zhuanxian/add",
+    "pages/zhuanxian/toadd",
     "pages/contact/index",
     "pages/contact/detail",
     "pages/contact/company",
@@ -38,7 +40,7 @@
       {
         "selectedIconPath": "images/tabBar/publish02.png",
         "iconPath": "images/tabBar/publish01.png",
-        "pagePath": "pages/zhuanxian/add",
+        "pagePath": "pages/zhuanxian/toadd",
         "text": "发布专线"
       },
       {

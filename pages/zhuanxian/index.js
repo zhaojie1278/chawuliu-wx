@@ -3,13 +3,6 @@
 const app = getApp()
 var util = require("../../utils/util")
 
-var navTxts = [
-  {id:1,txt:'省际物流'},
-  {id:2,txt:'省内物流'},
-  {id:3,txt:'空运'},
-  {id:4,txt:'海运'},
-  {id:5,txt:'配载调车'}
-]
 Page({
   data: {
     canIUse: false,
@@ -31,7 +24,7 @@ Page({
         point:'杭州'
       }, */
     ],
-    navTxts:navTxts,
+    zxCats:app.globalData.zxCats,
     areacatid:1
   },
   bindNavTaped:function(e) {
@@ -126,6 +119,7 @@ Page({
     } else {
       // 默认不带条件查询
       start = that.data.startCity
+      point = that.data.pointCity
       areacatid = that.data.areacatid
     }
 
@@ -254,5 +248,7 @@ Page({
         pointProv: e.prov
       })
     }
+
+    this.getSearches();
   }
 })

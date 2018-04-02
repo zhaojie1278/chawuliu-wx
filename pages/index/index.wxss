@@ -24,13 +24,13 @@ image {
 .navigator view {
   background:#fff;
 } */
-.navigator navigator {
+.navigator .navview {
   width:50%;
   text-align:center;
   flex-direction:column;
 }
 
-.navigator navigator .icon {
+.navigator .navview .icon {
   width:55rpx;
   height:50rpx;
   padding:15rpx;
@@ -38,7 +38,7 @@ image {
   color:#fff;
 }
 
-.navigator navigator .title {
+.navigator .navview .title {
   font-size:0.8em;
   margin-top: 15rpx;
 }

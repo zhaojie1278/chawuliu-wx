@@ -13,21 +13,30 @@
 </view>
 <!--导航-->
 <view  class="navigator">
-  <navigator open-type="switchTab" url="{{'../zhuanxian/index'}}" hover-class="navhover">
+  <navigator class="navview" open-type="switchTab" url="{{'../zhuanxian/index'}}" hover-class="navhover">
       <text class="icon iconfont icon-wuliu icon-large" style="background:#a1e932;"></text>
       <view class="title">
           <text>查询线路</text>
       </view>
   </navigator>
 
-  <navigator url="../index/shangcheng" hover-class="navhover">
+  <!--
+  <navigator class="navview" url="../index/shangcheng" hover-class="navhover">
       <text class="icon iconfont icon-shangcheng icon-large" style="background:#f97e0b;"></text>
       <view class="title">
           <text>特价商城</text>
       </view>
   </navigator>
+  -->
 
-  <navigator open-type="switchTab" url="../zhuanxian/add" hover-class="navhover">
+  <view bindtap="shopTap" class="navview" hover-class="navhover">
+      <text class="icon iconfont icon-shangcheng icon-large" style="background:#f97e0b;"></text>
+      <view class="title">
+          <text>特价商城</text>
+      </view>
+  </view>
+
+  <navigator class="navview" open-type="switchTab" url="../zhuanxian/toadd" hover-class="navhover">
       <text class="icon iconfont icon-fabu icon-large" style="background:#ff865e;"></text>
       <view class="title">
           <text>发布专线</text>
@@ -35,21 +44,44 @@
   </navigator>
 </view>
 <view  class="navigator">
-  <navigator url="../index/kuaidi" hover-class="navhover">
+  <!--
+    <navigator class="navview" url="../index/kuaidi" hover-class="navhover">
       <text class="icon iconfont icon-kuaidi icon-large" style="background:#2fb6ff;"></text>
       <view class="title">
           <text>快递100</text>
       </view>
   </navigator>
-
-  <navigator url="../index/news" hover-class="navhover">
+  -->
+    <navigator wx:if="{{canIUseWebView}}" class="navview" url="../index/kuaidi100" hover-class="navhover">
+        <text class="icon iconfont icon-kuaidi icon-large" style="background:#2fb6ff;"></text>
+        <view class="title">
+            <text>快递100</text>
+        </view>
+    </navigator>
+    <view wx:else bindtap="kuaidi100" class="navview">
+        <text class="icon iconfont icon-kuaidi icon-large" style="background:#2fb6ff;"></text>
+        <view class="title">
+            <text>快递100</text>
+        </view>
+    </view>
+  
+    <!--
+  <navigator class="navview" url="../index/news" hover-class="navhover">
       <text class="icon iconfont icon-xinwen icon-large" style="background:#bb57e7;"></text>
       <view class="title">
           <text>行业新闻</text>
       </view>
   </navigator>
+  -->
+  <view  bindtap="newsTap" class="navview" url="../index/news" hover-class="navhover">
+      <text class="icon iconfont icon-xinwen icon-large" style="background:#bb57e7;"></text>
+      <view class="title">
+          <text>行业新闻</text>
+      </view>
+  </view>
 
-  <navigator url="../index/news" hover-class="navhover">
+
+  <navigator class="navview" url="../zhuanxian/add?catid=6" hover-class="navhover">
       <text class="icon iconfont icon-zixun icon-large" style="background:#5be3a8;"></text>
       <view class="title">
           <text>市内倒短车</text>

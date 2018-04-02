@@ -230,7 +230,13 @@ Page({
     var city = e.currentTarget.dataset.city
     var prov = e.currentTarget.dataset.prov
     var pages = getCurrentPages()
-    var prePage = pages[0]
+    console.log('pages')
+    console.log(pages.length)
+    if(pages.length > 1){
+      var prePage = pages[pages.length - 2];
+    } else {
+      var prePage = pages[0]
+    }
     var returnData = {
       direction: this.data.direction,
       prov: prov,

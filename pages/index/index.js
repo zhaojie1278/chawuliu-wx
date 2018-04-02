@@ -7,6 +7,7 @@ var util = require('../../utils/util')
 Page({
   data: {
     canIUse: false,
+    canIUseWebView: wx.canIUse('web-view'),
     startProv:'',
     startCity:'',
     pointProv:'',
@@ -123,7 +124,7 @@ Page({
     } else {
       // 默认不带条件查询
       start = that.data.startCity
-      point = '';
+      point = that.data.pointCity;
     }
 
     // console.log(that)
@@ -251,5 +252,17 @@ Page({
         pointProv: e.prov
       })
     }
+
+    this.getTuis()
+  },
+  kuaidi100 (e) {
+    util.showError('当前版本小程序暂不支持页内跳转')
+    return
+  },
+  shopTap (e) {
+    util.showError('敬请期待')
+  },
+  newsTap (e) {
+    util.showError('敬请期待')
   }
 })

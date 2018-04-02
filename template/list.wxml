@@ -11,8 +11,7 @@
                         <view class="body">
                             <view class="title"><text class="nowrap">{{item.company}} </text></view>
                             <view class="describe">
-                            <text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin-right: 15rpx;"></text>
-                            <text class="nowrap">{{item.start}}-{{item.point}}</text>
+                            <text class="nowrap">{{item.start}}<text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin: 0 5rpx;"></text>{{item.point}}</text>
                             </view>
                         </view>
                     </view>

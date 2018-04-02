@@ -12,7 +12,7 @@
   border-bottom:1px solid #eee;
 }
 
-.icon{
+/* .icon{
   width:40rpx;
   height:40rpx;
   float: left;
@@ -21,6 +21,16 @@
   top: 20rpx;
   color:#3573fa;
   position: relative;
+} */
+.icon{
+  width:40rpx;
+  height:100rpx;
+  line-height: 100rpx;
+  font-size: 1.4em;
+  padding:0 5rpx;
+  color:#3573fa;
+  position: relative;
+  top: 5rpx;
 }
 
 .cell {
@@ -28,8 +38,16 @@
   background:#fff;
   border-bottom:1px solid #eee;
 }
-.cell .body{
+/* .cell .body{
   width: calc(100% - 80rpx);
+  float: right;
+  height: 100%;
+  line-height: 100rpx;
+  font-size:0.8em;
+  color:#444;
+} */
+.cell .body{
+  width: calc(100% - 25rpx);
   float: right;
   height: 100%;
   line-height: 100rpx;

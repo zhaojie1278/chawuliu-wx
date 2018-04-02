@@ -20,31 +20,11 @@ Page({
       img3:'',
       img4:'',
       zhuanxians:[
-        [
-        {
-          start:'',
-          point:''
-        },
-        {
-          start:'合肥',
-          point:'上海2'
-        }],
-        [{
-          start:'合肥',
-          point:'上海3'
-        },
-        {
-          start:'合肥',
-          point:'上海4'
-        }],
-        [{
-          start:'合肥',
-          point:'上海5'
-        }],
       ],
       isfav:false,
       favItemIndex: -1 // 收藏列表界面打开时传递
-    }
+    },
+    zxCatsKeyVal: app.globalData.zxCatsKeyVal
   },
   onLoad: function ($query) {
     // console.log(this.data);
@@ -55,6 +35,7 @@ Page({
     })
 
     var that = this;
+    console.log(that.data.zxCatsKeyVal)
 
     // 用户头像
     that.getUserInfoThis();

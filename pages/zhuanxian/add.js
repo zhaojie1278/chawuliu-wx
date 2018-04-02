@@ -29,15 +29,24 @@ Page({
     loading: false,
     defaultsize: 'default'
   },
-  onLoad: function () {
+  onLoad: function (e) {
+    var that = this
+
+    // console.log(e)
+    if(undefined != e) {
+      that.setData({
+        defAreaCat: e.catid
+      })
+    }
+    // var pages = getCurrentPages();
+    // console.log('pages.length:'+pages.length)
+
     // console.log(app.globalData)
     // 获取已保存信息
     wx.showLoading({
         title: '加载中..',
         mask: true
     })
-
-    var that = this
 
     // 判断是否已添加公司信息
     var openid = wx.getStorageSync('openid')
@@ -81,10 +90,10 @@ Page({
           itemVal.nickname = res.data.data.nickname;
           itemVal.phone = res.data.data.phone;
           itemVal.address = res.data.data.address;
-          itemVal.cats = res.data.data.cats;
+          itemVal.cats = app.globalData.zxCatsKeyVal;
           itemVal.catname = itemVal.cats[that.data.defAreaCat]
           that.setData({item:itemVal})
-          console.log(that)
+          // console.log(that)
         }
       },
       fail: function(res) {

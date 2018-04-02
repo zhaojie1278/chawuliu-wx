@@ -2,7 +2,7 @@
 
 <!--导航-->
 <view  class="navigator">
-    <block wx:for="{{navTxts}}" wx:key="{{index}}">  
+    <block wx:for="{{zxCats}}" wx:key="{{index}}">
     <view bindtap="bindNavTaped" class="{{areacatid==item.id?'viewdef-taped':'viewdef'}}" data-areacatid="{{item.id}}" hover-class="onhover">{{item.txt}}</view>
     </block>
 </view>

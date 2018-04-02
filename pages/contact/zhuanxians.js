@@ -17,11 +17,12 @@ Page({
         ishidden: true
       } */
     ],
-    emptyshow: false
+    emptyshow: false,
+    zxCatsKeyVal: app.globalData.zxCatsKeyVal
   },
   onLoad: function () {
-    var pages = getCurrentPages();
-    console.log('pages.length::'+pages.length);
+    // var pages = getCurrentPages();
+    // console.log('pages.length::'+pages.length);
     var that = this
     // 获取已保存信息
     wx.showLoading({
