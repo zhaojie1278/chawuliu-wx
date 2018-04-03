@@ -39,7 +39,7 @@
   <navigator class="navview" open-type="switchTab" url="../zhuanxian/toadd" hover-class="navhover">
       <text class="icon iconfont icon-fabu icon-large" style="background:#ff865e;"></text>
       <view class="title">
-          <text>发布专线</text>
+          <text>我要发布</text>
       </view>
   </navigator>
 </view>
@@ -84,7 +84,7 @@
   <navigator class="navview" url="../zhuanxian/add?catid=6" hover-class="navhover">
       <text class="icon iconfont icon-zixun icon-large" style="background:#5be3a8;"></text>
       <view class="title">
-          <text>市内倒短车</text>
+          <text>车源</text>
       </view>
   </navigator>
 </view>

@@ -30,19 +30,10 @@ Page({
     defaultsize: 'default'
   },
   onLoad: function (e) {
+
+    console.log(e)
     var that = this
 
-    // console.log(e)
-    if(undefined != e) {
-      that.setData({
-        defAreaCat: e.catid
-      })
-    }
-    // var pages = getCurrentPages();
-    // console.log('pages.length:'+pages.length)
-
-    // console.log(app.globalData)
-    // 获取已保存信息
     wx.showLoading({
         title: '加载中..',
         mask: true
@@ -50,67 +41,148 @@ Page({
 
     // 判断是否已添加公司信息
     var openid = wx.getStorageSync('openid')
-    wx.request({
-      url: app.globalData.config.service.contactUrl+'/isregcompany',
-      data: {
-        openid: openid
-      },
-      method: 'POST',
-      dataType: 'json',
-      header: {
-        sign: 'sign123123',
-        ver: 'v1',
-        'content-type': 'application/x-www-form-urlencoded'
-      },
-      success: function(res){
-        wx.hideLoading();
-        // console.log(res);
-        if(res.data.status !== 1) {
+    if(undefined != e && undefined != e.catid) {
+      // 添加专线入口
+      that.setData({
+        defAreaCat: e.catid
+      })
+
+      // 判断是否已注册公司信息
+      wx.request({
+        url: app.globalData.config.service.contactUrl+'/isregcompany',
+        data: {
+          openid: openid
+        },
+        method: 'POST',
+        dataType: 'json',
+        header: {
+          sign: 'sign123123',
+          ver: 'v1',
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function(res){
+          wx.hideLoading();
+          // console.log(res);
+          if(res.data.status !== 1) {
+            wx.showToast({
+              title: '抱歉，请先完善公司信息',
+              icon: 'none',
+              duration: 3000,
+              success: function(e) {
+                // console.log('toast')
+                // console.log(e);
+                // 完善公司信息
+                setTimeout(
+                  function() {
+                    wx.redirectTo({
+                      url: '../contact/company'
+                    })
+                },1000)
+                
+              }
+            })
+          } else {
+            var itemVal = that.data.item
+            // console.log(itemVal)
+            itemVal.cid = res.data.data.id;
+            itemVal.nickname = res.data.data.nickname;
+            itemVal.phone = res.data.data.phone;
+            itemVal.address = res.data.data.address;
+            itemVal.cats = app.globalData.zxCatsKeyVal;
+            itemVal.catname = itemVal.cats[that.data.defAreaCat]
+            that.setData({item:itemVal})
+            // console.log(that)
+          }
+        },
+        fail: function(res) {
           wx.showToast({
-            title: '抱歉，请先完善公司信息',
+            title: '抱歉，数据地址请求错误.v01',
             icon: 'none',
-            duration: 3000,
-            success: function(e) {
-              // console.log('toast')
-              // console.log(e);
-              // 完善公司信息
-              setTimeout(
-                function() {
-                  wx.redirectTo({
-                    url: '../contact/company'
-                  })
-              },1000)
-              
-            }
+            // icon: 'loading',
+            duration: 2000
           })
-        } else {
-          var itemVal = that.data.item
-          // console.log(itemVal)
-          itemVal.cid = res.data.data.id;
-          itemVal.nickname = res.data.data.nickname;
-          itemVal.phone = res.data.data.phone;
-          itemVal.address = res.data.data.address;
-          itemVal.cats = app.globalData.zxCatsKeyVal;
-          itemVal.catname = itemVal.cats[that.data.defAreaCat]
-          that.setData({item:itemVal})
-          // console.log(that)
+          console.log('fail');
+          // coonsole.log(res);
+        },
+        complete: function(res) {
+          // console.log('complete');
+          // console.log(res)
         }
-      },
-      fail: function(res) {
-        wx.showToast({
-          title: '抱歉，数据地址请求错误.v01',
-          icon: 'none',
-          // icon: 'loading',
-          duration: 2000
-        })
-        console.log('fail');
-        // coonsole.log(res);
-      },
-      complete: function(res) {
-        // console.log('complete');
-        // console.log(res)
-      }
-    })
+      })
+
+      return
+    } else if (undefined != e && undefined != e.zxid) {
+      // 修改专线入口
+      wx.request({
+        url: app.globalData.config.service.zhuanxianUrl+'/toupdate',
+        data: {
+          id: e.zxid,
+          cid: e.cid 
+        },
+        method: 'POST',
+        dataType: 'json',
+        header: {
+          sign: 'sign123123',
+          ver: 'v1',
+          'content-type': 'application/x-www-form-urlencoded'
+        },
+        success: function(res){
+          wx.hideLoading();
+          // console.log(res);
+          if(res.data.status !== 1) {
+            wx.showToast({
+              title: '抱歉，数据获取失败，请稍后重试',
+              icon: 'none',
+              duration: 3000,
+              success: function(e) {
+                // console.log('toast')
+                // console.log(e);
+                // 完善公司信息
+                setTimeout(
+                  function() {
+                    wx.navigateBack()
+                },1000)
+                
+              }
+            })
+          } else {
+            var itemVal = that.data.item
+            // console.log(itemVal)
+            itemVal.id = res.data.data.id;
+            itemVal.start_prov = res.data.data.start_prov;
+            itemVal.start = res.data.data.start;
+            itemVal.point_prov = res.data.data.point_prov;
+            itemVal.point = res.data.data.point;
+            itemVal.price_zhonghuo = res.data.data.price_zhonghuo;
+            itemVal.price_paohuo = res.data.data.price_paohuo;
+            itemVal.cid = res.data.data.cid;
+            itemVal.nickname = res.data.data.nickname;
+            itemVal.phone = res.data.data.phone;
+            itemVal.address = res.data.data.address;
+            itemVal.cats = app.globalData.zxCatsKeyVal;
+            itemVal.catname = itemVal.cats[res.data.data.cat]
+            that.setData({
+              item:itemVal,
+              defAreaCat: res.data.data.catid
+            })
+            // console.log(that)
+          }
+        },
+        fail: function(res) {
+          wx.showToast({
+            title: '抱歉，数据地址请求错误.v03',
+            icon: 'none',
+            duration: 2000
+          })
+          console.log('fail');
+        },
+        complete: function(res) {
+          // console.log('complete');
+          // console.log(res)
+        }
+      })
+    }
+    
   },
   formSubmit:function(e){
     wx.showLoading({
@@ -174,6 +246,10 @@ Page({
                   'item.price_zhonghuo': '',
                   'item.price_paohuo': '',
                 })
+
+                if (formdata.id) {
+                  wx.navigateTo({url: '../contact/zhuanxians'})
+                }
                 // console.log(res)
                 // 添加成功后跳转
                 /* setTimeout(

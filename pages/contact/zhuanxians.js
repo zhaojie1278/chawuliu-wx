@@ -162,6 +162,21 @@ Page({
       }
     })
   },
+  updateZhuanxian (e) {
+    // 删除专线操作
+    var self = this
+    // console.log(delParams)
+    // 获取已保存信息
+    wx.showLoading({
+        title: '加载中..',
+        mask: true
+    })
+    var zxid = e.currentTarget.dataset.zxid
+    var cid = e.currentTarget.dataset.cid
+    wx.navigateTo({
+      url: '../zhuanxian/add?zxid='+zxid+'&cid='+cid
+    })
+  },
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
   }

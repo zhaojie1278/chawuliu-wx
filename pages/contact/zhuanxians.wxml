@@ -5,6 +5,7 @@
         <view class="body">
             <text class="zhuanxian">{{item.start}}<text class="icon iconfont icon-huhuan"></text>{{item.point + ' - ' + zxCatsKeyVal[item.cat]}}</text>
             <text class="del" bindtap="delZhuanxian" data-index="{{index}}" data-zxid="{{item.id}}" data-cid="{{item.cid}}">删除</text>
+            <text class="update" bindtap="updateZhuanxian" data-zxid="{{item.id}}" data-cid="{{item.cid}}">修改</text>
         </view>
     </view>
     </block>
