@@ -35,13 +35,13 @@
         "selectedIconPath": "images/tabBar/search02.png",
         "iconPath": "images/tabBar/search01.png",
         "pagePath": "pages/zhuanxian/index",
-        "text": "专线查询"
+        "text": "我要查询"
       },
       {
         "selectedIconPath": "images/tabBar/publish02.png",
         "iconPath": "images/tabBar/publish01.png",
         "pagePath": "pages/zhuanxian/toadd",
-        "text": "发布专线"
+        "text": "我要发布"
       },
       {
         "selectedIconPath": "images/tabBar/my02.png",

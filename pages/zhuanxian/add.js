@@ -31,6 +31,7 @@ Page({
   },
   onLoad: function (e) {
 
+    console.log('addd')
     console.log(e)
     var that = this
 
@@ -41,10 +42,10 @@ Page({
 
     // 判断是否已添加公司信息
     var openid = wx.getStorageSync('openid')
-    if(undefined != e && undefined != e.catid) {
+    if(undefined != e && undefined != e.catid && undefined == e.zxid) {
       // 添加专线入口
       that.setData({
-        defAreaCat: e.catid
+        defAreaCat: e.catid-1
       })
 
       // 判断是否已注册公司信息
@@ -89,7 +90,7 @@ Page({
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
             itemVal.cats = app.globalData.zxCatsKeyVal;
-            itemVal.catname = itemVal.cats[that.data.defAreaCat]
+            itemVal.catname = itemVal.cats[that.data.defAreaCat-1]
             that.setData({item:itemVal})
             // console.log(that)
           }
@@ -112,6 +113,7 @@ Page({
 
       return
     } else if (undefined != e && undefined != e.zxid) {
+      console.log('upupdate')
       // 修改专线入口
       wx.request({
         url: app.globalData.config.service.zhuanxianUrl+'/toupdate',
@@ -160,10 +162,11 @@ Page({
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
             itemVal.cats = app.globalData.zxCatsKeyVal;
-            itemVal.catname = itemVal.cats[res.data.data.cat]
+            var _cat = res.data.data.cat-1 // 本地数组索引小于1
+            itemVal.catname = itemVal.cats[_cat]
             that.setData({
               item:itemVal,
-              defAreaCat: res.data.data.catid
+              defAreaCat: _cat
             })
             // console.log(that)
           }
@@ -215,6 +218,7 @@ Page({
     } else if (formdata.cid == '') {
       util.showMaskTip1500('抱歉，联系人信息异常，请重新加载后重试')
     } else {
+      console.log('cat'+formdata.catname);
       //提交
       var reqUrl = app.globalData.config.service.zhuanxianUrl+'/add';
       wx.request({

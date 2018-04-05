@@ -12,15 +12,17 @@ var zxCats = [
   {id:4,txt:'海运'},
   {id:5,txt:'配载调车'},
   {id:6,txt:'市内倒短车'},
+  {id:7,txt:'车辆买卖'},
+  {id:8,txt:'司机招聘'},
 ]
 
 var zxCatsKeyVal = new Array(6)
-zxCatsKeyVal[1] = '省际物流'
-zxCatsKeyVal[2] = '省内物流'
-zxCatsKeyVal[3] = '空运'
-zxCatsKeyVal[4] = '海运'
-zxCatsKeyVal[5] = '配载调车'
-zxCatsKeyVal[6] = '市内倒短车'
+zxCatsKeyVal[0] = '省际物流'
+zxCatsKeyVal[1] = '省内物流'
+zxCatsKeyVal[2] = '空运'
+zxCatsKeyVal[3] = '海运'
+zxCatsKeyVal[4] = '配载调车'
+zxCatsKeyVal[5] = '市内倒短车'
 
 App({
   onLaunch: function () {

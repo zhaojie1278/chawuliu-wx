@@ -16,7 +16,7 @@
   <navigator class="navview" open-type="switchTab" url="{{'../zhuanxian/index'}}" hover-class="navhover">
       <text class="icon iconfont icon-wuliu icon-large" style="background:#a1e932;"></text>
       <view class="title">
-          <text>查询线路</text>
+          <text>超级买卖</text>
       </view>
   </navigator>
 
