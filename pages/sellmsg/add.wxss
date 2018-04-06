@@ -1,0 +1,68 @@
+
+/* pages/contact/company.wxss */
+
+.view-mg {
+  padding: 0 20rpx;
+  height:100rpx;
+  line-height:100rpx;
+  background:#fff;
+  border-bottom:1px solid #efefef;
+}
+
+.view-mg .lbl-left {
+  width:23%;
+  float:left;
+  color:#333;
+  font-size:0.9em;
+}
+.view-mg .lbl-line {
+  width:100%;
+  color:#333;
+  font-size:0.9em;
+}
+
+.contact-info {
+  color:#3573fa; 
+  background:#f7f7fa; 
+  height: 80rpx; 
+  line-height: 80rpx; 
+  font-size:0.9em;
+}
+
+.fsize-dig8 {
+  font-size:0.8rem;
+}
+.view-mg .inp {
+  padding:27rpx 10rpx 0rpx;
+  font-size:0.8rem;
+  /* color:#999; */
+}
+
+.view-mg .btnsub {
+  background: #3573fa;
+}
+
+.textarea{
+  text-align: left;
+  width: 100%;
+  font-size: 0.75rem;
+  color: #666666;
+  padding-left: 10rpx;
+  line-height: 40rpx;
+  height: 200rpx;
+}
+
+.view-mg .imgs {
+  background:#fff;
+  display: flex;
+  justify-content: space-around;
+}
+
+.view-mg .img-i {
+  height: 200rpx;
+}
+
+.view-mg .imgs image {
+  width: 150rpx;
+  height: 150rpx;
+}

@@ -42,6 +42,13 @@
             <text class="i">></text>
         </view>
     </navigator>
+    <navigator class="cell" url="{{url6}}">
+        <view class="icon iconfont icon-zixun"></view>
+        <view class="body">
+            <text>超级买卖</text>
+            <text class="i">></text>
+        </view>
+    </navigator>
     <view class="cell" url="{{url4}}">
         <view class="icon iconfont icon-mianfeizixun"></view>
         <view class="body">

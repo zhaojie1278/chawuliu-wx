@@ -1,0 +1,70 @@
+<!--index.wxml-->
+<view class="container">
+  <form bindsubmit="formSubmit" bindreset="formReset">
+    <input name="id" hidden value="{{item.id}}"/>
+    <input name="cid" hidden value="{{item.cid}}"/>
+    <input name="prov" hidden value="{{item.prov}}"/>
+    <input name="city" hidden value="{{item.city}}"/>
+    <input name="catname" hidden value="{{item.catname}}"/>
+    <view class="view-mg" wx:if="{{isnotzhaopin}}">
+        <text class="lbl-left">发布类型</text>
+        <input name="selltype" hidden value="{{item.selltype}}"/>
+        <radio-group class="fsize-dig8" bindchange="sellTypeChange">
+        <label class="radio" wx:for="{{selltypes}}" wx:for-item="selltype" wx:key="{{selltype.name}}">
+            <radio value="{{selltype.name}}" checked="{{selltype.checked}}"/>{{selltype.value}}
+        </label>
+        </radio-group>
+    </view>
+    <view class="view-mg" style="height:300rpx;">
+        <view class="lbl-line"><text>发布内容</text></view>
+        <view class="area_box">
+        <textarea bindinput="bindWordChg" name="content" class="textarea" placeholder="请手动输入真实有效的内容，不要随意发布虚假消息" maxlength="100" fixed="{{false}}" value="{{item.content}}" />
+        </view>
+    </view>
+    <!-- img -->
+    <view class="view-mg" style="display: block; height:300rpx; background:#fff;">
+        <view class="lbl-line"><text>图片</text></view>
+        <view class="imgs" style="padding-top:0rpx;">
+            <view class="img-i">
+                <input hidden="{{true}}" name="img1" type="text" value="{{item.img1}}"/>
+                <image wx:if="{{showImgs.img1!=''}}" bindtap="checkImg" src="{{showImgs.img1}}" ss="{{showImgs.img1}}" id="img1"></image>
+                <image wx:else bindtap="checkImg" src="{{defaultimg}}" id="img1" ss="{{showImgs.img1}}"></image>
+            </view>
+            <view class="img-i">
+                <input hidden="{{true}}" name="img2" type="text" value="{{item.img2}}"/>
+                <image wx:if="{{showImgs.img2!=''}}" bindtap="checkImg" src="{{showImgs.img2}}" id="img2"></image>
+                <image wx:else bindtap="checkImg" src="{{defaultimg}}" id="img2"></image>
+            </view>
+            <view class="img-i">
+                <input hidden="{{true}}" name="img3" type="text" value="{{item.img3}}"/>
+                <image wx:if="{{showImgs.img3!=''}}" bindtap="checkImg" src="{{showImgs.img3}}" id="img3"></image>
+                <image wx:else bindtap="checkImg" src="{{defaultimg}}" id="img3"></image>
+            </view>
+            <view class="img-i">
+                <input hidden="{{true}}" name="img4" type="text" value="{{item.img4}}"/>
+                <image wx:if="{{showImgs.img4!=''}}" bindtap="checkImg" src="{{showImgs.img4}}" id="img4"></image>
+                <image wx:else bindtap="checkImg" src="{{defaultimg}}" id="img4"></image>
+            </view>
+        </view>
+    </view>
+    <!--联系人信息-->
+    <view  class="view-mg contact-info">发货联系人信息</view>
+    <view class="view-mg">
+        <text class="lbl-left">联系人</text>
+        <input class="inp" id="nickname" name="nickname" maxlength="20" placeholder="请输入联系人" type="text" value="{{item.nickname}}"/>
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">电话</text>
+        <input class="inp" id="phone" name="phone" maxlength="11" placeholder="请输入电话" type="text" value="{{item.phone}}"/>
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">地址</text>
+        <input class="inp" id="address" name="address" maxlength="60" placeholder="请输入地址" type="text" value="{{item.address}}"/>
+    </view>
+    <view class="h-10" style="background:#f7f7fa"></view>
+    <view class="view-mg">
+        <button class="btnsub" type="primary" size="{{defaultsize}}" loading="{{loading}}" plain="{{plain}}"
+              disabled="{{disabled}}" form-type="{{form_type}}">保  存</button>
+    </view>
+  </form>
+</view>

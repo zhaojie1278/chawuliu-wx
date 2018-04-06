@@ -12,8 +12,6 @@ var zxCats = [
   {id:4,txt:'海运'},
   {id:5,txt:'配载调车'},
   {id:6,txt:'市内倒短车'},
-  {id:7,txt:'车辆买卖'},
-  {id:8,txt:'司机招聘'},
 ]
 
 var zxCatsKeyVal = new Array(6)
@@ -23,6 +21,70 @@ zxCatsKeyVal[2] = '空运'
 zxCatsKeyVal[3] = '海运'
 zxCatsKeyVal[4] = '配载调车'
 zxCatsKeyVal[5] = '市内倒短车'
+
+// 超级买卖
+var sellCats = [
+  {id:7,txt:'车辆买卖'},
+  {id:8,txt:'司机招聘'},
+]
+
+var sellCatsKeyVal = new Array(2)
+sellCatsKeyVal[6] = '车辆买卖'
+sellCatsKeyVal[7] = '司机招聘'
+
+// 车辆买卖
+var sellCatsSecond = [
+  {id:1,txt:'牵引车'},
+  {id:2,txt:'载货车'},
+  {id:3,txt:'自卸车'},
+  {id:4,txt:'工程车'},
+  {id:5,txt:'单桥货车'},
+  {id:6,txt:'水泥罐车'},
+  {id:7,txt:'油罐车'},
+  {id:8,txt:'挂车'},
+]
+
+var sellCatsSecondKeyVal = new Array(8)
+sellCatsSecondKeyVal[0] = '牵引车'
+sellCatsSecondKeyVal[1] = '载货车'
+sellCatsSecondKeyVal[2] = '自卸车'
+sellCatsSecondKeyVal[3] = '工程车'
+sellCatsSecondKeyVal[4] = '单桥货车'
+sellCatsSecondKeyVal[5] = '水泥罐车'
+sellCatsSecondKeyVal[6] = '油罐车'
+sellCatsSecondKeyVal[7] = '挂车'
+// sellCatsSecondKeyVal[8] = '车主招聘司机'
+// sellCatsSecondKeyVal[9] = '公司招聘司机'
+sellCatsSecondKeyVal[8] = '招聘司机'
+sellCatsSecondKeyVal[9] = '司机求职'
+
+
+// 车辆买卖发布类型
+var selltypesKeyVal = new Array(2)
+selltypesKeyVal[0] = ''
+selltypesKeyVal[1] = '出售'
+selltypesKeyVal[2] = '购买'
+
+// 招聘信息
+var zhaopinCatsSecond = [
+  // {id:9,txt:'车主招聘司机'},
+  // {id:10,txt:'公司招聘司机'},
+  {id:9,txt:'招聘司机'},
+  {id:10,txt:'司机求职'},
+]
+var zhaopinCatsSecondObj = {
+  // 9: '车主招聘司机',
+  // 10: '公司招聘司机',
+  9: '招聘司机',
+  10: '司机求职'
+}
+
+var allSellCatsSecond = {
+  7: sellCatsSecond,
+  8: zhaopinCatsSecond,
+}
+
+
 
 App({
   onLaunch: function () {
@@ -143,7 +205,15 @@ App({
     config:config,
     ooid:0, // 邀请人 openid
     zxCats: zxCats,
-    zxCatsKeyVal: zxCatsKeyVal
+    zxCatsKeyVal: zxCatsKeyVal,
+    sellCats: sellCats,
+    sellCatsKeyVal: sellCatsKeyVal,
+    sellCatsSecond: sellCatsSecond,
+    sellCatsSecondKeyVal: sellCatsSecondKeyVal,
+    zhaopinCatsSecond: zhaopinCatsSecond,
+    allSellCatsSecond: allSellCatsSecond,
+    zhaopinCatsSecondObj: zhaopinCatsSecondObj,
+    selltypesKeyVal: selltypesKeyVal
   },
   shareFun (res) { // 转发函数
     console.log(res);

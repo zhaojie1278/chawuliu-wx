@@ -36,7 +36,7 @@
       </view>
   </view>
 
-  <navigator class="navview" open-type="switchTab" url="../zhuanxian/toadd" hover-class="navhover">
+  <navigator class="navview" open-type="switchTab" url="../index/toadd" hover-class="navhover">
       <text class="icon iconfont icon-fabu icon-large" style="background:#ff865e;"></text>
       <view class="title">
           <text>我要发布</text>

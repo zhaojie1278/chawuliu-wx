@@ -4,14 +4,18 @@
     "pages/index/kuaidi100",
     "pages/zhuanxian/index",
     "pages/zhuanxian/add",
-    "pages/zhuanxian/toadd",
+    "pages/index/toadd",
     "pages/contact/index",
     "pages/contact/detail",
     "pages/contact/company",
     "pages/contact/fav",
     "pages/contact/zhuanxians",
+    "pages/contact/sellmsgs",
     "pages/logs/logs",
-    "pages/city/index"
+    "pages/city/index",
+    "pages/sellmsg/add",
+    "pages/sellmsg/toadd",
+    "pages/sellmsg/detail"
   ],
   "window":{
     "backgroundTextStyle":"light",
@@ -40,7 +44,7 @@
       {
         "selectedIconPath": "images/tabBar/publish02.png",
         "iconPath": "images/tabBar/publish01.png",
-        "pagePath": "pages/zhuanxian/toadd",
+        "pagePath": "pages/index/toadd",
         "text": "我要发布"
       },
       {
@@ -50,5 +54,9 @@
         "text": "个人中心"
       }
     ]
+  },
+  "networkTimeout": {
+    "request": 20000,
+    "uploadFile" : 20000
   }
 }

@@ -1,0 +1,100 @@
+
+/* pages/contact/fav.wxss */
+
+/* 未收藏 */
+.nofav {
+  height: 200rpx;
+  line-height: 200rpx;
+  width: 100%;
+  text-align: center;
+  font-size:0.8em;
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+
+/* .icon{
+  width:40rpx;
+  height:40rpx;
+  float: left;
+  font-size: 1.4em;
+  padding-left: 20rpx;
+  top: 20rpx;
+  color:#3573fa;
+  position: relative;
+} */
+.icon{
+  width:40rpx;
+  height:100rpx;
+  line-height: 100rpx;
+  font-size: 1.4em;
+  padding:0 5rpx;
+  color:#3573fa;
+  position: relative;
+  top: 5rpx;
+}
+
+.cell {
+  height:100rpx;
+  background:#fff;
+  border-bottom:1px solid #eee;
+}
+/* .cell .body{
+  width: calc(100% - 80rpx);
+  float: right;
+  height: 100%;
+  line-height: 100rpx;
+  font-size:0.8em;
+  color:#444;
+} */
+.cell .body{
+  width: calc(100% - 25rpx);
+  float: right;
+  height: 100%;
+  line-height: 100rpx;
+  font-size:0.8em;
+  color:#666;
+}
+
+.cell .body .del{
+  width: 60rpx;
+  height: 100%;
+  float: right;
+  font-size: 0.95em;
+  color: #ff0000;
+  margin-right: 10rpx;
+}
+
+.update {
+  width: 60rpx;
+  height: 100%;
+  float: right;
+  font-size: 0.95em;
+  color: #3573fa;
+  margin-right: 10rpx;
+}
+
+/* 类别 */
+.container .cat {
+  float: left;
+  /* display:inline-block; */
+  height:60rpx;
+  line-height:60rpx;
+  padding:0 15rpx;
+  border:1px solid #ddd;
+  margin-right:14rpx;
+  background:#3573fa;
+  color:#fff;
+  font-size:0.7rem;
+  margin-top: 20rpx;
+}
+
+/* 内容 */
+.container .cnt {
+  white-space:nowrap;
+  text-overflow:ellipsis;
+  overflow:hidden;
+  width:250rpx;
+  line-height:100rpx;
+  height:100rpx;
+  float:left;
+}

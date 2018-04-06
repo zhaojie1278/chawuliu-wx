@@ -150,6 +150,7 @@ Page({
       success: function(res){
         wx.hideLoading();
         // console.log(res);
+        console.log('succ')
         if(res.data.status !== 1) {
           wx.showToast({
             title: '抱歉，专线数据请求错误',
@@ -173,7 +174,7 @@ Page({
         // coonsole.log(res);
       },
       complete: function(res) {
-        // console.log('complete');
+        console.log('complete');
         // console.log(res)
       }
     })
@@ -214,6 +215,7 @@ Page({
               that.setData({'nowCity':'位置获取失败'})
             } else {
               // that.setData({'nowCity':res.data.result.addressComponent.city})
+              // console.log(res.data.result)
               var cityStr = res.data.result.addressComponent.city
               if (cityStr.indexOf('市')!=-1){
                 cityStr = cityStr.replace('市','')

@@ -71,6 +71,12 @@ Page({
             companyimg: companyimgs,
             imglist: imglists
           })
+        } else {
+          wx.showToast({
+            title: '请务必填写真实信息，方便其他的用户根据您的专线/物流等信息与您联系',
+            icon: 'none',
+            duration: 3500
+          })
         }
         // console.log(that.data);
       },
@@ -122,7 +128,7 @@ Page({
           'content-type': 'multipart/form-data'
         },
         formData:{
-          'imgid': '123123'
+          'from': 'company'
         },
         success: function(res){
           console.log('upload res::')

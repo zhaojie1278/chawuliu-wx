@@ -13,8 +13,10 @@ Page({
     url3:'./fav',
     url4:'',
     url5:'./zhuanxians',
+    url6:'./sellmsgs',
   },
   onLoad: function () {
+    console.log(app.globalData.userInfo)
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,

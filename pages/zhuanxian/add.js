@@ -90,7 +90,7 @@ Page({
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
             itemVal.cats = app.globalData.zxCatsKeyVal;
-            itemVal.catname = itemVal.cats[that.data.defAreaCat-1]
+            itemVal.catname = itemVal.cats[that.data.defAreaCat]
             that.setData({item:itemVal})
             // console.log(that)
           }
@@ -131,7 +131,7 @@ Page({
         success: function(res){
           wx.hideLoading();
           // console.log(res);
-          if(res.data.status !== 1) {
+          if(res.data.status !== 1 || null == res.data.data) {
             wx.showToast({
               title: '抱歉，数据获取失败，请稍后重试',
               icon: 'none',
@@ -184,6 +184,9 @@ Page({
           // console.log(res)
         }
       })
+    } else {
+      util.showError('抱歉，数据异常')
+      return
     }
     
   },
