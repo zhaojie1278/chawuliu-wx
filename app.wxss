@@ -10,6 +10,7 @@
 } 
 
 @import "template/list.wxss";
+@import "template/sellmsglist.wxss";
 @import "lib/icon.wxss";
 
 page {

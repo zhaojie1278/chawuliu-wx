@@ -69,6 +69,11 @@
   color:#ff865e;
 }
 
+.icon-min2 {
+  font-size: 1.5em;
+  color:#ff865e;
+}
+
 .icon-middle {
   font-size: 32pt;
   color:#ff865e;

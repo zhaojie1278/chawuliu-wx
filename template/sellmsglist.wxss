@@ -1,0 +1,146 @@
+
+/* list */
+/*
+.sellmsglist{
+	 padding: 10rpx 0rpx; 
+}
+*/
+
+.sellmsglist .item{
+	margin-bottom: 20rpx;
+	background: #fff;
+}
+
+.sellmsglist .nowrap2 {
+	overflow:hidden;
+	white-space:nowrap;
+	text-overflow:ellipsis;
+	max-width:300rpx;
+	float:left;
+	padding:5rpx 10rpx 10rpx 10rpx;
+	/* border:1px solid #ddd; */
+	background:#3573fa;
+	color:#fff;
+	border-radius: 7rpx;
+}
+
+.sellmsglist .item .info {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+  	align-items: center;
+	border-bottom: 1px solid #eee;
+}
+
+.sellmsglist .item-left {
+	display: flex;
+	flex-direction: row;
+}
+.sellmsglist .item .icon{
+	/* width:40%; */
+	padding: 28rpx 20rpx;
+	/* box-sizing: border-box; */
+}
+.sellmsglist .item .icon image{
+	width: 100rpx;
+	height: 100rpx;
+	border: 0px solid #ccc;
+	box-sizing: border-box;
+	display: block;
+	overflow: hidden;
+	border-radius: 100rpx;
+}
+
+.sellmsglist .item .body {
+	display: flex;
+	flex-direction: column;
+	/* align-items:center; */
+	justify-content: center;
+}
+
+.sellmsglist .item .body .title {
+	margin-bottom: 5rpx;
+	font-size: 0.8em;
+	color: #6f95fb;
+}
+
+.sellmsglist .item .body .describe {
+	font-size: 0.7em;
+	color: #666666;
+	margin-top: 3rpx;
+}
+.sellmsglist .item .bohao {
+  margin-right:20rpx;
+}
+.sellmsglist .item .bohao .icon {
+  padding:15rpx;
+  border-radius:50%;
+  color:#fff;
+}
+.sellmsglist .item .address {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	line-height: 50rpx;
+	padding: 15rpx 20rpx 15rpx 20rpx;
+	/* width: 715rpx; */
+}
+
+.sellmsglist .item .addresstxt {
+	font-size: 0.72em;
+	color:#666666;
+	max-height: 180rpx;
+	display: -webkit-box;
+	-webkit-box-orient: vertical;
+	-webkit-line-clamp:3;
+	overflow: hidden;
+}
+.sellmsglist .item .todetail {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+	line-height: 60rpx;
+	height: 60rpx;
+	padding: 5rpx 20rpx 15rpx 20rpx;
+	font-size: 0.7em;
+	/* width: 715rpx; */
+}
+.sellmsglist .item .deinfo {
+	width: calc(100% - 250rpx);
+	display: flex;
+}
+.sellmsglist .item .deinfo .time {
+	height: 50rpx;
+	line-height: 50rpx;
+	color: #666;
+	/* font-size: 0.75em; */
+}
+.sellmsglist .item .imgcount {
+	background:#6f95fb;
+	font-size: 0.95em;
+	border-radius: 7rpx;
+	padding: 5rpx 10rpx;
+	height: 40rpx;
+	line-height: 40rpx;
+	margin-left: 15rpx;
+	color: #fff;
+}
+.sellmsglist .item .detaillink {
+	color: #3573fa;
+	/* font-size: 0.75em; */
+	/* border-radius: 7rpx; */
+}
+
+
+.sellmsglist .listempty {
+	font-size: 0.9em;
+	height:100rpx;
+	line-height: 100rpx;
+	text-align: center;
+	background: #fff;
+	color:#666666;
+	margin-bottom: 15rpx;
+	border: 1rpx solid #fff;
+}

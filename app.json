@@ -15,7 +15,8 @@
     "pages/city/index",
     "pages/sellmsg/add",
     "pages/sellmsg/toadd",
-    "pages/sellmsg/detail"
+    "pages/sellmsg/detail",
+    "pages/sellmsg/index"
   ],
   "window":{
     "backgroundTextStyle":"light",

@@ -1,0 +1,23 @@
+<!--index.wxml-->
+
+<!--导航-->
+<!--
+<view  class="navigator">
+    <block wx:for="{{zxCats}}" wx:key="{{index}}">
+    <view bindtap="bindNavTaped" class="{{firstcat==item.id?'viewdef-taped':'viewdef'}}" data-firstcat="{{item.id}}" hover-class="onhover">{{item.txt}}</view>
+    </block>
+</view>
+-->
+
+<!--专线推荐-->
+<!--
+<view class="tuijian-nav">
+<text style="float:left; color:#6f95fb">精品专线推荐</text>
+<text style="float:right">{{nowCity}}</text><text class="iconfont icon-add icon-min" style="float:right;"></text>
+</view>
+-->
+
+<!-- 模板引用 -->
+<import src="../../template/sellmsglist.wxml"/>
+<template is="sellmsglist" data="{{list,sellCatsSecondKeyVal,selltypesKeyVal}}"/>
+

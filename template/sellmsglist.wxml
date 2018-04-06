@@ -1,0 +1,37 @@
+
+<template name="sellmsglist">
+    <view class="sellmsglist">
+        <block wx:if="{{list.length != 0}}">
+            <navigator class="item" wx:for="{{list}}" wx:key="item" url="{{url?url:'../sellmsg/detail'}}?id={{item.id}}">
+                <view class="info">
+                    <view class="item-left">
+                        <view class="icon">
+                            <image src="{{item.avatarurl ? item.avatarurl : '../../images/company/default.jpg'}}" />
+                        </view>
+                        <view class="body">
+                            <view class="title"><text class="nowrap">{{item.company}} </text></view>
+                            <view class="describe">
+                            <text class="nowrap2">{{sellCatsSecondKeyVal[item.cat-1] + selltypesKeyVal[item.selltype]}}</text>
+                            </view>
+                        </view>
+                    </view>
+                    <view class="bohao" catchtap="calling" data-phone-number="{{item.phone}}">
+                        <text class="icon iconfont icon-bohao icon-min2" style="background:#ff865e;"></text>
+                    </view>
+                </view>
+                <view class="address">
+                    <text class="addresstxt">{{item.content}}</text>
+                </view>
+                <view class="todetail">
+                    <view class="deinfo">
+                    <text class="time">{{item.timebefore}}</text><text wx:if="{{item.imgcount>0}}" class="imgcount">{{item.imgcount}}图</text>
+                    </view>
+                    <text class="detaillink">查看详细>></text>
+                </view>
+            </navigator>
+        </block>
+        <block wx:else>
+            <view class="listempty">暂无</view>
+        </block>
+    </view>
+</template>

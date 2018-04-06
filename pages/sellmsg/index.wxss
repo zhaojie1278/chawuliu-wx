@@ -1,0 +1,100 @@
+/**index.wxss**/
+
+image {
+  width:100%;
+}
+
+.navigator {
+  display:flex;
+  flex-direction:row;
+  justify-content: space-around;
+  padding:10rpx;
+  background:#fff;
+  height: 100rpx;
+  line-height: 100rpx;
+  font-size: 0.88em;
+  padding: 0 20rpx;
+}
+
+.navigator view {
+  background:#fff;
+}
+
+.navigator .onhover {
+  color:#3573fa;
+  border-bottom:1px solid #3573fa;
+}
+
+.navigator .viewdef {
+  font-size:0.9em;
+}
+
+.navigator .viewdef-taped {
+  font-size:0.9em;
+  color:#3573fa;
+  border-bottom:1px solid #3573fa;
+}
+
+/* 查询地址 */
+.search-zhuanxian {
+  padding: 20rpx;
+}
+.search-zhuanxian input {
+  font-size:1em;
+}
+
+.search-zhuanxian .tosel_inp{
+  background-color:#3573fa;
+}
+
+.search-zhuanxian .areas {
+  width: 100%;
+  display: flex;
+}
+
+.search-zhuanxian .areas-direction {
+  width: 20%;
+  height:93rpx;
+  line-height:93rpx;
+  text-align:center;
+}
+.search-zhuanxian navigator {
+  width:40%;
+  text-align:center;
+  flex-direction:column;
+}
+
+.search-zhuanxian .btn-zhuanxian {
+  background-color:#fff;
+  width:100%;
+  /* border: 1px solid #dbdbdb; */
+}
+
+.search-zhuanxian .search {
+  margin-top: 20rpx;
+}
+
+/*专线推荐*/
+.tuijian-nav {
+  padding: 5rpx 20rpx;
+  background: #fff;
+  font-size: 0.9em;
+  height: 80rpx;
+  line-height: 80rpx;
+  margin-bottom: 5rpx;
+}
+
+.tuijian-list {
+  margin-top: 2rpx;
+  padding: 10rpx 20rpx;
+  height: 180rpx;
+}
+.tuijian-list .icon {
+  width:23%;
+  padding:5rpx 10rpx;
+  box-sizing:border-box;
+  flex-direction:column;
+}
+.tuijian-list img {
+  border-radius: 29px;
+}

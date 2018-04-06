@@ -13,7 +13,7 @@
 </view>
 <!--导航-->
 <view  class="navigator">
-  <navigator class="navview" open-type="switchTab" url="{{'../zhuanxian/index'}}" hover-class="navhover">
+  <navigator class="navview" url="{{'../sellmsg/index'}}" hover-class="navhover">
       <text class="icon iconfont icon-wuliu icon-large" style="background:#a1e932;"></text>
       <view class="title">
           <text>超级买卖</text>
