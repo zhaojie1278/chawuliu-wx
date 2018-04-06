@@ -6,6 +6,7 @@ var util = require('../../utils/util.js')
 Page({
   data: {
     userInfo: {},
+    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     item: {
       id: 0
     },
@@ -25,6 +26,10 @@ Page({
   },
   onLoad: function () {
     var that = this
+
+    // 检查微信信息是否已获取，如果没获取，则重新获取并赋值至 app.globalData
+    that.getUserInfoThis()
+
     // 获取已保存信息
     wx.showLoading({
         title: '加载中..',
@@ -107,7 +112,7 @@ Page({
     // console.log(imgId);
     // console.log('点击选择图片');
     self=this
-    console.log(self);
+    // console.log(self);
     
     wx.chooseImage({
     count: 1, // 默认9
@@ -117,7 +122,7 @@ Page({
       // 返回选定照片的本地文件路径列表，tempFilePath可以作为img标签的src属性显示图片
       var tempFilePaths = res.tempFilePaths
 
-      console.log(res)
+      // console.log(res)
 
       // 上传到服务器
       wx.uploadFile({
@@ -132,11 +137,11 @@ Page({
         },
         success: function(res){
           console.log('upload res::')
-          console.log(res)
+          // console.log(res)
           var data = res.data
           // console.log(res);
           var jsonData = JSON.parse(data)
-          console.log(jsonData);
+          // console.log(jsonData);
           // console.log(jsonData.status);
 
           if (jsonData.status != 1) {
@@ -147,7 +152,7 @@ Page({
 
             var imgUploadUrl = jsonData.data.imgurl
             imglist[imgId] = imgUploadUrl;
-            console.log(imglist)
+            // console.log(imglist)
 
             // 设置本地展示
             companyImgs[imgId] = tempFilePaths[0];
@@ -221,9 +226,25 @@ Page({
       if (!openid) {
         util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
         return;
+      } else {
+        formdata.openid = openid
       }
 
-      formdata.openid = openid
+      var userInfo = app.globalData.userInfo
+      // console.log(userInfo)
+      if (!userInfo) {
+        // 检查微信信息是否已获取，如果没获取，则重新获取并赋值至 app.globalData
+        that.getUserInfoThis()
+
+        // 提示
+        util.showMaskTip1500('微信数据获取异常，请稍等2秒后重试')
+        return
+      } else {
+        formdata.avatarUrl = userInfo.avatarUrl
+        formdata.wxnickname = userInfo.nickName
+      }
+      // Object.assign(formdata, userInfo) // 合并对象
+      // return
 
       //提交
       var reqUrl = app.globalData.config.service.contactUrl;
@@ -277,6 +298,34 @@ Page({
         complete: function(res) {
           console.log('complete');
           // console.log(res)
+        }
+      })
+    }
+  },
+  getUserInfoThis:function(e) { // 获取用户信息
+    if (app.globalData.userInfo) {
+      this.setData({
+        userInfo: app.globalData.userInfo,
+      })
+      console.log('thisdata----')
+      console.log(app.globalData.userInfo)
+      console.log('thisdata----')
+    } else if (this.data.canIUse){
+      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
+      // 所以此处加入 callback 以防止这种情况
+      app.userInfoReadyCallback = res => {
+        this.setData({
+          userInfo: res.userInfo,
+        })
+      }
+    } else {
+      // 在没有 open-type=getUserInfo 版本的兼容处理
+      wx.getUserInfo({
+        success: res => {
+          app.globalData.userInfo = res.userInfo
+          this.setData({
+            userInfo: res.userInfo,
+          })
         }
       })
     }
