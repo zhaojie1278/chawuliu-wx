@@ -4,7 +4,6 @@ const app = getApp()
 var util = require('../../utils/util')
 // var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
 
-
 Page({
   data: {
     userInfo: {},
@@ -19,9 +18,9 @@ Page({
       phone:'',
       address:'',
       cid: 0,
-      cats: [],
       catname: ''
     },
+    cats: [],
     defAreaCat: 0,
     form_type: 'submit',
     disabled: false,
@@ -31,10 +30,20 @@ Page({
   },
   onLoad: function (e) {
 
-    console.log('addd')
-    console.log(e)
+    console.log('zx--addd')
+    // console.log(e)
     var that = this
 
+    // 专线分类可选
+    that.setData({
+      cats: app.globalData.zxCatsSecondKeyVal
+    })
+
+    // 设置页面标题
+    wx.setNavigationBarTitle({
+      title: app.globalData.zxCatsSecondKeyVal[e.catid-1]
+    })
+    
     wx.showLoading({
         title: '加载中..',
         mask: true
@@ -89,8 +98,8 @@ Page({
             itemVal.nickname = res.data.data.nickname;
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
-            itemVal.cats = app.globalData.zxCatsKeyVal;
-            itemVal.catname = itemVal.cats[that.data.defAreaCat]
+            // itemVal.cats = ;
+            itemVal.catname = app.globalData.zxCatsSecondKeyVal[that.data.defAreaCat]
             that.setData({item:itemVal})
             // console.log(that)
           }
@@ -161,9 +170,8 @@ Page({
             itemVal.nickname = res.data.data.nickname;
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
-            itemVal.cats = app.globalData.zxCatsKeyVal;
             var _cat = res.data.data.cat-1 // 本地数组索引小于1
-            itemVal.catname = itemVal.cats[_cat]
+            itemVal.catname = app.globalData.zxCatsSecondKeyVal[_cat]
             that.setData({
               item:itemVal,
               defAreaCat: _cat
@@ -312,8 +320,8 @@ Page({
   },
   bindCatsChange (e) {
     this.setData({
-      "item.catname": this.data.item.cats[e.detail.value]
+      "item.catname": this.data.cats[e.detail.value]
     })
-    console.log(this.data.item.catname)
+    console.log('this.data.item.catname::'+this.data.item.catname)
   }
 })

@@ -24,7 +24,7 @@ Page({
       isfav:false,
       favItemIndex: -1 // 收藏列表界面打开时传递
     },
-    zxCatsKeyVal: app.globalData.zxCatsKeyVal
+    zxCatsSecondKeyVal: app.globalData.zxCatsSecondKeyVal
   },
   onLoad: function ($query) {
     // console.log(this.data);
@@ -35,7 +35,7 @@ Page({
     })
 
     var that = this;
-    console.log(that.data.zxCatsKeyVal)
+    console.log(that.data.zxCatsSecondKeyVal)
 
     // 用户头像
     that.getUserInfoThis();
@@ -114,7 +114,7 @@ Page({
     })  
   },
   ylImg:function(e) {
-    console.log(e.currentTarget.dataset.src);
+    // console.log(e.currentTarget.dataset.src);
     wx.previewImage({
       current: e.currentTarget.dataset.src,
       urls: [e.currentTarget.dataset.src], // 需要预览的图片http链接列表

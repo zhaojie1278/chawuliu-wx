@@ -1,4 +1,4 @@
-//index.js
+// chaxun.js
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util')
@@ -18,7 +18,10 @@ Page({
     allCats: allCats
   },
   onLoad: function () {
-    var pages = getCurrentPages();
+    // var pages = getCurrentPages();
+    wx.setNavigationBarTitle({
+      title: '查询分类'
+    })
   },
   bindCatsChange (e) {
 
@@ -30,15 +33,15 @@ Page({
     var switchAreacatid = areacatid - 1
     if (switchAreacatid in sellCatsKeyVal) {
       // 超级买卖发布入口
-      console.log('app.globalData.sellCats')
+      // console.log('app.globalData.sellCats')
       wx.navigateTo({
-        url: '../sellmsg/toadd?catid='+areacatid
+        url: '../sellmsg/index'
       })
     } else {
       console.log('app.globalData.zxcats--'+areacatid)
       // 专线发布入口
       wx.navigateTo({
-        url: '../zhuanxian/toadd?catid='+areacatid
+        url: '../zhuanxian/index'
       })
     }
     

@@ -1,0 +1,7 @@
+<!--index.wxml-->
+<view class="container">
+  <view class="catmenu">{{catmenu}}</view>
+  <block wx:for="{{zxCats}}" wx:key="{{index}}">
+    <view bindtap="bindCatsChange" class="cat {{zxCatId==item.id?'viewdef-taped':''}} {{index==0 ? 'view-top': ''}}" hover-class="view-onhover" data-catid="{{item.id}}">{{item.txt}}</view>
+    </block>
+</view>

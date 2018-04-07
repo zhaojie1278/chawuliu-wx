@@ -24,7 +24,7 @@ Page({
         point:'杭州'
       }, */
     ],
-    zxCats:app.globalData.zxCats,
+    zxCatsSecond:app.globalData.zxCatsSecond,
     areacatid:1
   },
   bindNavTaped:function(e) {

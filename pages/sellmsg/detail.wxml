@@ -3,81 +3,33 @@
     <view class="info">
         <view class="item-left">
             <view class="icon">
-                <image src="{{item.image}}" background-size="cover"/>
+                <image src="{{item.avatarurl ? item.avatarurl : '../../images/company/default.jpg'}}" background-size="cover"/>
             </view>
             <view class="body">
                 <view class="title"><text class="nowrap">{{item.company}} </text></view>
                 <view class="describe">
-                    <block wx:for="{{item.zhuanxians[0]}}" wx:key="id" wx:for-item="zx3">
-                    <text wx:if="{{index==0}}" class="nowrap" style="margin-right: 10rpx;">{{zx3.start}}<text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin: 0 5rpx;"></text>{{zx3.point}}</text>
-                    <text wx:elif="{{index==1}}" class="nowrap">{{zx3.start}}<text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin:0 5rpx;"></text>{{zx3.point}}</text>
-                    </block>
+                    <text class="nowrap2">{{sellCatsSecondKeyVal[item.cat-1] + selltypesKeyVal[item.selltype]}}</text>
+                    <text class="time">{{item.timebefore}}</text>
+                    <text wx:if="{{item.imgcount>0}}" class="imgcount">{{item.imgcount}}图</text>
                 </view>
             </view>
         </view>
         <view class="bohao" catchtap="calling" data-phone-number="{{item.phone}}">
-            <text class="icon iconfont icon-bohao icon-large" style="background:#ff865e;"></text>
+            <text class="icon iconfont icon-bohao icon-min2" style="background:#ff865e;"></text>
         </view>
     </view>
     <view class="address">
-        <view class="addmap nowrap">
-            <text class="iconaddress iconfont icon-ditu icon-min"></text>
-            <text class="addresstxt">{{item.address ? item.address : '暂未设置'}}</text>
-        </view>
-        <view class="addresstxt">
-            <!--距离 12.18 Km-->
-        </view>
+        <text class="addresstxt">{{item.content}}</text>
     </view>
-    <view class="h-10" style="background:#f7f7fa"></view>
-    <!-- 公司介绍 -->
-    <view class="msg-intro">
-        <view class="title">公司介绍</view>
-        <view class="detail">
-        {{item.descri ? item.descri : '无'}}
-        </view>
-        <view class="zhuanxians">
-            <view class="title">公司运营专线有：</view>
-            <view class="detail">
-                <block wx:for="{{item.zhuanxians}}" wx:for-item="zx" wx:key="id">
-                <view>
-                    <block wx:for="{{zx}}" wx:for-item="zxsingle" wx:for-index="zxindex" wx:key="zxindex">
-                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsKeyVal[zxsingle.cat-1]}}专线；</text>
-                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsKeyVal[zxsingle.cat-1]}}专线；</text>
-                    </block>
-                </view>
-                </block>
-            <!--
-                <view><text>合肥-上海专线；</text><text class="detail2">合肥-无锡专线；</text></view>
-                <view><text>合肥-江阴专线；</text><text class="detail2">合肥-张家口专线；</text></view>
-                <view><text>合肥-上海专线；</text><text class="detail2">合肥-无锡专线；</text></view>
-                <view><text>合肥-江阴专线；</text><text class="detail2">合肥-张家口专线；</text></view>
-                -->
-            </view>
-        </view>
-    </view>
-    <view class="h-10" style="background:#f7f7fa"></view>
-    <view class="h-10" style="background:#f7f7fa"></view>
-    <view class="img-intro">
-        <view class="title">图片介绍</view>
-        <view class="images">
-            <view>
-                <image src="{{item.domainimg1}}" bindtap="ylImg" data-src="{{item.domainimg1}}"></image>
-            </view>
-            <view>
-                <image src="{{item.domainimg2}}" bindtap="ylImg" data-src="{{item.domainimg2}}"></image>
-            </view>
-        </view>
-        <view class="images">
-            <view>
-                <image src="{{item.domainimg3}}" bindtap="ylImg" data-src="{{item.domainimg3}}"></image>
-            </view>
-            <view>
-                <image src="{{item.domainimg4}}" bindtap="ylImg" data-src="{{item.domainimg4}}"></image>
-            </view>
-        </view>
-        
+    <!--<view class="h-10" style="background:#f7f7fa"></view>-->
+    <view wx:if="{{item.imgcount>0}}" class="img-intro">
+       <image wx:if="{{item.domainimg1!=''}}" mode="widthFix" src="{{item.domainimg1}}" bindtap="ylImg" data-src="{{item.domainimg1}}"></image>
+       <image wx:if="{{item.domainimg2!=''}}" mode="widthFix" src="{{item.domainimg2}}" bindtap="ylImg" data-src="{{item.domainimg2}}"></image>
+       <image wx:if="{{item.domainimg3!=''}}" mode="widthFix" src="{{item.domainimg3}}" bindtap="ylImg" data-src="{{item.domainimg3}}"></image>
+       <image wx:if="{{item.domainimg4!=''}}" mode="widthFix" src="{{item.domainimg4}}" bindtap="ylImg" data-src="{{item.domainimg4}}"></image>
     </view>
 </view>
+<!--
 <view class='bottom'>
     <view><button class="share-btn" open-type="share"><text class='icon-min iconfont icon-fenxiang'></text><text>分享</text></button></view>
     <view bindtap="favcompany" id='favcompany' data-id="{{item.id}}" data-isfav="{{item.isfav ? 1:0}}" class="{{item.isfav ? 'fav' : ''}}">
@@ -87,3 +39,4 @@
     </view>
     <view class="contact-us" bindtap="calling" data-phone-number="{{item.phone}}"><text class='icon-min iconfont icon-mianfeizixun'></text><text>联系我们</text></view>
 </view>
+-->

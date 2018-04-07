@@ -6,25 +6,31 @@ var util = require('../../utils/util')
 Page({
   data: {
     userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     item:{
-      id:0,
-      image: '',
-      company: "",
-      address:'',
-      phone:'',
-      descri: '',
-      img1:'',
-      img2:'',
-      img3:'',
-      img4:'',
-      zhuanxians:[
-      ],
-      isfav:false,
-      favItemIndex: -1 // 收藏列表界面打开时传递
+      id: '8',
+      prov: '北京市',
+      city: '北京市',
+      cid: '6',
+      selltype: '0',
+      content: '找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车',
+      domainimg1: 'http://local.chawuliu2018.com/uploads/wafer/sellmsg/20180406/78afdc0531c2943b9f0558617c60b4be.jpg',
+      domainimg2: 'http://local.chawuliu2018.com/uploads/wafer/sellmsg/20180406/dd0186f997703592f5da99e6dda795c6.jpg',
+      domainimg3: '',
+      domainimg4: '',
+      marks: '',
+      status: '1',
+      nickname: 'Jwuliu',
+      phone: '13966666666',
+      address: '安徽合肥',
+      isrecommend: '0',
+      cat: 10,
+      timebefore: '3小时前',
+      avatarurl: 'https://wx.qlogo.cn/mmopen/vi_32/Q0j4TwGTfTIVR2wY9icec2AicOFt3pSaIDR6PBBnbd3HvrRq9GrjypyDFY71eRptOJd69xYcDgI6ZbQ8zLlNIsZQ/0',
+      company: 'J物流',
+      imgcount: 5
     },
-    zxCatsKeyVal: app.globalData.zxCatsKeyVal
+    sellCatsSecondKeyVal: app.globalData.sellCatsSecondKeyVal,
+    selltypesKeyVal: app.globalData.selltypesKeyVal
   },
   onLoad: function ($query) {
     // console.log(this.data);
@@ -35,18 +41,8 @@ Page({
     })
 
     var that = this;
-    console.log(that.data.zxCatsKeyVal)
 
-    // 用户头像
-    that.getUserInfoThis();
-
-    var cid = $query.id
-    var favItemIndex = $query.favItemIndex
-    if(undefined != favItemIndex) {
-      that.setData({
-        favItemIndex: favItemIndex
-      })
-    }
+    var id = $query.id
     var openid = wx.getStorageSync('openid')
     if (!openid) {
       util.showMaskTip1500('数据获取失败，请重新打开小程序，并允许获取用户信息')
@@ -54,9 +50,9 @@ Page({
     }
 
     wx.request({
-      url: app.globalData.config.service.contactUrl,
+      url: app.globalData.config.service.sellmsgUrl+'/detail',
       data: {
-        cid: cid,
+        id: id,
         openid: openid
       },
       method: 'POST',
@@ -67,7 +63,7 @@ Page({
         'content-type': 'application/x-www-form-urlencoded'
       },
       success (res) {
-        if (res.data.status !== 1) {       
+        if (res.data.status !== 1) {
           wx.showToast({
             title: '抱歉，请求失败，' + res.data.message,
             icon: 'none',
@@ -78,7 +74,6 @@ Page({
             item: res.data.data
           })
         }
-        // console.log(res);
       },
       fail: function(res) {
         wx.showToast({
@@ -114,7 +109,7 @@ Page({
     })  
   },
   ylImg:function(e) {
-    console.log(e.currentTarget.dataset.src);
+    // console.log(e.currentTarget.dataset.src);
     wx.previewImage({
       current: e.currentTarget.dataset.src,
       urls: [e.currentTarget.dataset.src], // 需要预览的图片http链接列表
@@ -127,34 +122,6 @@ Page({
           })
         }
     })
-  },
-  getUserInfoThis:function(e) { // 获取用户信息
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
   },
   favcompany: function(e) {
     var that = this

@@ -34,20 +34,40 @@ Page({
       }
       */
     ],
-    firstcat: 1,
     sellCatsSecondKeyVal: app.globalData.sellCatsSecondKeyVal,
-    selltypesKeyVal: app.globalData.selltypesKeyVal
-  },
-  bindNavTaped:function(e) {
-    // 分类切换
-    var id = parseInt(e.currentTarget.dataset.firstcat)  
-    this.setData({  
-      firstcat: id  
-    })  
+    allSellCatsSecond: app.globalData.allSellCatsSecond,
+    selltypesKeyVal: app.globalData.selltypesKeyVal,
+    sellCats: app.globalData.sellCats,
+    prov: '',
+    city: '',
+    cat: 0, // second cat
+    firstcatid: 2
   },
   onLoad: function () {
     console.log('in sellmsg')
-    this.getSearches(); // 获取推荐专线
+    // 是否查询线路操作
+    var getLocParam = {
+      isget: true
+    }
+    this.getNowLocation(getLocParam); // 获取推荐专线
+  },
+  bindNavFirstTaped:function(e) {
+    // 分类切换
+    var id = parseInt(e.currentTarget.dataset.firstcatid)  
+    this.setData({
+      firstcatid: id,
+    })  
+  },
+  bindNavSecondTaped:function(e) {
+    // 分类切换
+    var id = parseInt(e.currentTarget.dataset.cat)
+    console.log('second-id:'+id)
+    console.log('data')
+    console.log(this.data)
+    this.setData({
+      cat: id
+    })
+    this.searchsellmsg(e)
   },
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
@@ -63,19 +83,45 @@ Page({
   searchsellmsg (e) {
     // 本业内查询专线，按照精品专线发布时间/普通专线发布时间倒序排序
     // console.log(e)
-    var start = e.currentTarget.dataset.start
-    var point = e.currentTarget.dataset.point
-    var areacat = e.currentTarget.dataset.areacat
+    var prov = e.currentTarget.dataset.prov
+    var city = e.currentTarget.dataset.city
+    var cat = e.currentTarget.dataset.cat
     var params = {
-      start: start,
-      point: point,
-      areacatid: areacat
+      prov: prov,
+      city: city,
+      cat: cat
     }
     this.getSearches(params);
   },
   getSearches: function(e) {
     var that = this;
     console.log('getSearches')
+    console.log('search-param' + JSON.stringify(e));
+    var prov = ''
+    var city = ''
+    var cat = 0
+    // var firstcatid = 0
+    // console.log(e)
+    if (undefined!=e) {
+      if(undefined != e.prov) {
+        prov = e.prov
+      }
+      if(undefined != e.city) {
+        city = e.city
+      }
+      if(undefined != e.cat) {
+        cat = e.cat
+      }
+      /* if(undefined != e.firstcatid) {
+        firstcatid = e.firstcatid
+      } */
+    } else {
+      // 默认不带条件查询
+      prov = that.data.prov
+      city = that.data.city
+      cat = that.data.cat
+      // firstcatid = that.data.firstcatid
+    }
     // console.log(e)
       // 默认不带条件查询
     wx.showLoading({
@@ -92,9 +138,9 @@ Page({
         "content-type": "application/x-www-form-urlencoded"
       },
       data: {
-        /* start: start,
-        point: point,
-        areacatid: areacatid */
+        prov: prov,
+        city: city,
+        cat: cat
       },
       success: function(res){
         wx.hideLoading();
@@ -129,6 +175,57 @@ Page({
       }
     })
     // console.log();
+  },
+  getNowLocation: function(e) {
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        // 调用百度API获取位置具体地址名
+        wx.request({
+          url: 'https://api.map.baidu.com/geocoder/v2/?ak='+app.globalData.baiduAk+'&location=' + latitude + ',' + longitude + '&output=json&coordtype=wgs84ll', 
+          data: { },
+          header: { 'Content-Type': 'application/json' },
+          success: function(res) {
+            // console.log(res)
+            // console.log(typeof(res.data.status));
+            // console.log(res.data.result.addressComponent.city);
+            if(res.data.status!=0) {
+              that.setData({'nowCity':'位置获取失败'})
+            } else {
+              var provStr =  res.data.result.addressComponent.province
+              if (provStr.indexOf('市')!=-1){
+                provStr = provStr.replace('市','')
+              }
+              if (provStr.indexOf('省')!=-1){
+                provStr = provStr.replace('省','')
+              }
+              var cityStr = res.data.result.addressComponent.city
+              if (cityStr.indexOf('市')!=-1){
+                cityStr = cityStr.replace('市','')
+              }
+              that.setData({
+                prov: provStr,
+                city:cityStr
+              })
+
+              // 获取当前位置后再查找专线
+              if(undefined != e) {
+                if (undefined != e.isget) {
+                  var params = {
+                    prov: provStr,
+                    city: cityStr
+                  }
+                  that.getSearches(params); // 获取推荐专线
+                }
+              }
+            }
+          }
+        })
+      }
+    })
   },
   calling:function(event){
     var that = this;

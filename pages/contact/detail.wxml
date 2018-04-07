@@ -41,8 +41,8 @@
                 <block wx:for="{{item.zhuanxians}}" wx:for-item="zx" wx:key="id">
                 <view>
                     <block wx:for="{{zx}}" wx:for-item="zxsingle" wx:for-index="zxindex" wx:key="zxindex">
-                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsKeyVal[zxsingle.cat-1]}}专线；</text>
-                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsKeyVal[zxsingle.cat-1]}}专线；</text>
+                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsSecondKeyVal[zxsingle.cat-1]}}专线；</text>
+                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsSecondKeyVal[zxsingle.cat-1]}}专线；</text>
                     </block>
                 </view>
                 </block>
@@ -61,18 +61,18 @@
         <view class="title">图片介绍</view>
         <view class="images">
             <view>
-                <image src="{{item.domainimg1}}" bindtap="ylImg" data-src="{{item.domainimg1}}"></image>
+                <image mode="aspectFill" src="{{item.domainimg1}}" bindtap="ylImg" data-src="{{item.domainimg1}}"></image>
             </view>
             <view>
-                <image src="{{item.domainimg2}}" bindtap="ylImg" data-src="{{item.domainimg2}}"></image>
+                <image mode="aspectFill" src="{{item.domainimg2}}" bindtap="ylImg" data-src="{{item.domainimg2}}"></image>
             </view>
         </view>
         <view class="images">
             <view>
-                <image src="{{item.domainimg3}}" bindtap="ylImg" data-src="{{item.domainimg3}}"></image>
+                <image mode="aspectFill" src="{{item.domainimg3}}" bindtap="ylImg" data-src="{{item.domainimg3}}"></image>
             </view>
             <view>
-                <image src="{{item.domainimg4}}" bindtap="ylImg" data-src="{{item.domainimg4}}"></image>
+                <image mode="aspectFill" src="{{item.domainimg4}}" bindtap="ylImg" data-src="{{item.domainimg4}}"></image>
             </view>
         </view>
         

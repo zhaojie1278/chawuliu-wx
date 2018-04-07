@@ -1,4 +1,3 @@
-
 <template name="sellmsglist">
     <view class="sellmsglist">
         <block wx:if="{{list.length != 0}}">

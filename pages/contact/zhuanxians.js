@@ -18,7 +18,7 @@ Page({
       } */
     ],
     emptyshow: false,
-    zxCatsKeyVal: app.globalData.zxCatsKeyVal
+    zxCatsSecondKeyVal: app.globalData.zxCatsSecondKeyVal
   },
   onLoad: function () {
     // var pages = getCurrentPages();
@@ -173,8 +173,9 @@ Page({
     })
     var zxid = e.currentTarget.dataset.zxid
     var cid = e.currentTarget.dataset.cid
+    var cat = e.currentTarget.dataset.cat
     wx.navigateTo({
-      url: '../zhuanxian/add?zxid='+zxid+'&cid='+cid
+      url: '../zhuanxian/add?zxid='+zxid+'&cid='+cid+"&catid="+cat
     })
   },
   onShareAppMessage: function (res) { // 转发

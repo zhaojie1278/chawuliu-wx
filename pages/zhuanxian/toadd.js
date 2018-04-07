@@ -4,40 +4,39 @@ const app = getApp()
 var util = require('../../utils/util')
 // var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
 
-var sellCats = app.globalData.sellCatsSecond
-var sellCatsKeyVal = app.globalData.sellCatsKeyVal
+var zxCats = app.globalData.zxCatsSecond
+var zxCatsKeyVal = app.globalData.zxCatsKeyVal
 
 Page({
   data: {
     plain: false,
     loading: false,
     defaultsize: 'default',
-    sellCatId: 1,
-    sellCats: [],
+    zxCatId: 1,
+    zxCats: [],
     catmenu: ''
   },
   onLoad: function (e) {
     var catid = e.catid
-    console.log('sellmsg111--'+catid)
-    sellCats = app.globalData.allSellCatsSecond[catid]
-    var sellCatId = sellCats[0].id
-    // console.log('secondcat-first-id::'+sellCatId)
+    console.log('zx111---'+catid)
+    var zxCatId = app.globalData.zxCatsSecond[0].id
+    // console.log('secondcat-first-id::'+zxCatId)
     this.setData({
-      sellCatId: sellCatId,
-      sellCats: sellCats,
-      catmenu: sellCatsKeyVal[catid-1],
+      zxCatId: zxCatId,
+      zxCats: zxCats,
+      catmenu: zxCatsKeyVal[catid-1],
     })
     // var pages = getCurrentPages();
     // console.log(this.data)
   },
   bindCatsChange (e) {
-    var sellCatId = e.currentTarget.dataset.catid
+    var zxCatId = e.currentTarget.dataset.catid
     this.setData({
-      "sellCatId": sellCatId
+      "zxCatId": zxCatId
     })
     // 超级买卖发布入口
     wx.navigateTo({
-      url: '../sellmsg/add?catid='+sellCatId
+      url: '../zhuanxian/add?catid='+zxCatId
     })    
   }
 })

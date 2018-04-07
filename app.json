@@ -1,10 +1,12 @@
 {
   "pages":[
     "pages/index/index",
+    "pages/index/chaxun",
+    "pages/index/toadd",
     "pages/index/kuaidi100",
     "pages/zhuanxian/index",
+    "pages/zhuanxian/toadd",
     "pages/zhuanxian/add",
-    "pages/index/toadd",
     "pages/contact/index",
     "pages/contact/detail",
     "pages/contact/company",
@@ -13,8 +15,8 @@
     "pages/contact/sellmsgs",
     "pages/logs/logs",
     "pages/city/index",
-    "pages/sellmsg/add",
     "pages/sellmsg/toadd",
+    "pages/sellmsg/add",
     "pages/sellmsg/detail",
     "pages/sellmsg/index"
   ],
@@ -39,7 +41,7 @@
       {
         "selectedIconPath": "images/tabBar/search02.png",
         "iconPath": "images/tabBar/search01.png",
-        "pagePath": "pages/zhuanxian/index",
+        "pagePath": "pages/index/chaxun",
         "text": "我要查询"
       },
       {

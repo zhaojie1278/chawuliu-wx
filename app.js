@@ -6,6 +6,12 @@ var util = require('./utils/util.js')
 // console.log(config);
 /* 专线类型 */
 var zxCats = [
+  {id:1,txt:'车源'}
+]
+var zxCatsKeyVal = new Array(1)
+zxCatsKeyVal[0] = '车源'
+
+var zxCatsSecond = [
   {id:1,txt:'省际物流'},
   {id:2,txt:'省内物流'},
   {id:3,txt:'空运'},
@@ -14,23 +20,23 @@ var zxCats = [
   {id:6,txt:'市内倒短车'},
 ]
 
-var zxCatsKeyVal = new Array(6)
-zxCatsKeyVal[0] = '省际物流'
-zxCatsKeyVal[1] = '省内物流'
-zxCatsKeyVal[2] = '空运'
-zxCatsKeyVal[3] = '海运'
-zxCatsKeyVal[4] = '配载调车'
-zxCatsKeyVal[5] = '市内倒短车'
+var zxCatsSecondKeyVal = new Array(6)
+zxCatsSecondKeyVal[0] = '省际物流'
+zxCatsSecondKeyVal[1] = '省内物流'
+zxCatsSecondKeyVal[2] = '空运'
+zxCatsSecondKeyVal[3] = '海运'
+zxCatsSecondKeyVal[4] = '配载调车'
+zxCatsSecondKeyVal[5] = '市内倒短车'
 
 // 超级买卖
 var sellCats = [
-  {id:7,txt:'车辆买卖'},
-  {id:8,txt:'司机招聘'},
+  {id:2,txt:'车辆买卖'},
+  {id:3,txt:'司机招聘'},
 ]
 
 var sellCatsKeyVal = new Array(2)
-sellCatsKeyVal[6] = '车辆买卖'
-sellCatsKeyVal[7] = '司机招聘'
+sellCatsKeyVal[1] = '车辆买卖'
+sellCatsKeyVal[2] = '司机招聘'
 
 // 车辆买卖
 var sellCatsSecond = [
@@ -80,8 +86,8 @@ var zhaopinCatsSecondObj = {
 }
 
 var allSellCatsSecond = {
-  7: sellCatsSecond,
-  8: zhaopinCatsSecond,
+  2: sellCatsSecond,
+  3: zhaopinCatsSecond,
 }
 
 
@@ -206,6 +212,8 @@ App({
     ooid:0, // 邀请人 openid
     zxCats: zxCats,
     zxCatsKeyVal: zxCatsKeyVal,
+    zxCatsSecond: zxCatsSecond,
+    zxCatsSecondKeyVal: zxCatsSecondKeyVal,
     sellCats: sellCats,
     sellCatsKeyVal: sellCatsKeyVal,
     sellCatsSecond: sellCatsSecond,
@@ -220,7 +228,7 @@ App({
     var openid = wx.getStorageSync('openid')
     console.log('oid:'+openid)
     return {
-      title: '邀请您一起免费加入专业的物流专线实名认证社群',
+      title: '邀请您一起免费加入专业的物流资讯实名认证社群',
       path: '/page/index/index?ooid='+openid,
       success: function(sharedRes) {
         // 转发成功
