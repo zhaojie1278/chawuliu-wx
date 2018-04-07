@@ -5,7 +5,7 @@
           <block wx:for="{{imgUrls}}" wx:key="index">    
               <swiper-item>    
                   <!--<navigator url="{{item.link}}" hover-class="navigator-hover">-->
-                      <image src="{{item.url}}" class="slide-image" width="355" height="150"/>    
+                      <image mode="aspectFill" src="{{item.url}}" class="slide-image" width="355" height="150"/>    
                   <!--</navigator>-->
               </swiper-item>    
           </block>

@@ -3,7 +3,7 @@
     <view class="info">
         <view class="item-left">
             <view class="icon">
-                <image src="{{item.image}}" background-size="cover"/>
+                <image mode="aspectFill" src="{{item.image}}" background-size="cover"/>
             </view>
             <view class="body">
                 <view class="title"><text class="nowrap">{{item.company}} </text></view>

@@ -5,7 +5,7 @@
                 <view class="info">
                     <view class="item-left">
                         <view class="icon">
-                            <image src="{{item.avatarurl ? item.avatarurl : '../../images/company/default.jpg'}}" />
+                            <image mode="aspectFill" src="{{item.avatarurl ? item.avatarurl : '../../images/company/default.jpg'}}" />
                         </view>
                         <view class="body">
                             <view class="title"><text class="nowrap">{{item.company}} </text></view>

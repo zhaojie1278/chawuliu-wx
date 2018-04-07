@@ -18,7 +18,7 @@
     <view class="view-mg" style="height:300rpx;">
         <view class="lbl-line"><text>发布内容</text></view>
         <view class="area_box">
-        <textarea bindinput="bindWordChg" name="content" class="textarea" placeholder="请手动输入真实有效的内容，不要随意发布虚假消息" maxlength="100" fixed="{{false}}" value="{{item.content}}" />
+        <textarea bindblur="bindWordChg" name="content" class="textarea" placeholder="请手动输入真实有效的内容，不要随意发布虚假消息" maxlength="100" fixed="{{false}}" value="{{item.content}}" />
         </view>
     </view>
     <!-- img -->
@@ -27,23 +27,23 @@
         <view class="imgs" style="padding-top:0rpx;">
             <view class="img-i">
                 <input hidden="{{true}}" name="img1" type="text" value="{{item.img1}}"/>
-                <image wx:if="{{showImgs.img1!=''}}" bindtap="checkImg" src="{{showImgs.img1}}" ss="{{showImgs.img1}}" id="img1"></image>
-                <image wx:else bindtap="checkImg" src="{{defaultimg}}" id="img1" ss="{{showImgs.img1}}"></image>
+                <image mode="aspectFill" wx:if="{{showImgs.img1!=''}}" bindtap="checkImg" src="{{showImgs.img1}}" ss="{{showImgs.img1}}" id="img1"></image>
+                <image mode="aspectFill" wx:else bindtap="checkImg" src="{{defaultimg}}" id="img1" ss="{{showImgs.img1}}"></image>
             </view>
             <view class="img-i">
                 <input hidden="{{true}}" name="img2" type="text" value="{{item.img2}}"/>
-                <image wx:if="{{showImgs.img2!=''}}" bindtap="checkImg" src="{{showImgs.img2}}" id="img2"></image>
-                <image wx:else bindtap="checkImg" src="{{defaultimg}}" id="img2"></image>
+                <image mode="aspectFill" wx:if="{{showImgs.img2!=''}}" bindtap="checkImg" src="{{showImgs.img2}}" id="img2"></image>
+                <image mode="aspectFill" wx:else bindtap="checkImg" src="{{defaultimg}}" id="img2"></image>
             </view>
             <view class="img-i">
                 <input hidden="{{true}}" name="img3" type="text" value="{{item.img3}}"/>
-                <image wx:if="{{showImgs.img3!=''}}" bindtap="checkImg" src="{{showImgs.img3}}" id="img3"></image>
-                <image wx:else bindtap="checkImg" src="{{defaultimg}}" id="img3"></image>
+                <image mode="aspectFill" wx:if="{{showImgs.img3!=''}}" bindtap="checkImg" src="{{showImgs.img3}}" id="img3"></image>
+                <image mode="aspectFill" wx:else bindtap="checkImg" src="{{defaultimg}}" id="img3"></image>
             </view>
             <view class="img-i">
                 <input hidden="{{true}}" name="img4" type="text" value="{{item.img4}}"/>
-                <image wx:if="{{showImgs.img4!=''}}" bindtap="checkImg" src="{{showImgs.img4}}" id="img4"></image>
-                <image wx:else bindtap="checkImg" src="{{defaultimg}}" id="img4"></image>
+                <image mode="aspectFill" wx:if="{{showImgs.img4!=''}}" bindtap="checkImg" src="{{showImgs.img4}}" id="img4"></image>
+                <image mode="aspectFill" wx:else bindtap="checkImg" src="{{defaultimg}}" id="img4"></image>
             </view>
         </view>
     </view>

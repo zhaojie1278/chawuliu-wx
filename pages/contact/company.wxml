@@ -30,16 +30,16 @@
             <view class="f-i" id='1'>
                 <view class="company-img-i">
                     <input hidden="{{true}}" name="img1" type="text" value="{{imglist.img1}}"/>
-                    <image wx:if="{{companyimg.img1!=''}}" bindtap="ylImg" data-src="{{companyimg.img1}}" src="{{companyimg.img1}}" id="img1"></image>
-                    <image wx:else bindtap="ylImg" data-src="{{defaultimg}}" src="{{defaultimg}}" id="img1"></image>
+                    <image mode="aspectFill" wx:if="{{companyimg.img1!=''}}" bindtap="ylImg" data-src="{{companyimg.img1}}" src="{{companyimg.img1}}" id="img1"></image>
+                    <image mode="aspectFill" wx:else bindtap="ylImg" data-src="{{defaultimg}}" src="{{defaultimg}}" id="img1"></image>
                 </view>
                 <view class="company-img-txt">门头照片</view>
             </view>
             <view class="f-i" id='2'>
                 <view class="company-img-i">
                     <input hidden="{{true}}" name="img2" type="text" value="{{imglist.img2}}"/>
-                    <image wx:if="{{companyimg.img2!=''}}" bindtap="ylImg" data-src="{{companyimg.img2}}" src="{{companyimg.img2}}" id="img2"></image>
-                    <image wx:else bindtap="ylImg" data-src="{{defaultimg}}" src="{{defaultimg}}" id="img2"></image>
+                    <image mode="aspectFill" wx:if="{{companyimg.img2!=''}}" bindtap="ylImg" data-src="{{companyimg.img2}}" src="{{companyimg.img2}}" id="img2"></image>
+                    <image mode="aspectFill" wx:else bindtap="ylImg" data-src="{{defaultimg}}" src="{{defaultimg}}" id="img2"></image>
                 </view>
                 <view class="company-img-txt">场地照片</view>
             </view>
@@ -48,16 +48,16 @@
             <view class="f-i" id='3'>
                 <view class="company-img-i">
                     <input hidden="{{true}}" name="img3" type="text" value="{{imglist.img3}}"/>
-                    <image wx:if="{{companyimg.img3!=''}}" bindtap="ylImg" data-src="{{companyimg.img3}}" src="{{companyimg.img3}}" id="img3"></image>
-                    <image wx:else bindtap="ylImg" data-src="{{defaultimg}}" src="{{defaultimg}}" id="img3"></image>
+                    <image mode="aspectFill" wx:if="{{companyimg.img3!=''}}" bindtap="ylImg" data-src="{{companyimg.img3}}" src="{{companyimg.img3}}" id="img3"></image>
+                    <image mode="aspectFill" wx:else bindtap="ylImg" data-src="{{defaultimg}}" src="{{defaultimg}}" id="img3"></image>
                 </view>
                 <view class="company-img-txt">办公照片</view>
             </view>
             <view class="f-i" id='4'>
                 <view class="company-img-i">
                     <input hidden="{{true}}" name="img4" type="text" value="{{imglist.img4}}"/>
-                    <image wx:if="{{companyimg.img4!=''}}" bindtap="ylImg" data-src="{{companyimg.img4}}" src="{{companyimg.img4}}" id="img4"></image>
-                    <image wx:else bindtap="ylImg" data-src="{{defaultimg}}" src="{{defaultimg}}" id="img4"></image>
+                    <image mode="aspectFill" wx:if="{{companyimg.img4!=''}}" bindtap="ylImg" data-src="{{companyimg.img4}}" src="{{companyimg.img4}}" id="img4"></image>
+                    <image mode="aspectFill" wx:else bindtap="ylImg" data-src="{{defaultimg}}" src="{{defaultimg}}" id="img4"></image>
                 </view>
                 <view class="company-img-txt">其他照片</view>
             </view>
