@@ -18,7 +18,10 @@
     "pages/sellmsg/toadd",
     "pages/sellmsg/add",
     "pages/sellmsg/detail",
-    "pages/sellmsg/index"
+    "pages/sellmsg/index",
+    "pages/zhaopin/toadd",
+    "pages/zhaopin/add",
+    "pages/zhaopin/detail"
   ],
   "window":{
     "backgroundTextStyle":"light",

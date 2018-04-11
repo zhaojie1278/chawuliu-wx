@@ -1,0 +1,43 @@
+/* pages/zhuanxian/toadd.wxss */
+.container {
+  padding: 20rpx;
+}
+
+.catmenu {
+  height: 100rpx;
+  line-height: 100rpx;
+  /* width: 100%; */
+  text-align: center;
+  font-size:1em;
+  background:#eee;
+  border:1px solid #ddd;
+  color:#333;
+  margin-bottom: 2rpx;
+}
+
+.cat {
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 100%;
+  text-align: center;
+  font-size:0.8em;
+  background:#fff;
+  border-bottom:1px solid #eee;
+  border-left:1px solid #eee;
+  border-right:1px solid #eee;
+  color:#333;
+}
+
+.view-top {
+  border-top:1px solid #eee;
+}
+
+.viewdef-taped {
+  background:#3573fa;
+  color:#fff;
+}
+
+.view-onhover {
+  background:#3573fa;
+  color:#fff;
+}

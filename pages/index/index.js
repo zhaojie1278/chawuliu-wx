@@ -262,7 +262,19 @@ Page({
     return
   },
   shopTap (e) {
-    util.showError('敬请期待')
+    // util.showError('敬请期待')
+    wx.navigateToMiniProgram({
+      appId: 'wx12de72cf50e9bb0c',
+      // path: 'pages/index/index?id=123',
+      /* extraData: {
+        foo: 'bar'
+      }, */
+      // envVersion: 'develop',
+      success(res) {
+        // 打开成功
+        console.log('test mini program')
+      }
+    })
   },
   newsTap (e) {
     util.showError('敬请期待')

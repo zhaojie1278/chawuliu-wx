@@ -4,14 +4,21 @@ var config = require('./config')
 var util = require('./utils/util.js')
 
 // console.log(config);
+var allCats = [
+  {id:1,txt:'专线分类'},
+  {id:2,txt:'车辆买卖'},
+  {id:3,txt:'司机招聘'},
+]
+
+var allCatsKeyVal = new Array(4)
+allCatsKeyVal[0] = '分类'
+allCatsKeyVal[1] = '专线分类'
+allCatsKeyVal[2] = '车辆买卖'
+allCatsKeyVal[3] = '司机招聘'
+
 /* 专线类型 */
 var zxCats = [
-  {id:1,txt:'车源'}
-]
-var zxCatsKeyVal = new Array(1)
-zxCatsKeyVal[0] = '车源'
-
-var zxCatsSecond = [
+  {id:0,txt:'专线分类'},
   {id:1,txt:'省际物流'},
   {id:2,txt:'省内物流'},
   {id:3,txt:'空运'},
@@ -20,50 +27,36 @@ var zxCatsSecond = [
   {id:6,txt:'市内倒短车'},
 ]
 
-var zxCatsSecondKeyVal = new Array(6)
-zxCatsSecondKeyVal[0] = '省际物流'
-zxCatsSecondKeyVal[1] = '省内物流'
-zxCatsSecondKeyVal[2] = '空运'
-zxCatsSecondKeyVal[3] = '海运'
-zxCatsSecondKeyVal[4] = '配载调车'
-zxCatsSecondKeyVal[5] = '市内倒短车'
-
-// 超级买卖
-var sellCats = [
-  {id:2,txt:'车辆买卖'},
-  {id:3,txt:'司机招聘'},
-]
-
-var sellCatsKeyVal = new Array(2)
-sellCatsKeyVal[1] = '车辆买卖'
-sellCatsKeyVal[2] = '司机招聘'
+var zxCatsKeyVal = new Array(6)
+zxCatsKeyVal[0] = '专线分类'
+zxCatsKeyVal[1] = '省际物流'
+zxCatsKeyVal[2] = '省内物流'
+zxCatsKeyVal[3] = '空运'
+zxCatsKeyVal[4] = '海运'
+zxCatsKeyVal[5] = '配载调车'
+zxCatsKeyVal[6] = '市内倒短车'
 
 // 车辆买卖
-var sellCatsSecond = [
-  {id:1,txt:'牵引车'},
-  {id:2,txt:'载货车'},
-  {id:3,txt:'自卸车'},
-  {id:4,txt:'工程车'},
-  {id:5,txt:'单桥货车'},
-  {id:6,txt:'水泥罐车'},
-  {id:7,txt:'油罐车'},
-  {id:8,txt:'挂车'},
+/* var sellCatsSecond = [
+  // {id:1,txt:'牵引车'},
+  // {id:2,txt:'载货车'},
+  // {id:3,txt:'自卸车'},
+  // {id:4,txt:'工程车'},
+  {id:1,txt:'单桥货车'},
+  // {id:6,txt:'水泥罐车'},
+  // {id:7,txt:'油罐车'},
+  {id:2,txt:'挂车'},
+] */
+var sellCats = [
+  {id:0,txt:'车辆买卖'},
+  {id:1,txt:'单桥货车'},
+  {id:2,txt:'挂车'},
 ]
 
-var sellCatsSecondKeyVal = new Array(8)
-sellCatsSecondKeyVal[0] = '牵引车'
-sellCatsSecondKeyVal[1] = '载货车'
-sellCatsSecondKeyVal[2] = '自卸车'
-sellCatsSecondKeyVal[3] = '工程车'
-sellCatsSecondKeyVal[4] = '单桥货车'
-sellCatsSecondKeyVal[5] = '水泥罐车'
-sellCatsSecondKeyVal[6] = '油罐车'
-sellCatsSecondKeyVal[7] = '挂车'
-// sellCatsSecondKeyVal[8] = '车主招聘司机'
-// sellCatsSecondKeyVal[9] = '公司招聘司机'
-sellCatsSecondKeyVal[8] = '招聘司机'
-sellCatsSecondKeyVal[9] = '司机求职'
-
+var sellCatsKeyVal = new Array(1)
+sellCatsKeyVal[0] = '车辆买卖'
+sellCatsKeyVal[1] = '单桥货车'
+sellCatsKeyVal[2] = '挂车'
 
 // 车辆买卖发布类型
 var selltypesKeyVal = new Array(2)
@@ -71,26 +64,31 @@ selltypesKeyVal[0] = ''
 selltypesKeyVal[1] = '出售'
 selltypesKeyVal[2] = '购买'
 
-// 招聘信息
-var zhaopinCatsSecond = [
-  // {id:9,txt:'车主招聘司机'},
-  // {id:10,txt:'公司招聘司机'},
-  {id:9,txt:'招聘司机'},
-  {id:10,txt:'司机求职'},
+var zhaopinCats = [
+  {id:0,txt:'招聘'}
+  {id:1,txt:'招聘司机'}
+  {id:2,txt:'司机求职'}
 ]
-var zhaopinCatsSecondObj = {
-  // 9: '车主招聘司机',
-  // 10: '公司招聘司机',
-  9: '招聘司机',
-  10: '司机求职'
-}
+var zhaopinCatsKeyVal = new Array(1);
+zhaopinCatsKeyVal[0] = '招聘'
+zhaopinCatsKeyVal[1] = '招聘司机'
+zhaopinCatsKeyVal[2] = '司机求职'
 
-var allSellCatsSecond = {
-  2: sellCatsSecond,
-  3: zhaopinCatsSecond,
-}
-
-
+/* 
+var sellCatsSecondKeyVal = new Array(8)
+// sellCatsSecondKeyVal[0] = '牵引车'
+// sellCatsSecondKeyVal[1] = '载货车'
+// sellCatsSecondKeyVal[2] = '自卸车'
+// sellCatsSecondKeyVal[3] = '工程车'
+sellCatsSecondKeyVal[0] = '单桥货车'
+// sellCatsSecondKeyVal[5] = '水泥罐车'
+// sellCatsSecondKeyVal[6] = '油罐车'
+sellCatsSecondKeyVal[1] = '挂车'
+// sellCatsSecondKeyVal[8] = '车主招聘司机'
+// sellCatsSecondKeyVal[9] = '公司招聘司机'
+sellCatsSecondKeyVal[2] = ''
+sellCatsSecondKeyVal[3] = ''
+ */
 
 App({
   onLaunch: function () {
@@ -216,6 +214,7 @@ App({
     zxCatsSecondKeyVal: zxCatsSecondKeyVal,
     sellCats: sellCats,
     sellCatsKeyVal: sellCatsKeyVal,
+    zhaopinCatsKeyVal: zhaopinCatsKeyVal,
     sellCatsSecond: sellCatsSecond,
     sellCatsSecondKeyVal: sellCatsSecondKeyVal,
     zhaopinCatsSecond: zhaopinCatsSecond,

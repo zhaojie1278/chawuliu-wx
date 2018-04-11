@@ -4,12 +4,6 @@ const app = getApp()
 var util = require('../../utils/util')
 // var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
 
-// 车辆买卖发布类型
-var selltypes = [
-  {name: '0', value: '出售', checked: 'true'},
-  {name: '1', value: '购买'},
-]
-
 Page({
   data: {
     userInfo: {},
@@ -17,6 +11,10 @@ Page({
       prov:'',
       city:'',
       cid:0,
+      jiazhao:'',
+      jialing:'',
+      gongzi:'',
+      fuli:'',
       content:'',
       img1:'',
       img2:'',
@@ -28,12 +26,9 @@ Page({
       phone:'',
       address:'',
       cat: 0,
-      catname: '',
-      selltype: 1
+      catname: ''
     },
-    selltypes: selltypes,
-    isnotzhaopin: true,
-    defCat: 0,
+    defCat: 1,
     form_type: 'submit',
     disabled: false,
     plain: false,
@@ -66,20 +61,13 @@ Page({
     // 位置信息
     that.getNowLocation();
 
-    // 判断是否招聘
-    if (e.catid in app.globalData.zhaopinCatsSecondObj) {
-      that.setData({
-        isnotzhaopin: false
-      })
-    }
     // 判断是否已添加公司信息
     var openid = wx.getStorageSync('openid')
     if(undefined != e && undefined != e.catid && undefined == e.sellmsgid) {
-      console.log('addddd')
+      console.log('zhaopin addddd')
       // 添加专线入口
       that.setData({
         defCat: e.catid-1,
-        selltypes: selltypes
       })
 
       // 判断是否已注册公司信息
@@ -212,21 +200,8 @@ Page({
             showImgs['img3'] = res.data.data.domainimg3
             showImgs['img4'] = res.data.data.domainimg4
 
-
-            // 招聘分类无“发布类型”
-            if (!(e.catid in app.globalData.zhaopinCatsSecondObj)) {
-              // radio 单选控制
-              for(var i=0;i<selltypes.length;i++) {
-                if (i == itemVal.selltype-1) {
-                  selltypes[i].checked = true
-                } else {
-                  selltypes[i].checked = false
-                }
-              }
-            }
             that.setData({
               item:itemVal,
-              selltypes: selltypes,
               showImgs: showImgs
             })
           }
@@ -347,24 +322,24 @@ Page({
       "item.selltype": Number(checkVal)+1
     })
   },
-  bindPinpaiBlur (e) {
+  bindJiazhaoBlur (e) {
     this.setData({
-      "item.pinpai": e.detail.value
+      "item.jiazhao": e.detail.value
     })
   },
-  bindPriceBlur (e) {
+  bindJialingBlur (e) {
     this.setData({
-      "item.price": e.detail.value
+      "item.jialing": e.detail.value
     })
   },
-  bindShangpaiBlur (e) {
+  bindGongziBlur (e) {
     this.setData({
-      "item.shangpai": e.detail.value
+      "item.gongzi": e.detail.value
     })
   },
-  bindLichengBlur (e) {
+  bindFuliBlur (e) {
     this.setData({
-      "item.licheng": e.detail.value
+      "item.fuli": e.detail.value
     })
   },
   bindWordChg (e) {

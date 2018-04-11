@@ -1,0 +1,26 @@
+<!--index.wxml-->
+
+<!--导航-->
+<view class="navigator">
+    <view  class="navigator1">
+        <block wx:for="{{sellCats}}" wx:key="{{id}}">
+            <view class="catfirst" bindtap="bindNavFirstTaped" class="{{firstcatid==item.id?'viewdef-taped':'viewdef'}}" data-firstcatid="{{item.id}}" hover-class="onhover">{{item.txt}}</view>
+        </block>
+    </view>
+    <view class="navigator2">
+        <view class="catsecond" hidden="{{false}}" wx:for="{{allSellCatsSecond[firstcatid]}}" wx:key="{{id}}" wx:for-item="secondcat" bindtap="bindNavSecondTaped" class="{{cat==secondcat.id?'viewdef-taped':'viewdef'}}" data-cat="{{secondcat.id}}" data-prov="{{prov}}" data-city="{{city}}" hover-class="onhover">{{secondcat.txt}}</view>
+    </view>
+</view>
+
+<!--专线推荐-->
+<!--
+<view class="tuijian-nav">
+<text style="float:left; color:#6f95fb">精品专线推荐</text>
+<text style="float:right">{{nowCity}}</text><text class="iconfont icon-add icon-min" style="float:right;"></text>
+</view>
+-->
+
+<!-- 模板引用 -->
+<import src="../../template/sellmsglist.wxml"/>
+<template is="sellmsglist" data="{{list,sellCatsSecondKeyVal,selltypesKeyVal}}"/>
+

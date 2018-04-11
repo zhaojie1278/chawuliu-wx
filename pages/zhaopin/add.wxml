@@ -15,26 +15,33 @@
         </label>
         </radio-group>
     </view>
-    <view class="view-mg" hidden="{{!isnotzhaopin || (isnotzhaopin && item.selltype!=1)}}">
-        <text class="lbl-left">品牌</text>
-        <input bindblur="bindPinpaiBlur" class="inp" id="pinpai" name="pinpai" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.pinpai}}"/>
+    <view class="view-mg">
+        <text class="lbl-left">招聘</text>
+        <input bindblur="bindJiazhaoBlur" class="inp width170" id="jiazhao" name="jiazhao" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.jiazhao}}"/>
+        <input name="jiazhao" hidden value="{{item.jiazhao}}"/>
+        <picker bindchange="bindCatsChange" value="{{defcat}}" range="{{jiazhaoCats}}">
+            <view class="picker-cat">
+            {{item.jiazhao}}
+            </view>
+        </picker>
+        <text class="lbl-right-suffix">驾驶员</text>
     </view>
-    <view class="view-mg" hidden="{{!isnotzhaopin || (isnotzhaopin && item.selltype!=1)}}">
-        <text class="lbl-left">价格</text>
-        <input bindblur="bindPriceBlur" class="inp width50" id="price" name="price" maxlength="20" placeholder="请输入价格" type="digit" value="{{item.price}}"/>
-        <text class="lbl-right-suffix">万元</text>
+    <view class="view-mg">
+        <text class="lbl-left">驾龄</text>
+        <input bindblur="bindJialingBlur" class="inp width170" id="jialing" name="jialing" maxlength="20" placeholder="请输入价格" type="digit" value="{{item.jialing}}"/>
+        <text class="lbl-right-suffix">年</text>
     </view>
-    <view class="view-mg" hidden="{{!isnotzhaopin || (isnotzhaopin && item.selltype!=1)}}">
-        <text class="lbl-left">上牌时间</text>
-        <input bindblur="bindShangpaiBlur" class="inp" id="shangpai" name="shangpai" maxlength="20" placeholder="请输入上牌时间" type="text" value="{{item.shangpai}}"/>
+    <view class="view-mg">
+        <text class="lbl-left">工资</text>
+        <input bindblur="bindGongziBlur" class="inp width250" id="gongzi" name="gongzi" maxlength="20" placeholder="请输入上牌时间" type="text" value="{{item.gongzi}}"/>
+        <text class="lbl-right-suffix">元</text>
     </view>
-    <view class="view-mg" hidden="{{!isnotzhaopin || (isnotzhaopin && item.selltype!=1)}}">
-        <text class="lbl-left">里程</text>
-        <input bindblur="bindLichengBlur" class="inp width50" id="licheng" name="licheng" maxlength="20" placeholder="请输入里程" type="text" value="{{item.licheng}}"/>
-        <text class="lbl-right-suffix">万公里</text>
+    <view class="view-mg">
+        <text class="lbl-left">福利</text>
+        <input bindblur="bindFuliBlur" class="inp" id="fuli" name="fuli" maxlength="20" placeholder="例如双休、假日补贴等" type="text" value="{{item.fuli}}"/>
     </view>    
     <view class="view-mg" style="height:300rpx;">
-        <view class="lbl-line"><text wx:if="{{isnotzhaopin}}">车辆介绍</text><text wx:else>发布内容</text></view>
+        <view class="lbl-line"><text>发布内容</text></view>
         <view class="area_box">
         <textarea bindblur="bindWordChg" name="content" class="textarea" placeholder="请手动输入真实有效的内容，不要随意发布虚假消息" maxlength="100" fixed="{{false}}" value="{{item.content}}" />
         </view>

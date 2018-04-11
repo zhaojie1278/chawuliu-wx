@@ -20,8 +20,12 @@
   color:#333;
   font-size:0.9em;
 }
-.view-mg .width50 {
+.view-mg .width170 {
   width: 170rpx;
+  float: left;
+}
+.view-mg .width250 {
+  width: 250rpx;
   float: left;
 }
 .view-mg .lbl-right-suffix {

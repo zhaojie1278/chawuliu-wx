@@ -85,7 +85,7 @@
   <navigator class="navview" url="../zhuanxian/index" hover-class="navhover">
       <text class="icon iconfont icon-zixun icon-large" style="background:#5be3a8;"></text>
       <view class="title">
-          <text>车源</text>
+          <text>我要查询</text>
       </view>
   </navigator>
 </view>

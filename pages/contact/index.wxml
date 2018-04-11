@@ -15,7 +15,7 @@
     <navigator class="cell" url="{{url1}}">
         <view class="icon iconfont icon-tuandui"></view>
         <view class="body">
-            <text>我的公司信息</text>
+            <text>我的信息</text>
             <text class="i">></text>
         </view>
     </navigator>

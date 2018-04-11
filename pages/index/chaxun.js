@@ -20,7 +20,7 @@ Page({
   onLoad: function () {
     // var pages = getCurrentPages();
     wx.setNavigationBarTitle({
-      title: '查询分类'
+      title: '我要查询'
     })
   },
   bindCatsChange (e) {
