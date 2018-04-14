@@ -4,10 +4,18 @@ var config = require('./config')
 var util = require('./utils/util.js')
 
 // console.log(config);
+
+var zxCatsIden = 1;
+var zxCatsTxt = '专线分类';
+var sellCatsIden = 2;
+var sellCatsTxt = '车辆买卖';
+var zhaopinCatsIden = 3;
+var zhaopinCatsTxt = '司机招聘';
+
 var allCats = [
-  {id:1,txt:'专线分类'},
-  {id:2,txt:'车辆买卖'},
-  {id:3,txt:'司机招聘'},
+  {id:zxCatsIden,txt:zxCatsTxt},
+  {id:sellCatsIden,txt:sellCatsTxt},
+  {id:zhaopinCatsIden,txt:zhaopinCatsTxt},
 ]
 
 var allCatsKeyVal = new Array(4)
@@ -37,58 +45,89 @@ zxCatsKeyVal[5] = '配载调车'
 zxCatsKeyVal[6] = '市内倒短车'
 
 // 车辆买卖
-/* var sellCatsSecond = [
-  // {id:1,txt:'牵引车'},
-  // {id:2,txt:'载货车'},
-  // {id:3,txt:'自卸车'},
-  // {id:4,txt:'工程车'},
-  {id:1,txt:'单桥货车'},
-  // {id:6,txt:'水泥罐车'},
-  // {id:7,txt:'油罐车'},
-  {id:2,txt:'挂车'},
-] */
+/* 
+  var sellCats = [
+    // {id:1,txt:'牵引车'},
+    // {id:2,txt:'载货车'},
+    // {id:3,txt:'自卸车'},
+    // {id:4,txt:'工程车'},
+    {id:1,txt:'单桥货车'},
+    // {id:6,txt:'水泥罐车'},
+    // {id:7,txt:'油罐车'},
+    {id:2,txt:'挂车'},
+  ] 
+
+  var sellCatsKeyVal = new Array(8)
+  // sellCatsKeyVal[0] = '牵引车'
+  // sellCatsKeyVal[1] = '载货车'
+  // sellCatsKeyVal[2] = '自卸车'
+  // sellCatsKeyVal[3] = '工程车'
+  sellCatsKeyVal[0] = '单桥货车'
+  // sellCatsKeyVal[5] = '水泥罐车'
+  // sellCatsKeyVal[6] = '油罐车'
+  sellCatsKeyVal[1] = '挂车'
+  // sellCatsKeyVal[8] = '车主招聘司机'
+  // sellCatsKeyVal[9] = '公司招聘司机'
+  sellCatsKeyVal[2] = ''
+  sellCatsKeyVal[3] = ''
+*/
+
 var sellCats = [
   {id:0,txt:'车辆买卖'},
   {id:1,txt:'单桥货车'},
   {id:2,txt:'挂车'},
 ]
 
-var sellCatsKeyVal = new Array(1)
+var sellCatsKeyVal = new Array(3)
 sellCatsKeyVal[0] = '车辆买卖'
 sellCatsKeyVal[1] = '单桥货车'
 sellCatsKeyVal[2] = '挂车'
 
 // 车辆买卖发布类型
-var selltypesKeyVal = new Array(2)
+var selltypesKeyVal = new Array(3)
 selltypesKeyVal[0] = ''
 selltypesKeyVal[1] = '出售'
 selltypesKeyVal[2] = '购买'
 
-var zhaopinCats = [
-  {id:0,txt:'招聘'}
-  {id:1,txt:'招聘司机'}
-  {id:2,txt:'司机求职'}
+
+// 车辆买卖发布类型
+var selltypes = [
+  {name: '0', value: '请选择'},
+  {name: '1', value: '出售', checked: 'true'},
+  {name: '2', value: '购买'},
 ]
-var zhaopinCatsKeyVal = new Array(1);
+
+// 招聘
+var zhaopinCats = [
+  {id:0,txt:'招聘'},
+  {id:1,txt:'招聘司机'},
+  {id:2,txt:'司机求职'},
+]
+
+var zhaopinCatsKeyVal = new Array(3);
 zhaopinCatsKeyVal[0] = '招聘'
 zhaopinCatsKeyVal[1] = '招聘司机'
 zhaopinCatsKeyVal[2] = '司机求职'
 
-/* 
-var sellCatsSecondKeyVal = new Array(8)
-// sellCatsSecondKeyVal[0] = '牵引车'
-// sellCatsSecondKeyVal[1] = '载货车'
-// sellCatsSecondKeyVal[2] = '自卸车'
-// sellCatsSecondKeyVal[3] = '工程车'
-sellCatsSecondKeyVal[0] = '单桥货车'
-// sellCatsSecondKeyVal[5] = '水泥罐车'
-// sellCatsSecondKeyVal[6] = '油罐车'
-sellCatsSecondKeyVal[1] = '挂车'
-// sellCatsSecondKeyVal[8] = '车主招聘司机'
-// sellCatsSecondKeyVal[9] = '公司招聘司机'
-sellCatsSecondKeyVal[2] = ''
-sellCatsSecondKeyVal[3] = ''
- */
+// 分类聚合
+var allCats2SubCats = [
+  {
+    id:zxCatsIden,
+    txt:zxCatsTxt,
+    subCats: zxCats
+  },
+  {
+    id:sellCatsIden,
+    txt:sellCatsTxt,
+    subCats: sellCats
+  },
+  {
+    id:zhaopinCatsIden,
+    txt:zhaopinCatsTxt,
+    subCats: zhaopinCats
+  }
+]
+
 
 App({
   onLaunch: function () {
@@ -208,19 +247,23 @@ App({
     baiduAk:'pdDY8jZw89lTn8OHEA6rS8aWaDNmSEc4',
     config:config,
     ooid:0, // 邀请人 openid
+    allCats: allCats,
+    allCatsKeyVal: allCatsKeyVal,
+    allCats2SubCats: allCats2SubCats,
+    zxCatsIden: zxCatsIden,
+    sellCatsIden: sellCatsIden,
+    zhaopinCatsIden: zhaopinCatsIden,
     zxCats: zxCats,
     zxCatsKeyVal: zxCatsKeyVal,
-    zxCatsSecond: zxCatsSecond,
-    zxCatsSecondKeyVal: zxCatsSecondKeyVal,
     sellCats: sellCats,
     sellCatsKeyVal: sellCatsKeyVal,
+    zhaopinCats: zhaopinCats,
     zhaopinCatsKeyVal: zhaopinCatsKeyVal,
-    sellCatsSecond: sellCatsSecond,
-    sellCatsSecondKeyVal: sellCatsSecondKeyVal,
-    zhaopinCatsSecond: zhaopinCatsSecond,
-    allSellCatsSecond: allSellCatsSecond,
-    zhaopinCatsSecondObj: zhaopinCatsSecondObj,
-    selltypesKeyVal: selltypesKeyVal
+    selltypes: selltypes,
+    selltypesKeyVal: selltypesKeyVal,
+    zxCatsIden:zxCatsIden,
+    sellCatsIden:sellCatsIden,
+    zhaopinCatsIden:zhaopinCatsIden,
   },
   shareFun (res) { // 转发函数
     console.log(res);

@@ -45,7 +45,14 @@
     <navigator class="cell" url="{{url6}}">
         <view class="icon iconfont icon-zixun"></view>
         <view class="body">
-            <text>超级买卖</text>
+            <text>车辆买卖</text>
+            <text class="i">></text>
+        </view>
+    </navigator>
+    <navigator class="cell" url="{{url7}}">
+        <view class="icon iconfont icon-wuliu"></view>
+        <view class="body">
+            <text>司机招聘</text>
             <text class="i">></text>
         </view>
     </navigator>

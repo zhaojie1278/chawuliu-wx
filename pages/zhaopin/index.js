@@ -34,17 +34,24 @@ Page({
       }
       */
     ],
-    sellCatsSecondKeyVal: app.globalData.sellCatsSecondKeyVal,
-    allSellCatsSecond: app.globalData.allSellCatsSecond,
-    selltypesKeyVal: app.globalData.selltypesKeyVal,
-    sellCats: app.globalData.sellCats,
+    zhaopinCats: app.globalData.zhaopinCats,
     prov: '',
     city: '',
-    cat: 0, // second cat
-    firstcatid: 2
+    cat: 1, // second cat
+    // firstcatid: 2,
+    catsKeyVal: app.globalData.zhaopinCatsKeyVal,
+    detailUrl:'detail',
+    detailFrom: 'zhaopin'
   },
-  onLoad: function () {
-    console.log('in sellmsg')
+  onLoad: function (e) {
+    console.log('in zhaopin')
+
+    var cat = e.cat
+    // console.log(cat);
+    this.setData({
+      cat: cat
+    })
+
     // 是否查询线路操作
     var getLocParam = {
       isget: true
@@ -53,11 +60,12 @@ Page({
   },
   bindNavFirstTaped:function(e) {
     // 分类切换
-    var id = parseInt(e.currentTarget.dataset.firstcatid)  
+    var cat = parseInt(e.currentTarget.dataset.cat)  
     this.setData({
-      firstcatid: id,
-    })  
-  },
+      cat: cat,
+    })
+    this.searchsellmsg(e)
+  },/* 
   bindNavSecondTaped:function(e) {
     // 分类切换
     var id = parseInt(e.currentTarget.dataset.cat)
@@ -68,7 +76,7 @@ Page({
       cat: id
     })
     this.searchsellmsg(e)
-  },
+  }, */
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
   },
@@ -95,7 +103,7 @@ Page({
   },
   getSearches: function(e) {
     var that = this;
-    console.log('getSearches -- sellmsg')
+    console.log('getSearches -- zhaopin')
     console.log('search-param' + JSON.stringify(e));
     var prov = ''
     var city = ''
@@ -129,7 +137,7 @@ Page({
       mask: true
     })
     wx.request({
-      url: app.globalData.config.service.sellmsgUrl+'/search',
+      url: app.globalData.config.service.zhaopinUrl+'/search',
       method: 'POST',
       dataType: 'json',
       header: {
@@ -206,9 +214,11 @@ Page({
               if (cityStr.indexOf('市')!=-1){
                 cityStr = cityStr.replace('市','')
               }
+              var cat=that.data.cat
               that.setData({
                 prov: provStr,
-                city:cityStr
+                city:cityStr,
+                cat: cat
               })
 
               // 获取当前位置后再查找专线
@@ -216,7 +226,8 @@ Page({
                 if (undefined != e.isget) {
                   var params = {
                     prov: provStr,
-                    city: cityStr
+                    city: cityStr,
+                    cat: cat
                   }
                   that.getSearches(params); // 获取推荐专线
                 }

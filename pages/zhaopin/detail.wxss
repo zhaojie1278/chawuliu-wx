@@ -95,6 +95,7 @@
 
 .item .carsinfo {
 	padding: 15rpx 20rpx 5rpx 20rpx;
+	border-bottom: 1px solid #eee;
 }
 
 .item .carsinfo .price {
@@ -132,7 +133,7 @@
 }
 
 .item .addresstxt {
-	font-size: 0.72em;
+	font-size: 0.75em;
 	color:#666666;
 }
 

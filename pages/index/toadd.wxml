@@ -1,6 +1,6 @@
 <!--index.wxml-->
 <view class="container">
   <block wx:for="{{allCats}}" wx:key="{{index}}">
-    <view bindtap="bindCatsChange" class="cat {{areacatid==item.id?'viewdef-taped':''}} {{index==0 ? 'view-top': ''}}" hover-class="view-onhover" data-areacatid="{{item.id}}">{{item.txt}}</view>
+    <view bindtap="bindCatsChange" class="cat {{catid==item.id?'viewdef-taped':''}} {{index==0 ? 'view-top': ''}}" hover-class="view-onhover" data-catid="{{item.id}}">{{item.txt}}</view>
     </block>
 </view>

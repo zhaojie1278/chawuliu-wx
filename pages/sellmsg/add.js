@@ -4,12 +4,6 @@ const app = getApp()
 var util = require('../../utils/util')
 // var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
 
-// 车辆买卖发布类型
-var selltypes = [
-  {name: '0', value: '出售', checked: 'true'},
-  {name: '1', value: '购买'},
-]
-
 Page({
   data: {
     userInfo: {},
@@ -29,10 +23,10 @@ Page({
       address:'',
       cat: 0,
       catname: '',
-      selltype: 1
+      selltype: 1,
+      shangpai: '请选择'
     },
-    selltypes: selltypes,
-    isnotzhaopin: true,
+    selltypes: '',
     defCat: 0,
     form_type: 'submit',
     disabled: false,
@@ -45,17 +39,19 @@ Page({
       img2: '',
       img3: '',
       img4: ''
-    }
+    },
+    enddate: util.formatDay(new Date())
   },
   onLoad: function (e) {
 
     console.log('sellmsg add')
+    // console.log(this.data.enddate);
     // console.log(e)
     var that = this
 
     // 设置页面标题
     wx.setNavigationBarTitle({
-      title: app.globalData.sellCatsSecondKeyVal[e.catid-1]
+      title: app.globalData.sellCatsKeyVal[e.catid]
     })
 
     wx.showLoading({
@@ -66,22 +62,17 @@ Page({
     // 位置信息
     that.getNowLocation();
 
-    // 判断是否招聘
-    if (e.catid in app.globalData.zhaopinCatsSecondObj) {
-      that.setData({
-        isnotzhaopin: false
-      })
-    }
     // 判断是否已添加公司信息
     var openid = wx.getStorageSync('openid')
     if(undefined != e && undefined != e.catid && undefined == e.sellmsgid) {
-      console.log('addddd')
+      console.log('sellmsg onload')
+      var selltypes = app.globalData.selltypes
+      console.log(selltypes);
       // 添加专线入口
       that.setData({
-        defCat: e.catid-1,
+        defCat: e.catid,
         selltypes: selltypes
       })
-
       // 判断是否已注册公司信息
       wx.request({
         url: app.globalData.config.service.contactUrl+'/isregcompany',
@@ -123,7 +114,7 @@ Page({
             itemVal.nickname = res.data.data.nickname;
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
-            itemVal.catname = app.globalData.sellCatsSecondKeyVal[that.data.defCat]
+            itemVal.catname = app.globalData.sellCatsKeyVal[that.data.defCat]
             that.setData({item:itemVal})
           }
         },
@@ -146,7 +137,7 @@ Page({
       return
     } else if (undefined != e && undefined != e.sellmsgid) {
       console.log('upupdate')
-      // 修改专线入口
+      // 修改入口
       wx.request({
         url: app.globalData.config.service.sellmsgUrl+'/toupdate',
         data: {
@@ -197,8 +188,8 @@ Page({
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
             itemVal.cat = res.data.data.cat;
-            var _cat = res.data.data.cat-1 // 本地数组索引小于1
-            itemVal.catname = app.globalData.sellCatsSecondKeyVal[_cat]
+            var _cat = res.data.data.cat // 本地数组索引小于1
+            itemVal.catname = app.globalData.sellCatsKeyVal[_cat]
             itemVal.selltype = res.data.data.selltype;
             itemVal.pinpai = res.data.data.pinpai;
             itemVal.price = res.data.data.price;
@@ -214,14 +205,14 @@ Page({
 
 
             // 招聘分类无“发布类型”
-            if (!(e.catid in app.globalData.zhaopinCatsSecondObj)) {
-              // radio 单选控制
-              for(var i=0;i<selltypes.length;i++) {
-                if (i == itemVal.selltype-1) {
-                  selltypes[i].checked = true
-                } else {
-                  selltypes[i].checked = false
-                }
+            // radio 单选控制
+            var selltypes = JSON.parse(JSON.stringify(app.globalData.selltypes))
+
+            for(var i=0;i<selltypes.length;i++) {
+              if (i == itemVal.selltype) {
+                selltypes[i].checked = true
+              } else {
+                selltypes[i].checked = false
               }
             }
             that.setData({
@@ -272,9 +263,7 @@ Page({
     } else if (formdata.cid == '') {
       util.showMaskTip1500('抱歉，联系人信息异常，请重新加载后重试')
     } else {
-      console.log(that.data.isnotzhaopin)
-      console.log('that.item.selltype::'+that.data.item.selltype);
-      if (that.data.isnotzhaopin && that.data.item.selltype == 1) {
+      if (that.data.item.selltype == 1) {
         // 非招聘，判断车辆相关信息是否为空 品牌/价格/上牌时间/里程数
         if (formdata.pinpai == '') {
           util.showMaskTip1500('品牌不能为空')
@@ -289,12 +278,6 @@ Page({
           util.showMaskTip1500('里程数不能为空')
           return
         }
-      } else {
-        // 购买时数据置空
-        delete formdata.pinpai
-        delete formdata.price
-        delete formdata.shangpai
-        delete formdata.licheng
       }
       //提交
       var reqUrl = app.globalData.config.service.sellmsgUrl+'/add';
@@ -344,7 +327,7 @@ Page({
     var checkVal = e.detail.value
     console.log(checkVal)
     this.setData({
-      "item.selltype": Number(checkVal)+1
+      "item.selltype": Number(checkVal)
     })
   },
   bindPinpaiBlur (e) {
@@ -459,6 +442,12 @@ Page({
           }
         })
       }
+    })
+  },
+  bindDateChange (e) {
+    console.log('picker发送选择改变，携带值为', e.detail.value)
+    this.setData({
+      'item.shangpai': e.detail.value
     })
   }
 })

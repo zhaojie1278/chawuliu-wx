@@ -8,7 +8,7 @@
             <view class="body">
                 <view class="title"><text class="nowrap">{{item.company}} </text></view>
                 <view class="describe">
-                    <text class="nowrap2">{{sellCatsSecondKeyVal[item.cat-1] + selltypesKeyVal[item.selltype]}}</text>
+                    <text class="nowrap2">{{zhaopinCatsKeyVal[item.cat]}}</text>
                     <text class="time">{{item.timebefore}}</text>
                     <text wx:if="{{item.imgcount>0}}" class="imgcount">{{item.imgcount}}图</text>
                 </view>
@@ -18,22 +18,25 @@
             <text class="icon iconfont icon-bohao icon-min2" style="background:#ff865e;"></text>
         </view>
     </view>
-    <view class="carsinfo" wx:if="{{item.selltype==1}}">
-        <view>
-        <text class="price">￥{{item.price}}万</text>
+    <view class="carsinfo">
+        <view class="carsinfo-tit-cnt">
+            <view>
+                <text class="title">驾照：</text>
+                <text class="price">{{item.jiazhao}}</text>
+            </view>
+            <view>
+                <text class="title">驾龄：</text>
+                <text class="cnt">{{item.jialing}}</text>
+            </view>
+            <view>
+                <text class="title">工资：</text>
+                <text class="cnt">{{item.gongzi}}</text>
+            </view>
         </view>
         <view class="carsinfo-tit-cnt">
             <view>
-            <text class="title">品牌系列：</text>
-            <text class="cnt">{{item.pinpai}}</text>
-            </view>
-            <view>
-            <text class="title">上牌时间：</text>
-            <text class="cnt">{{item.shangpai}}</text>
-            </view>
-            <view>
-            <text class="title">行驶里程：</text>
-            <text class="cnt">{{item.licheng}}万公里</text>
+            <text class="title">福利：</text>
+            <text class="cnt">{{item.fuli}}</text>
             </view>
         </view>
     </view>

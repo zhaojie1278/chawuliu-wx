@@ -18,7 +18,7 @@ Page({
       } */
     ],
     emptyshow: false,
-    zxCatsSecondKeyVal: app.globalData.zxCatsSecondKeyVal
+    zxCatsKeyVal: app.globalData.zxCatsKeyVal
   },
   onLoad: function () {
     // var pages = getCurrentPages();

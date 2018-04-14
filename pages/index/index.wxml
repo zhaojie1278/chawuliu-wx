@@ -82,8 +82,8 @@
 
 
   <!--<navigator class="navview" url="../zhuanxian/add?catid=6" hover-class="navhover">-->
-  <navigator class="navview" url="../zhuanxian/index" hover-class="navhover">
-      <text class="icon iconfont icon-zixun icon-large" style="background:#5be3a8;"></text>
+  <navigator class="navview" open-type="switchTab" url="../index/chaxun" hover-class="navhover">
+      <text class="icon iconfont icon-search icon-large" style="background:#5be3a8;"></text>
       <view class="title">
           <text>我要查询</text>
       </view>

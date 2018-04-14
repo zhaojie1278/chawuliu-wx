@@ -65,7 +65,7 @@
 }
 
 .sellmsglist .item .body .describe {
-	font-size: 0.7em;
+	font-size: 0.75em;
 	color: #666666;
 	margin-top: 3rpx;
 }

@@ -17,7 +17,9 @@
 }
 
 .view-top {
-  border-top:1px solid #eee;
+  /* border-top:1px solid #eee; */
+  background:#ddd;
+  font-size: 0.9em;
 }
 
 .viewdef-taped {

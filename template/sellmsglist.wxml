@@ -1,7 +1,7 @@
 <template name="sellmsglist">
     <view class="sellmsglist">
         <block wx:if="{{list.length != 0}}">
-            <navigator class="item" wx:for="{{list}}" wx:key="item" url="{{url?url:'../sellmsg/detail'}}?id={{item.id}}">
+            <navigator class="item" wx:for="{{list}}" wx:key="item" url="{{detailUrl}}?id={{item.id}}">
                 <view class="info">
                     <view class="item-left">
                         <view class="icon">
@@ -10,7 +10,8 @@
                         <view class="body">
                             <view class="title"><text class="nowrap">{{item.company}} </text></view>
                             <view class="describe">
-                            <text class="nowrap2">{{sellCatsSecondKeyVal[item.cat-1] + selltypesKeyVal[item.selltype]}}</text>
+                            <text wx:if="{{detailFrom=='sell'}}" class="nowrap2">{{catsKeyVal[item.cat] + selltypesKeyVal[item.selltype]}}</text>
+                            <text wx:else class="nowrap2">{{catsKeyVal[item.cat]}}</text>
                             </view>
                         </view>
                     </view>

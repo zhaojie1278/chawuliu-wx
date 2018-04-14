@@ -2,8 +2,8 @@
 
 <!--导航-->
 <view  class="navigator">
-    <block wx:for="{{zxCatsSecond}}" wx:key="{{index}}">
-    <view bindtap="bindNavTaped" class="{{areacatid==item.id?'viewdef-taped':'viewdef'}}" data-areacatid="{{item.id}}" hover-class="onhover">{{item.txt}}</view>
+    <block wx:for="{{zxCats}}" wx:key="{{index}}">
+    <view wx:if="{{item.id>0}}" bindtap="bindNavTaped" class="{{cat==item.id?'viewdef-taped':'viewdef'}}" data-cat="{{item.id}}" hover-class="onhover">{{item.txt}}</view>
     </block>
 </view>
 
@@ -21,7 +21,7 @@
     </navigator>
   </view>
   <view class="search">
-        <button class="tosel_inp" type="primary" data-areacat="{{areacatid}}" data-start="{{startCity}}" data-point="{{pointCity}}" data-start-prov="{{startProv}}" data-point-prov="{{pointProv}}" size="default" loading="{{false}}" bindtap="searchzhuanxian">查询线路</button>
+        <button class="tosel_inp" type="primary" data-catid="{{cat}}" data-start="{{startCity}}" data-point="{{pointCity}}" data-start-prov="{{startProv}}" data-point-prov="{{pointProv}}" size="default" loading="{{false}}" bindtap="searchzhuanxian">查询线路</button>
       </view>
 </view>
 

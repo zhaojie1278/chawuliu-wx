@@ -26,11 +26,11 @@ image {
 }
 
 .navigator .viewdef {
-  font-size:0.9em;
+  font-size:0.85em;
 }
 
 .navigator .viewdef-taped {
-  font-size:0.9em;
+  font-size:0.85em;
   color:#3573fa;
   border-bottom:1px solid #3573fa;
 }

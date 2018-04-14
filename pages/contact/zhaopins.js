@@ -18,8 +18,7 @@ Page({
       } */
     ],
     emptyshow: false,
-    sellCatsKeyVal: app.globalData.sellCatsKeyVal,
-    selltypesKeyVal: app.globalData.selltypesKeyVal
+    zhaopinCatsKeyVal: app.globalData.zhaopinCatsKeyVal
   },
   onLoad: function () {
     var that = this
@@ -36,7 +35,7 @@ Page({
       return;
     }
     wx.request({
-      url: app.globalData.config.service.contactUrl + '/getallsellmsg',
+      url: app.globalData.config.service.contactUrl + '/getallzhaopin',
       data: {
         openid: openid
       },
@@ -72,7 +71,7 @@ Page({
     // wx.request({ 
     // wx.hideLoading();
   },
-  delSellmsg (e) {
+  delZhaopin (e) {
     // 删除前步
     var that = this
     var id = e.currentTarget.dataset.id
@@ -104,7 +103,7 @@ Page({
         mask: true
     })
     wx.request({
-      url: app.globalData.config.service.contactUrl + '/delsellmsg',
+      url: app.globalData.config.service.contactUrl + '/delzhaopin',
       data: {
         id: delParams.id,
         cid: delParams.cid
@@ -160,7 +159,7 @@ Page({
       }
     })
   },
-  updateSellmsg (e) {
+  updateZhaopin (e) {
     // 删除专线操作
     var self = this
     // console.log(delParams)
@@ -169,11 +168,11 @@ Page({
         title: '加载中..',
         mask: true
     })
-    var sellmsgid = e.currentTarget.dataset.id
+    var zhaopinid = e.currentTarget.dataset.id
     var cid = e.currentTarget.dataset.cid
     var cat = e.currentTarget.dataset.catid
     wx.navigateTo({
-      url: '../sellmsg/add?sellmsgid='+sellmsgid+'&cid='+cid+"&catid="+cat
+      url: '../zhaopin/add?zhaopinid='+zhaopinid+'&cid='+cid+"&catid="+cat
     })
   },
   onShareAppMessage: function (res) { // 转发

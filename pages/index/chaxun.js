@@ -4,20 +4,28 @@ const app = getApp()
 var util = require('../../utils/util')
 // var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
 
-var zxCats = app.globalData.zxCats
-var sellCats = app.globalData.sellCats
-var allCats = zxCats.concat(sellCats)
-var sellCatsKeyVal = app.globalData.sellCatsKeyVal
-
 Page({
   data: {
     plain: false,
     loading: false,
     defaultsize: 'default',
-    areacatid: 1,
-    allCats: allCats
+    catid: 0,
+    cat_selid: 0,
+    allCats: []
   },
   onLoad: function () {
+    var zxCats = app.globalData.zxCats
+    var sellCats = app.globalData.sellCats
+    var zhaopinCats = app.globalData.zhaopinCats
+    var allCats2SubCats = app.globalData.allCats2SubCats
+    // console.log('chaxun.js '+JSON.stringify(allCats));
+    var sellCatsKeyVal = app.globalData.sellCatsKeyVal
+
+    this.setData({
+      allCats2SubCats: allCats2SubCats,
+      
+    })
+
     // var pages = getCurrentPages();
     wx.setNavigationBarTitle({
       title: '我要查询'
@@ -25,23 +33,27 @@ Page({
   },
   bindCatsChange (e) {
 
-    var areacatid = e.currentTarget.dataset.areacatid
+    var catid = e.currentTarget.dataset.catid
+    var subcatid = e.currentTarget.dataset.subcatid
     this.setData({
-      "areacatid": areacatid
+      cat_selid: catid + '-' + subcatid
     })
-
-    var switchAreacatid = areacatid - 1
-    if (switchAreacatid in sellCatsKeyVal) {
-      // 超级买卖发布入口
-      // console.log('app.globalData.sellCats')
+    
+    // var subcatid = subcatid - 1
+    if (catid == app.globalData.zxCatsIden) {
+      // 专线
       wx.navigateTo({
-        url: '../sellmsg/index'
+        url: '../zhuanxian/index?cat='+subcatid
       })
-    } else {
-      console.log('app.globalData.zxcats--'+areacatid)
-      // 专线发布入口
+    } else if (catid == app.globalData.sellCatsIden) {
+      // 车辆买卖
       wx.navigateTo({
-        url: '../zhuanxian/index'
+        url: '../sellmsg/index?cat='+subcatid
+      })
+    } else if (catid == app.globalData.zhaopinCatsIden) {
+      // 司机
+      wx.navigateTo({
+        url: '../zhaopin/index?cat='+subcatid
       })
     }
     

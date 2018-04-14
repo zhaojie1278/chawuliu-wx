@@ -29,7 +29,7 @@ Page({
       company: 'J物流',
       imgcount: 5
     },
-    sellCatsSecondKeyVal: app.globalData.sellCatsSecondKeyVal,
+    sellCatsKeyVal: app.globalData.sellCatsKeyVal,
     selltypesKeyVal: app.globalData.selltypesKeyVal
   },
   onLoad: function ($query) {

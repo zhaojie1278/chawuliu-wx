@@ -3,7 +3,9 @@
 const app = getApp()
 var util = require('../../utils/util')
 // var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
-
+var jiazhaoCats = ['请选择','A1','A2','A3','B1','B2','C1','C2']
+var jialingCats = ['请选择','无','1-2年','3-4年','4-5年','5年以上']
+var gongziCats = ['请选择','面议','1000-3000元','3000-5000元','5000-8000元','8000以上']
 Page({
   data: {
     userInfo: {},
@@ -11,9 +13,9 @@ Page({
       prov:'',
       city:'',
       cid:0,
-      jiazhao:'',
-      jialing:'',
-      gongzi:'',
+      jiazhao:'请选择',
+      jialing:'请选择',
+      gongzi:'请选择',
       fuli:'',
       content:'',
       img1:'',
@@ -40,17 +42,23 @@ Page({
       img2: '',
       img3: '',
       img4: ''
-    }
+    },
+    jiazhaoIndex: 0,
+    jialingIndex: 0,
+    gongziIndex: 0,
+    jiazhaoCats: jiazhaoCats,
+    jialingCats: jialingCats,
+    gongziCats: gongziCats
   },
   onLoad: function (e) {
 
-    console.log('sellmsg add')
+    console.log('zhaopin add')
     // console.log(e)
     var that = this
 
     // 设置页面标题
     wx.setNavigationBarTitle({
-      title: app.globalData.sellCatsSecondKeyVal[e.catid-1]
+      title: app.globalData.zhaopinCatsKeyVal[e.catid]
     })
 
     wx.showLoading({
@@ -63,11 +71,11 @@ Page({
 
     // 判断是否已添加公司信息
     var openid = wx.getStorageSync('openid')
-    if(undefined != e && undefined != e.catid && undefined == e.sellmsgid) {
+    if(undefined != e && undefined != e.catid && undefined == e.zhaopinid) {
       console.log('zhaopin addddd')
       // 添加专线入口
       that.setData({
-        defCat: e.catid-1,
+        defCat: e.catid,
       })
 
       // 判断是否已注册公司信息
@@ -111,7 +119,7 @@ Page({
             itemVal.nickname = res.data.data.nickname;
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
-            itemVal.catname = app.globalData.sellCatsSecondKeyVal[that.data.defCat]
+            itemVal.catname = app.globalData.zhaopinCatsKeyVal[that.data.defCat]
             that.setData({item:itemVal})
           }
         },
@@ -132,13 +140,13 @@ Page({
       })
 
       return
-    } else if (undefined != e && undefined != e.sellmsgid) {
+    } else if (undefined != e && undefined != e.zhaopinid) {
       console.log('upupdate')
       // 修改专线入口
       wx.request({
-        url: app.globalData.config.service.sellmsgUrl+'/toupdate',
+        url: app.globalData.config.service.zhaopinUrl+'/toupdate',
         data: {
-          id: e.sellmsgid,
+          id: e.zhaopinid,
           cid: e.cid 
         },
         method: 'POST',
@@ -185,13 +193,12 @@ Page({
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
             itemVal.cat = res.data.data.cat;
-            var _cat = res.data.data.cat-1 // 本地数组索引小于1
-            itemVal.catname = app.globalData.sellCatsSecondKeyVal[_cat]
-            itemVal.selltype = res.data.data.selltype;
-            itemVal.pinpai = res.data.data.pinpai;
-            itemVal.price = res.data.data.price;
-            itemVal.shangpai = res.data.data.shangpai;
-            itemVal.licheng = res.data.data.licheng;
+            var _cat = res.data.data.cat // 本地数组索引小于1
+            itemVal.catname = app.globalData.zhaopinCatsKeyVal[_cat]
+            itemVal.jiazhao = res.data.data.jiazhao;
+            itemVal.jialing = res.data.data.jialing;
+            itemVal.gongzi = res.data.data.gongzi;
+            itemVal.fuli = res.data.data.fuli;
             
             // 图片展示
             var showImgs = that.data.showImgs
@@ -234,10 +241,12 @@ Page({
     var that=this
     // 提交校验
     var formdata = e.detail.value
-    if(formdata.content==''){
-      util.showMaskTip1500('内容不能为空')
-    // } else if (formdata.img1 == '' && formdata.img2 == '' && formdata.img3 == '' && formdata.img4 == '') {
-      // util.showMaskTip1500('抱歉，请至少上传一张图片')        
+    if(formdata.jiazhao=='请选择'){
+      util.showMaskTip1500('请选择驾照类型')
+    } else if(formdata.jialing=='请选择'){
+      util.showMaskTip1500('请选择驾龄')
+    } else if(formdata.gongzi=='请选择'){
+      util.showMaskTip1500('请选择工资')
     } else if (formdata.nickname == '') {
       util.showMaskTip1500('联系人不能为空')
     } else if (formdata.phone == '') {
@@ -247,32 +256,8 @@ Page({
     } else if (formdata.cid == '') {
       util.showMaskTip1500('抱歉，联系人信息异常，请重新加载后重试')
     } else {
-      console.log(that.data.isnotzhaopin)
-      console.log('that.item.selltype::'+that.data.item.selltype);
-      if (that.data.isnotzhaopin && that.data.item.selltype == 1) {
-        // 非招聘，判断车辆相关信息是否为空 品牌/价格/上牌时间/里程数
-        if (formdata.pinpai == '') {
-          util.showMaskTip1500('品牌不能为空')
-          return
-        } else if (formdata.price == '') {
-          util.showMaskTip1500('价格不能为空')
-          return
-        } else if (formdata.shangpai == '') {
-          util.showMaskTip1500('上牌时间不能为空')
-          return
-        } else if (formdata.licheng == '') {
-          util.showMaskTip1500('里程数不能为空')
-          return
-        }
-      } else {
-        // 购买时数据置空
-        delete formdata.pinpai
-        delete formdata.price
-        delete formdata.shangpai
-        delete formdata.licheng
-      }
       //提交
-      var reqUrl = app.globalData.config.service.sellmsgUrl+'/add';
+      var reqUrl = app.globalData.config.service.zhaopinUrl+'/add';
       wx.request({
         url: reqUrl,
         method: 'POST',
@@ -296,7 +281,7 @@ Page({
               success: function(res) {
                 setTimeout(
                   function() {
-                    wx.navigateTo({url: '../contact/sellmsgs'})
+                    wx.navigateTo({url: '../contact/zhaopins'})
                 },1000)
               }
             })
@@ -314,27 +299,22 @@ Page({
       })
     }
   },
-  sellTypeChange (e) {
-    // console.log(e)
-    var checkVal = e.detail.value
-    console.log(checkVal)
+  bindJiazhaoChange (e) {
     this.setData({
-      "item.selltype": Number(checkVal)+1
+      jiazhaoIndex: e.detail.value,
+      "item.jiazhao": jiazhaoCats[e.detail.value]
     })
   },
-  bindJiazhaoBlur (e) {
+  bindJialingChange (e) {
     this.setData({
-      "item.jiazhao": e.detail.value
+      jialingIndex: e.detail.value,
+      "item.jialing": jialingCats[e.detail.value]
     })
   },
-  bindJialingBlur (e) {
+  bindGoongziChange (e) {
     this.setData({
-      "item.jialing": e.detail.value
-    })
-  },
-  bindGongziBlur (e) {
-    this.setData({
-      "item.gongzi": e.detail.value
+      gongziIndex: e.detail.value,
+      "item.gongzi": gongziCats[e.detail.value]
     })
   },
   bindFuliBlur (e) {
@@ -369,7 +349,7 @@ Page({
           'content-type': 'multipart/form-data'
         },
         formData:{
-          'from': 'sellmsg'
+          'from': 'zhaopin'
         },
         success: function(res){
           console.log('upload res::')

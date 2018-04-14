@@ -4,47 +4,47 @@ const app = getApp()
 var util = require('../../utils/util')
 // var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
 
-var zxCats = app.globalData.zxCatsSecond
-var sellCats = app.globalData.sellCats
-var allCats = zxCats.concat(sellCats)
-var sellCatsKeyVal = app.globalData.sellCatsKeyVal
-var zhaopinCatsKeyVal = app.globalData.zhaopinCatsKeyVal
+var zxCats = app.globalData.zxCats
+var allCats = app.globalData.allCats
+var zxCatsIden = app.globalData.zxCatsIden
+var sellCatsIden = app.globalData.sellCatsIden
+var zhaopinCatsIden = app.globalData.zhaopinCatsIden
+
 
 Page({
   data: {
     plain: false,
     loading: false,
     defaultsize: 'default',
-    areacatid: 1,
+    catid: 1,
     allCats: allCats
   },
   onLoad: function () {
-    var pages = getCurrentPages();
+    // var pages = getCurrentPages();
   },
   bindCatsChange (e) {
 
-    var areacatid = e.currentTarget.dataset.areacatid
+    var catid = e.currentTarget.dataset.catid
     this.setData({
-      "areacatid": areacatid
+      "catid": catid
     })
-
-    var switchAreacatid = areacatid - 1
-    if (switchAreacatid in sellCatsKeyVal) {
-      // 超级买卖发布入口
-      console.log('app.globalData.sellCats')
-      wx.navigateTo({
-        url: '../sellmsg/toadd?catid='+areacatid
-      })
-    } else if (switchAreacatid in zhaopinCatsKeyVal) {
-      console.log('app.globalData.zhaopinCats')
-      wx.navigateTo({
-        url: '../zhaopin/toadd?catid='+areacatid
-      })
-    } else {
-      console.log('app.globalData.zxcats--'+areacatid)
+    if (catid==zxCatsIden) {
+      console.log('app.globalData.zxcats--'+catid)
       // 专线发布入口
       wx.navigateTo({
-        url: '../zhuanxian/add?catid='+areacatid
+        url: '../zhuanxian/toadd?catid='+catid
+      })
+    } else if (catid == zhaopinCatsIden) {
+      // 司机招聘发布入口
+      console.log('app.globalData.zhaopinCats')
+      wx.navigateTo({
+        url: '../zhaopin/toadd?catid='+catid
+      })
+    } else {
+      // 车辆买卖发布入口
+      console.log('app.globalData.sellCats')
+      wx.navigateTo({
+        url: '../sellmsg/toadd?catid='+catid
       })
     }
     

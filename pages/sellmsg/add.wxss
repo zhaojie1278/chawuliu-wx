@@ -30,6 +30,9 @@
   color:#333;
   font-size:0.8em;
 }
+.view-mg .radio {
+  margin-left: 10rpx;
+}
 .contact-info {
   color:#3573fa; 
   background:#f7f7fa; 
@@ -39,11 +42,11 @@
 }
 
 .fsize-dig8 {
-  font-size:0.8rem;
+  font-size:0.8em;
 }
 .view-mg .inp {
   padding:27rpx 10rpx 0rpx;
-  font-size:0.8rem;
+  font-size:0.8em;
   /* color:#999; */
 }
 
@@ -54,7 +57,7 @@
 .textarea{
   text-align: left;
   width: 100%;
-  font-size: 0.75rem;
+  font-size: 0.75em;
   color: #666666;
   padding-left: 10rpx;
   line-height: 40rpx;
@@ -74,4 +77,10 @@
 .view-mg .imgs image {
   width: 150rpx;
   height: 150rpx;
+}
+.view-mg .shangpai {
+  /* color:#333; */
+  padding-left:10rpx;
+  font-size:0.8em;
+  float: left;
 }

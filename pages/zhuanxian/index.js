@@ -24,16 +24,17 @@ Page({
         point:'杭州'
       }, */
     ],
-    zxCatsSecond:app.globalData.zxCatsSecond,
-    areacatid:1
+    zxCats:app.globalData.zxCats,
+    cat:1
   },
   bindNavTaped:function(e) {
-    var id = parseInt(e.currentTarget.dataset.areacatid)  
+    var id = parseInt(e.currentTarget.dataset.cat)  
     this.setData({  
-      areacatid: id  
+      cat: id  
     })  
   },
-  onLoad: function () {
+  onLoad: function (e) {
+    console.log('e.cat::'+e.cat);
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -61,6 +62,12 @@ Page({
       })
     }
 
+    // 设置当前选中分类
+    var cat = e.cat
+    this.setData({
+      cat: cat
+    })
+
     // 是否查询线路操作
     var getLocParam = {
       isgetZhuanxian: true
@@ -83,11 +90,11 @@ Page({
     // console.log(e)
     var start = e.currentTarget.dataset.start
     var point = e.currentTarget.dataset.point
-    var areacat = e.currentTarget.dataset.areacat
+    var cat = e.currentTarget.dataset.catid
     var params = {
       start: start,
       point: point,
-      areacatid: areacat
+      catid: cat
     }
     this.getSearches(params);
   },
@@ -96,7 +103,7 @@ Page({
     console.log('getSearches')
     var start = ''
     var point = ''
-    var areacatid = 0
+    var catid = 0
     // console.log(e)
     if (undefined!=e) {
       if (e.start == undefined) {
@@ -113,14 +120,14 @@ Page({
         point = e.point
       }
 
-      if(undefined != e.areacatid) {
-        areacatid = e.areacatid
+      if(undefined != e.catid) {
+        catid = e.catid
       }
     } else {
       // 默认不带条件查询
       start = that.data.startCity
       point = that.data.pointCity
-      areacatid = that.data.areacatid
+      catid = that.data.cat
     }
 
     wx.showLoading({
@@ -139,7 +146,7 @@ Page({
       data: {
         start: start,
         point: point,
-        areacatid: areacatid
+        cat: catid
       },
       success: function(res){
         wx.hideLoading();

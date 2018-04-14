@@ -6,35 +6,38 @@
     <input name="prov" hidden value="{{item.prov}}"/>
     <input name="city" hidden value="{{item.city}}"/>
     <input name="catname" hidden value="{{item.catname}}"/>
-    <view class="view-mg" wx:if="{{isnotzhaopin}}">
-        <text class="lbl-left">发布类型</text>
-        <input name="selltype" hidden value="{{item.selltype}}"/>
-        <radio-group class="fsize-dig8" bindchange="sellTypeChange">
-        <label class="radio" wx:for="{{selltypes}}" wx:for-item="selltype" wx:key="{{selltype.name}}">
-            <radio value="{{selltype.name}}" checked="{{selltype.checked}}"/>{{selltype.value}}
-        </label>
-        </radio-group>
-    </view>
     <view class="view-mg">
-        <text class="lbl-left">招聘</text>
-        <input bindblur="bindJiazhaoBlur" class="inp width170" id="jiazhao" name="jiazhao" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.jiazhao}}"/>
+        <text class="lbl-left">驾照</text>
+        <!--<input bindblur="bindJiazhaoBlur" class="inp width170" id="jiazhao" name="jiazhao" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.jiazhao}}"/>-->
         <input name="jiazhao" hidden value="{{item.jiazhao}}"/>
-        <picker bindchange="bindCatsChange" value="{{defcat}}" range="{{jiazhaoCats}}">
-            <view class="picker-cat">
+        <picker bindchange="bindJiazhaoChange" value="{{jiazhaoIndex}}" range="{{jiazhaoCats}}">
+            <view class="picker-jiazhao">
             {{item.jiazhao}}
             </view>
         </picker>
-        <text class="lbl-right-suffix">驾驶员</text>
     </view>
     <view class="view-mg">
         <text class="lbl-left">驾龄</text>
-        <input bindblur="bindJialingBlur" class="inp width170" id="jialing" name="jialing" maxlength="20" placeholder="请输入价格" type="digit" value="{{item.jialing}}"/>
-        <text class="lbl-right-suffix">年</text>
+        <!--<input bindblur="bindJialingBlur" class="inp width170" id="jialing" name="jialing" maxlength="20" placeholder="请输入驾龄" type="digit" value="{{item.jialing}}"/>-->
+        <input name="jialing" hidden value="{{item.jialing}}"/>
+        <picker bindchange="bindJialingChange" value="{{jialingIndex}}" range="{{jialingCats}}">
+            <view class="picker-jiazhao">
+            {{item.jialing}}
+            </view>
+        </picker>
+
+        <!--<text class="lbl-right-suffix">年</text>-->
     </view>
     <view class="view-mg">
         <text class="lbl-left">工资</text>
-        <input bindblur="bindGongziBlur" class="inp width250" id="gongzi" name="gongzi" maxlength="20" placeholder="请输入上牌时间" type="text" value="{{item.gongzi}}"/>
-        <text class="lbl-right-suffix">元</text>
+        <input name="gongzi" hidden value="{{item.gongzi}}"/>
+        <!--<input bindblur="bindGongziBlur" class="inp width170" id="gongzi" name="gongzi" maxlength="20" placeholder="请输入上牌时间" type="text" value="{{item.gongzi}}"/>-->
+        <picker bindchange="bindGoongziChange" value="{{gongziIndex}}" range="{{gongziCats}}">
+            <view class="picker-jiazhao">
+            {{item.gongzi}}
+            </view>
+        </picker>
+        <!--<text class="lbl-right-suffix">元</text>-->
     </view>
     <view class="view-mg">
         <text class="lbl-left">福利</text>

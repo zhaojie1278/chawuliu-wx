@@ -8,7 +8,7 @@
             <view class="body">
                 <view class="title"><text class="nowrap">{{item.company}} </text></view>
                 <view class="describe">
-                    <text class="nowrap2">{{sellCatsSecondKeyVal[item.cat-1] + selltypesKeyVal[item.selltype]}}</text>
+                    <text class="nowrap2">{{sellCatsKeyVal[item.cat] + selltypesKeyVal[item.selltype]}}</text>
                     <text class="time">{{item.timebefore}}</text>
                     <text wx:if="{{item.imgcount>0}}" class="imgcount">{{item.imgcount}}图</text>
                 </view>
@@ -18,7 +18,8 @@
             <text class="icon iconfont icon-bohao icon-min2" style="background:#ff865e;"></text>
         </view>
     </view>
-    <view class="carsinfo" wx:if="{{item.selltype==1}}">
+    <!--<view class="carsinfo" wx:if="{{item.selltype==1}}">-->
+    <view class="carsinfo">
         <view>
         <text class="price">￥{{item.price}}万</text>
         </view>

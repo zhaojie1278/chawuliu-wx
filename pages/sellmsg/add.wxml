@@ -6,29 +6,35 @@
     <input name="prov" hidden value="{{item.prov}}"/>
     <input name="city" hidden value="{{item.city}}"/>
     <input name="catname" hidden value="{{item.catname}}"/>
-    <view class="view-mg" wx:if="{{isnotzhaopin}}">
+    <view class="view-mg">
         <text class="lbl-left">发布类型</text>
         <input name="selltype" hidden value="{{item.selltype}}"/>
         <radio-group class="fsize-dig8" bindchange="sellTypeChange">
-        <label class="radio" wx:for="{{selltypes}}" wx:for-item="selltype" wx:key="{{selltype.name}}">
+        <label class="radio" wx:for="{{selltypes}}" wx:for-item="selltype" wx:key="{{selltype.name}}" wx:if="{{selltype.name>0}}">
             <radio value="{{selltype.name}}" checked="{{selltype.checked}}"/>{{selltype.value}}
         </label>
         </radio-group>
     </view>
-    <view class="view-mg" hidden="{{!isnotzhaopin || (isnotzhaopin && item.selltype!=1)}}">
+    <view class="view-mg">
         <text class="lbl-left">品牌</text>
         <input bindblur="bindPinpaiBlur" class="inp" id="pinpai" name="pinpai" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.pinpai}}"/>
     </view>
-    <view class="view-mg" hidden="{{!isnotzhaopin || (isnotzhaopin && item.selltype!=1)}}">
+    <view class="view-mg">
         <text class="lbl-left">价格</text>
         <input bindblur="bindPriceBlur" class="inp width50" id="price" name="price" maxlength="20" placeholder="请输入价格" type="digit" value="{{item.price}}"/>
         <text class="lbl-right-suffix">万元</text>
     </view>
-    <view class="view-mg" hidden="{{!isnotzhaopin || (isnotzhaopin && item.selltype!=1)}}">
+    <view class="view-mg">
         <text class="lbl-left">上牌时间</text>
-        <input bindblur="bindShangpaiBlur" class="inp" id="shangpai" name="shangpai" maxlength="20" placeholder="请输入上牌时间" type="text" value="{{item.shangpai}}"/>
+        <input name="shangpai" hidden value="{{item.shangpai}}"/>
+        <!--<input bindblur="bindShangpaiBlur" class="inp" id="shangpai" name="shangpai" maxlength="20" placeholder="请输入上牌时间" type="text" value="{{item.shangpai}}"/>-->
+        <picker mode="date" value="{{item.shangpai}}" fields="month" start="2005-01-01" end="{{enddate}}" bindchange="bindDateChange">
+            <view class="picker shangpai">
+            {{item.shangpai}}
+            </view>
+        </picker>
     </view>
-    <view class="view-mg" hidden="{{!isnotzhaopin || (isnotzhaopin && item.selltype!=1)}}">
+    <view class="view-mg">
         <text class="lbl-left">里程</text>
         <input bindblur="bindLichengBlur" class="inp width50" id="licheng" name="licheng" maxlength="20" placeholder="请输入里程" type="text" value="{{item.licheng}}"/>
         <text class="lbl-right-suffix">万公里</text>

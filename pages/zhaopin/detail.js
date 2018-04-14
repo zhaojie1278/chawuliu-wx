@@ -11,7 +11,6 @@ Page({
       prov: '北京市',
       city: '北京市',
       cid: '6',
-      selltype: '0',
       content: '找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车找个大货车的工作找个大货车',
       domainimg1: 'http://local.chawuliu2018.com/uploads/wafer/sellmsg/20180406/78afdc0531c2943b9f0558617c60b4be.jpg',
       domainimg2: 'http://local.chawuliu2018.com/uploads/wafer/sellmsg/20180406/dd0186f997703592f5da99e6dda795c6.jpg',
@@ -29,8 +28,7 @@ Page({
       company: 'J物流',
       imgcount: 5
     },
-    sellCatsSecondKeyVal: app.globalData.sellCatsSecondKeyVal,
-    selltypesKeyVal: app.globalData.selltypesKeyVal
+    zhaopinCatsKeyVal: app.globalData.zhaopinCatsKeyVal
   },
   onLoad: function ($query) {
     // console.log(this.data);
@@ -50,7 +48,7 @@ Page({
     }
 
     wx.request({
-      url: app.globalData.config.service.sellmsgUrl+'/detail',
+      url: app.globalData.config.service.zhaopinUrl+'/detail',
       data: {
         id: id,
         openid: openid
@@ -70,7 +68,6 @@ Page({
             duration: 2000
           })
         } else {
-          res.data.data.price = res.data.data.price.toFixed(2);
           that.setData({
             item: res.data.data
           })

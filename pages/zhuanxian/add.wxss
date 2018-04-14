@@ -30,7 +30,7 @@
 
 .view-mg .inp {
   padding:27rpx 10rpx 0rpx;
-  font-size:0.8rem;
+  font-size:0.8em;
   /* color:#999; */
 }
 
@@ -40,7 +40,7 @@
 
 /* 专线地区类型选择器 */
 .view-mg .picker-cat {
-  font-size: 0.8rem;
+  font-size: 0.8em;
   padding: 0 10rpx 0;
   float: left;
   color: #666666;

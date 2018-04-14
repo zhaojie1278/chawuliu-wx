@@ -4,7 +4,7 @@ const app = getApp()
 var util = require('../../utils/util')
 // var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
 
-var sellCats = app.globalData.sellCatsSecond
+var sellCats = app.globalData.sellCats
 var sellCatsKeyVal = app.globalData.sellCatsKeyVal
 
 Page({
@@ -14,18 +14,16 @@ Page({
     defaultsize: 'default',
     sellCatId: 1,
     sellCats: [],
-    catmenu: ''
+    catmenu: sellCatsKeyVal[0]
   },
   onLoad: function (e) {
     var catid = e.catid
     console.log('sellmsg111--'+catid)
-    sellCats = app.globalData.allSellCatsSecond[catid]
-    var sellCatId = sellCats[0].id
+    var sellCatId = sellCats[1].id
     // console.log('secondcat-first-id::'+sellCatId)
     this.setData({
       sellCatId: sellCatId,
-      sellCats: sellCats,
-      catmenu: sellCatsKeyVal[catid-1],
+      sellCats: sellCats
     })
     // var pages = getCurrentPages();
     // console.log(this.data)

@@ -41,8 +41,8 @@
                 <block wx:for="{{item.zhuanxians}}" wx:for-item="zx" wx:key="id">
                 <view>
                     <block wx:for="{{zx}}" wx:for-item="zxsingle" wx:for-index="zxindex" wx:key="zxindex">
-                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsSecondKeyVal[zxsingle.cat-1]}}专线；</text>
-                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsSecondKeyVal[zxsingle.cat-1]}}专线；</text>
+                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsKeyVal[zxsingle.cat-1]}}专线；</text>
+                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}{{"-"}}{{zxsingle.point}}-{{zxCatsKeyVal[zxsingle.cat-1]}}专线；</text>
                     </block>
                 </view>
                 </block>

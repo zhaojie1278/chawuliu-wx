@@ -24,7 +24,7 @@ Page({
       isfav:false,
       favItemIndex: -1 // 收藏列表界面打开时传递
     },
-    zxCatsSecondKeyVal: app.globalData.zxCatsSecondKeyVal
+    zxCatsKeyVal: app.globalData.zxCatsKeyVal
   },
   onLoad: function ($query) {
     // console.log(this.data);
@@ -35,7 +35,7 @@ Page({
     })
 
     var that = this;
-    console.log(that.data.zxCatsSecondKeyVal)
+    console.log(that.data.zxCatsKeyVal)
 
     // 用户头像
     that.getUserInfoThis();

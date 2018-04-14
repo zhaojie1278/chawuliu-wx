@@ -3,7 +3,7 @@
     <block wx:if="{{list.length>0 && emptyshow==false}}">
     <view wx:for="{{list}}" hidden="{{item.ishidden}}" wx:key="{{item.id}}" class="cell">
         <view class="body">
-            <text class="sellmsg"><text class="cat">{{sellCatsSecondKeyVal[item.cat-1] + selltypesKeyVal[item.selltype]}}</text><text class="cnt">{{item.content}}</text></text>
+            <text class="sellmsg"><text class="cat">{{sellCatsKeyVal[item.cat] + selltypesKeyVal[item.selltype]}}</text><text class="cnt">{{item.content}}</text></text>
             <text class="del" bindtap="delSellmsg" data-index="{{index}}" data-id="{{item.id}}" data-cid="{{item.cid}}">删除</text>
             <text class="update" bindtap="updateSellmsg" data-id="{{item.id}}" data-cid="{{item.cid}}"  data-catid="{{item.cat}}">修改</text>
         </view>

@@ -36,12 +36,12 @@ Page({
 
     // 专线分类可选
     that.setData({
-      cats: app.globalData.zxCatsSecondKeyVal
+      cats: app.globalData.zxCatsKeyVal
     })
 
     // 设置页面标题
     wx.setNavigationBarTitle({
-      title: app.globalData.zxCatsSecondKeyVal[e.catid-1]
+      title: app.globalData.zxCatsKeyVal[e.catid]
     })
     
     wx.showLoading({
@@ -54,7 +54,7 @@ Page({
     if(undefined != e && undefined != e.catid && undefined == e.zxid) {
       // 添加专线入口
       that.setData({
-        defAreaCat: e.catid-1
+        defAreaCat: e.catid
       })
 
       // 判断是否已注册公司信息
@@ -99,7 +99,7 @@ Page({
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
             // itemVal.cats = ;
-            itemVal.catname = app.globalData.zxCatsSecondKeyVal[that.data.defAreaCat]
+            itemVal.catname = app.globalData.zxCatsKeyVal[that.data.defAreaCat]
             that.setData({item:itemVal})
             // console.log(that)
           }
@@ -170,8 +170,8 @@ Page({
             itemVal.nickname = res.data.data.nickname;
             itemVal.phone = res.data.data.phone;
             itemVal.address = res.data.data.address;
-            var _cat = res.data.data.cat-1 // 本地数组索引小于1
-            itemVal.catname = app.globalData.zxCatsSecondKeyVal[_cat]
+            var _cat = res.data.data.cat // 本地数组索引小于1
+            itemVal.catname = app.globalData.zxCatsKeyVal[_cat]
             that.setData({
               item:itemVal,
               defAreaCat: _cat

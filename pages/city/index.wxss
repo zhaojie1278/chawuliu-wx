@@ -16,7 +16,7 @@
     color: #6f95fb;
 }
 .txt {
-    font-size: 0.9rem;
+    font-size: 0.9em;
     padding-bottom: 25rpx;
     color: #666666;
 }
