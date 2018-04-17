@@ -281,7 +281,7 @@ Page({
               success: function(res) {
                 setTimeout(
                   function() {
-                    wx.navigateTo({url: '../contact/zhaopins'})
+                    wx.redirectTo({url: '../contact/zhaopins'})
                 },1000)
               }
             })

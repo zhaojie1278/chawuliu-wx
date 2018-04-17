@@ -10,8 +10,10 @@ Page({
     canIUseWebView: wx.canIUse('web-view'),
     startProv:'',
     startCity:'',
+    startVal: '',
     pointProv:'',
     pointCity:'',
+    pointVal: '',
     nowCity: '定位中...',
     userInfo: {},
     imgUrls: [  {    
@@ -40,7 +42,8 @@ Page({
         start:'合肥',
         point:'杭州'
       }, */
-    ]
+    ],
+    cat: 1, // 默认省际物流
   },
   onLoad: function (e) {
     /* 是否邀请进入 */
@@ -123,8 +126,8 @@ Page({
       }
     } else {
       // 默认不带条件查询
-      start = that.data.startCity
-      point = that.data.pointCity;
+      start = that.data.startVal
+      point = that.data.pointVal;
     }
 
     // console.log(that)
@@ -138,7 +141,8 @@ Page({
       url: app.globalData.config.service.zhuanxianUrl+'/tui',
       data: {
         'start': start,
-        'point': point
+        'point': point,
+        'cat': that.data.cat
       },
       method: 'POST',
       dataType: 'json',
@@ -217,13 +221,16 @@ Page({
               // that.setData({'nowCity':res.data.result.addressComponent.city})
               // console.log(res.data.result)
               var cityStr = res.data.result.addressComponent.city
+              var provStr = res.data.result.addressComponent.province
+              /*
               if (cityStr.indexOf('市')!=-1){
                 cityStr = cityStr.replace('市','')
-              }
+              }*/
             
               that.setData({
                 nowCity:cityStr,
-                startCity:cityStr
+                // startCity:cityStr,
+                startVal: provStr
               })
 
               // 获取当前位置后再查找专线
@@ -245,13 +252,15 @@ Page({
     var setCityDirection = e.direction
     if (setCityDirection == 'startCity') {
       this.setData({
-        startCity: e.city,
-        startProv: e.prov
+        /*startCity: e.city,
+        startProv: e.prov*/
+        startVal: e.returnVal
       })
     } else {
       this.setData({
-        pointCity: e.city,
-        pointProv: e.prov
+        /*pointCity: e.city,
+        pointProv: e.prov*/
+        pointVal: e.returnVal
       })
     }
 
@@ -277,6 +286,6 @@ Page({
     })
   },
   newsTap (e) {
-    util.showError('敬请期待')
+    util.showError('正在开发中，请耐心等待')
   }
 })

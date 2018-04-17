@@ -304,7 +304,7 @@ Page({
               success: function(res) {
                 setTimeout(
                   function() {
-                    wx.navigateTo({url: '../contact/sellmsgs'})
+                    wx.redirectTo({url: '../contact/sellmsgs'})
                 },1000)
               }
             })

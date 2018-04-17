@@ -8,9 +8,15 @@ Page({
     canIUse: false,
     startProv:'',
     startCity:'',
+    startVal: '',
     pointProv:'',
     pointCity:'',
+    pointVal: '',
     nowCity: '定位中...',
+    nowProv: '省份',
+    nowDistrict: '区县',
+    nowAreaVal: '',
+    nowAreaCatStr: '',
     userInfo: {},
     isTaped: false,
     list: [
@@ -26,12 +32,6 @@ Page({
     ],
     zxCats:app.globalData.zxCats,
     cat:1
-  },
-  bindNavTaped:function(e) {
-    var id = parseInt(e.currentTarget.dataset.cat)  
-    this.setData({  
-      cat: id  
-    })  
   },
   onLoad: function (e) {
     console.log('e.cat::'+e.cat);
@@ -70,9 +70,55 @@ Page({
 
     // 是否查询线路操作
     var getLocParam = {
-      isgetZhuanxian: true
+      isgetZhuanxian: true,
+      cat: cat
     }
     this.getNowLocation(getLocParam); // 获取当前位置
+    
+    // this.bindNavTaped(navParam)
+  },
+  bindNavTaped:function(e) {
+    if (undefined != e.cat) {
+      var catid = e.cat
+    } else {
+      var catid = e.currentTarget.dataset.cat
+    }
+    // 专线区域类别切换
+    var catid = parseInt(catid)  
+    this.setData({  
+      cat: catid
+    })
+    if (catid == app.globalData.zxCatShengji || catid == app.globalData.zxCatKongyun || catid == app.globalData.zxCatHaiyun || catid == app.globalData.zxCatPeizai) {
+      this.setData({
+        startVal: this.data.nowProv,
+        nowAreaVal: this.data.nowProv,
+        nowAreaCatStr: '',
+        pointVal: '请选择'
+      })
+    } else if (catid == app.globalData.zxCatShengnei) {
+      console.log('catidcatidcatid::'+catid);
+      this.setData({
+        startVal: this.data.nowCity,
+        nowAreaVal: this.data.nowProv,
+        nowAreaCatStr: 'province',
+        pointVal: '请选择'
+      })
+    } else if (catid == app.globalData.zxCatShinei) {
+      this.setData({
+        startVal: this.data.nowDistrict,
+        nowAreaVal: this.data.nowCity,
+        nowAreaCatStr: 'city',
+        pointVal: '请选择'
+      })
+    } else {
+      this.setData({
+        startVal: this.data.nowCity,
+        nowAreaVal: this.data.nowCity,
+        nowAreaCatStr: 'city',
+        pointVal: '请选择'
+      })
+    }
+    console.log(this.data)
   },
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
@@ -125,8 +171,8 @@ Page({
       }
     } else {
       // 默认不带条件查询
-      start = that.data.startCity
-      point = that.data.pointCity
+      start = that.data.startVal
+      point = that.data.pointVal
       catid = that.data.cat
     }
 
@@ -161,7 +207,6 @@ Page({
           })
           return
         }
-        console.log('getSearches --- in')
         // console.log(res)
         that.setData({list:res.data.data.list})
       },
@@ -216,20 +261,25 @@ Page({
             if(res.data.status!=0) {
               that.setData({'nowCity':'位置获取失败'})
             } else {
+              var provStr = res.data.result.addressComponent.province
+              // provStr = '安徽省'
               var cityStr = res.data.result.addressComponent.city
-              if (cityStr.indexOf('市')!=-1){
-                cityStr = cityStr.replace('市','')
-              }
+              // cityStr = '合肥市'
+              var districtStr = res.data.result.addressComponent.district
+              // districtStr = '蜀山区'
               that.setData({
                 nowCity:cityStr,
-                startCity:cityStr
+                nowProv:provStr,
+                nowDistrict:districtStr,
               })
-
-              // console.log(e)
 
               // 获取当前位置后再查找专线
               if(undefined != e) {
                 if (undefined != e.isgetZhuanxian) {
+                  var eParam = {
+                    cat: e.cat
+                  }
+                  that.bindNavTaped(eParam)
                   that.getSearches(); // 获取推荐专线
                 }
               }
@@ -246,13 +296,15 @@ Page({
     var setCityDirection = e.direction
     if (setCityDirection == 'startCity') {
       this.setData({
-        startCity: e.city,
-        startProv: e.prov
+        /*startCity: e.city,
+        startProv: e.prov*/
+        startVal: e.returnVal
       })
     } else {
       this.setData({
-        pointCity: e.city,
-        pointProv: e.prov
+        /*pointCity: e.city,
+        pointProv: e.prov*/
+        pointVal: e.returnVal
       })
     }
 

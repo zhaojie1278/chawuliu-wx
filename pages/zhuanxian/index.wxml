@@ -10,18 +10,18 @@
 <!--查询地址-->
 <view class="search-zhuanxian">
   <view class="areas">
-    <navigator url="../city/index?direction=startCity">
-        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startCity ? startCity: '出发地'}}</button>
+    <navigator url="../city/index?direction=startCity&cat={{cat}}&nowAreaVal={{nowAreaVal}}&nowAreaCatStr={{nowAreaCatStr}}">
+        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startVal ? startVal: '出发地'}}</button>
     </navigator>
     <view class="areas-direction">
     <text class="icon iconfont icon-huhuan icon-middle" style="color:#3573fa;"></text>
     </view>
-    <navigator url="../city/index?direction=pointCity">
-        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointCity ? pointCity:'目的地'}}</button>
+    <navigator url="../city/index?direction=pointCity&cat={{cat}}&nowAreaVal={{nowAreaVal}}&nowAreaCatStr={{nowAreaCatStr}}">
+        <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointVal ? pointVal:'目的地'}}</button>
     </navigator>
   </view>
   <view class="search">
-        <button class="tosel_inp" type="primary" data-catid="{{cat}}" data-start="{{startCity}}" data-point="{{pointCity}}" data-start-prov="{{startProv}}" data-point-prov="{{pointProv}}" size="default" loading="{{false}}" bindtap="searchzhuanxian">查询线路</button>
+        <button class="tosel_inp" type="primary" data-catid="{{cat}}" data-start="{{startVal}}" data-point="{{pointVal}}" data-start-prov="{{startProv}}" data-point-prov="{{pointProv}}" size="default" loading="{{false}}" bindtap="searchzhuanxian">查询线路</button>
       </view>
 </view>
 

@@ -2,13 +2,14 @@
 <view class="container">
     <view class="txt">
         <text class="all-city">所有城市</text>
-        <text class="return" hidden="{{hideReturn}}" bindtap="returnProvinceFun">返回省份</text>
+        <text class="return" hidden="{{hideReturnProv}}" bindtap="returnProvinceFun">返回省份</text>
+        <text class="return" hidden="{{hideReturnCity}}" bindtap="returnCityFun">返回城市</text>
     </view>
     <view class="p table {{isProvinceShow ? 'show' : 'hidden'}}">
         <block wx:for="{{provinces}}" wx:key="{{index}}" wx:for-item="item_group">
             <view class="tr">
-                <view wx:for="{{item_group}}" wx:key="{{fullName}}" class="td" data-province-code="{{item.code}}" data-province="{{item.fullName}}" bindtap="getCity">
-                <text>{{item.fullName}}</text>
+                <view wx:for="{{item_group}}" wx:key="{{areaname}}" class="td" data-province-code="{{item.code}}" data-province="{{item.areaname}}" bindtap="getCity">
+                <text>{{item.areaname}}</text>
                 </view>
             </view>
         </block>
@@ -16,8 +17,18 @@
     <view class="c table {{isCityShow ? 'show' : 'hidden'}}">
         <block wx:for="{{citys}}" wx:key="{{index}}" wx:for-item="item_group">
             <view class="tr">
-                <view wx:for="{{item_group}}" wx:key="{{fullName}}" class="td" data-city="{{item.fullNameDot}}" data-prov="{{setedProv}}" bindtap="sureCity">
-                <text>{{item.fullNameDot}}</text>
+                <view wx:for="{{item_group}}" wx:key="{{areaname}}" class="td" data-city-code="{{item.code}}" data-city="{{item.areaname}}" data-province="{{setedProv}}" bindtap="getArea">
+                <text>{{item.areaname}}</text>
+                </view>
+            </view>
+        </block>
+    </view>
+
+    <view class="c table {{isAreaShow ? 'show' : 'hidden'}}">
+        <block wx:for="{{areas}}" wx:key="{{index}}" wx:for-item="item_group">
+            <view class="tr">
+                <view wx:for="{{item_group}}" wx:key="{{areaname}}" class="td" data-area-code="{{item.code}}" data-area="{{item.areaname}}" data-province="{{setedProv}}" data-city="{{setedCity}}" bindtap="sureArea">
+                <text>{{item.areaname}}</text>
                 </view>
             </view>
         </block>

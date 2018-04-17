@@ -204,16 +204,17 @@ Page({
               that.setData({'nowCity':'位置获取失败'})
             } else {
               var provStr =  res.data.result.addressComponent.province
+              /*
               if (provStr.indexOf('市')!=-1){
                 provStr = provStr.replace('市','')
               }
               if (provStr.indexOf('省')!=-1){
                 provStr = provStr.replace('省','')
-              }
+              }*/
               var cityStr = res.data.result.addressComponent.city
-              if (cityStr.indexOf('市')!=-1){
+              /*if (cityStr.indexOf('市')!=-1){
                 cityStr = cityStr.replace('市','')
-              }
+              }*/
               var cat=that.data.cat
               that.setData({
                 prov: provStr,

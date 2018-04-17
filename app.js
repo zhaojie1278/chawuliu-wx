@@ -35,6 +35,13 @@ var zxCats = [
   {id:6,txt:'市内倒短车'},
 ]
 
+var zxCatShengji = 1
+var zxCatShengnei = 2
+var zxCatKongyun = 3
+var zxCatHaiyun = 4
+var zxCatPeizai = 5
+var zxCatShinei = 6
+
 var zxCatsKeyVal = new Array(6)
 zxCatsKeyVal[0] = '专线分类'
 zxCatsKeyVal[1] = '省际物流'
@@ -264,6 +271,12 @@ App({
     zxCatsIden:zxCatsIden,
     sellCatsIden:sellCatsIden,
     zhaopinCatsIden:zhaopinCatsIden,
+    zxCatShengji:zxCatShengji,
+    zxCatShengnei:zxCatShengnei,
+    zxCatKongyun:zxCatKongyun,
+    zxCatHaiyun:zxCatHaiyun,
+    zxCatPeizai:zxCatPeizai,
+    zxCatShinei:zxCatShinei,
   },
   shareFun (res) { // 转发函数
     console.log(res);

@@ -49,6 +49,7 @@ Page({
         mask: true
     })
 
+    that.getNowLocation();
     // 判断是否已添加公司信息
     var openid = wx.getStorageSync('openid')
     if(undefined != e && undefined != e.catid && undefined == e.zxid) {
@@ -262,9 +263,9 @@ Page({
                   'item.price_paohuo': '',
                 })
 
-                if (formdata.id) {
-                  wx.navigateTo({url: '../contact/zhuanxians'})
-                }
+                // if (formdata.id) {
+                  wx.redirectTo({url: '../contact/zhuanxians'})
+                // }
                 // console.log(res)
                 // 添加成功后跳转
                 /* setTimeout(
@@ -290,15 +291,47 @@ Page({
     }
   },
   toSelectStart (e) {
+    console.log('this.data.item.cat::'+this.data.defAreaCat);
+
+    var nowAreaVal = '';
+    var nowAreaCatStr = '';
+    // console.log(this.data);
+    if (this.data.defAreaCat == app.globalData.zxCatShengnei) {
+        nowAreaVal = this.data.nowProv
+        nowAreaCatStr = 'province'
+    } else if (this.data.defAreaCat == app.globalData.zxCatShinei) {
+        nowAreaVal = this.data.nowCity
+        nowAreaCatStr = 'city'
+    }
+
+    this.setData({
+      'item.start_prov': this.data.nowProv,
+      'item.start_city': this.data.nowCity
+    })
     // 选择出发地
     wx.navigateTo({
-      url:"../city/index?direction=item.start"
+      url:"../city/index?direction=item.start&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
     })
   },
   toSelectPoint (e) {
+    var nowAreaVal = '';
+    var nowAreaCatStr = '';
+    // console.log(this.data);
+    if (this.data.defAreaCat == app.globalData.zxCatShengnei) {
+        nowAreaVal = this.data.nowProv
+        nowAreaCatStr = 'province'
+    } else if (this.data.defAreaCat == app.globalData.zxCatShinei) {
+        nowAreaVal = this.data.nowCity
+        nowAreaCatStr = 'city'
+    }
+
+    this.setData({
+      'item.point_prov': this.data.nowProv,
+      'item.point_city': this.data.nowCity
+    })
     // 选择目的地
     wx.navigateTo({
-      url:"../city/index?direction=item.point"
+      url:"../city/index?direction=item.point&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
     })
   },
   changeCity (e) {
@@ -308,13 +341,15 @@ Page({
     var setCityDirection = e.direction
     if (setCityDirection == 'item.start') {
       this.setData({
-        'item.start': e.city,
-        'item.start_prov': e.prov
+        /*'item.start': e.city,
+        'item.start_prov': e.prov*/
+        'item.start': e.returnVal
       })
     } else {
       this.setData({
-        'item.point': e.city,
-        'item.point_prov': e.prov
+        /*'item.point': e.city,
+        'item.point_prov': e.prov*/
+        'item.point': e.returnVal
       })
     }
   },
@@ -323,5 +358,47 @@ Page({
       "item.catname": this.data.cats[e.detail.value]
     })
     console.log('this.data.item.catname::'+this.data.item.catname)
+  },
+  getNowLocation: function(e) {
+    var that = this;
+    wx.getLocation({
+      type: 'wgs84',
+      success: function(res) {
+        var latitude = res.latitude
+        var longitude = res.longitude
+        // 调用百度API获取位置具体地址名
+        wx.request({
+          url: 'https://api.map.baidu.com/geocoder/v2/?ak='+app.globalData.baiduAk+'&location=' + latitude + ',' + longitude + '&output=json&coordtype=wgs84ll', 
+          data: { },
+          header: { 'Content-Type': 'application/json' },
+          success: function(res) {
+            // console.log(res)
+            // console.log(typeof(res.data.status));
+            // console.log(res.data.result.addressComponent.city);
+            if(res.data.status!=0) {
+              that.setData({'nowCity':'位置获取失败'})
+            } else {
+              var provStr = res.data.result.addressComponent.province
+              // provStr = '安徽省'
+              var cityStr = res.data.result.addressComponent.city
+              // cityStr = '合肥市'
+              var districtStr = res.data.result.addressComponent.district
+              // districtStr = '蜀山区'
+              that.setData({
+                nowCity:cityStr,
+                nowProv:provStr,
+                nowDistrict:districtStr,
+              })
+              
+              that.setData({
+                nowCity:cityStr,
+                nowProv:provStr,
+                nowDistrict:districtStr,
+              })              
+            }
+          }
+        })
+      }
+    })
   }
 })

@@ -18,12 +18,14 @@
     <view class="view-mg">
         <text class="lbl-left">出发地</text>
         <input name="start_prov" hidden value="{{item.start_prov}}"/>
+        <input name="start_city" hidden value="{{item.start_city}}"/>
         <input name="start" hidden value="{{item.start}}"/>
         <input class="inp" id="start" name="start_inp" maxlength="20" placeholder="请选择起始地" placeholder-class="locationClass" type="text" value="{{item.start}}" catchtap="toSelectStart"/>
     </view>
     <view class="view-mg">
         <text class="lbl-left">目的地</text>
         <input name="point_prov" hidden value="{{item.point_prov}}"/>
+        <input name="point_city" hidden value="{{item.point_city}}"/>
         <input name="point" hidden value="{{item.point}}"/>
         <input class="inp" id="point" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point}}" catchtap="toSelectPoint"/>
     </view>
