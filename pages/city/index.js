@@ -2,6 +2,12 @@
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util')
+var provinceCallCity = {
+  '北京市':'',
+  '上海市':'',
+  '天津市':'',
+  '重庆市':''
+}
 
 // console.log(app);
 Page({
@@ -67,6 +73,12 @@ Page({
         })
         var nowAreaVal = e.nowAreaVal
         var nowAreaCatStr = e.nowAreaCatStr
+        if (that.data.zxCat == app.globalData.zxCatShinei) {
+          if (nowAreaVal in provinceCallCity) {
+            var nowAreaCatStr = 'province'
+          }
+        }
+        
         // console.log(e);
         wx.request({
           url: app.globalData.config.service.cityApi+'getcode?areaname='+nowAreaVal+'&areacat='+nowAreaCatStr,
@@ -366,13 +378,23 @@ Page({
     if (undefined != e.isShinei) {
       isShinei = true
     }
+
+    var reqUrl = app.globalData.config.service.cityApi+'getarea?code='+cityCode;
+    // 直辖市处理
+    if (that.data.zxCat == app.globalData.zxCatShinei) {
+      if (e.currentTarget.dataset.city in provinceCallCity) {
+        var reqUrl = app.globalData.config.service.cityApi+'getcity?code='+cityCode;
+      }
+    }
+
+
     // console.log(that.data);
     // var _storagedAreas = wx.getStorageSync('area-'+cityCode);
     var _storagedAreas = false;
     // console.log(_storagedAreas);
     if (!_storagedAreas) {
       wx.request({
-        url: app.globalData.config.service.cityApi+'getarea?code='+cityCode,
+        url: reqUrl,
         method: 'GET',
         dataType: 'json',
         success: function(res){
