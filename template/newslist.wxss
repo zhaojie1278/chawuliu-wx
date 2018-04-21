@@ -80,7 +80,7 @@
 
 .newslist .item .body .describe {
 	color: #999;
-	font-size: 0.7em;
+	font-size: 0.6em;
 	/*width:530rpx;*/
 	line-height:33rpx;
 	max-height: 70rpx;

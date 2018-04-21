@@ -2,11 +2,11 @@
 <view class="item">
     <view class="title">
         <view class='title-txt'>{{item.title}}</view>
-        <view class="update-time">{{item.update_time}}</view>
+        <view class="update-time">{{item.uptime}}</view>
     </view>
     <view class="content">
         <view class="title-img">
-        <image wx:if="{{item.titleimg!=''}}" mode="aspectFill" src="{{item.titleimg}}" bindtap="ylImg" data-src="{{item.titleimg}}"></image>
+        <image wx:if="{{item.titleimg!=''}}" mode="aspectFill" src="{{item.domaintitleimg}}" bindtap="ylImg" data-src="{{item.domaintitleimg}}"></image>
         </view>
         <view class="cnt">
         {{item.content}}

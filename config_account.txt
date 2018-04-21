@@ -34,4 +34,5 @@ https://api.map.baidu.com
 密码：123456heyi
 appid: wxad30c53f5e8f8290
 AppSecret: de1330accfe1fe89e904474febc370b3
-baidu地图API ak 密钥: 123456789012345678901234567890aa
+百度地图开放平台API AK密钥:
+gctkvsW3GLa7FQaq8MoLRMrKwd3yQQ4G

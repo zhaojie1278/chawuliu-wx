@@ -6,7 +6,7 @@ var util = require('../../utils/util')
 Page({
   data: {
     item:{
-      id:0,
+      /*id:0,
       titleimg: '../../images/testimg/1.jpg',
       title: '新闻123新闻123',
       update_time: '2018-4-18',
@@ -14,7 +14,7 @@ Page({
       domainimg1: '../../images/testimg/1.jpg',
       domainimg2: '../../images/testimg/1.jpg',
       domainimg3: '../../images/testimg/2.jpg',
-      domainimg4: '../../images/testimg/1.jpg'
+      domainimg4: '../../images/testimg/1.jpg'*/
     }
   },
   onLoad: function ($query) {
@@ -28,8 +28,8 @@ Page({
     var that = this;
     var nid = $query.id
     console.log(nid);
-/*    wx.request({
-      url: app.globalData.config.service.contactUrl,
+    wx.request({
+      url: app.globalData.config.service.newsUrl,
       data: {
         id: nid
       },
@@ -64,7 +64,7 @@ Page({
         console.log('fail');
         // coonsole.log(res);
       }
-    })*/
+    })
     wx.hideLoading();
   },
   onShareAppMessage: function (res) { // 转发
