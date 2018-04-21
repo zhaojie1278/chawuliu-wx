@@ -11,6 +11,7 @@
 
 @import "template/list.wxss";
 @import "template/sellmsglist.wxss";
+@import "template/newslist.wxss";
 @import "lib/icon.wxss";
 
 page {

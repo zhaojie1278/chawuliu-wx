@@ -1,0 +1,27 @@
+
+<template name="list">
+    <view class="newslist">
+        <block wx:if="{{list.length != 0}}">
+            <navigator class="item {{index%2==1 ? 'item-2' : ''}}" wx:for="{{list}}" wx:key="item" url="{{'detail'}}?id={{item.id}}">
+                <view class="info">
+                    <view class="item-left">
+                        <view class="icon" wx:if="{{item.titleimg}}">
+                            <image mode="aspectFill" src="{{item.titleimg}}" />
+                        </view>
+                        <view class="body">
+                            <view class="title">
+                                <text class="title-txt">{{item.title}}</text>
+                                <text class="update-time">{{item.update_time}}</text></view>
+                            <view class="describe">
+                                <text>{{item.content}}</text>
+                            </view>
+                        </view>
+                    </view>
+                </view>
+            </navigator>
+        </block>
+        <block wx:else>
+            <view class="listempty">暂无</view>
+        </block>
+    </view>
+</template>

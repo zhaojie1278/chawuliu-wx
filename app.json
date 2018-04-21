@@ -23,7 +23,9 @@
     "pages/zhaopin/index",
     "pages/zhaopin/toadd",
     "pages/zhaopin/add",
-    "pages/zhaopin/detail"
+    "pages/zhaopin/detail",
+    "pages/news/index",
+    "pages/news/detail"
   ],
   "window":{
     "backgroundTextStyle":"light",

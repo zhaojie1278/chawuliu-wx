@@ -251,7 +251,6 @@ App({
   },
   globalData: {
     userInfo: null,
-    baiduAk:'pdDY8jZw89lTn8OHEA6rS8aWaDNmSEc4',
     config:config,
     ooid:0, // 邀请人 openid
     allCats: allCats,

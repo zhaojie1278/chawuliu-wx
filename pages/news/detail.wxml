@@ -1,0 +1,31 @@
+<!--detail.wxml-->
+<view class="item">
+    <view class="title">
+        <view class='title-txt'>{{item.title}}</view>
+        <view class="update-time">{{item.update_time}}</view>
+    </view>
+    <view class="content">
+        <view class="title-img">
+        <image wx:if="{{item.titleimg!=''}}" mode="aspectFill" src="{{item.titleimg}}" bindtap="ylImg" data-src="{{item.titleimg}}"></image>
+        </view>
+        <view class="cnt">
+        {{item.content}}
+        </view>
+    </view>
+    <view class="img-intro">
+        <view class="images">
+            <view>
+                <image wx:if="{{item.domainimg1!=''}}" mode="aspectFill" src="{{item.domainimg1}}" bindtap="ylImg" data-src="{{item.domainimg1}}"></image>
+            </view>
+            <view>
+                <image wx:if="{{item.domainimg2!=''}}" mode="aspectFill" src="{{item.domainimg2}}" bindtap="ylImg" data-src="{{item.domainimg2}}"></image>
+            </view>
+            <view>
+                <image wx:if="{{item.domainimg3!=''}}" mode="aspectFill" src="{{item.domainimg3}}" bindtap="ylImg" data-src="{{item.domainimg3}}"></image>
+            </view>
+            <view class='erweima'>
+                <image wx:if="{{item.domainimg4!=''}}" mode="aspectFill" src="{{item.domainimg4}}" bindtap="ylImg" data-src="{{item.domainimg4}}"></image>
+            </view>
+        </view>        
+    </view>
+</view>

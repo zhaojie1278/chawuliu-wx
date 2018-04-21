@@ -65,20 +65,21 @@
         </view>
     </view>
   
-    <!--
-  <navigator class="navview" url="../index/news" hover-class="navhover">
+    
+  <navigator class="navview" url="../news/index" hover-class="navhover">
       <text class="icon iconfont icon-xinwen icon-large" style="background:#bb57e7;"></text>
       <view class="title">
           <text>行业新闻</text>
       </view>
   </navigator>
-  -->
+  
+  <!-- 
   <view  bindtap="newsTap" class="navview" url="../index/news" hover-class="navhover">
       <text class="icon iconfont icon-xinwen icon-large" style="background:#bb57e7;"></text>
       <view class="title">
           <text>行业新闻</text>
       </view>
-  </view>
+  </view> -->
 
 
   <!--<navigator class="navview" url="../zhuanxian/add?catid=6" hover-class="navhover">-->

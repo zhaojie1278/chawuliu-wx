@@ -1,0 +1,6 @@
+<!--index.wxml-->
+
+<!-- 模板引用 -->
+<import src="../../template/newslist.wxml"/>
+<template is="list" data="{{list}}"/>
+

@@ -191,7 +191,7 @@ Page({
         var longitude = res.longitude
         // 调用百度API获取位置具体地址名
         wx.request({
-          url: 'https://api.map.baidu.com/geocoder/v2/?ak='+app.globalData.baiduAk+'&location=' + latitude + ',' + longitude + '&output=json&coordtype=wgs84ll', 
+          url: app.globalData.config.service.baiduApi+'&location=' + latitude + ',' + longitude + '&output=json&coordtype=wgs84ll', 
           data: { },
           header: { 'Content-Type': 'application/json' },
           success: function(res) {
