@@ -2,10 +2,21 @@
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util')
+// 引入Promise
+import Promise from '../../vendors/es6-promise.js';
+// 用Promise封装小程序的其他API
+export const promisify = (api) => {
+    return (options, ...params) => {
+        return new Promise((resolve, reject) => {
+            api(Object.assign({}, options, { success: resolve, fail: reject }), ...params);
+        });
+    }
+}
 
 // console.log(app);
 Page({
   data: {
+    iscanvas: 'none',
     canIUse: false,
     canIUseWebView: wx.canIUse('web-view'),
     startProv:'',
@@ -46,6 +57,7 @@ Page({
     cat: 1, // 默认省际物流
   },
   onLoad: function (e) {
+    console.log(e);
     /* 是否邀请进入 */
     var ooid = e.ooid
     // console.log('app.globalData::'+JSON.stringify(app.globalData));
@@ -287,5 +299,156 @@ Page({
   },
   newsTap (e) {
     util.showError('正在开发中，请耐心等待')
+  },
+  canvasShowTap (e) {
+    // util.showError('正在开发中，请耐心等待')
+    this.setData({
+      iscanvas: 'block'
+    })
+    this.canvasShareImg()
+  },
+  canvasShareImg (e) {
+    var winWidth = 0
+    wx.getSystemInfo({
+      success: function(res) {
+        /*console.log(res.model)
+        console.log(res.pixelRatio)
+        console.log(res.screenWidth)
+        console.log(res.screenHeight)
+        console.log(res.windowWidth)
+        console.log(res.windowHeight)
+        console.log(res.language)
+        console.log(res.version)
+        console.log(res.platform)*/
+        winWidth = res.windowWidth
+      }
+    })
+
+    if (winWidth == 0) {
+      util.showError('获取设备信息异常，请稍后重试');
+      return
+    }
+
+    console.log('winWidth::'+winWidth)
+
+    // var nickName = app.globalData.userInfo.nickName;
+    // var avatarUrl = app.globalData.userInfo.avatarUrl;
+    // if (avatarUrl) {} // TODO 判断是否获取到
+
+    const wxGetImageInfo = promisify(wx.getImageInfo)
+
+    Promise.all([
+      wxGetImageInfo({
+        src: app.globalData.config.service.hostM+'uploads/wafer/logo/logo_bg.jpg'
+      }),
+      wxGetImageInfo({
+        src: app.globalData.config.service.hostM+'uploads/wafer/logo/chawuliu_logo.png'
+      }),
+      /*wxGetImageInfo({
+        src: avatarUrl
+      }),*/
+      wxGetImageInfo({
+           src: app.globalData.config.service.hostM+'uploads/wafer/logo/xcx_qrcode.png'
+      })
+    ]).then(res => {
+
+      const ctx = wx.createCanvasContext('shareCanvas')
+
+      // 底图
+       ctx.drawImage(res[0].path, 0, 0, 350, 450)
+
+      // 查物流 logo
+      const logoImgWidth = 131
+      const logoImgHeight = 120
+      const yIden = 120;
+      // const xIden = 40;
+      const xIden = winWidth*0.108;
+      console.log('xIden::'+xIden);
+       ctx.drawImage(res[1].path, xIden, yIden, logoImgWidth, logoImgHeight)
+       // ctx.stroke()
+
+
+      // 文字
+       ctx.setTextAlign('center') // 文字居中
+       ctx.setFillStyle('#333333') // 文字颜色：黑色
+       ctx.setFontSize(18) // 文字字号：22px
+       ctx.fillText('合一物流', xIden-10+logoImgWidth/2, yIden+logoImgHeight+20)
+
+
+      // 小程序码
+      const qrImgSize = 120
+      // var xQrImg = 190;
+      var xQrImg = winWidth*0.5066;
+      console.log('xQrImg::'+xQrImg)
+
+      ctx.save() // 保存当前ctx的状态
+      // ctx.beginPath()
+      // var xArcQr = xQrImg+60
+      var xArcQr = xQrImg+winWidth*0.16
+      var yArcQr = yIden+60
+     ctx.arc(xArcQr, yArcQr, 60, 0, 2*Math.PI) // 画出圆
+     ctx.clip() // 裁剪上面的圆形
+
+      // var yQrImg = 200;
+      
+       ctx.drawImage(res[2].path, xQrImg, yIden, qrImgSize, qrImgSize)
+       // ctx.stroke()
+      ctx.restore() // 还原状态
+
+       // ctx.draw()
+
+       // ctx.save() // 保存当前ctx的状态
+       var xArc = ((350 - qrImgSize) / 2)+75
+       var yArc = 300+75
+
+       // ctx.arc(xArc, yArc, 35, 0, 2*Math.PI) // 画出圆
+       // ctx.clip() // 裁剪上面的圆形
+
+      // 个人头像
+      const avatarImgSize = 67
+       // ctx.drawImage(res[2].path, ((350 - qrImgSize) / 2)+42, 300+42, avatarImgSize, avatarImgSize)
+      ctx.restore() // 还原状态
+       // 
+      // ctx.setStrokeStyle('#dddddd')
+      // ctx.stroke()
+
+
+       ctx.setTextAlign('center') // 文字居中
+       ctx.setFillStyle('#666666') // 文字颜色：黑色
+       ctx.setFontSize(16) // 文字字号：22px
+       ctx.fillText('长按识别二维码', xQrImg-3+qrImgSize/2, yIden+qrImgSize+20)
+       // ctx.stroke()
+
+
+       ctx.draw()
+    })
+
+    /* */
+  },
+  canvasSaveImg1 (e) {
+    console.log('ing1')
+    this.setData({
+      iscanvas: 'none'
+    })
+  },
+  canvasSaveImg (e) {
+    console.log('ing00')
+    const wxCanvasToTempFilePath = promisify(wx.canvasToTempFilePath)
+    const wxSaveImageToPhotosAlbum = promisify(wx.saveImageToPhotosAlbum)
+
+    wxCanvasToTempFilePath({
+       canvasId: 'shareCanvas'
+    }, this).then(res => {
+      return wxSaveImageToPhotosAlbum({
+             filePath: res.tempFilePath
+      })
+    }).then(res => {
+       wx.showToast({
+           title: '已保存到相册'
+      })
+       this.setData({
+        iscanvas: 'none'
+      })
+    })
   }
 })

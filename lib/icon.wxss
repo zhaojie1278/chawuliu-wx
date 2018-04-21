@@ -74,6 +74,10 @@
   color:#ff865e;
 }
 
+.icon-min3 {
+  font-size: 2em;
+}
+
 .icon-middle {
   font-size: 32pt;
   color:#ff865e;

@@ -31,6 +31,7 @@ Page({
   onLoad: function (e) {
 
     console.log('zx--addd')
+    // console.log(defAreaCat);
     // console.log(e)
     var that = this
 
@@ -57,6 +58,13 @@ Page({
       that.setData({
         defAreaCat: e.catid
       })
+
+      if (e.catid == app.globalData.zxCatPeizai) {
+        // 配置调车可一次添加多个
+        that.setData({
+          isPeizai: true
+        })
+      }
 
       // 判断是否已注册公司信息
       wx.request({
@@ -325,13 +333,30 @@ Page({
         nowAreaCatStr = 'city'
     }
 
-    this.setData({
-      'item.point_prov': this.data.nowProv,
-      'item.point_city': this.data.nowCity
-    })
+    var eTargetId = e.currentTarget.id;
+    var pointDirection = 'item.point';
+    if (eTargetId == 'point2') {
+      pointDirection = 'item.point2';
+      this.setData({
+        'item.point_prov': this.data.nowProv,
+        'item.point_city2': this.data.nowCity
+      })
+    } else if (eTargetId == 'point3') {
+      pointDirection = 'item.point3';
+      this.setData({
+        'item.point_prov': this.data.nowProv,
+        'item.point_city3': this.data.nowCity
+      })
+    } else {
+      this.setData({
+        'item.point_prov': this.data.nowProv,
+        'item.point_city': this.data.nowCity
+      })
+    }
+    console.log('this.data.nowCity::'+this.data.nowCity)
     // 选择目的地
     wx.navigateTo({
-      url:"../city/index?direction=item.point&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
+      url:"../city/index?direction="+pointDirection+"&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
     })
   },
   changeCity (e) {
@@ -346,11 +371,21 @@ Page({
         'item.start': e.returnVal
       })
     } else {
-      this.setData({
-        /*'item.point': e.city,
-        'item.point_prov': e.prov*/
-        'item.point': e.returnVal
-      })
+      if(setCityDirection == 'item.point2') {
+        this.setData({
+          'item.point2': e.returnVal
+        })
+      } else if (setCityDirection == 'item.point3') {
+        this.setData({
+          'item.point3': e.returnVal
+        })
+      } else {
+        this.setData({
+          /*'item.point': e.city,
+          'item.point_prov': e.prov*/
+          'item.point': e.returnVal
+        })
+      }
     }
   },
   bindCatsChange (e) {

@@ -111,3 +111,21 @@ image {
 .tuijian-list img {
   border-radius: 29px;
 }
+
+.share-haibao {
+  position:fixed;
+  bottom:150rpx;
+  right: 20rpx;
+  border:1px solid #ddd;
+  border-radius:50%;
+  background:#6f95fb;
+  color:#fff;
+  padding-top:2rpx;
+  padding-right:15rpx;
+  padding-bottom:11rpx;
+  padding-left:8rpx
+}
+.noscroll {
+     height: 100%;
+     overflow: hidden;
+}

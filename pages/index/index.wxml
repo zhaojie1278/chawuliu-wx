@@ -114,6 +114,18 @@
 <text style="float:right">{{nowCity}}</text><text class="iconfont icon-add icon-min" style="float:right;"></text>
 </view>
 
+
+<view class="share-haibao" bindtap="canvasShowTap">
+  <text class="icon iconfont icon-fenxiang icon-min3" style="color: #fff"></text>
+</view>
+<view style="display: {{iscanvas}};position: fixed;width: 100%;height: 100%;top: 0px;left: 0px;z-index:999;background-color:rgba(0,0,0,0.5);">
+  <canvas bindtap="canvasSaveImg1" canvas-id="shareCanvas" style="width:700rpx;height:900rpx; border: 1px solid #ddd; margin: 40rpx auto 0rpx;"></canvas> 
+  <view style="padding: 15rpx 20rpx 10rpx;width:700rpx;">
+    <button type="default" type="primary" bindtap="canvasSaveImg" style="background-color:#3573fa;">保存图片</button>
+  </view>
+  <view class="{{iscanvas == 'block' ? 'noscroll':''}}"></view>
+</view>
+
 <!-- 模板引用 -->
 <import src="../../template/list.wxml"/>
 <template is="list" data="{{list}}"/>

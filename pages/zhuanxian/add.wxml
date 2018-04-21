@@ -29,6 +29,20 @@
         <input name="point" hidden value="{{item.point}}"/>
         <input class="inp" id="point" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point}}" catchtap="toSelectPoint"/>
     </view>
+    <view class="view-mg" wx:if="{{isPeizai}}">
+        <text class="lbl-left">目的地2</text>
+        <input name="point_prov" hidden value="{{item.point_prov}}"/>
+        <input name="point_city2" hidden value="{{item.point_city2}}"/>
+        <input name="point2" hidden value="{{item.point2}}"/>
+        <input class="inp" id="point2" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point2}}" catchtap="toSelectPoint"/>
+    </view>
+    <view class="view-mg" wx:if="{{isPeizai}}">
+        <text class="lbl-left">目的地3</text>
+        <input name="point_prov" hidden value="{{item.point_prov}}"/>
+        <input name="point_city3" hidden value="{{item.point_city3}}"/>
+        <input name="point3" hidden value="{{item.point3}}"/>
+        <input class="inp" id="point3" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point3}}" catchtap="toSelectPoint"/>
+    </view>
     <view class="view-mg">
         <text class="lbl-left">重货价格</text>
         <input class="inp" id="zhonghuo" name="price_zhonghuo" maxlength="8" placeholder="请输入重货价格(元/吨)" type="digit" value="{{item.price_zhonghuo}}"/>
