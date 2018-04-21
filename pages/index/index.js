@@ -14,6 +14,30 @@ export const promisify = (api) => {
     }
 }
 
+
+// 画布需要
+var winWidth = 0
+var winHeight = 0
+
+wx.getSystemInfo({
+  success: function(res) {
+    /*console.log(res.model)
+    console.log(res.pixelRatio)
+    console.log(res.screenWidth)
+    console.log(res.screenHeight)
+    console.log(res.windowWidth)
+    console.log(res.windowHeight)
+    console.log(res.language)
+    console.log(res.version)
+    console.log(res.platform)*/
+    winWidth = res.windowWidth
+    winHeight = res.windowHeight
+    // console.log('screenHeight::'+res.screenHeight)
+  }
+})
+
+var mtop = winHeight * 0.14;
+
 // console.log(app);
 Page({
   data: {
@@ -56,6 +80,8 @@ Page({
       }, */
     ],
     cat: 1, // 默认省际物流
+    mtop: mtop+'rpx',
+    isDrawCanvas: false
   },
   onLoad: function (e) {
     console.log(e);
@@ -283,7 +309,7 @@ Page({
     util.showError('当前版本小程序暂不支持页内跳转')
     return
   },
-  shopTap (e) {
+  shopTap (e) { // TODO
     // util.showError('敬请期待')
     wx.navigateToMiniProgram({
       appId: 'wx12de72cf50e9bb0c',
@@ -306,26 +332,19 @@ Page({
     this.setData({
       iscanvas: 'block'
     })
-    this.canvasShareImg()
+
+    if (this.data.isDrawCanvas) {
+      console.log('yesyes')
+    } else {
+      console.log('nonno')
+    }
+    this.canvasShareImg(e)
+  
   },
   canvasShareImg (e) {
-    var winWidth = 0
-    wx.getSystemInfo({
-      success: function(res) {
-        /*console.log(res.model)
-        console.log(res.pixelRatio)
-        console.log(res.screenWidth)
-        console.log(res.screenHeight)
-        console.log(res.windowWidth)
-        console.log(res.windowHeight)
-        console.log(res.language)
-        console.log(res.version)
-        console.log(res.platform)*/
-        winWidth = res.windowWidth
-      }
-    })
+    var that = this
 
-    if (winWidth == 0) {
+    if (winWidth == 0 || winHeight == 0) {
       util.showError('获取设备信息异常，请稍后重试');
       return
     }
@@ -349,21 +368,30 @@ Page({
         src: avatarUrl
       }),*/
       wxGetImageInfo({
-           src: app.globalData.config.service.hostM+'uploads/wafer/logo/xcx_qrcode.png'
+           src: app.globalData.config.service.hostM+'uploads/wafer/logo/xcx_qrcode.jpg'
       })
     ]).then(res => {
 
+      var canvaswidth = (winWidth / 750) * 700;
+      console.log(canvaswidth)
       const ctx = wx.createCanvasContext('shareCanvas')
 
       // 底图
-       ctx.drawImage(res[0].path, 0, 0, 350, 450)
+       ctx.drawImage(res[0].path, 0, 0, 350, 425)
 
       // 查物流 logo
-      const logoImgWidth = 131
+      const logoImgWidth = 131 // logo width
+      const qrImgSize = 120 // qrcode width
+      var minusWidth = logoImgWidth - qrImgSize;
+
       const logoImgHeight = 120
-      const yIden = 120;
+      var yIden = 160;
       // const xIden = 40;
-      const xIden = winWidth*0.108;
+      // var xIden = (winWidth-(qrImgSize*2))/3 - minusWidth/2 - 8;  // 8 图片自身左边空白移除
+      if (winWidth > 350) {
+        canvaswidth = 350
+      }
+      var xIden = (canvaswidth - logoImgWidth - qrImgSize) / 3 - 2;
       console.log('xIden::'+xIden);
        ctx.drawImage(res[1].path, xIden, yIden, logoImgWidth, logoImgHeight)
        // ctx.stroke()
@@ -377,57 +405,62 @@ Page({
 
 
       // 小程序码
-      const qrImgSize = 120
       // var xQrImg = 190;
-      var xQrImg = winWidth*0.5066;
+      var xQrImg = xIden+logoImgWidth+xIden;
       console.log('xQrImg::'+xQrImg)
 
-      ctx.save() // 保存当前ctx的状态
+      // ctx.save() // 保存当前ctx的状态
       // ctx.beginPath()
       // var xArcQr = xQrImg+60
-      var xArcQr = xQrImg+winWidth*0.16
-      var yArcQr = yIden+60
-     ctx.arc(xArcQr, yArcQr, 60, 0, 2*Math.PI) // 画出圆
-     ctx.clip() // 裁剪上面的圆形
+     //  var xArcQr = xQrImg+winWidth*0.16
+     //  var yArcQr = yIden+60
+     // ctx.arc(xArcQr, yArcQr, 60, 0, 2*Math.PI) // 画出圆
+     // ctx.clip() // 裁剪上面的圆形
 
       // var yQrImg = 200;
       
        ctx.drawImage(res[2].path, xQrImg, yIden, qrImgSize, qrImgSize)
        // ctx.stroke()
-      ctx.restore() // 还原状态
+      // ctx.restore() // 还原状态
 
        // ctx.draw()
 
        // ctx.save() // 保存当前ctx的状态
-       var xArc = ((350 - qrImgSize) / 2)+75
-       var yArc = 300+75
+       // var xArc = ((350 - qrImgSize) / 2)+75
+       // var yArc = 300+75
 
        // ctx.arc(xArc, yArc, 35, 0, 2*Math.PI) // 画出圆
        // ctx.clip() // 裁剪上面的圆形
 
       // 个人头像
-      const avatarImgSize = 67
+      // const avatarImgSize = 67
        // ctx.drawImage(res[2].path, ((350 - qrImgSize) / 2)+42, 300+42, avatarImgSize, avatarImgSize)
-      ctx.restore() // 还原状态
+      // ctx.restore() // 还原状态
        // 
       // ctx.setStrokeStyle('#dddddd')
       // ctx.stroke()
 
 
        ctx.setTextAlign('center') // 文字居中
-       ctx.setFillStyle('#666666') // 文字颜色：黑色
+       ctx.setFillStyle('#333') // 文字颜色：黑色
        ctx.setFontSize(16) // 文字字号：22px
        ctx.fillText('长按识别二维码', xQrImg-3+qrImgSize/2, yIden+qrImgSize+20)
        // ctx.stroke()
 
 
        ctx.draw()
+
+       // 设置已绘制
+       that.setData({
+          isDrawCanvas: true
+       })
+
     })
 
     /* */
   },
   canvasSaveImg1 (e) {
-    console.log('ing1')
+    // console.log('ing1')
     this.setData({
       iscanvas: 'none'
     })

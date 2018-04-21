@@ -112,6 +112,11 @@ image {
   border-radius: 29px;
 }
 
+.show-canvas {
+  /*width:700rpx;*/
+  padding: 20rpx;
+}
+
 .share-haibao {
   position:fixed;
   bottom:150rpx;
