@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util')
+
 // 引入Promise
 import Promise from '../../vendors/es6-promise.js';
 // 用Promise封装小程序的其他API
