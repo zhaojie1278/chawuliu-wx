@@ -119,8 +119,8 @@ image {
 
 .share-haibao {
   position:fixed;
-  bottom:150rpx;
-  right: 20rpx;
+  top:12rpx;
+  right: 12rpx;
   border:1px solid #ddd;
   border-radius:50%;
   background:#6f95fb;

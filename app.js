@@ -106,13 +106,13 @@ var selltypes = [
 
 // 招聘
 var zhaopinCats = [
-  {id:0,txt:'招聘'},
+  {id:0,txt:'司机招聘'},
   {id:1,txt:'招聘司机'},
   {id:2,txt:'司机求职'},
 ]
 
 var zhaopinCatsKeyVal = new Array(3);
-zhaopinCatsKeyVal[0] = '招聘'
+zhaopinCatsKeyVal[0] = '司机招聘'
 zhaopinCatsKeyVal[1] = '招聘司机'
 zhaopinCatsKeyVal[2] = '司机求职'
 

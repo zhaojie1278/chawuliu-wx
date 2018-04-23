@@ -85,7 +85,7 @@
             <view>
                 <image wx:if="{{item.domainimg3!=''}}" mode="aspectFill" src="{{item.domainimg3}}" bindtap="ylImg" data-src="{{item.domainimg3}}"></image>
             </view>
-            <view>
+            <view class="erweima">
                 <image wx:if="{{item.domainimg4!=''}}" mode="aspectFill" src="{{item.domainimg4}}" bindtap="ylImg" data-src="{{item.domainimg4}}"></image>
             </view>
         </view>        

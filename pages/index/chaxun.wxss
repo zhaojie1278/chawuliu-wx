@@ -16,16 +16,17 @@
 
 .view-top {
   /* border-top:1px solid #eee; */
-  background:#ddd;
-  font-size: 0.9em;
+  background:#ff7917;
+  font-size:0.9em;
+  color:#fff;
 }
 
 .viewdef-taped {
-  background:#3573fa;
+  background:#ff9d56;
   color:#fff;
 }
 
 .view-onhover {
-  background:#3573fa;
+  background:#ff9d56;
   color:#fff;
 }

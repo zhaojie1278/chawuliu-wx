@@ -9,9 +9,11 @@
   /* width: 100%; */
   text-align: center;
   font-size:1em;
-  background:#eee;
+  /*background:#eee;
+  color:#333;*/
+  background:#ff7917;
+  color: #fff;
   border:1px solid #ddd;
-  color:#333;
   margin-bottom: 2rpx;
 }
 
@@ -33,11 +35,11 @@
 }
 
 .viewdef-taped {
-  background:#3573fa;
+  background:#ff9d56;
   color:#fff;
 }
 
 .view-onhover {
-  background:#3573fa;
+  background:#ff9d56;
   color:#fff;
 }

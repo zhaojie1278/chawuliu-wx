@@ -250,8 +250,8 @@ Page({
     }
     if (that.data.zxCat == app.globalData.zxCatShengji || that.data.zxCat == app.globalData.zxCatKongyun || that.data.zxCat == app.globalData.zxCatHaiyun || that.data.zxCat == app.globalData.zxCatPeizai) {
       // 省际
-      that.sureProvince(e)
-      return
+      // that.sureProvince(e)
+      // return
     }
     // 当前选中省份赋值
     that.setData({
@@ -356,7 +356,8 @@ Page({
     console.log('that.data.zxCat::'+that.data.zxCat)
     if (that.data.zxCat == app.globalData.zxCatShengji || that.data.zxCat == app.globalData.zxCatKongyun || that.data.zxCat == app.globalData.zxCatHaiyun || that.data.zxCat == app.globalData.zxCatPeizai) {
       // 省际
-      
+      that.sureCity(e)
+      return
     } else if (that.data.zxCat == app.globalData.zxCatShengnei) {
       // 省内
       that.sureCity(e)
@@ -507,6 +508,7 @@ Page({
     console.log('sureCity')
     // 改变上一页的值
     var prov = e.currentTarget.dataset.province
+    console.log('prov::'+prov);
     var city = e.currentTarget.dataset.city
     var pages = getCurrentPages()
     console.log('pages')
@@ -518,7 +520,8 @@ Page({
     }
     var returnData = {
       direction: this.data.direction,
-      returnVal: city
+      returnVal: city,
+      provVal: prov
     }
     prePage.changeCity(returnData)
     // console.log(prePage)

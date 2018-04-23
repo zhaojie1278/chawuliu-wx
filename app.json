@@ -30,7 +30,7 @@
   "window":{
     "backgroundTextStyle":"light",
     "navigationBarBackgroundColor": "#3573fa",
-    "navigationBarTitleText": "物流查询平台",
+    "navigationBarTitleText": "查物流货运公司",
     "navigationBarTextStyle":"#fff"
   },
   "tabBar": {

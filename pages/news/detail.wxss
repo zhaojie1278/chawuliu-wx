@@ -39,6 +39,7 @@
   font-size: 0.8em;
   color: #999;
   text-align: left;
+  line-height: 50rpx;
 }
 
 .item .images {

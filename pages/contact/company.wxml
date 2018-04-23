@@ -59,7 +59,7 @@
                     <image mode="aspectFill" wx:if="{{companyimg.img4!=''}}" bindtap="ylImg" data-src="{{companyimg.img4}}" src="{{companyimg.img4}}" id="img4"></image>
                     <image mode="aspectFill" wx:else bindtap="ylImg" data-src="{{defaultimg}}" src="{{defaultimg}}" id="img4"></image>
                 </view>
-                <view class="company-img-txt">其他照片</view>
+                <view class="company-img-txt">个人二维码</view>
             </view>
         </view>
     </view>
