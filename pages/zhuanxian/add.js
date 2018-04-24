@@ -59,7 +59,7 @@ Page({
         defAreaCat: e.catid
       })
 
-      if (e.catid == app.globalData.zxCatPeizai) {
+      if (e.catid == app.globalData.zxCatPeizai || e.catid == app.globalData.zxCatShinei) {
         // 配置调车可一次添加多个
         that.setData({
           isPeizai: true,
@@ -188,7 +188,7 @@ Page({
             })
             // console.log(that)
             // 
-            if (e.catid == app.globalData.zxCatPeizai) {
+            if (e.catid == app.globalData.zxCatPeizai || e.catid == app.globalData.zxCatShinei) {
               // 配置调车可一次添加多个
               that.setData({
                 isPeizai: true,

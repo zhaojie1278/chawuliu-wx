@@ -3,6 +3,8 @@
 const app = getApp()
 var util = require('../../utils/util')
 // var areaCats = new Array('省际物流','省内物流','空运','海运','配载调车')
+var lengthtypes = ['请选择','不限车长','<4.2米','2.5米','4.2米','5米','6.2米','6.8米','7.2米','7.7米','7.8米','8.2米','8.7米','9.6米','12.5米','13米','15米','16米','17.5米']
+var cartypes = ['请选择','不限车型','平板','高栏','厢式','危险','自卸','冷藏','保温','高低板','棉被车','其他']
 
 Page({
   data: {
@@ -24,7 +26,9 @@ Page({
       cat: 0,
       catname: '',
       selltype: 1,
-      shangpai: '请选择'
+      shangpai: '请选择',
+      cartype:'请选择',
+      lengthtype:'请选择',
     },
     selltypes: '',
     defCat: 0,
@@ -40,7 +44,11 @@ Page({
       img3: '',
       img4: ''
     },
-    enddate: util.formatDay(new Date())
+    enddate: util.formatDay(new Date()),
+    lengthtypeIndex: 0,
+    cartypeIndex: 0,
+    lengthtypes: lengthtypes,
+    cartypes: cartypes
   },
   onLoad: function (e) {
 
@@ -193,8 +201,10 @@ Page({
             itemVal.selltype = res.data.data.selltype;
             itemVal.pinpai = res.data.data.pinpai;
             itemVal.price = res.data.data.price;
-            itemVal.shangpai = res.data.data.shangpai;
+            itemVal.shangpai = res.data.data.shangpai ? res.data.data.shangpai : '请选择';
             itemVal.licheng = res.data.data.licheng;
+            itemVal.lengthtype = res.data.data.lengthtype ? res.data.data.lengthtype : '请选择';
+            itemVal.cartype = res.data.data.cartype ? res.data.data.cartype : '请选择';
             
             // 图片展示
             var showImgs = that.data.showImgs
@@ -264,7 +274,7 @@ Page({
       util.showMaskTip1500('抱歉，联系人信息异常，请重新加载后重试')
     } else {
       if (that.data.item.selltype == 1) {
-        // 非招聘，判断车辆相关信息是否为空 品牌/价格/上牌时间/里程数
+        // 非购买，判断车辆相关信息是否为空 品牌/价格/上牌时间/里程数
         if (formdata.pinpai == '') {
           util.showMaskTip1500('品牌不能为空')
           return
@@ -276,6 +286,12 @@ Page({
           return
         } else if (formdata.licheng == '') {
           util.showMaskTip1500('里程数不能为空')
+          return
+        } else if (formdata.lengthtype == '请选择') {
+          util.showMaskTip1500('车长不能为空')
+          return
+        } else if (formdata.cartype == '请选择') {
+          util.showMaskTip1500('车型不能为空')
           return
         }
       }
@@ -328,6 +344,18 @@ Page({
     console.log(checkVal)
     this.setData({
       "item.selltype": Number(checkVal)
+    })
+  },
+  bindCartypeChange (e) {
+    this.setData({
+      cartypeIndex: e.detail.value,
+      "item.cartype": cartypes[e.detail.value]
+    })
+  },
+  bindLenghtypeChange (e) {
+    this.setData({
+      lengthtypeIndex: e.detail.value,
+      "item.lengthtype": lengthtypes[e.detail.value]
     })
   },
   bindPinpaiBlur (e) {

@@ -40,6 +40,7 @@
   color: #999;
   text-align: left;
   line-height: 50rpx;
+  text-indent: 20rpx;
 }
 
 .item .images {

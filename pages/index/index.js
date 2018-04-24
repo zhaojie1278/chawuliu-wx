@@ -312,15 +312,16 @@ Page({
   shopTap (e) { // TODO
     // util.showError('敬请期待')
     wx.navigateToMiniProgram({
-      appId: 'wx12de72cf50e9bb0c',
+      // appId: 'wx12de72cf50e9bb0c',
+      appId: 'wx1fe7922fd9c5495c',
       // path: 'pages/index/index?id=123',
-      /* extraData: {
-        foo: 'bar'
-      }, */
+      extraData: {
+        from: 'chawuliu_miniprogram'
+      },
       // envVersion: 'develop',
       success(res) {
         // 打开成功
-        console.log('test mini program')
+        console.log('mini program: open success.')
       }
     })
   },

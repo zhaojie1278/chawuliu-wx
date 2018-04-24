@@ -20,6 +20,24 @@
         <input bindblur="bindPinpaiBlur" class="inp" id="pinpai" name="pinpai" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.pinpai}}"/>
     </view>
     <view class="view-mg">
+        <text class="lbl-left">车型</text>
+        <input name="cartype" hidden value="{{item.cartype}}"/>
+        <picker bindchange="bindCartypeChange" value="{{cartypeIndex}}" range="{{cartypes}}">
+            <view class="picker-jiazhao">
+            {{item.cartype}}
+            </view>
+        </picker>
+    </view>
+    <view class="view-mg">
+        <text class="lbl-left">车长</text>
+        <input name="lengthtype" hidden value="{{item.lengthtype}}"/>
+        <picker bindchange="bindLenghtypeChange" value="{{lengthtypeIndex}}" range="{{lengthtypes}}">
+            <view class="picker-jiazhao">
+            {{item.lengthtype}}
+            </view>
+        </picker>
+    </view>
+    <view class="view-mg">
         <text class="lbl-left">价格</text>
         <input bindblur="bindPriceBlur" class="inp width50" id="price" name="price" maxlength="20" placeholder="请输入价格" type="digit" value="{{item.price}}"/>
         <text class="lbl-right-suffix">万元</text>
@@ -72,7 +90,7 @@
         </view>
     </view>
     <!--联系人信息-->
-    <view  class="view-mg contact-info">发货联系人信息</view>
+    <view  class="view-mg contact-info">联系人信息</view>
     <view class="view-mg">
         <text class="lbl-left">联系人</text>
         <input class="inp" id="nickname" name="nickname" maxlength="20" placeholder="请输入联系人" type="text" value="{{item.nickname}}"/>

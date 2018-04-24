@@ -12,7 +12,7 @@ Page({
     plain: false,
     loading: false,
     defaultsize: 'default',
-    sellCatId: 1,
+    sellCatId: 0,
     sellCats: [],
     catmenu: sellCatsKeyVal[0]
   },
@@ -22,7 +22,7 @@ Page({
     var sellCatId = sellCats[1].id
     // console.log('secondcat-first-id::'+sellCatId)
     this.setData({
-      sellCatId: sellCatId,
+      // sellCatId: sellCatId, // 默认第一个
       sellCats: sellCats
     })
     // var pages = getCurrentPages();

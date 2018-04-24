@@ -76,7 +76,7 @@
         </view>
     </view>
     <!--联系人信息-->
-    <view  class="view-mg contact-info">发货联系人信息</view>
+    <view  class="view-mg contact-info">联系人信息</view>
     <view class="view-mg">
         <text class="lbl-left">联系人</text>
         <input class="inp" id="nickname" name="nickname" maxlength="20" placeholder="请输入联系人" type="text" value="{{item.nickname}}"/>

@@ -67,7 +67,7 @@
 	white-space:nowrap;
 	text-overflow:ellipsis;
 	overflow:hidden;
-	width:408rpx;
+	width:400rpx;
 	float: left;
 }
 

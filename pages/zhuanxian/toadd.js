@@ -12,7 +12,7 @@ Page({
     plain: false,
     loading: false,
     defaultsize: 'default',
-    zxCatId: 1,
+    zxCatId: 0,
     zxCats: [],
     catmenu: zxCatsKeyVal[0]
   },
@@ -22,7 +22,7 @@ Page({
     var zxCatId = app.globalData.zxCats[1].id
     // console.log('secondcat-first-id::'+zxCatId)
     this.setData({
-      zxCatId: zxCatId,
+      // zxCatId: zxCatId, // 默认第一个
       zxCats: zxCats
     })
     // var pages = getCurrentPages();

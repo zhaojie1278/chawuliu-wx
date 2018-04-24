@@ -84,3 +84,9 @@
   font-size:0.8em;
   float: left;
 }
+.view-mg .picker-jiazhao {
+  padding-left:10rpx;
+  font-size:0.8em;
+  float: left;
+  color: #333;
+}

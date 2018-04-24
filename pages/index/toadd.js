@@ -16,7 +16,7 @@ Page({
     plain: false,
     loading: false,
     defaultsize: 'default',
-    catid: 1,
+    catid: 0,
     allCats: allCats
   },
   onLoad: function () {

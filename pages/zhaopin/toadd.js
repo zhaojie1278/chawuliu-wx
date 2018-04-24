@@ -12,7 +12,7 @@ Page({
     plain: false,
     loading: false,
     defaultsize: 'default',
-    zhaopinCatId: 1,
+    zhaopinCatId: 0,
     zhaopinCats: [],
     catmenu: zhaopinCatsKeyVal[0]
   },
@@ -22,7 +22,7 @@ Page({
     var zhaopinCatId = zhaopinCats[1].id
     // console.log('secondcat-first-id::'+zhaopinCatId)
     this.setData({
-      zhaopinCatId: zhaopinCatId,
+      // zhaopinCatId: zhaopinCatId, // 默认第一个
       zhaopinCats: zhaopinCats
     })
     // var pages = getCurrentPages();
