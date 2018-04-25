@@ -3,6 +3,20 @@
   padding: 20rpx;
 }
 
+.catmenu {
+  height: 100rpx;
+  line-height: 100rpx;
+  /* width: 100%; */
+  text-align: center;
+  font-size:1em;
+  /*background:#eee;
+  color:#333;*/
+  background:#ff7917;
+  color: #fff;
+  border:1px solid #ddd;
+  margin-bottom: 2rpx;
+}
+
 .cat {
   height: 100rpx;
   line-height: 100rpx;
@@ -22,12 +36,12 @@
 
 .viewdef-taped {
   /*background:#3573fa;*/
-  background:#ff9d56;
+  background:#3573fa;
   color:#fff;
 }
 
 .view-onhover {
   /*background:#3573fa;*/
-  background:#ff9d56;
+  background:#3573fa;
   color:#fff;
 }

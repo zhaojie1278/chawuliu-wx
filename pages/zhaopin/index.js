@@ -41,9 +41,15 @@ Page({
     // firstcatid: 2,
     catsKeyVal: app.globalData.zhaopinCatsKeyVal,
     detailUrl:'detail',
-    detailFrom: 'zhaopin'
+    detailFrom: 'zhaopin',
+    isLoaded: false
   },
   onLoad: function (e) {
+    // 已加载设置
+    this.setData({
+      isLoaded: true
+    })
+    // --
     console.log('in zhaopin')
 
     var cat = e.cat
@@ -51,12 +57,19 @@ Page({
     this.setData({
       cat: cat
     })
-
-    // 是否查询线路操作
-    var getLocParam = {
-      isget: true
+  },
+  onShow: function(e) {
+    var that = this
+    // 每次打开小程序时候，获取当前位置
+    console.log('onshow');
+    if (this.data.isLoaded) {
+      // 是否查询线路操作
+      var getLocParam = {
+        isget: true
+      }
+      this.getNowLocation(getLocParam); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
     }
-    this.getNowLocation(getLocParam); // 获取推荐专线
+    console.log('onshow end')
   },
   bindNavFirstTaped:function(e) {
     // 分类切换

@@ -33,6 +33,7 @@ wx.getSystemInfo({
     winWidth = res.windowWidth
     winHeight = res.windowHeight
     // console.log('screenHeight::'+res.screenHeight)
+    // console.log(res);
   }
 })
 
@@ -81,10 +82,20 @@ Page({
     ],
     cat: 1, // 默认省际物流
     mtop: mtop+'rpx',
-    isDrawCanvas: false
+    isDrawCanvas: false,
+    isLoaded: false
   },
+  /*onTabItemTap (item) {
+    // 点击 tab 时触发
+    // console.log(item)
+  },*/
   onLoad: function (e) {
     console.log(e);
+    // 已加载设置
+    this.setData({
+      isLoaded: true
+    })
+    // --
     /* 是否邀请进入 */
     var ooid = e.ooid
     // console.log('app.globalData::'+JSON.stringify(app.globalData));
@@ -116,12 +127,19 @@ Page({
         }
       })
     }
-
-    // 是否查询线路操作
-    var getLocParam = {
-      isgetZhuanxian: true
+  },
+  onShow: function(e) {
+    var that = this
+    // 每次打开小程序时候，获取当前位置
+    console.log('onshow');
+    if (this.data.isLoaded) {
+      // 是否查询线路操作
+      var getLocParam = {
+        isgetZhuanxian: true
+      }
+      this.getNowLocation(getLocParam); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
     }
-    this.getNowLocation(getLocParam); // 获取当前位置
+    console.log('onshow end')
   },
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)

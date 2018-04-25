@@ -26,10 +26,15 @@ Page({
     disabled: false,
     plain: false,
     loading: false,
-    defaultsize: 'default'
+    defaultsize: 'default',
+    isLoaded: false
   },
   onLoad: function (e) {
-
+    // 已加载设置
+    this.setData({
+      isLoaded: true
+    })
+    // --
     console.log('zx--addd')
     // console.log(defAreaCat);
     // console.log(e)
@@ -50,7 +55,6 @@ Page({
         mask: true
     })
 
-    that.getNowLocation();
     // 判断是否已添加公司信息
     var openid = wx.getStorageSync('openid')
     if(undefined != e && undefined != e.catid && undefined == e.zxid) {
@@ -215,6 +219,14 @@ Page({
       return
     }
     
+  },
+  onShow: function(e) {
+    // 每次打开小程序时候，获取当前位置
+    console.log('onshow');
+    if (this.data.isLoaded) {
+      this.getNowLocation(); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
+    }
+    console.log('onshow end')
   },
   formSubmit:function(e){
     wx.showLoading({

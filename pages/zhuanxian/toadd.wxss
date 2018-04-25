@@ -11,6 +11,7 @@
   font-size:1em;
   /*background:#eee;
   color:#333;*/
+  /*background:#ff9d56;*/
   background:#ff7917;
   color: #fff;
   border:1px solid #ddd;
@@ -35,11 +36,11 @@
 }
 
 .viewdef-taped {
-  background:#ff9d56;
+  background:#3573fa;
   color:#fff;
 }
 
 .view-onhover {
-  background:#ff9d56;
+  background:#3573fa;
   color:#fff;
 }

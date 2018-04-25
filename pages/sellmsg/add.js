@@ -48,10 +48,15 @@ Page({
     lengthtypeIndex: 0,
     cartypeIndex: 0,
     lengthtypes: lengthtypes,
-    cartypes: cartypes
+    cartypes: cartypes,
+    isLoaded: false
   },
   onLoad: function (e) {
-
+    // 已加载设置
+    this.setData({
+      isLoaded: true
+    })
+    // --
     console.log('sellmsg add')
     // console.log(this.data.enddate);
     // console.log(e)
@@ -66,9 +71,6 @@ Page({
         title: '加载中..',
         mask: true
     })
-
-    // 位置信息
-    that.getNowLocation();
 
     // 判断是否已添加公司信息
     var openid = wx.getStorageSync('openid')
@@ -250,6 +252,14 @@ Page({
       return
     }
     
+  },
+  onShow: function(e) {
+    // 每次打开小程序时候，获取当前位置
+    console.log('onshow');
+    if (this.data.isLoaded) {
+      this.getNowLocation(); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置
+    }
+    console.log('onshow end')
   },
   formSubmit:function(e){
     wx.showLoading({

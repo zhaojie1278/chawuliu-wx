@@ -9,6 +9,7 @@ var allCats = app.globalData.allCats
 var zxCatsIden = app.globalData.zxCatsIden
 var sellCatsIden = app.globalData.sellCatsIden
 var zhaopinCatsIden = app.globalData.zhaopinCatsIden
+var topcat = app.globalData.topcat
 
 
 Page({
@@ -17,7 +18,8 @@ Page({
     loading: false,
     defaultsize: 'default',
     catid: 0,
-    allCats: allCats
+    allCats: allCats,
+    catmenu: topcat
   },
   onLoad: function () {
     // var pages = getCurrentPages();

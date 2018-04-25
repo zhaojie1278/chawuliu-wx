@@ -22,11 +22,11 @@
 }
 
 .viewdef-taped {
-  background:#ff9d56;
+  background:#3573fa;
   color:#fff;
 }
 
 .view-onhover {
-  background:#ff9d56;
+  background:#3573fa;
   color:#fff;
 }

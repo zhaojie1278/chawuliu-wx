@@ -5,8 +5,9 @@ var util = require('./utils/util.js')
 
 // console.log(config);
 
+var topcat = '发布信息'
 var zxCatsIden = 1;
-var zxCatsTxt = '专线分类';
+var zxCatsTxt = '物流专线';
 var sellCatsIden = 2;
 var sellCatsTxt = '车辆买卖';
 var zhaopinCatsIden = 3;
@@ -20,15 +21,15 @@ var allCats = [
 
 var allCatsKeyVal = new Array(4)
 allCatsKeyVal[0] = '分类'
-allCatsKeyVal[1] = '专线分类'
+allCatsKeyVal[1] = '物流专线'
 allCatsKeyVal[2] = '车辆买卖'
 allCatsKeyVal[3] = '司机招聘'
 
 /* 专线类型 */
 var zxCats = [
-  {id:0,txt:'专线分类'},
-  {id:1,txt:'省际物流'},
-  {id:2,txt:'省内物流'},
+  {id:0,txt:'物流专线'},
+  {id:1,txt:'省际专线'},
+  {id:2,txt:'省内专线'},
   {id:3,txt:'空运'},
   {id:4,txt:'海运'},
   {id:5,txt:'配载调车'},
@@ -43,9 +44,9 @@ var zxCatPeizai = 5
 var zxCatShinei = 6
 
 var zxCatsKeyVal = new Array(6)
-zxCatsKeyVal[0] = '专线分类'
-zxCatsKeyVal[1] = '省际物流'
-zxCatsKeyVal[2] = '省内物流'
+zxCatsKeyVal[0] = '物流专线'
+zxCatsKeyVal[1] = '省际专线'
+zxCatsKeyVal[2] = '省内专线'
 zxCatsKeyVal[3] = '空运'
 zxCatsKeyVal[4] = '海运'
 zxCatsKeyVal[5] = '配载调车'
@@ -139,9 +140,9 @@ var allCats2SubCats = [
 App({
   onLaunch: function () {
     // 展示本地存储能力
-    var logs = wx.getStorageSync('logs') || []
-    logs.unshift(Date.now())
-    wx.setStorageSync('logs', logs)
+    // var logs = wx.getStorageSync('logs') || []
+    // logs.unshift(Date.now())
+    // wx.setStorageSync('logs', logs)
 
     // 校验用户当前session_key是否有效。
     wx.checkSession({
@@ -253,6 +254,7 @@ App({
     userInfo: null,
     config:config,
     ooid:0, // 邀请人 openid
+    topcat: topcat,
     allCats: allCats,
     allCatsKeyVal: allCatsKeyVal,
     allCats2SubCats: allCats2SubCats,

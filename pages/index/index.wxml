@@ -67,7 +67,7 @@
     <navigator class="navview" url="{{'../zhaopin/index'}}" hover-class="navhover">
       <text class="icon iconfont icon-kuaidi icon-large" style="background:#2fb6ff;"></text>
       <view class="title">
-          <text>司机招聘</text>
+          <text>56同城</text>
       </view>
   </navigator>
   

@@ -31,10 +31,22 @@ Page({
       }, */
     ],
     zxCats:app.globalData.zxCats,
-    cat:1
+    cat:1,
+    isLoaded: false
   },
   onLoad: function (e) {
-    console.log('e.cat::'+e.cat);
+    console.log('onload')
+    console.log(e);
+    // 已加载设置
+    this.setData({
+      isLoaded: true
+    })
+    // --
+    console.log('onload end')
+    if (undefined == e.cat) {
+      e.cat = this.data.cat;
+    }
+    // console.log('e.cat::'+e.cat);
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -68,14 +80,21 @@ Page({
       cat: cat
     })
 
-    // 是否查询线路操作
-    var getLocParam = {
-      isgetZhuanxian: true,
-      cat: cat
-    }
-    this.getNowLocation(getLocParam); // 获取当前位置
-    
     // this.bindNavTaped(navParam)
+  },
+  onShow: function(e) {
+    // 每次打开小程序时候，获取当前位置
+    console.log('onshow');
+    if (this.data.isLoaded) {
+      var cat = this.data.cat
+      // 是否查询线路操作
+      var getLocParam = {
+        isgetZhuanxian: true,
+        cat: cat
+      }
+      this.getNowLocation(getLocParam); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
+    }
+    console.log('onshow end')
   },
   bindNavTaped:function(e) {
     if (undefined != e.cat) {
@@ -255,9 +274,6 @@ Page({
           data: { },
           header: { 'Content-Type': 'application/json' },
           success: function(res) {
-            // console.log(res)
-            // console.log(typeof(res.data.status));
-            // console.log(res.data.result.addressComponent.city);
             if(res.data.status!=0) {
               that.setData({'nowCity':'位置获取失败'})
             } else {
