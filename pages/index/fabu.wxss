@@ -1,0 +1,32 @@
+/* pages/index/fabu.wxss */
+.container {
+  padding: 20rpx;
+}
+
+.cat {
+  height: 100rpx;
+  line-height: 100rpx;
+  width: 100%;
+  text-align: center;
+  font-size:0.8em;
+  background:#fff;
+  border-bottom:1px solid #eee;
+  color:#333;
+}
+
+.view-top {
+  /* border-top:1px solid #eee; */
+  background:#ff7917;
+  font-size:0.9em;
+  color:#fff;
+}
+
+.viewdef-taped {
+  background:#3573fa;
+  color:#fff;
+}
+
+.view-onhover {
+  background:#3573fa;
+  color:#fff;
+}

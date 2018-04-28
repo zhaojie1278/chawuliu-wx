@@ -87,3 +87,16 @@
   float: left;
   color: #333;
 }
+.view-mg .radiosex {
+  padding-left:10rpx;
+  font-size:0.8em;
+  float: left;
+  color: #333;
+}
+
+.view-mg .birthmonth {
+  /* color:#333; */
+  padding-left:10rpx;
+  font-size:0.8em;
+  float: left;
+}

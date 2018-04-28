@@ -27,7 +27,7 @@ Page({
 
     // var pages = getCurrentPages();
     wx.setNavigationBarTitle({
-      title: '我要查询'
+      title: '发布信息'
     })
   },
   bindCatsChange (e) {
@@ -42,17 +42,17 @@ Page({
     if (catid == app.globalData.zxCatsIden) {
       // 专线
       wx.navigateTo({
-        url: '../zhuanxian/index?cat='+subcatid
+        url: '../zhuanxian/add?catid='+subcatid
       })
     } else if (catid == app.globalData.sellCatsIden) {
       // 车辆买卖
       wx.navigateTo({
-        url: '../sellmsg/index?cat='+subcatid
+        url: '../sellmsg/add?catid='+subcatid
       })
     } else if (catid == app.globalData.zhaopinCatsIden) {
       // 司机
       wx.navigateTo({
-        url: '../zhaopin/index?cat='+subcatid
+        url: '../zhaopin/add?catid='+subcatid
       })
     }
     

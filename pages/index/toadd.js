@@ -1,4 +1,4 @@
-//index.js
+// toadd.js  发布信息，大分类样式
 //获取应用实例
 const app = getApp()
 var util = require('../../utils/util')

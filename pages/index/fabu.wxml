@@ -1,0 +1,8 @@
+<!--chaxun.wxml-->
+<view class="container">
+  <block wx:for="{{allCats2SubCats}}" wx:key="{{index}}">
+  <!--{{areacatid==item.id && index==1?'viewdef-taped':''}} -->
+    <view class="cat view-top">{{item.txt}}</view>
+    <view wx:for="{{item.subCats}}" wx:for-item="subcat" wx:key="{{*this}}" bindtap="bindCatsChange" class="cat {{cat_selid==item.id+'-'+subcat.id ? 'view-onhover' : ''}}"  data-subcatid="{{subcat.id}}" data-catid="{{item.id}}" wx:if="{{subcat.id>0}}">{{subcat.txt}}</view>
+  </block>
+</view>

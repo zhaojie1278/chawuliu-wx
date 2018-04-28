@@ -51,7 +51,11 @@ Page({
     })
     // --
     console.log('in sellmsg')
-    var cat = e.cat
+    if (undefined == e.cat) {
+      var cat = this.data.cat
+    } else {
+      var cat = e.cat
+    }
     console.log(cat);
     this.setData({
       cat: cat
@@ -61,6 +65,19 @@ Page({
     var that = this
     // 每次打开小程序时候，获取当前位置
     console.log('onshow');
+
+    // 控制非后台打开不刷新
+    /*var showIden4 = wx.getStorageSync('showIden4');
+    var showIden4Global = app.globalData.showIden4;
+    if (showIden4 == showIden4Global) {
+      return;
+    } else {
+      wx.setStorage({
+        key: 'showIden4',
+        data: showIden4Global
+      });
+    }*/
+
     if (this.data.isLoaded) {
       // 是否查询线路操作
       var getLocParam = {

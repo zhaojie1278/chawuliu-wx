@@ -256,6 +256,18 @@ Page({
   onShow: function(e) {
     // 每次打开小程序时候，获取当前位置
     console.log('onshow');
+
+    // 控制非后台打开不刷新
+    /*var showIden3 = wx.getStorageSync('showIden3');
+    var showIden3Global = app.globalData.showIden3;
+    if (showIden3 == showIden3Global) {
+      return;
+    } else {
+      wx.setStorage({
+        key: 'showIden3',
+        data: showIden3Global
+      });
+    }*/
     if (this.data.isLoaded) {
       this.getNowLocation(); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置
     }
@@ -283,7 +295,7 @@ Page({
     } else if (formdata.cid == '') {
       util.showMaskTip1500('抱歉，联系人信息异常，请重新加载后重试')
     } else {
-      if (that.data.item.selltype == 1) {
+      if (that.data.item.catname == '出售') {
         // 非购买，判断车辆相关信息是否为空 品牌/价格/上牌时间/里程数
         if (formdata.pinpai == '') {
           util.showMaskTip1500('品牌不能为空')
@@ -347,7 +359,7 @@ Page({
         }
       })
     }
-  },
+  },/*
   sellTypeChange (e) {
     // console.log(e)
     var checkVal = e.detail.value
@@ -355,7 +367,7 @@ Page({
     this.setData({
       "item.selltype": Number(checkVal)
     })
-  },
+  },*/
   bindCartypeChange (e) {
     this.setData({
       cartypeIndex: e.detail.value,
@@ -483,7 +495,7 @@ Page({
     })
   },
   bindDateChange (e) {
-    console.log('picker发送选择改变，携带值为', e.detail.value)
+    // console.log('picker发送选择改变，携带值为', e.detail.value)
     this.setData({
       'item.shangpai': e.detail.value
     })

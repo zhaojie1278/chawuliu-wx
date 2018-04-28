@@ -6,7 +6,7 @@
     <input name="prov" hidden value="{{item.prov}}"/>
     <input name="city" hidden value="{{item.city}}"/>
     <input name="catname" hidden value="{{item.catname}}"/>
-    <view class="view-mg">
+    <!-- <view class="view-mg">
         <text class="lbl-left">发布类型</text>
         <input name="selltype" hidden value="{{item.selltype}}"/>
         <radio-group class="fsize-dig8" bindchange="sellTypeChange">
@@ -14,7 +14,7 @@
             <radio value="{{selltype.name}}" checked="{{selltype.checked}}"/>{{selltype.value}}
         </label>
         </radio-group>
-    </view>
+    </view> -->
     <view class="view-mg">
         <text class="lbl-left">品牌</text>
         <input bindblur="bindPinpaiBlur" class="inp" id="pinpai" name="pinpai" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.pinpai}}"/>

@@ -21,22 +21,38 @@
     <view class="carsinfo">
         <view class="carsinfo-tit-cnt">
             <view>
-                <text class="title">驾照：</text>
-                <text class="price">{{item.jiazhao}}</text>
-            </view>
-            <view>
-                <text class="title">驾龄：</text>
-                <text class="cnt">{{item.jialing}}</text>
+                <text class="title">岗位：</text>
+                <text class="price">{{item.worktype}}</text>
             </view>
             <view>
                 <text class="title">工资：</text>
-                <text class="cnt">{{item.gongzi}}</text>
+                <text class="price">{{item.gongzi}}</text>
+            </view>
+            <view>
+                <text class="title">性别：</text>
+                <text class="cnt">{{sextypes[item.sex]}}</text>
+            </view>
+            <view>
+                <text class="title">学历：</text>
+                <text class="cnt">{{item.xueli}}</text>
+            </view>
+            <view>
+                <text class="title">工作经验：</text>
+                <text class="cnt">{{item.jialing}}</text>
+            </view>
+            <view>
+                <text class="title">求职区域：</text>
+                <text class="cnt">{{item.quyu}}</text>
             </view>
         </view>
-        <view class="carsinfo-tit-cnt">
+        <view class="carsinfo-tit-cnt" style="justify-content: flex-start; padding-top: 0;">
+            <view style="margin-right: 80rpx;">
+                <text class="title">驾照：</text>
+                <text class="cnt">{{item.jiazhao}}</text>
+            </view>
             <view>
-            <text class="title">福利：</text>
-            <text class="cnt">{{item.fuli}}</text>
+                <text class="title">福利：</text>
+                <text class="cnt">{{item.fuli}}</text>
             </view>
         </view>
     </view>

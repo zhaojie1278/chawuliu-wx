@@ -11,8 +11,8 @@
         <view class="catsecond" hidden="{{false}}" wx:for="{{sellCats[firstcatid]}}" wx:key="{{id}}" wx:for-item="secondcat" bindtap="bindNavSecondTaped" class="{{cat==secondcat.id?'viewdef-taped':'viewdef'}}" data-cat="{{secondcat.id}}" data-prov="{{prov}}" data-city="{{city}}" hover-class="onhover">{{secondcat.txt}}</view>
     </view>-->
     <view  class="navigator1">
-        <block wx:for="{{sellCats}}" wx:key="{{id}}">
-            <view wx:if="{{item.id>0}}" class="catfirst" bindtap="bindNavFirstTaped" class="{{cat==item.id?'viewdef-taped':'viewdef'}}" data-cat="{{item.id}}" data-prov="{{prov}}" data-city="{{city}}" hover-class="onhover">{{item.txt}}</view>
+        <block wx:for="{{selltypesKeyVal}}" wx:key="{{index}}">
+            <view wx:if="{{index>0}}" class="catfirst" bindtap="bindNavFirstTaped" class="{{cat==index?'viewdef-taped':'viewdef'}}" data-cat="{{index}}" data-prov="{{prov}}" data-city="{{city}}" hover-class="onhover">{{item}}</view>
         </block>
     </view>
 </view>

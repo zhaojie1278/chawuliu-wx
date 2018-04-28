@@ -90,7 +90,9 @@ Page({
     // console.log(item)
   },*/
   onLoad: function (e) {
-    console.log(e);
+    console.log('onload')
+    // console.log(e);
+    console.log('onload e end')
     // 已加载设置
     this.setData({
       isLoaded: true
@@ -132,6 +134,27 @@ Page({
     var that = this
     // 每次打开小程序时候，获取当前位置
     console.log('onshow');
+    /*wx.showModal({
+      title:' -- tip --',
+      // content: 'scene::'+this.data.scene
+      content: 'storage::'+showIden1+' globalData::'+showIden1Global
+    })*/
+    // 控制非后台打开不刷新
+    var showIden1 = wx.getStorageSync('showIden1');
+    var showIden1Global = app.globalData.showIden1;
+    if (showIden1 == showIden1Global) {
+      return;
+    } else {
+      wx.setStorage({
+        key: 'showIden1',
+        data: showIden1Global
+      });
+    }
+    /*wx.showModal({
+      title:' -- tip --',
+      // content: 'scene::'+this.data.scene
+      content: 'storage::'+wx.getStorageSync('appOnshowTime')+' globalData::'+app.globalData.appOnshowTime
+    })*/
     if (this.data.isLoaded) {
       // 是否查询线路操作
       var getLocParam = {

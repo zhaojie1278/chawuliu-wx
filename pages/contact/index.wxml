@@ -38,7 +38,7 @@
     <navigator class="cell" url="{{url5}}">
         <view class="icon iconfont icon-huhuan"></view>
         <view class="body">
-            <text>我的专线</text>
+            <text>物流专线</text>
             <text class="i">></text>
         </view>
     </navigator>
@@ -52,7 +52,7 @@
     <navigator class="cell" url="{{url7}}">
         <view class="icon iconfont icon-wuliu"></view>
         <view class="body">
-            <text>司机招聘</text>
+            <text>56同城</text>
             <text class="i">></text>
         </view>
     </navigator>

@@ -99,7 +99,7 @@
 }
 
 .item .carsinfo .price {
-	font-size: 1.1em;
+	font-size: 0.8em;
 	color: #ff865e;
 }
 
@@ -108,9 +108,14 @@
 	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: space-between;
+	/*justify-content: flex-start;*/
 	align-items: center;
 	line-height: 50rpx;
 	padding: 15rpx 20rpx 5rpx 0rpx;
+}
+
+.item .carsinfo-tit-cnt view {
+	margin: 0 15rpx;
 }
 
 .item .carsinfo-tit-cnt .title {

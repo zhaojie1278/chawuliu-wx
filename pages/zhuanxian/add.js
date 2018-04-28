@@ -223,6 +223,19 @@ Page({
   onShow: function(e) {
     // 每次打开小程序时候，获取当前位置
     console.log('onshow');
+
+    // 控制非后台打开不刷新
+    /*var showIden7 = wx.getStorageSync('showIden7');
+    var showIden7Global = app.globalData.showIden7;
+    if (showIden7 == showIden7Global) {
+      return;
+    } else {
+      wx.setStorage({
+        key: 'showIden7',
+        data: showIden7Global
+      });
+    }*/
+
     if (this.data.isLoaded) {
       this.getNowLocation(); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
     }
@@ -407,14 +420,14 @@ Page({
         'item.start': e.returnVal
       })
 
-      if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai){
+      if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
         this.setData({
           'item.start_prov': e.provVal
         })
       }
     } else {
       if(setCityDirection == 'item.point2') {
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai){
+        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov2': e.provVal
           })
@@ -423,7 +436,7 @@ Page({
           'item.point2': e.returnVal
         })
       } else if (setCityDirection == 'item.point3') {
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai){
+        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov3': e.provVal
           })
@@ -432,7 +445,7 @@ Page({
           'item.point3': e.returnVal
         })
       } else if (setCityDirection == 'item.point4') {
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai){
+        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov4': e.provVal
           })
@@ -441,7 +454,7 @@ Page({
           'item.point4': e.returnVal
         })
       } else if (setCityDirection == 'item.point5') {
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai){
+        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov5': e.provVal
           })
@@ -455,7 +468,7 @@ Page({
           'item.point_prov': e.prov*/
           'item.point': e.returnVal
         })
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai){
+        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov': e.provVal
           })

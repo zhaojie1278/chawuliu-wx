@@ -2,6 +2,7 @@
 //获取应用实例
 const app = getApp()
 var util = require("../../utils/util")
+var worktypes = ['请选择','司机','叉车工','物流会计','客服','物流专员/助理','物流经理/主管','物流总监','调度员','快递员','仓库管理员','仓库经理/主管','装卸/搬运工','供应链管理','单证员','国际货运','分拣员','物料管理','货运代理','集装箱业务','海关事务管理','物流/仓储项目管理','集装箱维护','集装箱操作','物流销售','船务/空运陆运操作','订单处理员','水运/陆运/空运销售'];
 
 Page({
   data: {
@@ -42,7 +43,9 @@ Page({
     catsKeyVal: app.globalData.zhaopinCatsKeyVal,
     detailUrl:'detail',
     detailFrom: 'zhaopin',
-    isLoaded: false
+    isLoaded: false,
+    worktypes: worktypes,
+    worktypei: 1
   },
   onLoad: function (e) {
     // 已加载设置
@@ -52,6 +55,9 @@ Page({
     // --
     console.log('in zhaopin')
 
+    if (undefined == e.cat) {
+      e.cat = this.data.cat;
+    }
     var cat = e.cat
     // console.log(cat);
     this.setData({
@@ -62,6 +68,19 @@ Page({
     var that = this
     // 每次打开小程序时候，获取当前位置
     console.log('onshow');
+
+    // 控制非后台打开不刷新
+    /*var showIden6 = wx.getStorageSync('showIden6');
+    var showIden6Global = app.globalData.showIden6;
+    if (showIden6 == showIden6Global) {
+      return;
+    } else {
+      wx.setStorage({
+        key: 'showIden6',
+        data: showIden6Global
+      });
+    }*/
+
     if (this.data.isLoaded) {
       // 是否查询线路操作
       var getLocParam = {
@@ -78,18 +97,19 @@ Page({
       cat: cat,
     })
     this.searchsellmsg(e)
-  },/* 
+  }, 
   bindNavSecondTaped:function(e) {
     // 分类切换
-    var id = parseInt(e.currentTarget.dataset.cat)
-    console.log('second-id:'+id)
+    var id = parseInt(e.currentTarget.dataset.worktypei)
+    console.log('worktype-id:'+id)
     console.log('data')
     console.log(this.data)
     this.setData({
-      cat: id
+      worktype: worktypes[id],
+      worktypei: id
     })
     this.searchsellmsg(e)
-  }, */
+  }, 
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
   },
@@ -121,28 +141,31 @@ Page({
     var prov = ''
     var city = ''
     var cat = 0
+    // var worktypei = 0
+    var worktype = 0
     // var firstcatid = 0
     // console.log(e)
-    if (undefined!=e) {
-      if(undefined != e.prov) {
+    
+      if (undefined != e.prov) {
         prov = e.prov
+      } else {
+        prov = that.data.prov
       }
-      if(undefined != e.city) {
+      if (undefined != e.city) {
         city = e.city
+      } else {
+        city = that.data.city
       }
-      if(undefined != e.cat) {
+      if (undefined != e.cat) {
         cat = e.cat
+      } else {
+        cat = that.data.cat
       }
-      /* if(undefined != e.firstcatid) {
-        firstcatid = e.firstcatid
-      } */
-    } else {
-      // 默认不带条件查询
-      prov = that.data.prov
-      city = that.data.city
-      cat = that.data.cat
-      // firstcatid = that.data.firstcatid
-    }
+      if (undefined != e.worktype) {
+        worktype = e.worktype
+      } else {
+        worktype = that.data.worktypes[that.data.worktypei]
+      }
     // console.log(e)
       // 默认不带条件查询
     wx.showLoading({
@@ -161,7 +184,8 @@ Page({
       data: {
         prov: prov,
         city: city,
-        cat: cat
+        cat: cat,
+        worktype: worktype
       },
       success: function(res){
         wx.hideLoading();

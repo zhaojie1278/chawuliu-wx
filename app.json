@@ -3,6 +3,7 @@
     "pages/index/index",
     "pages/index/chaxun",
     "pages/index/toadd",
+    "pages/index/fabu",
     "pages/index/kuaidi100",
     "pages/zhuanxian/index",
     "pages/zhuanxian/toadd",
@@ -54,7 +55,7 @@
       {
         "selectedIconPath": "images/tabBar/publish02.png",
         "iconPath": "images/tabBar/publish01.png",
-        "pagePath": "pages/index/toadd",
+        "pagePath": "pages/index/fabu",
         "text": "我要发布"
       },
       {

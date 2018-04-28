@@ -15,6 +15,9 @@
             <view wx:if="{{item.id>0}}" class="catfirst" bindtap="bindNavFirstTaped" class="{{cat==item.id?'viewdef-taped':'viewdef'}}" data-cat="{{item.id}}" data-prov="{{prov}}" data-city="{{city}}" hover-class="onhover">{{item.txt}}</view>
         </block>
     </view>
+    <view class="navigator2">
+        <view wx:if="{{index>0}}" class="catsecond" hidden="{{false}}" wx:for="{{worktypes}}" wx:key="{{index}}" bindtap="bindNavSecondTaped" class="{{worktypei==index?'viewdef-taped':'viewdef'}}" data-worktypei="{{index}}" hover-class="onhover">{{item}}</view>
+    </view>
 </view>
 
 <!--专线推荐-->

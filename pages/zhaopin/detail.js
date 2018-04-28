@@ -28,7 +28,11 @@ Page({
       company: 'J物流',
       imgcount: 5
     },
-    zhaopinCatsKeyVal: app.globalData.zhaopinCatsKeyVal
+    zhaopinCatsKeyVal: app.globalData.zhaopinCatsKeyVal,
+    sextypes: {
+      1: '男',
+      2: '女'
+    }
   },
   onLoad: function ($query) {
     // console.log(this.data);

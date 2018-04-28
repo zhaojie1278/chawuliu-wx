@@ -62,9 +62,16 @@ Page({
       direction: e.direction,
     })
 
-    if (that.data.zxCat == app.globalData.zxCatShengji || that.data.zxCat == app.globalData.zxCatKongyun || that.data.zxCat == app.globalData.zxCatHaiyun || that.data.zxCat == app.globalData.zxCatPeizai) {
+    if (that.data.zxCat == app.globalData.zxCatShengji || that.data.zxCat == app.globalData.zxCatPeizai) {
       // console.log('that.data.zxCat:::'+that.data.zxCat)
       that.getProvince(); // 获取所有省
+    } else if (that.data.zxCat == app.globalData.zxCatKongyun || that.data.zxCat == app.globalData.zxCatHaiyun) {
+      // 空运/海运 查询国外的
+      if (e.direction.indexOf('start')!=-1) {
+        that.getProvince(); // 获取国内
+      } else {
+        that.getForeign(); // 获取国外
+      }
     } else {
       if (that.data.zxCat == app.globalData.zxCatShengnei || that.data.zxCat == app.globalData.zxCatShinei) {
         wx.showLoading({
@@ -148,7 +155,6 @@ Page({
     }
   },
   getProvince: function(e) {
-
     var allProvincesCode = '0'
     console.log('getProvince')
     wx.showLoading({
@@ -239,6 +245,92 @@ Page({
     }
     // console.log(that.data);
   },
+  getForeign: function(e) {
+    var allProvincesCode = '0'
+    console.log('getForeign')
+    wx.showLoading({
+      title: '加载中',
+      mask: true
+    })
+    var that = this;
+    // console.log(that.data);
+    // var _storagedProvinces = wx.getStorageSync('provinces');
+    var _storagedProvinces = false;
+    if (!_storagedProvinces || _storagedProvinces.length == 0) {
+      console.log('!!!')
+      wx.request({
+        url: app.globalData.config.service.cityApi+'getforeignfirst',
+        method: 'GET',
+        dataType: 'json',
+        success: function(res){
+          wx.hideLoading();
+          console.log(res);
+          if(res.data.status != 1) {
+            console.log(res.data.message)
+            wx.showToast({
+              title: '抱歉，数据请求失败',
+              icon: 'none',
+              // icon: 'loading',
+              duration: 2000
+            })
+          } else {
+            var provinces = res.data.data
+
+            // 字符串处理展示
+            var len=provinces.length
+            var _group = Array();
+            // console.log('len::'+len)
+            for(var i=0;i<len;i++){
+              _group.push(provinces[i])
+            }
+            // console.log(_group)
+            var resultGroup = [];
+            for(var i=0;i<len;i+=4){
+              resultGroup.push(_group.slice(i,i+4));
+            }
+
+            // console.log(provinces);
+            wx.setStorageSync('foreignfirsts', resultGroup)
+            that.setData({
+              provinces:resultGroup,
+              hideReturnProv: true,
+              hideReturnCity: true,
+              isProvinceShow: true,
+              isCityShow: false,
+              isAreaShow: false
+            })
+          }
+          // console.log('success123')
+        },
+        fail: function(res) {
+          wx.showToast({
+            title: '抱歉，数据地址请求错误.v011',
+            icon: 'none',
+            // icon: 'loading',
+            duration: 2000
+          })
+          console.log('fail');
+          // coonsole.log(res);
+        },
+        complete: function(res) {
+          // console.log('complete');
+          // console.log(res)
+        }
+      })
+    } else {
+      wx.hideLoading();
+      that.setData({
+        provinces:_storagedProvinces,
+        hideReturnProv: true,
+        hideReturnCity: true,
+        isProvinceShow: true,
+        isCityShow: false,
+        isAreaShow: false
+      })
+    }
+    // console.log(that.data);
+  }
+  ,
   getCity: function(e) {
     // console.log(e.currentTarget);
     var that = this;
@@ -248,7 +340,7 @@ Page({
     if (undefined != e.isShengnei) {
         isShengnei = true
     }
-    if (that.data.zxCat == app.globalData.zxCatShengji || that.data.zxCat == app.globalData.zxCatKongyun || that.data.zxCat == app.globalData.zxCatHaiyun || that.data.zxCat == app.globalData.zxCatPeizai) {
+    if (that.data.zxCat == app.globalData.zxCatShengji || that.data.zxCat == app.globalData.zxCatPeizai) {
       // 省际
       // that.sureProvince(e)
       // return
@@ -270,8 +362,17 @@ Page({
     var _storagedCitys = false;
     // console.log(_storagedCitys);
     if (!_storagedCitys) {
+      var url = '';
+      // console.log('that.data.direction::'+that.data.direction);
+      var directionData = that.data.direction;
+      if (directionData.indexOf('point')!=-1 && (that.data.zxCat == app.globalData.zxCatKongyun || that.data.zxCat == app.globalData.zxCatHaiyun)) 
+      {
+        url = app.globalData.config.service.cityApi+'getforeignsecond?code='+provinceCode;
+      } else {
+        url = app.globalData.config.service.cityApi+'getcity?code='+provinceCode;
+      }
       wx.request({
-        url: app.globalData.config.service.cityApi+'getcity?code='+provinceCode,
+        url: url,
         method: 'GET',
         dataType: 'json',
         success: function(res){

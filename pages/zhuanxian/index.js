@@ -85,6 +85,18 @@ Page({
   onShow: function(e) {
     // 每次打开小程序时候，获取当前位置
     console.log('onshow');
+
+    // 控制非后台打开不刷新
+    var showIden2 = wx.getStorageSync('showIden2');
+    var showIden2Global = app.globalData.showIden2;
+    if (showIden2 == showIden2Global) {
+      return;
+    } else {
+      wx.setStorage({
+        key: 'showIden2',
+        data: showIden2Global
+      });
+    }
     if (this.data.isLoaded) {
       var cat = this.data.cat
       // 是否查询线路操作
