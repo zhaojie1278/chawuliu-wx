@@ -87,6 +87,10 @@
   float: left;
   color: #333;
 }
+.view-mg .locationClass {
+  /*font-size:em;*/
+  color: #333;
+}
 .view-mg .radiosex {
   padding-left:10rpx;
   font-size:0.8em;

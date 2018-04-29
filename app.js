@@ -315,7 +315,7 @@ App({
     // console.log('oid:'+openid)
     return {
       title: '邀请您一起免费加入专业的物流资讯实名认证社群',
-      path: '/page/index/index?ooid='+openid,
+      path: '/pages/index/index?ooid='+openid,
       success: function(sharedRes) {
         // 转发成功
         console.log(sharedRes)

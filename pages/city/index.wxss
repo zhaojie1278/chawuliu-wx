@@ -33,12 +33,21 @@
     /* align-items: center; */
 }
 .th,.td {
+    font-size: .9em;
     padding:20rpx;
     border-bottom: 1px solid #dadada;
     border-right: 1px solid #dadada;
     text-align: center;
     width:175rpx;
     color: #000000;
+}
+.th,.tdempty {
+    padding:20rpx;
+    border-bottom: 1px solid #fff;
+    border-right: 1px solid #fff;
+    text-align: center;
+    width:175rpx;
+    /*color: #000000;*/
 }
 .th {
     font-weight: 400;

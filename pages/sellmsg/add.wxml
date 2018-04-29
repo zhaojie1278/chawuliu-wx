@@ -16,11 +16,11 @@
         </radio-group>
     </view> -->
     <view class="view-mg">
-        <text class="lbl-left">品牌</text>
+        <text class="lbl-left" space="emsp">品  牌</text>
         <input bindblur="bindPinpaiBlur" class="inp" id="pinpai" name="pinpai" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.pinpai}}"/>
     </view>
     <view class="view-mg">
-        <text class="lbl-left">车型</text>
+        <text class="lbl-left" space="emsp">车  型</text>
         <input name="cartype" hidden value="{{item.cartype}}"/>
         <picker bindchange="bindCartypeChange" value="{{cartypeIndex}}" range="{{cartypes}}">
             <view class="picker-jiazhao">
@@ -29,7 +29,7 @@
         </picker>
     </view>
     <view class="view-mg">
-        <text class="lbl-left">车长</text>
+        <text class="lbl-left" space="emsp">车  长</text>
         <input name="lengthtype" hidden value="{{item.lengthtype}}"/>
         <picker bindchange="bindLenghtypeChange" value="{{lengthtypeIndex}}" range="{{lengthtypes}}">
             <view class="picker-jiazhao">
@@ -38,7 +38,7 @@
         </picker>
     </view>
     <view class="view-mg">
-        <text class="lbl-left">价格</text>
+        <text class="lbl-left" space="emsp">价  格</text>
         <input bindblur="bindPriceBlur" class="inp width50" id="price" name="price" maxlength="20" placeholder="请输入价格" type="digit" value="{{item.price}}"/>
         <text class="lbl-right-suffix">万元</text>
     </view>
@@ -53,7 +53,7 @@
         </picker>
     </view>
     <view class="view-mg">
-        <text class="lbl-left">里程</text>
+        <text class="lbl-left" space="emsp">里  程</text>
         <input bindblur="bindLichengBlur" class="inp width50" id="licheng" name="licheng" maxlength="20" placeholder="请输入里程" type="text" value="{{item.licheng}}"/>
         <text class="lbl-right-suffix">万公里</text>
     </view>    

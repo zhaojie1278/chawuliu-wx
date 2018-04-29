@@ -198,6 +198,17 @@ Page({
               }*/
               _group.push(provinces[i])
             }
+
+            // 控制对齐
+            var glen = _group.length;
+            if (glen%4 != 0) {
+              var minusGlen = 4-glen%4;
+              var emptyProvin = {areaname:'',code:''}
+              for(var i=0;i<minusGlen;i++) {
+                _group.push(emptyProvin)
+              }
+            }
+
             // console.log(_group)
             var resultGroup = [];
             for(var i=0;i<len;i+=4){
@@ -332,6 +343,10 @@ Page({
   }
   ,
   getCity: function(e) {
+    // console.log(e.currentTarget.dataset.province);
+    if (!e.currentTarget.dataset.province) {
+      return;
+    }
     // console.log(e.currentTarget);
     var that = this;
     console.log('that.data.zxCat::'+that.data.zxCat)
@@ -393,8 +408,18 @@ Page({
             /*citysUpdated.map(val => {
               val.fullNameDot = val.fullName.replace('市','');
             });*/
-            var resultGroup = [];
             var len=citysUpdated.length
+            console.log('len::'+len)
+            // 控制对齐
+            if (len%4 != 0) {
+              var minusGlen = 4-len%4;
+              var emptyProvin = {areaname:'',code:''}
+              for(var i=0;i<minusGlen;i++) {
+                citysUpdated.push(emptyProvin)
+              }
+            }
+
+            var resultGroup = [];
             for(var i=0;i<len;i+=4){
               resultGroup.push(citysUpdated.slice(i,i+4));
             }
@@ -452,6 +477,9 @@ Page({
     // console.log(that.data);
   },
   getArea: function(e) {
+    if (!e.currentTarget.dataset.city) {
+      return;
+    }
     // 县
     var that = this;
     console.log('that.data.zxCat::'+that.data.zxCat)

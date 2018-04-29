@@ -7,7 +7,7 @@
     <input name="city" hidden value="{{item.city}}"/>
     <input name="catname" hidden value="{{item.catname}}"/>
     <view class="view-mg">
-        <text class="lbl-left">性别</text>
+        <text class="lbl-left" space="emsp">性  别</text>
         <input name="sex" hidden value="{{item.sex}}"/>
         <radio-group class="radio-group" bindchange="radioChange">
           <label class="radiosex" wx:for="{{sextypes}}" wx:key="{{name}}" wx:for-item="sextype">
@@ -51,7 +51,7 @@
         <!--<text class="lbl-right-suffix">年</text>-->
     </view>
     <view class="view-mg">
-        <text class="lbl-left">岗位</text>
+        <text class="lbl-left" space="emsp">岗  位</text>
         <input name="worktype" hidden value="{{item.worktype}}"/>
         <picker bindchange="bindWorktypeChange" value="{{worktypeIndex}}" range="{{worktypeCats}}">
             <view class="picker-jiazhao">
@@ -60,7 +60,7 @@
         </picker>
     </view>
     <view class="view-mg">
-        <text class="lbl-left">驾照</text>
+        <text class="lbl-left" space="emsp">驾  照</text>
         <!--<input bindblur="bindJiazhaoBlur" class="inp width170" id="jiazhao" name="jiazhao" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.jiazhao}}"/>-->
         <input name="jiazhao" hidden value="{{item.jiazhao}}"/>
         <picker bindchange="bindJiazhaoChange" value="{{jiazhaoIndex}}" range="{{jiazhaoCats}}">
@@ -70,7 +70,7 @@
         </picker>
     </view>
     <view class="view-mg">
-        <text class="lbl-left">工资</text>
+        <text class="lbl-left" space="emsp">工  资</text>
         <input name="gongzi" hidden value="{{item.gongzi}}"/>
         <picker bindchange="bindGoongziChange" value="{{gongziIndex}}" range="{{gongziCats}}">
             <view class="picker-jiazhao">
@@ -87,10 +87,10 @@
             {{region[0]}}，{{region[1]}}，{{region[2]}}
             </view>
         </picker> -->
-        <input class="inp" id="quyu_inp" name="quyu_inp" maxlength="20" placeholder="请选择起始地" placeholder-class="locationClass" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu"/>
+        <input class="inp" id="quyu_inp" name="quyu_inp" maxlength="20" placeholder="请选择" placeholder-class="locationClass" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu"/>
     </view>
     <view class="view-mg">
-        <text class="lbl-left">福利</text>
+        <text class="lbl-left" space="emsp">福  利</text>
         <input bindblur="bindFuliBlur" class="inp" id="fuli" name="fuli" maxlength="20" placeholder="例如双休、假日补贴等" type="text" value="{{item.fuli}}"/>
     </view>    
     <view class="view-mg" style="height:300rpx;">

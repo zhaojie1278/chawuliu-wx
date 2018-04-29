@@ -29,9 +29,15 @@ image {
   flex-direction:row;
   /* height: 65rpx; */
   /*line-height: 65rpx;*/
-  /* justify-content: space-around; */
+   /*justify-content: space-around; */
+   /*justify-content: space-between; */
   flex-wrap: wrap;
   color: #555;
+  margin-left: 24rpx;
+}
+
+.navigator .navigator2 view {
+  min-width: 180rpx;
 }
 
 .navigator .onhover {

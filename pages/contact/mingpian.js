@@ -26,8 +26,21 @@ Page({
     },
     zxCatsKeyVal: app.globalData.zxCatsKeyVal
   },
+  onError (e) {
+    console.log('onerror:'+JSON.stringify(e));
+    wx.showModal({
+      title: 'onerror',
+      content: JSON.stringify(e)
+    })
+  },
+  onPageNotFound (e) {
+    wx.showModal({
+      title: 'onPageNotFound',
+      content: JSON.stringify(e)
+    })
+  },
   onLoad: function (query) {
-    console.log(query);
+    // console.log(query);
     // 加载中
     wx.showLoading({
         title: '加载中..',
@@ -186,7 +199,7 @@ Page({
     var company = this.data.item.company
     return {
       title: company+'的小程序个人名片',
-      path: '/page/contact/mingpian?ooid='+openid,
+      path: '/pages/contact/mingpian?ooid='+openid,
       success: function(sharedRes) {
         // 转发成功
         /*wx.showToast({
