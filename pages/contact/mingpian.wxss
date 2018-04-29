@@ -1,0 +1,101 @@
+
+/* detail.wxss */
+.item{
+	margin-bottom: 20rpx;
+	background: #fff;
+}
+
+.item .top {
+	width: 100%;
+}
+
+.item .top image {
+  height: 400rpx;
+  width: 100%;
+}
+
+.item .img-intro image {
+  height: 560rpx;
+  width: 100%;
+  margin-bottom: 25rpx;
+}
+
+.item .info {
+  width: 100%;
+}
+
+.item .info .title {
+  text-align: center;
+  font-size: 1.1em;
+  color: #000;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.item .info .zhuanxian {
+  width: 100%;
+  font-size: 1em;
+  color: #000;
+  border-bottom: 1px solid #eee;
+  height: 100rpx;
+  line-height: 100rpx;
+}
+
+.item .info .zhuanxian .detail {
+  width: 66%;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
+.item .info .user {
+  color: #999;
+  font-size: 0.9em;
+  border-bottom: 1px solid #eee;
+  padding: 0 40rpx;
+  line-height: 90rpx;
+  height: 90rpx;
+}
+
+.item .info .user .detail {
+  /*width: 80%;*/
+  margin: 0 auto;
+}
+
+.item .iconleft {
+  float: left;
+  margin: 0 10rpx 0 10rpx;
+}
+
+.item .info .address {
+  color: #999;
+  font-size: 0.9em;
+  border-bottom: 1px solid #eee;
+  padding: 0 40rpx;
+  line-height: 90rpx;
+  height: 90rpx;
+}
+.item .info .address .detail {
+  margin: 0 auto;
+}
+
+.item .img-intro .title {
+  text-align: center;
+  font-size: 1em;
+  color: #000;
+  height: 119rpx;
+  line-height: 110rpx;
+}
+
+.item .bottom {
+  padding: 14rpx 40rpx 35rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.item .bottom view {
+  width: 45%;
+}
+.item .bottom button {
+  background-color:#6f95fb;
+  font-size: 0.95em;
+}

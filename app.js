@@ -310,9 +310,9 @@ App({
     zxCatShinei:zxCatShinei,
   },
   shareFun (res) { // 转发函数
-    console.log(res);
+    // console.log(res);
     var openid = wx.getStorageSync('openid')
-    console.log('oid:'+openid)
+    // console.log('oid:'+openid)
     return {
       title: '邀请您一起免费加入专业的物流资讯实名认证社群',
       path: '/page/index/index?ooid='+openid,

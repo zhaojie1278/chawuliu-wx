@@ -2,7 +2,7 @@
 //获取应用实例
 const app = getApp()
 var util = require("../../utils/util")
-
+// var lastnavtapCat = {} // 最后选择的值
 Page({
   data: {
     canIUse: false,
@@ -32,7 +32,9 @@ Page({
     ],
     zxCats:app.globalData.zxCats,
     cat:1,
-    isLoaded: false
+    isLoaded: false,
+    isCityReturn: false // 是否选择城市后返回
+    // lastnavtapCat: {}
   },
   onLoad: function (e) {
     console.log('onload')
@@ -85,9 +87,10 @@ Page({
   onShow: function(e) {
     // 每次打开小程序时候，获取当前位置
     console.log('onshow');
+    console.log(e)
 
     // 控制非后台打开不刷新
-    var showIden2 = wx.getStorageSync('showIden2');
+    /*var showIden2 = wx.getStorageSync('showIden2');
     var showIden2Global = app.globalData.showIden2;
     if (showIden2 == showIden2Global) {
       return;
@@ -96,8 +99,18 @@ Page({
         key: 'showIden2',
         data: showIden2Global
       });
-    }
-    if (this.data.isLoaded) {
+    }*/
+
+    /*wx.showModal({
+      title: 'onshow',
+      content: 'isciti2return::'+this.data.isCityReturn
+    })*/
+    
+    if (this.data.isLoaded && !this.data.isCityReturn) {
+      // wx.showModal({
+      //   title: 'app . tip',
+      //   content: 'content:'+JSON.stringify(e)
+      // })
       var cat = this.data.cat
       // 是否查询线路操作
       var getLocParam = {
@@ -106,7 +119,17 @@ Page({
       }
       this.getNowLocation(getLocParam); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
     }
+
     console.log('onshow end')
+  },
+  onHide (e) {
+    this.setData({
+      isCityReturn: false
+    })
+    /*wx.showModal({
+      title: 'hide tit',
+      content: 'on hide::' + JSON.stringify(this.data.isCityReturn)
+    })*/
   },
   bindNavTaped:function(e) {
     if (undefined != e.cat) {
@@ -114,11 +137,32 @@ Page({
     } else {
       var catid = e.currentTarget.dataset.cat
     }
+
+    // var startVal = '';
+    // var pointVal = '';
+    // console.log('lastnavtapCat::'+JSON.stringify(this.data.lastnavtapCat))
+    // var lastnavtapCatData = this.data.lastnavtapCat
+    // // 1、之前有选择值，不自动变化
+    // // 2、比较当前值是否不同，不同则更改
+    // var proStart = 'start';
+
+    // if (lastnavtapCatData[catid] != undefined && (proStart in lastnavtapCatData[catid])) {
+    //   startVal = lastnavtapCatData[catid].start
+    // }
+
+    // console.log('last cat - '+catid+' startVal:'+startVal)
+    // if (lastnavtapCatData[catid] != undefined && ('point' in lastnavtapCatData[catid])) {
+    //   pointVal = lastnavtapCatData[catid].point
+    // }
+    // console.log('last cat - '+catid+' pointVal:'+pointVal)
+
     // 专线区域类别切换
     var catid = parseInt(catid)  
     this.setData({  
       cat: catid
     })
+    var startValSet = '';
+    var pointValSet = '';
     if (catid == app.globalData.zxCatShengji || catid == app.globalData.zxCatKongyun || catid == app.globalData.zxCatHaiyun || catid == app.globalData.zxCatPeizai) {
       this.setData({
         startVal: this.data.nowProv,
@@ -126,14 +170,18 @@ Page({
         nowAreaCatStr: '',
         pointVal: '请选择'
       })
+      startValSet = this.data.nowProv;
+      pointValSet = '请选择'
     } else if (catid == app.globalData.zxCatShengnei) {
-      console.log('catidcatidcatid::'+catid);
+      // console.log('catidcatidcatid::'+catid);
       this.setData({
         startVal: this.data.nowCity,
         nowAreaVal: this.data.nowProv,
         nowAreaCatStr: 'province',
         pointVal: '请选择'
       })
+      startValSet = this.data.nowCity;
+      pointValSet = '请选择'
     } else if (catid == app.globalData.zxCatShinei) {
       this.setData({
         startVal: this.data.nowDistrict,
@@ -141,6 +189,8 @@ Page({
         nowAreaCatStr: 'city',
         pointVal: '请选择'
       })
+      startValSet = this.data.nowDistrict;
+      pointValSet = '请选择'
     } else {
       this.setData({
         startVal: this.data.nowCity,
@@ -148,8 +198,36 @@ Page({
         nowAreaCatStr: 'city',
         pointVal: '请选择'
       })
+      startValSet = this.data.nowCity;
+      pointValSet = '请选择'
     }
-    console.log(this.data)
+    // console.log(this.data)
+    this.getSearches(); // 获取推荐专线
+    
+
+    // 保存设置的值
+    // var firstParam = {
+    //   start: this.data.startVal,
+    //   point: this.data.pointVal
+    // }
+    // this.setFirstSelectVal(firstParam);
+  },
+  setFirstSelectVal(firstParam) {
+    // 最后一次选择的地区赋值
+    var lastnavtapCatData = this.data.lastnavtapCat
+    var catid = this.data.cat
+    var catDirectinObj = lastnavtapCatData[catid] == undefined ? {} : lastnavtapCatData[catid];
+    // console.log('lastnavtapCatData::'+JSON.stringify(lastnavtapCatData))
+    if (undefined != firstParam.start) {
+      catDirectinObj.start = firstParam.start
+    }
+    if (undefined != firstParam.point) {
+      catDirectinObj.point = firstParam.point
+    }
+    lastnavtapCatData[catid] = catDirectinObj
+    this.setData({
+        lastnavtapCat: lastnavtapCatData
+    })
   },
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
@@ -308,7 +386,7 @@ Page({
                     cat: e.cat
                   }
                   that.bindNavTaped(eParam)
-                  that.getSearches(); // 获取推荐专线
+                  // that.getSearches(); // 获取推荐专线
                 }
               }
             }
@@ -321,8 +399,11 @@ Page({
     console.log('changeCity')
     // 选中的城市值赋值
     console.log(e)
+
     var setCityDirection = e.direction
+    
     if (setCityDirection == 'startCity') {
+      
       this.setData({
         /*startCity: e.city,
         startProv: e.prov*/
@@ -335,6 +416,10 @@ Page({
         pointVal: e.returnVal
       })
     }
+
+    this.setData({
+      isCityReturn: true
+    })
 
     this.getSearches();
   }

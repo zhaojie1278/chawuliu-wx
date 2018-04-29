@@ -15,6 +15,7 @@ Page({
     url5:'./zhuanxians',
     url6:'./sellmsgs',
     url7:'./zhaopins',
+    url8:'./mingpian',
   },
   onLoad: function () {
     if (app.globalData.userInfo) {

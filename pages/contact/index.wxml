@@ -13,9 +13,16 @@
   <view class="h-10"></view>
   <view class="usermotto" >
     <navigator class="cell" url="{{url1}}">
-        <view class="icon iconfont icon-tuandui"></view>
+        <view class="icon iconfont icon-shezhi"></view>
         <view class="body">
             <text>我的信息</text>
+            <text class="i">></text>
+        </view>
+    </navigator>
+    <navigator class="cell" url="{{url8}}">
+        <view class="icon iconfont icon-tuandui"></view>
+        <view class="body">
+            <text>个人名片</text>
             <text class="i">></text>
         </view>
     </navigator>

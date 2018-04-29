@@ -1,0 +1,59 @@
+<!--detail.wxml-->
+<view class="item">
+    <view class="top">
+        <image wx:if="{{item.image!=''}}" mode="aspectFill" src="{{item.image}}" data-src="{{item.image}}"></image>
+    </view>
+    <!-- 公司介绍 -->
+    <view class="info">
+        <view>
+            <view class="title">{{item.company}}</view>
+            <block wx:for="{{item.zhuanxians}}" wx:key="id" wx:for-item="zx">
+            <view>
+                <view class="zhuanxian">
+                    <view class="detail">
+                        <text>{{zx.start}}</text>
+                        <text class="iconfont icon-huhuan icon-min3" style="color:#3573fa; margin: 0 5rpx;"></text>
+                        <text>{{zx.point}}</text>
+                    </view>
+                </view>
+                <view class="user">
+                    <view class="detail">
+                        <text class="iconleft iconfont icon-my icon-min2" style="color:#bbb;"></text>
+                        <text class="fl">{{item.nickname}}</text><text class="fl" style='margin-left: 20rpx;'>{{item.phone}}</text>
+                        <text catchtap="calling" data-phone-number="{{item.phone}}" class="fr icon iconfont icon-bohao icon-min3" style="color:#3573fa;"></text>
+                    </view>
+                    <view class="clear"></view>
+                </view>
+                <view class="address">
+                    <view class="detail">
+                        <text class="iconleft iconfont icon-add icon-min2" style="color:#bbb;"></text>
+                        <text class="fl" style="margin-left: 12rpx;">{{item.address}}</text>
+                    </view>
+                    <view class="clear"></view>
+                </view>
+            </view>
+            </block>
+        </view>
+    </view>
+    <view class="img-intro">
+        <view class="title">图片介绍</view>
+        <view class="images">
+            <view>
+                <image wx:if="{{item.domainimg1!=''}}" mode="aspectFill" src="{{item.domainimg1}}" bindtap="ylImg" data-src="{{item.domainimg1}}"></image>
+            </view>
+            <view>
+                <image wx:if="{{item.domainimg2!=''}}" mode="aspectFill" src="{{item.domainimg2}}" bindtap="ylImg" data-src="{{item.domainimg2}}"></image>
+            </view>
+            <view>
+                <image wx:if="{{item.domainimg3}}" mode="aspectFill" src="{{item.domainimg3}}" bindtap="ylImg" data-src="{{item.domainimg3}}"></image>
+            </view>
+            <view class="erweima">
+                <image wx:if="{{item.domainimg4}}" mode="aspectFit" src="{{item.domainimg4}}" bindtap="ylImg" data-src="{{item.domainimg4}}"></image>
+            </view>
+        </view>        
+    </view>
+    <view class='bottom'>
+        <view><button type="primary" class="share-btn" open-type="share">好友转发</button></view>
+        <view><button class="share-btn" type="primary" bindtap="toFabu">发布物流</button></view>
+    </view>
+</view>

@@ -124,11 +124,14 @@
 .item .msg-intro .zhuanxians .detail {
   padding: 0 20rpx 25rpx;
 }
-/* 
+ 
 .item .msg-intro .zhuanxians .detail1 {
-} */
+  width: 300rpx;
+  float: left;
+}
 
 .item .msg-intro .zhuanxians .detail2 {
+  width: 100rpx;
   margin-left: 30rpx;
 }
 

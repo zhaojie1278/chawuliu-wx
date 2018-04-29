@@ -34,6 +34,7 @@ Page({
         mask: true
     })
 
+    // console.log('$query::'+JSON.stringify($query))
     var that = this;
     console.log(that.data.zxCatsKeyVal)
 
