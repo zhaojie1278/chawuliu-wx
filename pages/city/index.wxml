@@ -2,8 +2,8 @@
 <view class="container">
     <view class="txt">
         <text class="all-city">所有城市</text>
-        <text class="return" hidden="{{hideReturnProv}}" bindtap="returnProvinceFun">返回省份</text>
-        <text class="return" hidden="{{hideReturnCity}}" bindtap="returnCityFun">返回城市</text>
+        <text class="return" hidden="{{hideReturnProv}}" bindtap="returnProvinceFun">返回上级</text>
+        <text class="return" hidden="{{hideReturnCity}}" bindtap="returnCityFun">返回上级</text>
     </view>
     <view class="p table {{isProvinceShow ? 'show' : 'hidden'}}">
         <block wx:for="{{provinces}}" wx:key="{{index}}" wx:for-item="item_group">
@@ -27,7 +27,7 @@
     <view class="c table {{isAreaShow ? 'show' : 'hidden'}}">
         <block wx:for="{{areas}}" wx:key="{{index}}" wx:for-item="item_group">
             <view class="tr">
-                <view wx:for="{{item_group}}" wx:key="{{areaname}}" class="td" data-area-code="{{item.code}}" data-area="{{item.areaname}}" data-province="{{setedProv}}" data-city="{{setedCity}}" bindtap="sureArea">
+                <view wx:for="{{item_group}}" wx:key="{{areaname}}" class="{{item.code == ''? 'tdempty': 'td'}}" data-area-code="{{item.code}}" data-area="{{item.areaname}}" data-province="{{setedProv}}" data-city="{{setedCity}}" bindtap="sureArea">
                 <text>{{item.areaname}}</text>
                 </view>
             </view>

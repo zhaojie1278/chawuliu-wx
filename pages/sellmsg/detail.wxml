@@ -8,7 +8,7 @@
             <view class="body">
                 <view class="title"><text class="nowrap">{{item.company}} </text></view>
                 <view class="describe">
-                    <text class="nowrap2">{{sellCatsKeyVal[item.cat] + selltypesKeyVal[item.selltype]}}</text>
+                    <text class="nowrap2">{{sellCatsKeyVal[item.cat]}}</text>
                     <text class="time">{{item.timebefore}}</text>
                     <text wx:if="{{item.imgcount>0}}" class="imgcount">{{item.imgcount}}图</text>
                 </view>
@@ -20,19 +20,27 @@
     </view>
     <!--<view class="carsinfo" wx:if="{{item.selltype==1}}">-->
     <view class="carsinfo">
-        <view>
+        <view class="carsinfo-tit-cnt">
         <text class="price">￥{{item.price}}万</text>
         </view>
         <view class="carsinfo-tit-cnt">
-            <view>
-            <text class="title">品牌系列：</text>
+            <view wx:if="{{item.pinpai !=''}}">
+            <text class="title" space="emsp">品  牌：</text>
             <text class="cnt">{{item.pinpai}}</text>
             </view>
-            <view>
+            <view wx:if="{{item.cartype !=''}}">
+            <text class="title" space="emsp">车  型：</text>
+            <text class="cnt">{{item.cartype}}</text>
+            </view>
+            <view wx:if="{{item.lengthtype !=''}}">
+            <text class="title" space="emsp">车  长：</text>
+            <text class="cnt">{{item.lengthtype}}</text>
+            </view>
+            <view wx:if="{{item.shangpai !=''}}">
             <text class="title">上牌时间：</text>
             <text class="cnt">{{item.shangpai}}</text>
             </view>
-            <view>
+            <view wx:if="{{item.licheng !='' && item.licheng !=0}}">
             <text class="title">行驶里程：</text>
             <text class="cnt">{{item.licheng}}万公里</text>
             </view>

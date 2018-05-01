@@ -7,7 +7,9 @@ var jiazhaoCats = ['请选择','无','A1','A2','A3','B1','B2','C1','C2']
 var jialingCats = ['请选择','无','1-2年','3-4年','4-5年','5年以上']
 var gongziCats = ['请选择','面议','1000-3000元','3000-5000元','5000-8000元','8000以上']
 var worktypeCats = ['请选择','司机','叉车工','物流会计','客服','物流专员/助理','物流经理/主管','物流总监','调度员','快递员','仓库管理员','仓库经理/主管','装卸/搬运工','供应链管理','单证员','国际货运','分拣员','物料管理','货运代理','集装箱业务','海关事务管理','物流/仓储项目管理','集装箱维护','集装箱操作','物流销售','船务/空运陆运操作','订单处理员','水运/陆运/空运销售'];
-var xueliCats = ['高中','大专','本科','硕士','博士','其他']
+var xueliCats = ['请选择','高中','大专','本科','硕士','博士','其他']
+var zhaopinCat = 1;
+var qiuzhiCat = 2;
 Page({
   data: {
     userInfo: {},
@@ -62,13 +64,17 @@ Page({
     worktypeCats: worktypeCats,
     sextypes: [
       {name: '1', value: '男', checked: true},
-      {name: '2', value: '女'}
+      {name: '2', value: '女'},
+      // {name: '3', value: '不限'}
     ],
+    zhaopinCat: zhaopinCat,
+    qiuzhiCat: qiuzhiCat,
     region: ['安徽', '合肥', '蜀山区'],
     customItem: '请选择',
     isLoaded: false
   },
   onLoad: function (e) {
+    console.log('zhaopin add (e) --' + JSON.stringify(e));
     // 已加载设置
     this.setData({
       isLoaded: true
@@ -77,6 +83,10 @@ Page({
     console.log('zhaopin add')
     // console.log(e)
     var that = this
+
+    that.setData({
+        defCat: e.catid,
+      })
 
     // 设置页面标题
     wx.setNavigationBarTitle({
@@ -93,9 +103,7 @@ Page({
     if(undefined != e && undefined != e.catid && undefined == e.zhaopinid) {
       console.log('zhaopin addddd')
       // 添加专线入口
-      that.setData({
-        defCat: e.catid,
-      })
+      
 
       // 判断是否已注册公司信息
       wx.request({
@@ -214,14 +222,18 @@ Page({
             itemVal.cat = res.data.data.cat;
             var _cat = res.data.data.cat // 本地数组索引小于1
             itemVal.catname = app.globalData.zhaopinCatsKeyVal[_cat]
-            itemVal.jiazhao = res.data.data.jiazhao;
-            itemVal.jialing = res.data.data.jialing;
-            itemVal.gongzi = res.data.data.gongzi;
-            itemVal.quyu = res.data.data.quyu;
-            itemVal.xueli = res.data.data.xueli;
+            itemVal.jiazhao = res.data.data.jiazhao ? res.data.data.jiazhao : '请选择';
+            itemVal.jialing = res.data.data.jialing ? res.data.data.jialing : '请选择';
+            itemVal.gongzi = res.data.data.gongzi ? res.data.data.gongzi : '请选择';
+            itemVal.quyu = res.data.data.quyu ? res.data.data.quyu : '请选择';
+            itemVal.xueli = res.data.data.xueli ? res.data.data.xueli : '请选择';
             itemVal.birthmonth = res.data.data.birthmonth ? res.data.data.birthmonth : '请选择';
             itemVal.xueli = res.data.data.xueli ? res.data.data.xueli : '请选择';
             itemVal.sex = res.data.data.sex;
+            if (itemVal.sex.indexOf(',') != -1) {
+              console.log('have ,')
+              itemVal.sex = 3
+            }
             itemVal.worktype = res.data.data.worktype;
             itemVal.fuli = res.data.data.fuli;
             
@@ -293,9 +305,10 @@ Page({
     } 
     /*else if (formdata.jiazhao=='请选择') {
       util.showMaskTip1500('请选择驾照类型')
-    } else if(formdata.jialing=='请选择') {
-      util.showMaskTip1500('请选择驾龄')
     }*/ 
+    else if(formdata.jialing=='请选择') {
+      util.showMaskTip1500('请选择工作经验')
+    }
     else if(formdata.gongzi=='请选择') {
       util.showMaskTip1500('请选择工资')
     } else if(formdata.birthmonth=='请选择') {
@@ -353,12 +366,12 @@ Page({
         }
       })
     }
-  },
+  },/*
   radioChange (e) {
     this.setData({
       'item.sex': e.detail.value
     })
-  },
+  },*/
   bindWorktypeChange (e) {
     this.setData({
       worktypeIndex: e.detail.value,

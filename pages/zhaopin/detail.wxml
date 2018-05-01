@@ -20,38 +20,38 @@
     </view>
     <view class="carsinfo">
         <view class="carsinfo-tit-cnt">
-            <view>
-                <text class="title">岗位：</text>
+            <view wx:if="{{item.worktype !=''}}">
+                <text class="title" space="emsp">岗  位：</text>
                 <text class="price">{{item.worktype}}</text>
             </view>
-            <view>
-                <text class="title">工资：</text>
+            <view wx:if="{{item.gongzi !=''}}">
+                <text class="title" space="emsp">工  资：</text>
                 <text class="price">{{item.gongzi}}</text>
             </view>
-            <view>
-                <text class="title">性别：</text>
+            <view wx:if="{{item.sex !='' && item.sex != 0}}">
+                <text class="title" space="emsp">性  别：</text>
                 <text class="cnt">{{sextypes[item.sex]}}</text>
             </view>
-            <view>
-                <text class="title">学历：</text>
+            <view wx:if="{{item.xueli !=''}}">
+                <text class="title" space="emsp">学  历：</text>
                 <text class="cnt">{{item.xueli}}</text>
             </view>
-            <view>
+            <view wx:if="{{item.jialing !=''}}">
                 <text class="title">工作经验：</text>
                 <text class="cnt">{{item.jialing}}</text>
             </view>
-            <view>
+            <view wx:if="{{item.quyu !=''}}">
                 <text class="title">求职区域：</text>
                 <text class="cnt">{{item.quyu}}</text>
             </view>
         </view>
         <view class="carsinfo-tit-cnt" style="justify-content: flex-start; padding-top: 0;">
-            <view style="margin-right: 80rpx;">
-                <text class="title">驾照：</text>
+            <view>
+                <text class="title" space="emsp" wx:if="{{item.jiazhao !=''}}">驾  照：</text>
                 <text class="cnt">{{item.jiazhao}}</text>
             </view>
             <view>
-                <text class="title">福利：</text>
+                <text class="title" space="emsp" wx:if="{{item.fuli !=''}}">福  利：</text>
                 <text class="cnt">{{item.fuli}}</text>
             </view>
         </view>

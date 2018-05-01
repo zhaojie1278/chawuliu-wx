@@ -10,7 +10,7 @@
                         <view class="body">
                             <view class="title"><text class="nowrap">{{item.company}} </text></view>
                             <view class="describe">
-                            <text wx:if="{{detailFrom=='sell'}}" class="nowrap2">{{catsKeyVal[item.cat] + selltypesKeyVal[item.selltype]}}</text>
+                            <text wx:if="{{detailFrom=='sell'}}" class="nowrap2">{{catsKeyVal[item.cat]}}</text>
                             <text wx:else class="nowrap2">{{catsKeyVal[item.cat]}}</text>
                             </view>
                         </view>

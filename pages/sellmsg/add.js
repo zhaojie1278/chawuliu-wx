@@ -282,11 +282,7 @@ Page({
     var that=this
     // 提交校验
     var formdata = e.detail.value
-    if(formdata.content==''){
-      util.showMaskTip1500('内容不能为空')
-    // } else if (formdata.img1 == '' && formdata.img2 == '' && formdata.img3 == '' && formdata.img4 == '') {
-      // util.showMaskTip1500('抱歉，请至少上传一张图片')        
-    } else if (formdata.nickname == '') {
+    if (formdata.nickname == '') {
       util.showMaskTip1500('联系人不能为空')
     } else if (formdata.phone == '') {
       util.showMaskTip1500('手机号码不能为空')
@@ -315,6 +311,14 @@ Page({
         } else if (formdata.cartype == '请选择') {
           util.showMaskTip1500('车型不能为空')
           return
+        }
+      } else {
+        // 购买
+        if(formdata.content==''){
+          util.showMaskTip1500('内容不能为空')
+        // } else if (formdata.img1 == '' && formdata.img2 == '' && formdata.img3 == '' && formdata.img4 == '') {
+          // util.showMaskTip1500('抱歉，请至少上传一张图片')
+          return   
         }
       }
       //提交

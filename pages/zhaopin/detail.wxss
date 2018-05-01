@@ -104,14 +104,18 @@
 }
 
 .item .carsinfo-tit-cnt {
-	display: flex;
+	 display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
-	justify-content: space-between;
-	/*justify-content: flex-start;*/
-	align-items: center;
+	justify-content: flex-start;
+	align-items: center; 
 	line-height: 50rpx;
 	padding: 15rpx 20rpx 5rpx 0rpx;
+}
+
+.item .carsinfo-tit-cnt view {
+	min-width: 280rpx;
+	float: left;
 }
 
 .item .carsinfo-tit-cnt view {
@@ -134,7 +138,8 @@
 	justify-content: space-between;
 	align-items: center;
 	line-height: 50rpx;
-	padding: 15rpx 20rpx 5rpx 20rpx;
+	padding: 15rpx 20rpx 15rpx 35rpx;
+	/*text-indent: 20rpx;*/
 }
 
 .item .addresstxt {
