@@ -31,7 +31,8 @@ Page({
     zhaopinCatsKeyVal: app.globalData.zhaopinCatsKeyVal,
     sextypes: {
       1: '男',
-      2: '女'
+      2: '女',
+      3: '不限'
     }
   },
   onLoad: function ($query) {
@@ -72,6 +73,9 @@ Page({
             duration: 2000
           })
         } else {
+          if (res.data.data.sex && res.data.data.sex.indexOf(',') != -1) {
+            res.data.data.sex = '3'
+          }
           that.setData({
             item: res.data.data
           })
