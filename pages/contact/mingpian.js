@@ -58,6 +58,9 @@ Page({
         return;
       }
       ooid = openid
+    } else {
+      // 获取邀请人 openid 并设置到 app.globalData
+      app.globalData.ooid = ooid
     }
     // console.log(ooid);
     
@@ -96,34 +99,31 @@ Page({
           })
         } else {
           if (undefined == query.ooid) {
-            wx.showToast({
-              title: '抱歉，请先完善公司信息',
-              icon: 'none',
-              duration: 3000,
+            wx.showModal({
+              title: '提示',
+              content: '抱歉，请先完善公司信息',
+              showCancel: false,
+              success: function(e) {
+                wx.redirectTo({
+                  url: '../contact/company'
+                })
+              }
+            })
+          } else {
+            wx.showModal({
+              title: '提示',
+              content: '当前名片已不存在，点击确定跳至首页',
+              showCancel: false,
               success: function(e) {
                 // console.log('toast')
                 // console.log(e);
                 // 完善公司信息
-                setTimeout(
-                  function() {
-                    wx.redirectTo({
-                      url: '../contact/company'
-                    })
-                },3000)
-                
-              }
-            })
-          } else {
-            wx.showToast({
-              title: '当前名片已不存在，将为您跳至首页',
-              icon: 'none',
-              duration: 3000,
-              success: function(e) {
-                setTimeout(function(){
+                // setTimeout(
+                  // function() {
                   wx.switchTab({
                     url: '../index/index'
                   })
-                }, 3000);
+                // },3000)
               }
             })
           }
