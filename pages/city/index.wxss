@@ -28,7 +28,7 @@
 .tr {
     width: 100%;
     display: flex;
-    /* flex-wrap: wrap; */
+     flex-wrap: wrap; 
     justify-content: start;
     /* align-items: center; */
 }
@@ -38,15 +38,24 @@
     border-bottom: 1px solid #dadada;
     border-right: 1px solid #dadada;
     text-align: center;
-    width:175rpx;
+    width:133rpx;
     color: #000000;
+}
+.th,.td:nth-child(0) {
+    width: 134rpx;
+}
+.th,.td:nth-child(4n+1) {
+    width: 134rpx;
+}
+.th,.td:nth-child(4n) {
+    width: 134rpx;
 }
 .th,.tdempty {
     padding:20rpx;
     border-bottom: 1px solid #fff;
     border-right: 1px solid #fff;
     text-align: center;
-    width:175rpx;
+    width:133rpx;
     /*color: #000000;*/
 }
 .th {

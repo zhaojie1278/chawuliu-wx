@@ -210,15 +210,15 @@ Page({
             }
 
             // console.log(_group)
-            var resultGroup = [];
+            /*var resultGroup = [];
             for(var i=0;i<len;i+=4){
               resultGroup.push(_group.slice(i,i+4));
-            }
+            }*/
 
             // console.log(provinces);
-            wx.setStorageSync('provinces', resultGroup)
+            wx.setStorageSync('provinces', _group)
             that.setData({
-              provinces:resultGroup,
+              provinces:_group,
               hideReturnProv: true,
               hideReturnCity: true,
               isProvinceShow: true,
@@ -294,16 +294,27 @@ Page({
             for(var i=0;i<len;i++){
               _group.push(provinces[i])
             }
-            // console.log(_group)
-            var resultGroup = [];
-            for(var i=0;i<len;i+=4){
-              resultGroup.push(_group.slice(i,i+4));
+
+            // 控制对齐
+            var glen = _group.length;
+            if (glen%4 != 0) {
+              var minusGlen = 4-glen%4;
+              var emptyProvin = {areaname:'',code:''}
+              for(var i=0;i<minusGlen;i++) {
+                _group.push(emptyProvin)
+              }
             }
 
+            // console.log(_group)
+            /*var resultGroup = [];
+            for(var i=0;i<len;i+=4){
+              resultGroup.push(_group.slice(i,i+4));
+            }*/
+
             // console.log(provinces);
-            wx.setStorageSync('foreignfirsts', resultGroup)
+            // wx.setStorageSync('foreignfirsts', resultGroup)
             that.setData({
-              provinces:resultGroup,
+              provinces:_group,
               hideReturnProv: true,
               hideReturnCity: true,
               isProvinceShow: true,
@@ -425,15 +436,15 @@ Page({
               }
             }
 
-            var resultGroup = [];
+            /*var resultGroup = [];
             for(var i=0;i<len;i+=4){
               resultGroup.push(citysUpdated.slice(i,i+4));
-            }
+            }*/
             // console.log(provinces);
-            wx.setStorageSync('city-'+provinceCode, resultGroup)
+            // wx.setStorageSync('city-'+provinceCode, resultGroup)
             
             that.setData({
-              citys:resultGroup,
+              citys:citysUpdated,
               hideReturnProv: isShengnei ? true : false,
               hideReturnCity: true,
               isProvinceShow: false,
@@ -523,7 +534,6 @@ Page({
       }
     }
 
-
     // console.log(that.data);
     // var _storagedAreas = wx.getStorageSync('area-'+cityCode);
     var _storagedAreas = false;
@@ -567,16 +577,16 @@ Page({
             /*citysUpdated.map(val => {
               val.fullNameDot = val.fullName.replace('市','');
             });*/
-            var resultGroup = [];
+            /*var resultGroup = [];
             var len=areas.length
             for(var i=0;i<len;i+=4){
               resultGroup.push(areas.slice(i,i+4));
-            }
+            }*/
 
             // console.log(provinces);
-            wx.setStorageSync('area-'+cityCode, resultGroup)
+            wx.setStorageSync('area-'+cityCode, areas)
             that.setData({
-              areas:resultGroup,
+              areas:areas,
               hideReturnProv: true,
               hideReturnCity: isShinei ? true : false,
               isProvinceShow: false,

@@ -6,14 +6,12 @@
         <text class="return" hidden="{{hideReturnCity}}" bindtap="returnCityFun">返回上级</text>
     </view>
     <view class="p table {{isProvinceShow ? 'show' : 'hidden'}}">
-        <block wx:for="{{provinces}}" wx:key="{{index}}" wx:for-item="item_group">
-            <view class="tr">
-                <view wx:for="{{item_group}}" wx:key="{{areaname}}" class="{{item.code == ''? 'tdempty': 'td'}}" data-province-code="{{item.code}}" data-province="{{item.areaname}}" bindtap="getCity">
-                <text>{{item.areaname}}</text>
-                </view>
+        <view class="tr">
+            <view wx:for="{{provinces}}" wx:key="{{areaname}}" class="{{item.code == ''? 'tdempty': 'td'}}" data-province-code="{{item.code}}" data-province="{{item.areaname}}" bindtap="getCity">
+            <text>{{item.areaname}}</text>
             </view>
-        </block>
-    </view>
+        </view>
+    </view><!-- 
     <view class="c table {{isCityShow ? 'show' : 'hidden'}}">
         <block wx:for="{{citys}}" wx:key="{{index}}" wx:for-item="item_group">
             <view class="tr">
@@ -22,15 +20,23 @@
                 </view>
             </view>
         </block>
+    </view> -->
+
+    <view class="c table {{isCityShow ? 'show' : 'hidden'}}">
+            <view class="tr">
+                <block wx:for="{{citys}}" wx:key="{{index}}" wx:for-item="item">
+                    <view class="{{item.code == ''? 'tdempty': 'td'}}" data-city-code="{{item.code}}" data-city="{{item.areaname}}" data-province="{{setedProv}}" bindtap="getArea">
+                    <text>{{item.areaname}}</text>
+                    </view>
+                </block>
+            </view>
     </view>
 
     <view class="c table {{isAreaShow ? 'show' : 'hidden'}}">
-        <block wx:for="{{areas}}" wx:key="{{index}}" wx:for-item="item_group">
-            <view class="tr">
-                <view wx:for="{{item_group}}" wx:key="{{areaname}}" class="{{item.code == ''? 'tdempty': 'td'}}" data-area-code="{{item.code}}" data-area="{{item.areaname}}" data-province="{{setedProv}}" data-city="{{setedCity}}" bindtap="sureArea">
-                <text>{{item.areaname}}</text>
-                </view>
+        <view class="tr">
+            <view wx:for="{{areas}}" wx:key="{{areaname}}" class="{{item.code == ''? 'tdempty': 'td'}}" data-area-code="{{item.code}}" data-area="{{item.areaname}}" data-province="{{setedProv}}" data-city="{{setedCity}}" bindtap="sureArea">
+            <text>{{item.areaname}}</text>
             </view>
-        </block>
+        </view>
     </view>
 </view>
