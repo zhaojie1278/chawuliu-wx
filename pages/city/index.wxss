@@ -62,3 +62,8 @@
     font-weight: 400;
     background-color: #dadada
 }
+
+.td-area {
+    color: #666;
+    font-size: .85em;
+}

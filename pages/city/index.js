@@ -200,14 +200,14 @@ Page({
             }
 
             // 控制对齐
-            var glen = _group.length;
+            /*var glen = _group.length;
             if (glen%4 != 0) {
               var minusGlen = 4-glen%4;
               var emptyProvin = {areaname:'',code:''}
               for(var i=0;i<minusGlen;i++) {
                 _group.push(emptyProvin)
               }
-            }
+            }*/
 
             // console.log(_group)
             /*var resultGroup = [];
@@ -428,13 +428,13 @@ Page({
             var len=citysUpdated.length
             console.log('len::'+len)
             // 控制对齐
-            if (len%4 != 0) {
+            /*if (len%4 != 0) {
               var minusGlen = 4-len%4;
               var emptyProvin = {areaname:'',code:''}
               for(var i=0;i<minusGlen;i++) {
                 citysUpdated.push(emptyProvin)
               }
-            }
+            }*/
 
             /*var resultGroup = [];
             for(var i=0;i<len;i+=4){
@@ -565,14 +565,14 @@ Page({
             }
 
             // 控制对齐
-            var glen = areas.length;
+            /*var glen = areas.length;
             if (glen%4 != 0) {
               var minusGlen = 4-glen%4;
               var emptyProvin = {areaname:'',code:''}
               for(var i=0;i<minusGlen;i++) {
                 areas.push(emptyProvin)
               }
-            }
+            }*/
             // var citysUpdated = citys.slice();
             /*citysUpdated.map(val => {
               val.fullNameDot = val.fullName.replace('市','');
