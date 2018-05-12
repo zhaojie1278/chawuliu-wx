@@ -5,7 +5,6 @@ var util = require("../../utils/util")
 
 Page({
   data: {
-    userInfo: {},
     isTaped: false,
     list: [
       /*
@@ -38,11 +37,14 @@ Page({
     sellCats: app.globalData.sellCats,
     prov: '',
     city: '',
+    area: '',
+    quyu: '选择地区',
     cat: 1,
     catsKeyVal: app.globalData.sellCatsKeyVal,
     detailUrl:'detail',
     detailFrom: 'sell',
-    isLoaded: false
+    isLoaded: false,
+    isCityReturn: false // 是否选择城市后返回
   },
   onLoad: function (e) {
     // 已加载设置
@@ -78,7 +80,7 @@ Page({
       });
     }*/
 
-    if (this.data.isLoaded) {
+    if (this.data.isLoaded && !this.data.isCityReturn) {
       // 是否查询线路操作
       var getLocParam = {
         isget: true
@@ -86,6 +88,40 @@ Page({
       this.getNowLocation(getLocParam); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
     }
     console.log('onshow end')
+  },
+  onHide (e) {
+    this.setData({
+      isCityReturn: false
+    })
+    /*wx.showModal({
+      title: 'hide tit',
+      content: 'on hide::' + JSON.stringify(this.data.isCityReturn)
+    })*/
+  },
+  toSelectArea (e) {
+    wx.navigateTo({
+      url:"../city/index?direction=quyu"
+    })
+  },
+  changeCity (e) {
+    console.log('changeCity')
+    // 选中的城市值赋值
+    console.log(e)
+    var setCityDirection = e.direction
+    if (setCityDirection == 'quyu') {
+      var cityVal = util.getZhuanxianShow(e);
+      this.setData({
+        'prov': e.selectedProv,
+        'city': e.selectedCity,
+        'area': e.selectedArea,
+        'quyu': cityVal
+      })
+    }
+    this.setData({
+      isCityReturn: true
+    })
+
+    this.getSearches();
   },
   bindNavFirstTaped:function(e) {
     // 分类切换
@@ -110,55 +146,28 @@ Page({
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
   searchsellmsg (e) {
     // 本业内查询专线，按照精品专线发布时间/普通专线发布时间倒序排序
     // console.log(e)
-    var prov = e.currentTarget.dataset.prov
+    /*var prov = e.currentTarget.dataset.prov
     var city = e.currentTarget.dataset.city
     var cat = e.currentTarget.dataset.cat
     var params = {
       prov: prov,
       city: city,
       cat: cat
-    }
-    this.getSearches(params);
+    }*/
+    this.getSearches();
   },
   getSearches: function(e) {
     var that = this;
     console.log('getSearches -- sellmsg')
     console.log('search-param' + JSON.stringify(e));
-    var prov = ''
-    var city = ''
-    var cat = 0
-    // console.log(e)
-    if (undefined!=e) {
-      if(undefined != e.prov) {
-        prov = e.prov
-      }
-      if(undefined != e.city) {
-        city = e.city
-      }
-      if(undefined != e.cat) {
-        cat = e.cat
-      }
-      /* if(undefined != e.firstcatid) {
-        firstcatid = e.firstcatid
-      } */
-    } else {
-      // 默认不带条件查询
-      prov = that.data.prov
-      city = that.data.city
-      cat = that.data.cat
-      // firstcatid = that.data.firstcatid
-    }
+    // 默认不带条件查询
+    var prov = that.data.prov
+    var city = that.data.city
+    var area = that.data.area
+    var cat = that.data.cat
     // console.log(e)
       // 默认不带条件查询
     wx.showLoading({
@@ -177,6 +186,7 @@ Page({
       data: {
         prov: prov,
         city: city,
+        area: area,
         cat: cat
       },
       success: function(res){
@@ -246,21 +256,19 @@ Page({
                 cityStr = cityStr.replace('市','')
               }*/
               var cat=that.data.cat
+              // provStr = '安徽'
+              // cityStr = '合肥'
               that.setData({
                 prov: provStr,
                 city:cityStr,
+                quyu: cityStr,
                 cat: cat
               })
 
               // 获取当前位置后再查找专线
               if(undefined != e) {
                 if (undefined != e.isget) {
-                  var params = {
-                    prov: provStr,
-                    city: cityStr,
-                    cat: cat
-                  }
-                  that.getSearches(params); // 获取推荐专线
+                  that.getSearches(); // 获取推荐专线
                 }
               }
             }

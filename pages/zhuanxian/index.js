@@ -5,19 +5,19 @@ var util = require("../../utils/util")
 // var lastnavtapCat = {} // 最后选择的值
 Page({
   data: {
-    canIUse: false,
-    startProv:'',
-    startCity:'',
+    start_prov:'',
+    start_city:'',
+    start_area:'',
     startVal: '',
-    pointProv:'',
-    pointCity:'',
-    pointVal: '',
+    point_prov:'',
+    point_city:'',
+    point_area:'',
+    pointVal: '请选择',
     nowCity: '定位中...',
     nowProv: '省份',
     nowDistrict: '区县',
     nowAreaVal: '',
     nowAreaCatStr: '',
-    userInfo: {},
     isTaped: false,
     list: [
       /* {
@@ -48,41 +48,10 @@ Page({
     if (undefined == e.cat) {
       e.cat = this.data.cat;
     }
-    // console.log('e.cat::'+e.cat);
-    if (app.globalData.userInfo) {
-      this.setData({
-        userInfo: app.globalData.userInfo,
-        hasUserInfo: true
-      })
-    } else if (this.data.canIUse){
-      // 由于 getUserInfo 是网络请求，可能会在 Page.onLoad 之后才返回
-      // 所以此处加入 callback 以防止这种情况
-      app.userInfoReadyCallback = res => {
-        this.setData({
-          userInfo: res.userInfo,
-          hasUserInfo: true
-        })
-      }
-    } else {
-      // 在没有 open-type=getUserInfo 版本的兼容处理
-      wx.getUserInfo({
-        success: res => {
-          app.globalData.userInfo = res.userInfo
-          this.setData({
-            userInfo: res.userInfo,
-            hasUserInfo: true
-          })
-        }
-      })
-    }
-
     // 设置当前选中分类
-    var cat = e.cat
     this.setData({
-      cat: cat
+      cat: e.cat
     })
-
-    // this.bindNavTaped(navParam)
   },
   onShow: function(e) {
     // 每次打开小程序时候，获取当前位置
@@ -119,7 +88,6 @@ Page({
       }
       this.getNowLocation(getLocParam); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
     }
-
     console.log('onshow end')
   },
   onHide (e) {
@@ -163,7 +131,16 @@ Page({
     })
     var startValSet = '';
     var pointValSet = '';
-    if (catid == app.globalData.zxCatShengji || catid == app.globalData.zxCatKongyun || catid == app.globalData.zxCatHaiyun || catid == app.globalData.zxCatPeizai) {
+
+    if (catid == app.globalData.zxCatShinei) {
+      console.log('shinei::::'+this.data.nowDistrict)
+      this.setData({
+        startVal: this.data.nowDistrict,
+      })
+    }
+
+
+    /*if (catid == app.globalData.zxCatShengji || catid == app.globalData.zxCatKongyun || catid == app.globalData.zxCatHaiyun || catid == app.globalData.zxCatPeizai) {
       this.setData({
         startVal: this.data.nowProv,
         nowAreaVal: this.data.nowProv,
@@ -200,7 +177,7 @@ Page({
       })
       startValSet = this.data.nowCity;
       pointValSet = '请选择'
-    }
+    }*/
     // console.log(this.data)
     this.getSearches(); // 获取推荐专线
     
@@ -232,31 +209,22 @@ Page({
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
   },
-  getUserInfo: function(e) {
-    console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
-  },
   searchzhuanxian (e) {
     // 本业内查询专线，按照精品专线发布时间/普通专线发布时间倒序排序
     // console.log(e)
-    var start = e.currentTarget.dataset.start
+    /*var start = e.currentTarget.dataset.start
     var point = e.currentTarget.dataset.point
     var cat = e.currentTarget.dataset.catid
     var params = {
       start: start,
       point: point,
       catid: cat
-    }
-    this.getSearches(params);
+    }*/
+    this.getSearches();
   },
   getSearches: function(e) {
     var that = this;
-    console.log('getSearches')
-    var start = ''
+    /*var start = ''
     var point = ''
     var catid = 0
     // console.log(e)
@@ -283,7 +251,7 @@ Page({
       start = that.data.startVal
       point = that.data.pointVal
       catid = that.data.cat
-    }
+    }*/
 
     wx.showLoading({
       title: '加载中',
@@ -299,9 +267,13 @@ Page({
         "content-type": "application/x-www-form-urlencoded"
       },
       data: {
-        start: start,
-        point: point,
-        cat: catid
+        start_prov: that.data.start_prov,
+        start_city: that.data.start_city,
+        start_area: that.data.start_area,
+        point_prov: that.data.point_prov,
+        point_city: that.data.point_city,
+        point_area: that.data.point_area,
+        cat: that.data.cat
       },
       success: function(res){
         wx.hideLoading();
@@ -367,17 +339,32 @@ Page({
             if(res.data.status!=0) {
               that.setData({'nowCity':'位置获取失败'})
             } else {
+              console.log('locatin::::----')
+              console.log(res.data.result.addressComponent);
               var provStr = res.data.result.addressComponent.province
               // provStr = '安徽省'
               var cityStr = res.data.result.addressComponent.city
               // cityStr = '合肥市'
               var districtStr = res.data.result.addressComponent.district
               // districtStr = '蜀山区'
+              // 
               that.setData({
                 nowCity:cityStr,
                 nowProv:provStr,
                 nowDistrict:districtStr,
+                startVal: provStr,
+                start_prov: provStr,
+                start_city: cityStr,
+                start_area: districtStr
               })
+
+              if (provStr == cityStr) {
+                // 直辖市的名称作为省份、区作为市
+                that.setData({
+                  start_city: districtStr,
+                  start_area: ''
+                })
+              }
 
               // 获取当前位置后再查找专线
               if(undefined != e) {
@@ -401,19 +388,20 @@ Page({
     console.log(e)
 
     var setCityDirection = e.direction
-    
+    var cityVal = util.getZhuanxianShow(e);
     if (setCityDirection == 'startCity') {
-      
       this.setData({
-        /*startCity: e.city,
-        startProv: e.prov*/
-        startVal: e.returnVal
+        start_prov: e.selectedProv,
+        start_city: e.selectedCity,
+        start_area: e.selectedArea,
+        startVal: cityVal
       })
     } else {
       this.setData({
-        /*pointCity: e.city,
-        pointProv: e.prov*/
-        pointVal: e.returnVal
+        point_prov: e.selectedProv,
+        point_city: e.selectedCity,
+        point_area: e.selectedArea,
+        pointVal: cityVal
       })
     }
 

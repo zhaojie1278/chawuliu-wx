@@ -3,9 +3,21 @@
   <form bindsubmit="formSubmit" bindreset="formReset">
     <input name="id" hidden value="{{item.id}}"/>
     <input name="cid" hidden value="{{item.cid}}"/>
-    <input name="prov" hidden value="{{item.prov}}"/>
-    <input name="city" hidden value="{{item.city}}"/>
     <input name="catname" hidden value="{{item.catname}}"/>
+    <view class="view-mg">
+        <text class="lbl-left">求职区域</text>
+        <!-- TODO -->
+        <input name="prov" hidden value="{{item.prov}}"/>
+        <input name="city" hidden value="{{item.city}}"/>
+        <input name="area" hidden value="{{item.area}}"/>
+
+        <!-- <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
+            <view class="picker-jiazhao">
+            {{region[0]}}，{{region[1]}}，{{region[2]}}
+            </view>
+        </picker> -->
+        <input class="inp" id="quyu_inp" name="quyu" maxlength="20" placeholder="请选择" placeholder-class="locationClass" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu"/>
+    </view>
     <view class="view-mg">
         <text class="lbl-left" space="emsp">性  别</text>
         <radio-group name="sex" class="radio-group" bindchange="radioChange" wx:if="{{defCat == qiuzhiCat}}">
@@ -34,7 +46,7 @@
         </checkbox-group>
     </view>
     <view class="view-mg">
-        <text class="lbl-left">出生年份</text>
+        <text class="lbl-left">出生年月</text>
         <input name="birthmonth" hidden value="{{item.birthmonth}}"/>
         <picker mode="date" value="{{item.birthmonth}}" fields="month" start="1969-01-01" end="2000-01-01" bindchange="bindDateChange">
             <view class="picker birthmonth">
@@ -90,16 +102,6 @@
             </view>
         </picker>
         <!--<text class="lbl-right-suffix">元</text>-->
-    </view>
-    <view class="view-mg">
-        <text class="lbl-left">求职区域</text>
-        <input name="quyu" hidden value="{{item.quyu}}"/>
-        <!-- <picker mode="region" bindchange="bindRegionChange" value="{{region}}" custom-item="{{customItem}}">
-            <view class="picker-jiazhao">
-            {{region[0]}}，{{region[1]}}，{{region[2]}}
-            </view>
-        </picker> -->
-        <input class="inp" id="quyu_inp" name="quyu_inp" maxlength="20" placeholder="请选择" placeholder-class="locationClass" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu"/>
     </view>
     <view class="view-mg">
         <text class="lbl-left" space="emsp">福  利</text>

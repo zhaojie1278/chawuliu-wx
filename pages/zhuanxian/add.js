@@ -6,12 +6,15 @@ var util = require('../../utils/util')
 
 Page({
   data: {
-    userInfo: {},
     item:{
       start_prov:'',
-      start:'',
+      start_city:'',
+      start_area:'',
+      startVal: '',
       point_prov:'',
-      point:'',
+      point_city:'',
+      point_area:'',
+      pointVal: '',
       price_zhonghuo:'',
       price_paohuo:'',
       nickname:'',
@@ -175,9 +178,28 @@ Page({
             // console.log(itemVal)
             itemVal.id = res.data.data.id;
             itemVal.start_prov = res.data.data.start_prov;
-            itemVal.start = res.data.data.start;
+            itemVal.start_city = res.data.data.start_city;
+            if (res.data.data.start != '') {
+              itemVal.start = res.data.data.start;
+            } else if (res.data.data.start_city) {
+              itemVal.start = res.data.data.start_city;
+            } else if (res.data.data.start_prov) {
+              itemVal.start = res.data.data.start_prov;
+            }
             itemVal.point_prov = res.data.data.point_prov;
-            itemVal.point = res.data.data.point;
+            itemVal.point_city = res.data.data.point_city;
+
+            if (res.data.data.point != '') {
+              itemVal.point = res.data.data.point;
+            } else if (res.data.data.point_city) {
+              itemVal.point = res.data.data.point_city;
+            } else if (res.data.data.point_prov) {
+              itemVal.point = res.data.data.point_prov;
+            }
+
+            itemVal.startVal = itemVal.start;
+            itemVal.pointVal = itemVal.point;
+            
             itemVal.price_zhonghuo = res.data.data.price_zhonghuo;
             itemVal.price_paohuo = res.data.data.price_paohuo;
             itemVal.cid = res.data.data.cid;
@@ -236,9 +258,9 @@ Page({
       });
     }*/
 
-    if (this.data.isLoaded) {
-      this.getNowLocation(); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
-    }
+    // if (this.data.isLoaded) {
+    //   this.getNowLocation(); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
+    // }
     console.log('onshow end')
   },
   formSubmit:function(e){
@@ -257,10 +279,10 @@ Page({
     var formdata = e.detail.value
     console.log('formdata::')
     console.log(formdata);
-    console.log(formdata.price_zhonghuo);
-    if(formdata.start==''){
+    // console.log(formdata.price_zhonghuo);
+    if(formdata.start_prov =='' && formdata.start_city ==''&& formdata.start_area ==''){
       util.showMaskTip1500('出发地不能为空')
-    } else if (formdata.point == '') {
+    } else if (formdata.point_prov ==''&& formdata.point_city ==''&& formdata.point_area =='') {
       util.showMaskTip1500('目的地不能为空')
     } else if (formdata.price_zhonghuo == '') {
       util.showMaskTip1500('重货价格不能为空')
@@ -349,10 +371,10 @@ Page({
         nowAreaCatStr = 'city'
     }
 
-    this.setData({
+    /*this.setData({
       'item.start_prov': this.data.nowProv,
       'item.start_city': this.data.nowCity
-    })
+    })*/
     // 选择出发地
     wx.navigateTo({
       url:"../city/index?direction=item.start&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
@@ -374,33 +396,38 @@ Page({
     var pointDirection = 'item.point';
     if (eTargetId == 'point2') {
       pointDirection = 'item.point2';
-      this.setData({
+      /*this.setData({
         'item.point_prov2': this.data.nowProv,
-        'item.point_city2': this.data.nowCity
-      })
+        'item.point_city2': this.data.nowCity,
+        'item.point_area2': this.data.nowArea,
+      })*/
     } else if (eTargetId == 'point3') {
       pointDirection = 'item.point3';
-      this.setData({
+      /*this.setData({
         'item.point_prov3': this.data.nowProv,
-        'item.point_city3': this.data.nowCity
-      })
+        'item.point_city3': this.data.nowCity,
+        'item.point_area3': this.data.nowArea,
+      })*/
     } else if (eTargetId == 'point4') {
       pointDirection = 'item.point4';
-      this.setData({
+      /*this.setData({
         'item.point_prov4': this.data.nowProv,
-        'item.point_city4': this.data.nowCity
-      })
+        'item.point_city4': this.data.nowCity,
+        'item.point_area4': this.data.nowArea,
+      })*/
     } else if (eTargetId == 'point5') {
       pointDirection = 'item.point5';
-      this.setData({
+      /*this.setData({
         'item.point_prov5': this.data.nowProv,
-        'item.point_city5': this.data.nowCity
-      })
+        'item.point_city5': this.data.nowCity,
+        'item.point_area5': this.data.nowArea,
+      })*/
     } else {
-      this.setData({
+      /*this.setData({
         'item.point_prov': this.data.nowProv,
-        'item.point_city': this.data.nowCity
-      })
+        'item.point_city': this.data.nowCity,
+        'item.point_area': this.data.nowArea,
+      })*/
     }
     console.log('this.data.nowCity::'+this.data.nowCity)
     // 选择目的地
@@ -413,66 +440,101 @@ Page({
     // 选中的城市值赋值
     console.log(e)
     var setCityDirection = e.direction
+    var cityVal = util.getZhuanxianShow(e);
+
     if (setCityDirection == 'item.start') {
-      this.setData({
-        /*'item.start': e.city,
-        'item.start_prov': e.prov*/
+      /*this.setData({
+        // 'item.start': e.city,
+        // 'item.start_prov': e.prov
         'item.start': e.returnVal
+      })*/
+      this.setData({
+        'item.start_prov': e.selectedProv,
+        'item.start_city': e.selectedCity,
+        'item.start_area': e.selectedArea,
+        'item.startVal': cityVal
       })
 
+      /*
+      // 分类处理
       if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
         this.setData({
           'item.start_prov': e.provVal
         })
-      }
+      }*/
     } else {
       if(setCityDirection == 'item.point2') {
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
+        /*if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov2': e.provVal
           })
         }
         this.setData({
           'item.point2': e.returnVal
+        })*/
+        this.setData({
+          'item.point_prov2': e.selectedProv,
+          'item.point_city2': e.selectedCity,
+          'item.point_area2': e.selectedArea,
+          'item.point2': cityVal
         })
       } else if (setCityDirection == 'item.point3') {
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
+        /*if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov3': e.provVal
           })
         }
         this.setData({
           'item.point3': e.returnVal
+        })*/
+        this.setData({
+          'item.point_prov3': e.selectedProv,
+          'item.point_city3': e.selectedCity,
+          'item.point_area3': e.selectedArea,
+          'item.point3': cityVal
         })
       } else if (setCityDirection == 'item.point4') {
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
+        /*if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov4': e.provVal
           })
         }
         this.setData({
           'item.point4': e.returnVal
+        })*/
+        this.setData({
+          'item.point_prov4': e.selectedProv,
+          'item.point_city4': e.selectedCity,
+          'item.point_area4': e.selectedArea,
+          'item.point4': cityVal
         })
       } else if (setCityDirection == 'item.point5') {
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
+        /*if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov5': e.provVal
           })
         }
         this.setData({
           'item.point5': e.returnVal
+        })*/
+        this.setData({
+          'item.point_prov5': e.selectedProv,
+          'item.point_city5': e.selectedCity,
+          'item.point_area5': e.selectedArea,
+          'item.point5': cityVal
         })
       } else {
         this.setData({
-          /*'item.point': e.city,
-          'item.point_prov': e.prov*/
-          'item.point': e.returnVal
+          'item.point_prov': e.selectedProv,
+          'item.point_city': e.selectedCity,
+          'item.point_area': e.selectedArea,
+          'item.pointVal': cityVal
         })
-        if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
+        /*if (this.data.defAreaCat == app.globalData.zxCatShengji || this.data.defAreaCat == app.globalData.zxCatPeizai || this.data.defAreaCat == app.globalData.zxCatKongyun || this.data.defAreaCat == app.globalData.zxCatHaiyun){
           this.setData({
             'item.point_prov': e.provVal
           })
-        }
+        }*/
       }
     }
   },

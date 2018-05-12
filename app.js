@@ -170,6 +170,8 @@ App({
     // 校验用户当前session_key是否有效。
     wx.checkSession({
       success: function(sucres) {
+        console.log('sucres:::')
+        console.log(sucres);
         // session_key未过期
         // console.log('checksession success')
         // console.log(sucres);
@@ -212,7 +214,8 @@ App({
         }
       },
       fail: function (failres) {
-        // console.log(failres);
+        console.log('failres--------')
+        console.log(failres);
         // session_key过期
         // 登录
         // https://api.weixin.qq.com/sns/jscode2session?appid=APPID&secret=SECRET&js_code=JSCODE&grant_type=authorization_code
@@ -255,10 +258,12 @@ App({
     // 获取用户信息
     wx.getSetting({
       success: res => {
+        console.log('getsesssss::'+JSON.stringify(res))
         if (res.authSetting['scope.userInfo']) {
           // 已经授权，可以直接调用 getUserInfo 获取头像昵称，不会弹框
           wx.getUserInfo({
             success: res => {
+              console.log('app---getuserinfo')
               // 可以将 res 发送给后台解码出 unionId
               this.globalData.userInfo = res.userInfo
 

@@ -25,7 +25,7 @@
     <view class="c table {{isCityShow ? 'show' : 'hidden'}}">
             <view class="tr">
                 <block wx:for="{{citys}}" wx:key="{{index}}" wx:for-item="item">
-                    <view class="{{'td'}}" data-city-code="{{item.code}}" data-city="{{item.areaname}}" data-province="{{setedProv}}" bindtap="getArea">
+                    <view class="{{'td'}}" data-city-code="{{item.code}}" data-city="{{item.areaname}}" data-province="{{setedProv}}" bindtap="sureCity">
                         <text>{{item.areaname}}</text>
                     </view>
                     <!--areas-->

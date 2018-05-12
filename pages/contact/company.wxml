@@ -7,7 +7,7 @@
         <input class="inp" id="company" name="company" maxlength="50" placeholder="请输入公司名称" type="text" value="{{item.company}}" />
     </view>
     <view class="view-mg">
-        <text class="lbl-left">联系人</text>
+        <text class="lbl-left" space="ensp">联 系 人</text>
         <input class="inp" name="nickname" maxlength="20" placeholder="请输入联系人姓名" type="text" value="{{item.nickname}}"/>
     </view>
     <view class="view-mg">

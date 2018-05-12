@@ -73,7 +73,8 @@ Page({
         that.getForeign(); // 获取国外
       }
     } else {
-      if (that.data.zxCat == app.globalData.zxCatShengnei || that.data.zxCat == app.globalData.zxCatShinei) {
+      that.getProvince(); // 获取所有省
+      /*if (that.data.zxCat == app.globalData.zxCatShengnei || that.data.zxCat == app.globalData.zxCatShinei) {
         wx.showLoading({
           title: '加载中',
           mask: true
@@ -151,7 +152,7 @@ Page({
           }
         })
         return
-      }
+      }*/
     }
   },
   getProvince: function(e) {
@@ -657,8 +658,9 @@ Page({
     }
     var returnData = {
       direction: this.data.direction,
-      returnVal: prov,
-      // city: city
+      selectedProv: prov,
+      selectedCity: '',
+      selectedArea: ''
     }
     prePage.changeCity(returnData)
     // console.log(prePage)
@@ -670,7 +672,6 @@ Page({
     console.log('sureCity')
     // 改变上一页的值
     var prov = e.currentTarget.dataset.province
-    console.log('prov::'+prov);
     var city = e.currentTarget.dataset.city
     var pages = getCurrentPages()
     console.log('pages')
@@ -682,8 +683,9 @@ Page({
     }
     var returnData = {
       direction: this.data.direction,
-      returnVal: city,
-      provVal: prov
+      selectedProv: prov,
+      selectedCity: city,
+      selectedArea: ''
     }
     prePage.changeCity(returnData)
     // console.log(prePage)
@@ -692,7 +694,7 @@ Page({
     wx.navigateBack()
   },
   sureArea: function(e) {
-    console.log('sureProv')
+    console.log('sureArea')
     // 改变上一页的值
     var prov = e.currentTarget.dataset.province
     var city = e.currentTarget.dataset.city
@@ -707,7 +709,9 @@ Page({
     }
     var returnData = {
       direction: this.data.direction,
-      returnVal: area
+      selectedProv: prov,
+      selectedCity: city,
+      selectedArea: area
     }
     prePage.changeCity(returnData)
     // console.log(prePage)

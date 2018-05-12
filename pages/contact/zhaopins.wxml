@@ -5,8 +5,9 @@
         <view class="body">
             <text class="sellmsg">
                 <text class="cat">{{zhaopinCatsKeyVal[item.cat]}}</text>
+                <text class="cat2">{{item.quyu}}</text>
                 <text class="cat2">{{item.worktype}}</text>
-                <text class="cnt">{{item.content}}</text>
+                <!-- <text class="cnt">{{item.content}}</text> -->
             </text>
             <text class="del" bindtap="delZhaopin" data-index="{{index}}" data-id="{{item.id}}" data-cid="{{item.cid}}">删除</text>
             <text class="update" bindtap="updateZhaopin" data-id="{{item.id}}" data-cid="{{item.cid}}"  data-catid="{{item.cat}}">修改</text>

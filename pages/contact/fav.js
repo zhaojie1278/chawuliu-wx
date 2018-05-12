@@ -5,7 +5,6 @@ var util = require('../../utils/util.js')
 
 Page({
   data: {
-    userInfo: {},
     item: {
       id: 0
     },

@@ -19,20 +19,21 @@
         <text class="lbl-left">出发地</text>
         <input name="start_prov" hidden value="{{item.start_prov}}"/>
         <input name="start_city" hidden value="{{item.start_city}}"/>
-        <input name="start" hidden value="{{item.start}}"/>
-        <input class="inp" id="start" name="start_inp" maxlength="20" placeholder="请选择起始地" placeholder-class="locationClass" type="text" value="{{item.start}}" catchtap="toSelectStart"/>
+        <input name="start_area" hidden value="{{item.start_area}}"/>
+        <input class="inp" id="start" name="start_inp" maxlength="20" placeholder="请选择起始地" placeholder-class="locationClass" type="text" value="{{item.startVal}}" catchtap="toSelectStart"/>
     </view>
     <view class="view-mg">
         <text class="lbl-left">目的地</text>
         <input name="point_prov" hidden value="{{item.point_prov}}"/>
         <input name="point_city" hidden value="{{item.point_city}}"/>
-        <input name="point" hidden value="{{item.point}}"/>
-        <input class="inp" id="point" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point}}" catchtap="toSelectPoint"/>
+        <input name="point_area" hidden value="{{item.point_area}}"/>
+        <input class="inp" id="point" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.pointVal}}" catchtap="toSelectPoint"/>
     </view>
     <view class="view-mg" wx:if="{{isPeizai && !isPeizaiUpdate}}">
         <text class="lbl-left">目的地2</text>
         <input name="point_prov2" hidden value="{{item.point_prov2}}"/>
         <input name="point_city2" hidden value="{{item.point_city2}}"/>
+        <input name="point_area2" hidden value="{{item.point_area2}}"/>
         <input name="point2" hidden value="{{item.point2}}"/>
         <input class="inp" id="point2" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point2}}" catchtap="toSelectPoint"/>
     </view>
@@ -40,6 +41,7 @@
         <text class="lbl-left">目的地3</text>
         <input name="point_prov3" hidden value="{{item.point_prov3}}"/>
         <input name="point_city3" hidden value="{{item.point_city3}}"/>
+        <input name="point_area3" hidden value="{{item.point_area3}}"/>
         <input name="point3" hidden value="{{item.point3}}"/>
         <input class="inp" id="point3" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point3}}" catchtap="toSelectPoint"/>
     </view>
@@ -47,6 +49,7 @@
         <text class="lbl-left">目的地4</text>
         <input name="point_prov4" hidden value="{{item.point_prov4}}"/>
         <input name="point_city4" hidden value="{{item.point_city4}}"/>
+        <input name="point_area4" hidden value="{{item.point_area4}}"/>
         <input name="point4" hidden value="{{item.point4}}"/>
         <input class="inp" id="point4" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point4}}" catchtap="toSelectPoint"/>
     </view>
@@ -54,6 +57,7 @@
         <text class="lbl-left">目的地5</text>
         <input name="point_prov5" hidden value="{{item.point_prov5}}"/>
         <input name="point_city5" hidden value="{{item.point_city5}}"/>
+        <input name="point_area5" hidden value="{{item.point_area5}}"/>
         <input name="point5" hidden value="{{item.point5}}"/>
         <input class="inp" id="point5" name="point_inp" disabled="{{true}}" maxlength="20" placeholder="请选择目的地" placeholder-class="locationClass" type="text" value="{{item.point5}}" catchtap="toSelectPoint"/>
     </view>

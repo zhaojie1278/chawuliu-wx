@@ -27,8 +27,23 @@ Page({
   onLoad: function () {
     var that = this
 
-    // 检查微信信息是否已获取，如果没获取，则重新获取并赋值至 app.globalData
-    that.getUserInfoThis()
+    // 检查微信信息是否已获取，如果没获取，则提示授权，并跳回“我的”界面
+    // that.getUserInfoThis()
+    if (!app.globalData.userInfo) {
+      wx.showModal({
+        title:'提示',
+        content: '您当前未授权小程序获取您的基本信息，点击确定后为您返回个人中心，请点击授权按钮后继续完善信息',
+        showCancel: false,
+        success: function(res) {
+          if (res.confirm) {
+            wx.switchTab({
+              url: '/pages/contact/index'
+            })
+          }
+        }
+      })
+      return;
+    }
 
     // 获取已保存信息
     wx.showLoading({
@@ -203,9 +218,9 @@ Page({
       mask:true
     })
 
-    self=this
+    var that=this
     //图片
-    var imglist = self.data.imglist
+    var imglist = that.data.imglist
 
     // console.log(e)
 
@@ -231,13 +246,14 @@ Page({
       }
 
       var userInfo = app.globalData.userInfo
+      // console.log('userinfo:------------')
       // console.log(userInfo)
       if (!userInfo) {
         // 检查微信信息是否已获取，如果没获取，则重新获取并赋值至 app.globalData
-        that.getUserInfoThis()
+        // that.getUserInfoThis()
 
         // 提示
-        util.showMaskTip1500('微信数据获取异常，请稍等2秒后重试')
+        util.showMaskTip1500('抱歉，请先允许获取您的公开信息后再提交信息')
         return
       } else {
         formdata.avatarUrl = userInfo.avatarUrl
@@ -301,8 +317,8 @@ Page({
         }
       })
     }
-  },
-  getUserInfoThis:function(e) { // 获取用户信息
+  }
+  /*,getUserInfoThis:function(e) { // 获取用户信息
     if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
@@ -329,5 +345,5 @@ Page({
         }
       })
     }
-  }
+  }*/
 })

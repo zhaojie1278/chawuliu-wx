@@ -16,6 +16,13 @@
         </radio-group>
     </view> -->
     <view class="view-mg">
+        <input name="prov" hidden value="{{item.prov}}"/>
+        <input name="city" hidden value="{{item.city}}"/>
+        <input name="area" hidden value="{{item.area}}"/>
+        <text class="lbl-left" space="emsp">地  区</text>
+        <input class="inp" id="quyu" name="quyu" maxlength="20" placeholder="请选择" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu"/>
+    </view>
+    <view class="view-mg">
         <text class="lbl-left" space="emsp">品  牌</text>
         <input bindblur="bindPinpaiBlur" class="inp" id="pinpai" name="pinpai" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.pinpai}}"/>
     </view>
@@ -54,7 +61,7 @@
     </view>
     <view class="view-mg">
         <text class="lbl-left" space="emsp">里  程</text>
-        <input bindblur="bindLichengBlur" class="inp width50" id="licheng" name="licheng" maxlength="20" placeholder="请输入里程" type="text" value="{{item.licheng}}"/>
+        <input bindblur="bindLichengBlur" class="inp width50" id="licheng" name="licheng" maxlength="20" placeholder="请输入里程" type="digit" value="{{item.licheng}}"/>
         <text class="lbl-right-suffix">万公里</text>
     </view>    
     <view class="view-mg" style="height:300rpx;">

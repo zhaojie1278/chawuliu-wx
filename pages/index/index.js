@@ -45,14 +45,15 @@ Page({
     iscanvas: 'none',
     canIUse: false,
     canIUseWebView: wx.canIUse('web-view'),
-    startProv:'',
-    startCity:'',
+    start_prov:'',
+    start_city:'',
+    start_area:'',
     startVal: '',
-    pointProv:'',
-    pointCity:'',
+    point_prov:'',
+    point_city:'',
+    point_area:'',
     pointVal: '',
     nowCity: '定位中...',
-    userInfo: {},
     imgUrls: [  {    
         link:'/pages/index/index',    
         url:'../../images/lunbo/1.jpg'     
@@ -106,7 +107,7 @@ Page({
       app.globalData.ooid = ooid
     }
     // console.log('app.globalData::'+JSON.stringify(app.globalData));
-    if (app.globalData.userInfo) {
+    /*if (app.globalData.userInfo) {
       this.setData({
         userInfo: app.globalData.userInfo,
       })
@@ -128,7 +129,7 @@ Page({
           })
         }
       })
-    }
+    }*/
   },
   onShow: function(e) {
     var that = this
@@ -167,52 +168,26 @@ Page({
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
   },
-  getUserInfo: function(e) {
+  /*getUserInfo: function(e) {
     // console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,
     })
-  },
+  },*/
   searchzhuanxian (e) {
     // 本业内查询专线，按照精品专线发布时间/普通专线发布时间倒序排序
     // console.log(e)
-    var start = e.currentTarget.dataset.start
+    /*var start = e.currentTarget.dataset.start
     var point = e.currentTarget.dataset.point
     var params = {
       start: start,
       point: point
-    }
-    this.getTuis(params);
+    }*/
+    this.getTuis();
   },
-  getTuis: function(e) {
+  getTuis: function() {
     var that = this;
-    console.log('getTuis')
-    var start = ''
-    var point = ''
-    if (undefined!=e) {
-      if (e.start == undefined) {
-        util.showMaskTip1500('请选择出发地')
-        return
-      } else {
-        start = e.start
-      }
-      // console.log(e.point)
-      if (undefined == e.point) {
-        util.showMaskTip1500('请选择目的地')
-        return
-      } else {
-        point = e.point
-      }
-    } else {
-      // 默认不带条件查询
-      start = that.data.startVal
-      point = that.data.pointVal;
-    }
-
-    // console.log(that)
-    // console.log(start)
-    
     wx.showLoading({
       title: '加载中',
       mask: true
@@ -220,8 +195,12 @@ Page({
     wx.request({
       url: app.globalData.config.service.zhuanxianUrl+'/tui',
       data: {
-        'start': start,
-        'point': point,
+        start_prov: that.data.start_prov,
+        start_city: that.data.start_city,
+        start_area: that.data.start_area,
+        point_prov: that.data.point_prov,
+        point_city: that.data.point_city,
+        point_area: that.data.point_area,
         'cat': that.data.cat
       },
       method: 'POST',
@@ -310,7 +289,8 @@ Page({
               that.setData({
                 nowCity:cityStr,
                 // startCity:cityStr,
-                startVal: provStr
+                startVal: provStr,
+                start_prov: provStr
               })
 
               // 获取当前位置后再查找专线
@@ -328,19 +308,22 @@ Page({
   changeCity (e) {
     console.log('changeCity')
     // 选中的城市值赋值
-    console.log(e)
+    // console.log(e)
     var setCityDirection = e.direction
+    var cityVal = util.getZhuanxianShow(e);
     if (setCityDirection == 'startCity') {
       this.setData({
-        /*startCity: e.city,
-        startProv: e.prov*/
-        startVal: e.returnVal
+        start_prov: e.selectedProv,
+        start_city: e.selectedCity,
+        start_area: e.selectedArea,
+        startVal: cityVal
       })
     } else {
       this.setData({
-        /*pointCity: e.city,
-        pointProv: e.prov*/
-        pointVal: e.returnVal
+        point_prov: e.selectedProv,
+        point_city: e.selectedCity,
+        point_area: e.selectedArea,
+        pointVal: cityVal
       })
     }
 

@@ -1,0 +1,6 @@
+start_prov: that.data.start_prov,
+start_city: that.data.start_city,
+start_area: that.data.start_area,
+point_prov: that.data.point_prov,
+point_city: that.data.point_city,
+point_area: that.data.point_area,

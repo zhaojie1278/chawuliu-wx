@@ -88,6 +88,20 @@
   margin-top: 20rpx;
 }
 
+.container .cat2 {
+  float: left;
+  /* display:inline-block; */
+  height:60rpx;
+  line-height:60rpx;
+  padding:0 15rpx;
+  border:1px solid #ddd;
+  margin-right:14rpx;
+  color:#fff;
+  font-size:0.9em;
+  margin-top: 20rpx;
+  background: #6f95fb;
+}
+
 /* 内容 */
 .container .cnt {
   white-space:nowrap;

@@ -16,6 +16,16 @@ image {
   background:#fff;
 }
 
+.navigator .view-area {
+  padding: 20rpx 0;
+}
+
+.navigator .btn-area {
+  background-color:#fff;
+  width:100%;
+  margin-bottom: 5rpx;
+}
+
 .navigator .navigator1 {
   display:flex;
   flex-direction:row;

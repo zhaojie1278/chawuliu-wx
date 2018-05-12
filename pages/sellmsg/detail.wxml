@@ -9,6 +9,7 @@
                 <view class="title"><text class="nowrap">{{item.company}} </text></view>
                 <view class="describe">
                     <text class="nowrap2">{{sellCatsKeyVal[item.cat]}}</text>
+                    <text class="imgcount">{{item.quyu}}</text>
                     <text class="time">{{item.timebefore}}</text>
                     <text wx:if="{{item.imgcount>0}}" class="imgcount">{{item.imgcount}}图</text>
                 </view>

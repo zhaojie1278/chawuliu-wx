@@ -5,9 +5,6 @@ var util = require('../../utils/util')
 
 Page({
   data: {
-    userInfo: {},
-    hasUserInfo: false,
-    canIUse: wx.canIUse('button.open-type.getUserInfo'),
     item:{
       id:0,
       image: '', // ../../images/company/default.jpg

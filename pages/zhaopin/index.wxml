@@ -18,6 +18,9 @@
     <view class="navigator2">
         <view wx:if="{{index>0}}" class="catsecond" hidden="{{false}}" wx:for="{{worktypes}}" wx:key="{{index}}" bindtap="bindNavSecondTaped" class="{{worktypei==index?'viewdef-taped':'viewdef'}}" data-worktypei="{{index}}" hover-class="onhover">{{item}}</view>
     </view>
+    <view class="view-area">
+        <button bindtap="toSelectArea" type="default" size="default" loading="{{false}}" class="btn-area">{{quyu}}</button>
+    </view>
 </view>
 
 <!--专线推荐-->

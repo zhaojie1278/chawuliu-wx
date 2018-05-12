@@ -8,10 +8,11 @@ var cartypes = ['请选择','不限车型','平板','高栏','厢式','危险','
 
 Page({
   data: {
-    userInfo: {},
     item:{
       prov:'',
       city:'',
+      area:'',
+      startVal: '请选择',
       cid:0,
       content:'',
       img1:'',
@@ -186,6 +187,15 @@ Page({
             itemVal.id = res.data.data.id;
             itemVal.prov = res.data.data.prov;
             itemVal.city = res.data.data.city;
+            itemVal.area = res.data.data.area;
+            if (res.data.data.area != '') {
+              itemVal.quyu = res.data.data.area;
+            } else if (res.data.data.city != '') {
+              itemVal.quyu = res.data.data.city;
+            } else if (res.data.data.prov != '') {
+              itemVal.quyu = res.data.data.prov;
+            }
+            itemVal.quyu = itemVal.quyu ? itemVal.quyu : '请选择';
             itemVal.cid = res.data.data.cid;
             itemVal.content = res.data.data.content;
             itemVal.img1 = res.data.data.img1;
@@ -268,9 +278,9 @@ Page({
         data: showIden3Global
       });
     }*/
-    if (this.data.isLoaded) {
+    /*if (this.data.isLoaded) {
       this.getNowLocation(); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置
-    }
+    }*/
     console.log('onshow end')
   },
   formSubmit:function(e){
@@ -282,6 +292,32 @@ Page({
     var that=this
     // 提交校验
     var formdata = e.detail.value
+    if (formdata.quyu=='') {
+      util.showMaskTip1500('请选择发布城市或地区')
+      return
+    }
+    if (that.data.item.catname == '出售') {
+      // 非购买，判断车辆相关信息是否为空 品牌/价格/上牌时间/里程数
+      if (formdata.pinpai == '') {
+        util.showMaskTip1500('品牌不能为空')
+        return
+      } else if (formdata.cartype == '请选择') {
+        util.showMaskTip1500('车型不能为空')
+        return
+      } else if (formdata.lengthtype == '请选择') {
+        util.showMaskTip1500('车长不能为空')
+        return
+      } else if (formdata.price == '') {
+        util.showMaskTip1500('价格不能为空')
+        return
+      } else if (formdata.shangpai == '请选择') {
+        util.showMaskTip1500('上牌时间不能为空')
+        return
+      } else if (formdata.licheng == '') {
+        util.showMaskTip1500('里程数不能为空')
+        return
+      }
+    }
     if (formdata.nickname == '') {
       util.showMaskTip1500('联系人不能为空')
     } else if (formdata.phone == '') {
@@ -290,37 +326,12 @@ Page({
       util.showMaskTip1500('地址不能为空')
     } else if (formdata.cid == '') {
       util.showMaskTip1500('抱歉，联系人信息异常，请重新加载后重试')
-    } else {
-      if (that.data.item.catname == '出售') {
-        // 非购买，判断车辆相关信息是否为空 品牌/价格/上牌时间/里程数
-        if (formdata.pinpai == '') {
-          util.showMaskTip1500('品牌不能为空')
-          return
-        } else if (formdata.price == '') {
-          util.showMaskTip1500('价格不能为空')
-          return
-        } else if (formdata.shangpai == '') {
-          util.showMaskTip1500('上牌时间不能为空')
-          return
-        } else if (formdata.licheng == '') {
-          util.showMaskTip1500('里程数不能为空')
-          return
-        } else if (formdata.lengthtype == '请选择') {
-          util.showMaskTip1500('车长不能为空')
-          return
-        } else if (formdata.cartype == '请选择') {
-          util.showMaskTip1500('车型不能为空')
-          return
-        }
-      } else {
-        // 购买
-        if(formdata.content==''){
+    } else if(formdata.content==''){
           util.showMaskTip1500('内容不能为空')
         // } else if (formdata.img1 == '' && formdata.img2 == '' && formdata.img3 == '' && formdata.img4 == '') {
           // util.showMaskTip1500('抱歉，请至少上传一张图片')
           return   
-        }
-      }
+    } else {
       //提交
       var reqUrl = app.globalData.config.service.sellmsgUrl+'/add';
       wx.request({
@@ -408,6 +419,31 @@ Page({
     this.setData({
       "item.content": e.detail.value
     })
+  },
+  toSelectQuyu (e) {
+    // 求职区域
+    // var areaCat = app.globalData.zxCatShinei;
+    // var nowAreaVal = this.data.item.city
+    // var nowAreaCatStr = 'city'
+    // 选择
+    wx.navigateTo({
+      url:"../city/index?direction=item.quyu"
+    })
+  },
+  changeCity (e) {
+    console.log('changeCity')
+    // 选中的城市值赋值
+    console.log(e)
+    var setCityDirection = e.direction
+    if (setCityDirection == 'item.quyu') {
+      var cityVal = util.getZhuanxianShow(e);
+      this.setData({
+        'item.prov': e.selectedProv,
+        'item.city': e.selectedCity,
+        'item.area': e.selectedArea,
+        'item.quyu': cityVal
+      })
+    }
   },
   checkImg:function(e){
     var imgId = e.currentTarget.id

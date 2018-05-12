@@ -69,10 +69,27 @@ var showModel = (title, content) => {
   })
 }
 
+
+var getZhuanxianShow = e => {
+  // console.log('in zhuanxian;:'+JSON.stringify(e))
+    // 获取地区值
+    var selectedProv = e.selectedProv;
+    var selectedCity = e.selectedCity;
+    var selectedArea = e.selectedArea;
+    var returnVal = '';
+    if (selectedArea != '') {
+      returnVal = selectedArea;
+    } else if (selectedCity != '') {
+      returnVal = selectedCity;
+    } else if (selectedProv != '') {
+      returnVal = selectedProv;
+    }
+    return returnVal;
+}
 // module.exports = { formatTime, showBusy, showSuccess, showModel }
 
 module.exports = {
-  formatTime, formatDay, showMaskTip1500, showBusy, showSuccess, showMaskSuccess, showError, showModel
+  formatTime, formatDay, showMaskTip1500, showBusy, showSuccess, showMaskSuccess, showError, showModel, getZhuanxianShow
 }
 
 /** navigateBack with an unexist webviewId */

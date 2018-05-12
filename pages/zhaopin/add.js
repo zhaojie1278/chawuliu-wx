@@ -12,7 +12,6 @@ var zhaopinCat = 1;
 var qiuzhiCat = 2;
 Page({
   data: {
-    userInfo: {},
     item:{
       sex: 1,
       prov:'',
@@ -208,6 +207,17 @@ Page({
             itemVal.id = res.data.data.id;
             itemVal.prov = res.data.data.prov;
             itemVal.city = res.data.data.city;
+            itemVal.area = res.data.data.area;
+            if (res.data.data.area != '') {
+              itemVal.quyu = res.data.data.area;
+            } else if (res.data.data.city != '') {
+              itemVal.quyu = res.data.data.city;
+            } else if (res.data.data.prov != '') {
+              itemVal.quyu = res.data.data.prov;
+            }
+            itemVal.quyu = itemVal.quyu ? itemVal.quyu : '请选择';
+            // console.log('itemVal.quyu::'+itemVal.quyu)
+
             itemVal.cid = res.data.data.cid;
             itemVal.content = res.data.data.content;
             itemVal.img1 = res.data.data.img1;
@@ -225,7 +235,6 @@ Page({
             itemVal.jiazhao = res.data.data.jiazhao ? res.data.data.jiazhao : '请选择';
             itemVal.jialing = res.data.data.jialing ? res.data.data.jialing : '请选择';
             itemVal.gongzi = res.data.data.gongzi ? res.data.data.gongzi : '请选择';
-            itemVal.quyu = res.data.data.quyu ? res.data.data.quyu : '请选择';
             itemVal.xueli = res.data.data.xueli ? res.data.data.xueli : '请选择';
             itemVal.birthmonth = res.data.data.birthmonth ? res.data.data.birthmonth : '请选择';
             itemVal.xueli = res.data.data.xueli ? res.data.data.xueli : '请选择';
@@ -286,9 +295,9 @@ Page({
       });
     }*/
 
-    if (this.data.isLoaded) {
+    /*if (this.data.isLoaded) {
       this.getNowLocation(); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置并实时查询
-    }
+    }*/
     console.log('onshow end')
   },
   formSubmit:function(e){
@@ -299,22 +308,28 @@ Page({
 
     var that=this
     // 提交校验
-    var formdata = e.detail.value
-    if(formdata.worktype=='请选择') {
-      util.showMaskTip1500('请选择岗位')
-    } 
     /*else if (formdata.jiazhao=='请选择') {
       util.showMaskTip1500('请选择驾照类型')
     }*/ 
+
+    var formdata = e.detail.value
+    if (formdata.quyu=='') {
+      util.showMaskTip1500('请选择发布城市或地区')
+    }
+    else if(formdata.birthmonth=='请选择') {
+      util.showMaskTip1500('请选择出生年月')
+    }
+    else if(formdata.xueli=='请选择') {
+      util.showMaskTip1500('请选择学历')
+    }
     else if(formdata.jialing=='请选择') {
       util.showMaskTip1500('请选择工作经验')
     }
+    else if(formdata.worktype=='请选择') {
+      util.showMaskTip1500('请选择岗位')
+    } 
     else if(formdata.gongzi=='请选择') {
       util.showMaskTip1500('请选择工资')
-    } else if(formdata.birthmonth=='请选择') {
-      util.showMaskTip1500('请选择出生年份')
-    } else if(formdata.xueli=='请选择') {
-      util.showMaskTip1500('请选择学历')
     } else if (formdata.nickname == '') {
       util.showMaskTip1500('联系人不能为空')
     } else if (formdata.phone == '') {
@@ -437,7 +452,7 @@ Page({
     var areaCat = app.globalData.zxCatShinei;
     var nowAreaVal = this.data.item.city
     var nowAreaCatStr = 'city'
-    // 选择出发地
+    // 选择
     wx.navigateTo({
       url:"../city/index?direction=item.quyu&cat="+areaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
     })
@@ -448,8 +463,12 @@ Page({
     console.log(e)
     var setCityDirection = e.direction
     if (setCityDirection == 'item.quyu') {
+      var cityVal = util.getZhuanxianShow(e);
       this.setData({
-        'item.quyu': e.returnVal
+        'item.prov': e.selectedProv,
+        'item.city': e.selectedCity,
+        'item.area': e.selectedArea,
+        'item.quyu': cityVal
       })
     }
   },

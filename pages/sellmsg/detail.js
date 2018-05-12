@@ -5,7 +5,6 @@ var util = require('../../utils/util')
 
 Page({
   data: {
-    userInfo: {},
     item:{
       id: '8',
       prov: '北京市',
