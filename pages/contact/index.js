@@ -94,6 +94,7 @@ Page({
     return app.shareFun(res)
   },
   getUserInfo: function(e) {
+    // 用户授权公开信息 201805
     // console.log(e)
     if (e.detail.errMsg.indexOf('fail auth deny') !== -1) {
       // 拒绝授权

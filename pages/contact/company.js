@@ -27,6 +27,7 @@ Page({
   onLoad: function () {
     var that = this
 
+    // 用户公开信息是否已授权判断
     // 检查微信信息是否已获取，如果没获取，则提示授权，并跳回“我的”界面
     // that.getUserInfoThis()
     if (!app.globalData.userInfo) {
@@ -245,6 +246,7 @@ Page({
         formdata.openid = openid
       }
 
+      // 用户公开信息是否已授权判断
       var userInfo = app.globalData.userInfo
       // console.log('userinfo:------------')
       // console.log(userInfo)
@@ -253,7 +255,7 @@ Page({
         // that.getUserInfoThis()
 
         // 提示
-        util.showMaskTip1500('抱歉，请先允许获取您的公开信息后再提交信息')
+        util.showMaskTip1500('抱歉，您当前未授权小程序获取您的基本信息，请至“个人中心”授权后再完善信息')
         return
       } else {
         formdata.avatarUrl = userInfo.avatarUrl
