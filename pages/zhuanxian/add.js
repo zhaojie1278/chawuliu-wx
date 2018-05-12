@@ -179,6 +179,7 @@ Page({
             itemVal.id = res.data.data.id;
             itemVal.start_prov = res.data.data.start_prov;
             itemVal.start_city = res.data.data.start_city;
+            itemVal.start_area = res.data.data.start;
             if (res.data.data.start != '') {
               itemVal.start = res.data.data.start;
             } else if (res.data.data.start_city) {
@@ -188,6 +189,7 @@ Page({
             }
             itemVal.point_prov = res.data.data.point_prov;
             itemVal.point_city = res.data.data.point_city;
+            itemVal.point_area = res.data.data.point;
 
             if (res.data.data.point != '') {
               itemVal.point = res.data.data.point;
@@ -429,7 +431,7 @@ Page({
         'item.point_area': this.data.nowArea,
       })*/
     }
-    console.log('this.data.nowCity::'+this.data.nowCity)
+    // console.log('this.data.nowCity::'+this.data.nowCity)
     // 选择目的地
     wx.navigateTo({
       url:"../city/index?direction="+pointDirection+"&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
