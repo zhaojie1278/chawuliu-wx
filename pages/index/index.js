@@ -281,16 +281,17 @@ Page({
               // console.log(res.data.result)
               var cityStr = res.data.result.addressComponent.city
               var provStr = res.data.result.addressComponent.province
-              /*
+              
               if (cityStr.indexOf('市')!=-1){
                 cityStr = cityStr.replace('市','')
-              }*/
+              }
             
               that.setData({
                 nowCity:cityStr,
                 // startCity:cityStr,
-                startVal: provStr,
-                start_prov: provStr
+                start_prov: provStr,
+                start_city: cityStr,
+                startVal: cityStr,
               })
 
               // 获取当前位置后再查找专线

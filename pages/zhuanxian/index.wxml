@@ -24,6 +24,17 @@
         <button class="tosel_inp" type="primary" data-catid="{{cat}}" data-start="{{startVal}}" data-point="{{pointVal}}" data-start-prov="{{startProv}}" data-point-prov="{{pointProv}}" size="default" loading="{{false}}" bindtap="searchzhuanxian">查询线路</button>
       </view>
 </view>
+<view class="bottom-record">
+  <view class="record-txt-intro">
+    点击语音搜索 ↓↓
+  </view>
+  <view>
+    <button wx:if="{{recordNowStart}}" bindtap="recordStartTapFun" class='btn'>语音搜索</button>
+    <!-- <button bindtap="recordPauseFun" class='btn'>暂停录音</button> -->
+    <button  wx:if="{{!recordNowStart}}" bindtap="recordStopTapFun" class='btn'>说好了</button>
+    <!-- <button bindtap="recordPlayFun" class='btn'>播放录音</button> -->
+  </view>
+</view>
 
 <!--专线推荐-->
 <!--

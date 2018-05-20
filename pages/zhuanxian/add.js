@@ -137,6 +137,7 @@ Page({
         }
       })
 
+      that.getNowLocation()
       return
     } else if (undefined != e && undefined != e.zxid) {
       console.log('upupdate')
@@ -576,12 +577,16 @@ Page({
                 nowProv:provStr,
                 nowDistrict:districtStr,
               })
-              
+
+              if (that.data.defAreaCat == app.globalData.zxCatShinei) {
+                cityStr = districtStr
+              }
               that.setData({
-                nowCity:cityStr,
-                nowProv:provStr,
-                nowDistrict:districtStr,
-              })              
+                'item.start_prov': provStr,
+                'item.start_city': cityStr,
+                'item.start_area': districtStr,
+                'item.startVal': cityStr
+              })            
             }
           }
         })

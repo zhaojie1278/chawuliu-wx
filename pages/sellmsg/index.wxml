@@ -17,6 +17,7 @@
     </view>
     <view class="view-area">
         <button bindtap="toSelectArea" type="default" size="default" loading="{{false}}" class="btn-area">{{quyu}}</button>
+        <text class="area-txt-tip">Tip:点击可切换地区查询</text>
     </view>
 </view>
 

@@ -18,13 +18,26 @@ image {
 }
 
 .navigator .view-area {
-  padding: 20rpx 0;
+  padding: 20rpx 0 10rpx;
+  text-align: center;
+}
+
+.navigator .area-txt-tip {
+  color: #999;
+  font-size: 12px;
 }
 
 .navigator .btn-area {
   background-color:#fff;
-  width:100%;
+  /*width:100%;*/
+  width:670rpx;
   margin-bottom: 5rpx;
+  border: 0px solid #3573fa;
+  height: 80rpx;
+  line-height: 75rpx;
+  font-size: 1rem;
+  /*color: #0aba07;*/
+  color: green;
 }
 
 .navigator .navigator1 {
@@ -33,6 +46,7 @@ image {
   height: 100rpx;
   line-height: 100rpx;
   justify-content: space-around;
+  margin-top: 20rpx;
   margin-bottom: 5rpx;
 }
 .navigator .navigator2 {
@@ -40,15 +54,20 @@ image {
   flex-direction:row;
   /* height: 65rpx; */
   /*line-height: 65rpx;*/
-   /*justify-content: space-around; */
+   justify-content: space-around; 
    /*justify-content: space-between; */
   flex-wrap: wrap;
   color: #555;
-  margin-left: 24rpx;
+  /*margin-left: 24rpx;*/
+  width:670rpx;
+  padding: 10rpx 0;
+  margin: 0 auto;
 }
 
 .navigator .navigator2 view {
   min-width: 180rpx;
+  /*min-width: 130rpx;*/
+  /*float: left;*/
 }
 
 .navigator .onhover {
@@ -63,8 +82,9 @@ image {
 
 .navigator .navigator1 .viewdef {
   width: 350rpx;
+  border: 1px solid #e5e5e5;
 }
-.navigator .navigator2 .viewdef {
+.navigator .navigator2 .viewdef2 {
   font-size:0.85em;
   margin: 10rpx 10rpx;
   border:1px solid #3573fa;
@@ -72,12 +92,17 @@ image {
   padding:0 10rpx;
   height: 65rpx;
   line-height: 65rpx;
+  text-align: center;
 }
 
 .navigator .viewdef-taped {
+  font-size:1em;
+  /*
   font-size:0.9em;
   color:#3573fa;
-  border-bottom:1px solid #3573fa;
+  border-bottom: 1px solid #3573fa;*/
+  background: #ff7917;
+  color: #fff;
   text-align: center;
 }
 
@@ -85,7 +110,7 @@ image {
   width: 350rpx;
 }
 
-.navigator .navigator2 .viewdef-taped {
+.navigator .navigator2 .viewdef-taped2 {
   font-size:0.85em;
   margin: 10rpx 10rpx;
   border:1px solid #3573fa;
@@ -93,6 +118,9 @@ image {
   padding:0 10rpx;
   height: 65rpx;
   line-height: 65rpx;
+  background-color:#3573fa;
+  color: #fff;
+  text-align: center;
 }
 
 /* 查询地址 */

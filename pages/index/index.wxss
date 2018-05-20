@@ -81,6 +81,8 @@ image {
   background-color:#fff;
   width:100%;
   /* border: 1px solid #dbdbdb; */
+  /*color: #0aba07;*/
+  color: green;
 }
 
 .search-zhuanxian .search {

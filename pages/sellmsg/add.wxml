@@ -22,10 +22,12 @@
         <text class="lbl-left" space="emsp">地  区</text>
         <input class="inp" id="quyu" name="quyu" maxlength="20" placeholder="请选择" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu"/>
     </view>
+    <view class="clear"></view>
     <view class="view-mg">
         <text class="lbl-left" space="emsp">品  牌</text>
         <input bindblur="bindPinpaiBlur" class="inp" id="pinpai" name="pinpai" maxlength="20" placeholder="请输入品牌" type="text" value="{{item.pinpai}}"/>
     </view>
+    <view class="clear"></view>
     <view class="view-mg">
         <text class="lbl-left" space="emsp">车  型</text>
         <input name="cartype" hidden value="{{item.cartype}}"/>
@@ -35,6 +37,7 @@
             </view>
         </picker>
     </view>
+    <view class="clear"></view>
     <view class="view-mg">
         <text class="lbl-left" space="emsp">车  长</text>
         <input name="lengthtype" hidden value="{{item.lengthtype}}"/>
@@ -44,11 +47,13 @@
             </view>
         </picker>
     </view>
+    <view class="clear"></view>
     <view class="view-mg">
         <text class="lbl-left" space="emsp">价  格</text>
         <input bindblur="bindPriceBlur" class="inp width50" id="price" name="price" maxlength="20" placeholder="请输入价格" type="digit" value="{{item.price}}"/>
         <text class="lbl-right-suffix">万元</text>
     </view>
+    <view class="clear"></view>
     <view class="view-mg">
         <text class="lbl-left">上牌时间</text>
         <input name="shangpai" hidden value="{{item.shangpai}}"/>
@@ -59,11 +64,13 @@
             </view>
         </picker>
     </view>
+    <view class="clear"></view>
     <view class="view-mg">
         <text class="lbl-left" space="emsp">里  程</text>
         <input bindblur="bindLichengBlur" class="inp width50" id="licheng" name="licheng" maxlength="20" placeholder="请输入里程" type="digit" value="{{item.licheng}}"/>
         <text class="lbl-right-suffix">万公里</text>
-    </view>    
+    </view>
+    <view class="clear"></view>
     <view class="view-mg" style="height:300rpx;">
         <view class="lbl-line"><text wx:if="{{isnotzhaopin}}">车辆介绍</text><text wx:else>发布内容</text></view>
         <view class="area_box">

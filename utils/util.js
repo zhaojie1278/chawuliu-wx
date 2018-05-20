@@ -69,6 +69,17 @@ var showModel = (title, content) => {
   })
 }
 
+// 显示失败提示
+var showModel2 = (title, content) => {
+  // wx.hideToast();
+
+  wx.showModal({
+      title,
+      content: content,
+      showCancel: false
+  })
+}
+
 
 var getZhuanxianShow = e => {
   // console.log('in zhuanxian;:'+JSON.stringify(e))
@@ -89,7 +100,7 @@ var getZhuanxianShow = e => {
 // module.exports = { formatTime, showBusy, showSuccess, showModel }
 
 module.exports = {
-  formatTime, formatDay, showMaskTip1500, showBusy, showSuccess, showMaskSuccess, showError, showModel, getZhuanxianShow
+  formatTime, formatDay, showMaskTip1500, showBusy, showSuccess, showMaskSuccess, showError, showModel, showModel2, getZhuanxianShow
 }
 
 /** navigateBack with an unexist webviewId */

@@ -42,7 +42,7 @@
                 <text class="cnt">{{item.jialing}}</text>
             </view>
             <view wx:if="{{item.quyu !=''}}">
-                <text class="title">求职区域：</text>
+                <text class="title" space="emsp">地  区：</text>
                 <text class="cnt">{{item.quyu}}</text>
             </view>
         </view>

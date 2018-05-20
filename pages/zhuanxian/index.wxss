@@ -67,6 +67,8 @@ image {
 .search-zhuanxian .btn-zhuanxian {
   background-color:#fff;
   width:100%;
+  /*color: #0aba07;*/
+  color: green;
   /* border: 1px solid #dbdbdb; */
 }
 
@@ -97,4 +99,29 @@ image {
 }
 .tuijian-list img {
   border-radius: 29px;
+}
+.bottom-record {
+  position: fixed;
+  bottom: 0;
+  /*height: 100rpx;*/
+  /*line-height: 100rpx;*/
+  color: #3573fa;
+  font-size: 14px;
+  text-align: center;
+  width: 100%;
+  background-color:#fff;
+  padding:15rpx 0 0;
+}
+
+.bottom-record .record-txt-intro {
+  color: #999;
+  font-size: 12px;
+  padding-bottom: 5rpx;
+  /*border-bottom: 1px solid #ddd;*/
+  width: 70%;
+  margin: 10rpx auto 15rpx;
+}
+
+.bottom-record .btn {
+  border-top: 0 solid #fff;
 }

@@ -1,0 +1,58 @@
+﻿20180514
+{
+    1、首页定位到市 -ok
+    2、招聘分类显示优化 -ok
+    3、招聘多选查询 -ok
+    4、招聘地区放上面 -ok
+    5、地区仿照物流帮帮整体修改 todo
+    6、发布招聘默认显示当前市 -ok 市内倒短车 默认区
+    7、查物流关联公众号
+    8、首页生成图片
+    9、主体颜色加个绿色，仿照性别选择的男、女那个颜色 -ok
+    10、市辖区增加当前位置 -ok
+    11、招聘、求职、出售、购买的背景色改成橙色底 -ok
+    12、有选择和有切换的地方改成绿色 -ok
+    13、查询加语音搜索 - 物流帮帮 录音+转文字APP // TODO
+
+    http://www.bkjia.com/PHPjc/1233232.html
+
+    https://blog.csdn.net/happycxz/article/details/78016299 -- this say format 
+    https://blog.csdn.net/Afanbaby/article/details/78863749 --
+    https://blog.csdn.net/happycxz/article/details/78491751
+    https://www.jianshu.com/p/b092da81feb0
+    http://www.hishop.com.cn/xiaocx/show_50898.html
+    http://www.mntuku.cn/index.php/article/show/id-7096
+
+    百度语音
+    http://yuyin.baidu.com/docs/asr/54
+
+    ffmpeg
+    https://www.cnblogs.com/freeweb/p/6897907.html -- this
+
+    php
+    https://juejin.im/post/5a7a55d25188254e76179143
+
+
+    https://ffmpeg.zeranoe.com/builds/
+    https://www.jianshu.com/p/7ed3be01228b
+
+    // 计划任务清理录音文件 -- TODO
+
+
+    https://kn007.net/ -- 关注
+
+
+    -- ok --
+    https://blog.csdn.net/u011072139/article/details/78830999
+    https://blog.csdn.net/u011072139/article/details/78831077
+    https://blog.csdn.net/u011072139/article/details/78831285
+
+    https://my.oschina.net/junn/blog/93028 -- shell_exec
+    https://www.cnblogs.com/tinywan/p/6248714.html -- shell_exec
+
+    -- 参考
+    http://www.mntuku.cn/index.php/article/show/id-7096
+
+    -- todo
+    服务器删除语音文件
+}

@@ -5,7 +5,7 @@
     <input name="cid" hidden value="{{item.cid}}"/>
     <input name="catname" hidden value="{{item.catname}}"/>
     <view class="view-mg">
-        <text class="lbl-left">求职区域</text>
+        <text class="lbl-left" space="emsp">地  区</text>
         <!-- TODO -->
         <input name="prov" hidden value="{{item.prov}}"/>
         <input name="city" hidden value="{{item.city}}"/>

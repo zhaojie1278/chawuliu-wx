@@ -145,6 +145,8 @@ Page({
         }
       })
 
+      // 加载当前位置
+      this.getNowLocation();
       return
     } else if (undefined != e && undefined != e.sellmsgid) {
       console.log('upupdate')
@@ -278,6 +280,7 @@ Page({
         data: showIden3Global
       });
     }*/
+
     /*if (this.data.isLoaded) {
       this.getNowLocation(); // 放在 onShow 的目的是当小程序启动，或从后台进入前台显示都获取当前位置
     }*/
@@ -526,7 +529,8 @@ Page({
               var cityStr = locationInfo.city
               that.setData({
                 "item.prov":provStr,
-                "item.city":cityStr
+                "item.city":cityStr,
+                "item.quyu":cityStr
               })
             }
           }

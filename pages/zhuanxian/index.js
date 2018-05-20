@@ -3,6 +3,11 @@
 const app = getApp()
 var util = require("../../utils/util")
 // var lastnavtapCat = {} // 最后选择的值
+// 录音器
+const recorderManager = wx.getRecorderManager()
+const innerAudioContext = wx.createInnerAudioContext()
+var tempFilePath; // 临时路径
+
 Page({
   data: {
     start_prov:'',
@@ -33,7 +38,8 @@ Page({
     zxCats:app.globalData.zxCats,
     cat:1,
     isLoaded: false,
-    isCityReturn: false // 是否选择城市后返回
+    isCityReturn: false, // 是否选择城市后返回
+    recordNowStart: true
     // lastnavtapCat: {}
   },
   onLoad: function (e) {
@@ -410,5 +416,160 @@ Page({
     })
 
     this.getSearches();
+  },
+  recordStartTapFun (res) {
+    var that = this
+    const options = {
+      duration: 3000,
+      sampleRate: 44100,
+      numberOfChannels: 1,
+      encodeBitRate: 192000,
+      format: 'mp3',
+      frameSize: 50
+    }
+
+    recorderManager.start(options)
+    
+    that.recordStartFun();
+
+    // 自动停止录音回调
+    that.recordStopFun();
+
+    that.recordErrorFun();
+
+  },
+
+  recordErrorFun(res) {
+
+    var that = this
+     //错误回调
+    recorderManager.onError((res) => {
+      console.log('error', res);
+      wx.showToast({
+        title: "录音调用失败，请重新打开小程序再尝试",
+        icon: "none"
+      })
+      that.setData({
+        recordNowStart: true
+      })
+    })
+  },
+  recordStartFun (res) {
+
+    var that = this
+    recorderManager.onStart(() => {
+      console.log('recorder start')
+      that.setData({
+        recordNowStart: false
+      })
+      wx.showLoading({
+          title: '录音中..',
+          mask: true
+      })
+    })
+  },
+  recordPauseFun (res) {
+    recorderManager.pause();
+    console.log('recorder pause')
+  },
+  recordStopTapFun (res) {
+    var that = this
+    recorderManager.stop();
+    this.recordStopFun();
+  },
+  recordStopFun (res) {
+    // wx.hideLoading();
+    var that = this
+    recorderManager.onStop((res) => {
+      that.tempFilePath = res.tempFilePath;
+      console.log('停止录音', res.tempFilePath)
+      that.setData({
+        recordNowStart: true
+      })
+      const { tempFilePath } = res
+
+      // 上传文件至服务器
+      wx.showLoading({
+          title: '识别中..',
+          mask: true
+      })
+
+      wx.uploadFile({
+        url: app.globalData.config.service.uploadRecordUrl, //仅为示例，非真实的接口地址
+        filePath: tempFilePath,
+        name: 'file',
+        header: {
+          'content-type': 'multipart/form-data'
+        },
+        formData:{
+          'from': 'zhuanxian'
+        },
+        success: function(res){
+          console.log('upload res::')
+          // console.log(res)
+          var data = res.data
+          // console.log(res);
+          var jsonData = JSON.parse(data)
+          console.log('data::',data);
+          // console.log(jsonData.status);
+
+          if (jsonData.status != 1) {
+            util.showModel2('提示',jsonData.message)
+          } else {
+            // 设置本地展示
+            // console.log(that.data)
+            if (jsonData.data.recog == 0) {
+              wx.showModel2('提示','识别失败，请稍后重试，或手动选择地区')
+            } else {
+              // util.showError('识别的内容为：'+jsonData.data.recog.start+' --- '+jsonData.data.recog.end);
+              that.setData({
+                startVal: jsonData.data.recog.start,
+                pointVal: jsonData.data.recog.end
+              })
+            }
+          }
+        },
+        fail: function() {
+          util.showModel2('提示','上传失败')
+        },
+        complete (res) {
+          /*setTimeout(function(){
+            wx.hideLoading();
+          }, 2000)*/
+          wx.hideLoading();
+        }
+      })
+    })
+  },
+  recordPlayFun (res) { // 播放录音
+    innerAudioContext.autoplay = true
+    innerAudioContext.src = this.tempFilePath,
+    innerAudioContext.onPlay(() => {
+      console.log('开始播放')
+    })
+    innerAudioContext.onError((res) => {
+      console.log(res.errMsg)
+      console.log(res.errCode)
+    })
+  },
+  recordFun (res) {
+    console.log('record', res);
+
+    /*
+    recorderManager.onPause(() => {
+      console.log('recorder pause')
+    })
+    recorderManager.onStop((res) => {
+      console.log('recorder stop', res)
+      const { tempFilePath } = res
+
+    })
+    recorderManager.onFrameRecorded((res) => {
+      const { frameBuffer } = res
+      console.log('frameBuffer.byteLength', frameBuffer.byteLength)
+    })*/
+
+    
+
   }
 })

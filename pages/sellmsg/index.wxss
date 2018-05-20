@@ -18,12 +18,24 @@ image {
 
 .navigator .view-area {
   padding: 20rpx 0;
+  text-align: center;
+}
+
+.navigator .area-txt-tip {
+  color: #999;
+  font-size: 12px;
 }
 
 .navigator .btn-area {
   background-color:#fff;
-  width:100%;
+  width:670rpx;
   margin-bottom: 5rpx;
+  border: 0px solid #3573fa;
+  height: 80rpx;
+  line-height: 75rpx;
+  font-size: 1rem;
+  /*color: #0aba07;*/
+  color: green;
 }
 
 .navigator .navigator1 {
@@ -33,6 +45,7 @@ image {
   line-height: 100rpx;
   justify-content: space-around;
   margin-bottom: 5rpx;
+  margin-top: 20rpx;
 }
 .navigator .navigator2 {
   display:flex;
@@ -49,8 +62,11 @@ image {
   border-bottom:1px solid #3573fa;
 }
 
-.navigator .viewdef {
-  font-size:0.9em;
+.navigator .navigator1 .viewdef {
+  font-size:1em;
+  width: 350rpx;
+  text-align: center;
+  border: 1px solid #e5e5e5;
 }
 
 .navigator .navigator2 .viewdef {
@@ -61,10 +77,16 @@ image {
   padding:0 10rpx;
 }
 
-.navigator .viewdef-taped {
-  font-size:0.9em;
+.navigator .navigator1 .viewdef-taped {
+  /* font-size:0.9em;
   color:#3573fa;
-  border-bottom:1px solid #3573fa;
+  border-bottom:1px solid #3573fa; */
+
+  width: 350rpx;
+  font-size:1em;
+  background: #ff7917;
+  color: #fff;
+  text-align: center;
 }
 
 .navigator .navigator2 .viewdef-taped {

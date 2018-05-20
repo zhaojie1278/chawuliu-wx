@@ -2,7 +2,8 @@
 //获取应用实例
 const app = getApp()
 var util = require("../../utils/util")
-var worktypes = ['请选择','司机','叉车工','物流会计','客服','物流专员/助理','物流经理/主管','物流总监','调度员','快递员','仓库管理员','仓库经理/主管','装卸/搬运工','供应链管理','单证员','国际货运','分拣员','物料管理','货运代理','集装箱业务','海关事务管理','集装箱维护','集装箱操作','物流销售','订单处理员','物流/仓储项目管理','船务/空运陆运操作','水运/陆运/空运销售'];
+var worktypes = ['请选择','司机','叉车工','物流会计','客服','物流专员','物流经理主管','物流总监','调度员','快递员','仓库管理员','仓库主管','装卸/搬运工','供应链管理','单证员','国际货运','分拣员','物料管理','货运代理','集装箱业务','海关事务管理','集装箱维护','集装箱操作','物流销售','订单处理员','物流/仓储项目','船务操作','空陆运操作'];
+var selectWorktypesInit = {1:'司机'};
 
 Page({
   data: {
@@ -47,8 +48,9 @@ Page({
     isLoaded: false,
     isCityReturn: false, // 是否选择城市后返回
     worktypes: worktypes,
-    worktypei: 1,
-    worktype: '司机'
+    // worktypei: 1,
+    worktype: '司机',
+    selectWorktypes: selectWorktypesInit
   },
   onLoad: function (e) {
     // 已加载设置
@@ -134,46 +136,81 @@ Page({
     this.setData({
       cat: cat,
     })
-    this.searchsellmsg(e)
+    // this.searchsellmsg(e)
+    this.getSearches()
   }, 
   bindNavSecondTaped:function(e) {
     // 分类切换
     var id = parseInt(e.currentTarget.dataset.worktypei)
-    console.log('worktype-id:'+id)
-    console.log('data')
-    console.log(this.data)
-    this.setData({
+    // console.log('worktype-id:'+id)
+    // console.log('data')
+    // console.log(this.data)
+    /*this.setData({
       worktype: worktypes[id],
       worktypei: id
+    })*/
+    // console.log('eeee',e);
+    var selectWorktypes = this.data.selectWorktypes;
+    // var selectWorktypeI = id;
+    if (!selectWorktypes[id]) {
+      selectWorktypes[id] = worktypes[id];
+    } else {
+      delete selectWorktypes[id];
+    }
+    this.setData({
+      selectWorktypes: selectWorktypes
     })
-    this.searchsellmsg(e)
+
+    // console.log('selectWorktypes',selectWorktypes)
+
+    // this.searchsellmsg(e)
+    this.getSearches();
   }, 
   onShareAppMessage: function (res) { // 转发
     return app.shareFun(res)
   },
-  searchsellmsg (e) {
+  /*searchsellmsg (e) {
     // 本业内查询专线，按照精品专线发布时间/普通专线发布时间倒序排序
     // console.log(e)
-    /*var prov = e.currentTarget.dataset.prov
-    var city = e.currentTarget.dataset.city
-    var cat = e.currentTarget.dataset.cat
-    var params = {
-      prov: prov,
-      city: city,
-      cat: cat
-    }*/
+    // var prov = e.currentTarget.dataset.prov
+    // var city = e.currentTarget.dataset.city
+    // var cat = e.currentTarget.dataset.cat
+    // var params = {
+    //   prov: prov,
+    //   city: city,
+    //   cat: cat
+    // }
     this.getSearches();
-  },
+  },*/
   getSearches: function(e) {
     var that = this;
     console.log('getSearches -- zhaopin')
-    console.log('search-param' + JSON.stringify(e));
+    // console.log('search-param' + JSON.stringify(e));
     var prov = that.data.prov
     var city = that.data.city
     var area = that.data.area
     var cat = that.data.cat
-    var worktype = that.data.worktype
+    // var worktype = that.data.worktype
+    // 
+    var worktype = ''
+    var selectWorktypes = that.data.selectWorktypes
+    /*if (Object.keys(selectWorktypes).length>0) {
+      worktype = Object.keys(selectWorktypes);
+    }*/
+    if (Object.values(selectWorktypes).length>0) {
+      
+    }
 
+    var selectWorktypesVal = Object.values(selectWorktypes)
+    console.log('selectWorktypesVal::',selectWorktypesVal)
+    for(let wt in selectWorktypesVal) {
+      console.log('wt',wt);
+      worktype += ','+selectWorktypesVal[wt];
+    }
+    console.log('worktype::',typeof(worktype),worktype)
+    if (worktype) {
+      worktype = worktype.substring(1)
+    }
     // console.log(e)
       // 默认不带条件查询
     wx.showLoading({

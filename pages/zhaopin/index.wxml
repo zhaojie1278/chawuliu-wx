@@ -15,12 +15,14 @@
             <view wx:if="{{item.id>0}}" class="catfirst" bindtap="bindNavFirstTaped" class="{{cat==item.id?'viewdef-taped':'viewdef'}}" data-cat="{{item.id}}" data-prov="{{prov}}" data-city="{{city}}" hover-class="onhover">{{item.txt}}</view>
         </block>
     </view>
-    <view class="navigator2">
-        <view wx:if="{{index>0}}" class="catsecond" hidden="{{false}}" wx:for="{{worktypes}}" wx:key="{{index}}" bindtap="bindNavSecondTaped" class="{{worktypei==index?'viewdef-taped':'viewdef'}}" data-worktypei="{{index}}" hover-class="onhover">{{item}}</view>
-    </view>
     <view class="view-area">
         <button bindtap="toSelectArea" type="default" size="default" loading="{{false}}" class="btn-area">{{quyu}}</button>
+        <text class="area-txt-tip" space="emsp">↑可切换地区查询；↓岗位可多选</text>
     </view>
+    <view class="navigator2">
+        <view wx:if="{{index>0}}" class="catsecond" hidden="{{false}}" wx:for="{{worktypes}}" wx:key="{{index}}" bindtap="bindNavSecondTaped" class="{{selectWorktypes[index]?'viewdef-taped2':'viewdef2'}}" data-worktypei="{{index}}" hover-class="onhover">{{item}}</view>
+    </view>
+    <view class="clear"></view>
 </view>
 
 <!--专线推荐-->
