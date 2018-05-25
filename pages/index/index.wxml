@@ -100,7 +100,7 @@
 <!--查询地址-->
 <view class="search-zhuanxian">
   <view class="areas">
-    <navigator url="../city/index?direction=startCity">
+    <navigator url="../city2/index?direction=startCity">
         <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startVal ? startVal: '出发地'}}</button>
     </navigator>
     <view class="areas-direction">

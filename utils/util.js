@@ -88,11 +88,11 @@ var getZhuanxianShow = e => {
     var selectedCity = e.selectedCity;
     var selectedArea = e.selectedArea;
     var returnVal = '';
-    if (selectedArea != '') {
+    if (selectedArea != '' && selectedArea.indexOf('辖区') == -1) {
       returnVal = selectedArea;
-    } else if (selectedCity != '') {
+    } else if (selectedCity != '' && selectedCity.indexOf('辖区') == -1) {
       returnVal = selectedCity;
-    } else if (selectedProv != '') {
+    } else if (selectedProv != '' && selectedProv.indexOf('辖区') == -1) {
       returnVal = selectedProv;
     }
     return returnVal;

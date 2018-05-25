@@ -464,7 +464,7 @@ Page({
       })
       wx.showLoading({
           title: '录音中..',
-          mask: true
+          mask: false
       })
     })
   },
@@ -519,7 +519,7 @@ Page({
             // 设置本地展示
             // console.log(that.data)
             if (jsonData.data.recog == 0) {
-              wx.showModel2('提示','识别失败，请稍后重试，或手动选择地区')
+              util.showModel2('提示','识别失败，请稍后重试，或手动选择地区')
             } else {
               // util.showError('识别的内容为：'+jsonData.data.recog.start+' --- '+jsonData.data.recog.end);
               that.setData({

@@ -122,7 +122,7 @@
 }
 
 .item .msg-intro .zhuanxians .detail {
-  padding: 0 20rpx 25rpx;
+  padding: 0 20rpx 50rpx;
 }
  
 .item .msg-intro .zhuanxians .detail1 {

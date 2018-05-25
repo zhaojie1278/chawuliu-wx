@@ -18,6 +18,7 @@
     "pages/contact/mingpian",
     "pages/logs/logs",
     "pages/city/index",
+    "pages/city2/index",
     "pages/sellmsg/toadd",
     "pages/sellmsg/add",
     "pages/sellmsg/detail",

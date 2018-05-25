@@ -42,8 +42,8 @@
                 <view>
                     <block wx:for="{{zx}}" wx:for-item="zxsingle" wx:for-index="zxindex" wx:key="zxindex">
                         <!---{{zxCatsKeyVal[zxsingle.cat]}}-->
-                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}<text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin: 0 5rpx;"></text>{{zxsingle.point}};</text>
-                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}<text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin: 0 5rpx;"></text>{{zxsingle.point}};</text>
+                    <text wx:if="{{zxindex/1==0}}" class="detail1">{{zxsingle.start}}<text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin: 0 5rpx;"></text>{{zxsingle.point}}</text>
+                    <text wx:if="{{zxindex/1==1}}" class="detail2">{{zxsingle.start}}<text class="iconfont icon-huhuan icon-mini" style="color:#666666; margin: 0 5rpx;"></text>{{zxsingle.point}}</text>
                     </block>
                 </view>
                 </block>

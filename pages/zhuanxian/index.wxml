@@ -26,7 +26,7 @@
 </view>
 <view class="bottom-record">
   <view class="record-txt-intro">
-    点击语音搜索 ↓↓
+    点击语音搜索↓↓
   </view>
   <view>
     <button wx:if="{{recordNowStart}}" bindtap="recordStartTapFun" class='btn'>语音搜索</button>
