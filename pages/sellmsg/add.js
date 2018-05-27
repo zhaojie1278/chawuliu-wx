@@ -526,13 +526,13 @@ Page({
               var locationInfo = res.data.result.addressComponent
               // console.log(locationInfo)
               var provStr = locationInfo.province
-              if (provStr.indexOf('市')!=-1){
-                provStr = provStr.replace('市','')
+              if (provStr.indexOf('市')!=-1 && provStr.length>2){
+                provStr = provStr.replace(/(.*)市/, '$1')
               }
               var cityStr = locationInfo.city
 
-              if (cityStr.indexOf('市')!=-1){
-                cityStr = cityStr.replace('市','')
+              if (cityStr.indexOf('市')!=-1 && cityStr.length>2){
+                cityStr = cityStr.replace(/(.*)市/, '$1')
               }
               var cityStrShow = cityStr
               if (provStr == cityStr) {

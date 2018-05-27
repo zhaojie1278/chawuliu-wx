@@ -712,20 +712,22 @@ Page({
               var provStr = res.data.result.addressComponent.province
               // provStr = '安徽省'
               if (provStr.indexOf('市')!=-1){
-                provStr = provStr.replace('市','')
+                provStr = provStr.replace(/(.*)市/, '$1')
               }
               if (provStr.indexOf('省')!=-1){
-                provStr = provStr.replace('省','')
+                provStr = provStr.replace(/(.*)省/, '$1')
               }
               var cityStr = res.data.result.addressComponent.city
               // cityStr = '合肥市'
-              if (cityStr.indexOf('市')!=-1){
-                cityStr = cityStr.replace('市','')
+              if (cityStr.indexOf('市')!=-1 && cityStr.length>2){
+                cityStr = cityStr.replace(/(.*)市/, '$1')
               }
               var districtStr = res.data.result.addressComponent.district
               // districtStr = '蜀山区'
-              if (districtStr.indexOf('区')!=-1){
-                districtStr = districtStr.replace('区','')
+              // 
+              // str.replace(/(.*)and/, '$1but');
+              if (districtStr.indexOf('区')!=-1 && districtStr.length>2){
+                districtStr = districtStr.replace(/(.*)区/, '$1')
               }
               // 
               

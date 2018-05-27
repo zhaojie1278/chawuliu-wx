@@ -567,18 +567,18 @@ Page({
               that.setData({'nowCity':'位置获取失败'})
             } else {
               var provStr = res.data.result.addressComponent.province
-              if (provStr.indexOf('市')!=-1){
-                provStr = provStr.replace('市','')
-              }
               // provStr = '安徽省'
+              if (provStr.indexOf('市')!=-1 && provStr.length>2){
+                provStr = provStr.replace(/(.*)市/, '$1')
+              }
               var cityStr = res.data.result.addressComponent.city
-              if (cityStr.indexOf('市')!=-1){
-                cityStr = cityStr.replace('市','')
+              if (cityStr.indexOf('市')!=-1 && cityStr.length>2){
+                cityStr = cityStr.replace(/(.*)市/, '$1')
               }
               // cityStr = '合肥市'
               var districtStr = res.data.result.addressComponent.district
-              if (districtStr.indexOf('区')!=-1){
-                districtStr = districtStr.replace('区','')
+              if (districtStr.indexOf('区')!=-1 && districtStr.length>2){
+                districtStr = districtStr.replace(/(.*)区/, '$1')
               }
               /*if (districtStr.indexOf('县')!=-1){
                 districtStr = districtStr.replace('县','')
@@ -592,15 +592,17 @@ Page({
 
               var cityStrShow = cityStr;
               if (provStr == cityStr) {
-                cityStr = '';
+                cityStr = '辖区';
               }
               if (that.data.defAreaCat == app.globalData.zxCatShinei) {
                 cityStrShow = districtStr
+                that.setData({
+                  'item.start_area': districtStr
+                })
               }
               that.setData({
                 'item.start_prov': provStr,
                 'item.start_city': cityStr,
-                'item.start_area': districtStr,
                 'item.startVal': cityStrShow
               })            
             }

@@ -281,12 +281,15 @@ Page({
               // console.log(res.data.result)
               var cityStr = res.data.result.addressComponent.city
               var provStr = res.data.result.addressComponent.province
-              if (provStr.indexOf('市')!=-1){
-                provStr = provStr.replace('市','')
+              if (provStr.indexOf('省')!=-1 && provStr.length>2){
+                provStr = provStr.replace(/(.*)省/, '$1')
+              }
+              if (provStr.indexOf('市')!=-1 && provStr.length>2){
+                provStr = provStr.replace(/(.*)市/, '$1')
               }
               
-              if (cityStr.indexOf('市')!=-1){
-                cityStr = cityStr.replace('市','')
+              if (cityStr.indexOf('市')!=-1 && cityStr.length>2){
+                cityStr = cityStr.replace(/(.*)市/, '$1')
               }
               var cityStrShow = cityStr;
               if (provStr == cityStr) {

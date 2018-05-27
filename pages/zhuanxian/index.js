@@ -23,6 +23,8 @@ Page({
     nowDistrict: '区县',
     nowAreaVal: '',
     nowAreaCatStr: '',
+    start_record: '',
+    point_record: '',
     isTaped: false,
     list: [
       /* {
@@ -134,52 +136,21 @@ Page({
     var startValSet = '';
     var pointValSet = '';
 
-    if (catid == app.globalData.zxCatShinei) {
-      console.log('shinei::::'+this.data.nowDistrict)
-      /*this.setData({
+    if (catid == app.globalData.zxCatShinei && !this.data.isSetedShinei) {
+      if (this.data.nowProv == this.data.nowCity) {
+        var nowCityVal = '';
+      } else {
+        var nowCityVal = this.data.nowCity;
+      }
+      this.setData({
+        start_prov: this.data.nowProv,
+        start_city: nowCityVal,
+        start_area: this.data.nowDistrict,
         startVal: this.data.nowDistrict,
-      })*/
+        isSetedShinei: true
+      })
     }
 
-
-    /*if (catid == app.globalData.zxCatShengji || catid == app.globalData.zxCatKongyun || catid == app.globalData.zxCatHaiyun || catid == app.globalData.zxCatPeizai) {
-      this.setData({
-        startVal: this.data.nowProv,
-        nowAreaVal: this.data.nowProv,
-        nowAreaCatStr: '',
-        pointVal: '请选择'
-      })
-      startValSet = this.data.nowProv;
-      pointValSet = '请选择'
-    } else if (catid == app.globalData.zxCatShengnei) {
-      // console.log('catidcatidcatid::'+catid);
-      this.setData({
-        startVal: this.data.nowCity,
-        nowAreaVal: this.data.nowProv,
-        nowAreaCatStr: 'province',
-        pointVal: '请选择'
-      })
-      startValSet = this.data.nowCity;
-      pointValSet = '请选择'
-    } else if (catid == app.globalData.zxCatShinei) {
-      this.setData({
-        startVal: this.data.nowDistrict,
-        nowAreaVal: this.data.nowCity,
-        nowAreaCatStr: 'city',
-        pointVal: '请选择'
-      })
-      startValSet = this.data.nowDistrict;
-      pointValSet = '请选择'
-    } else {
-      this.setData({
-        startVal: this.data.nowCity,
-        nowAreaVal: this.data.nowCity,
-        nowAreaCatStr: 'city',
-        pointVal: '请选择'
-      })
-      startValSet = this.data.nowCity;
-      pointValSet = '请选择'
-    }*/
     // console.log(this.data)
     this.getSearches(); // 获取推荐专线
     
@@ -275,6 +246,8 @@ Page({
         point_prov: that.data.point_prov,
         point_city: that.data.point_city,
         point_area: that.data.point_area,
+        start_record: that.data.start_record,
+        point_record: that.data.point_record,
         cat: that.data.cat
       },
       success: function(res){
@@ -345,36 +318,38 @@ Page({
               console.log(res.data.result.addressComponent);
               var provStr = res.data.result.addressComponent.province
               // provStr = '安徽省'
-              if (provStr.indexOf('市')!=-1){
-                provStr = provStr.replace('市','')
+              if (provStr.indexOf('市')!=-1 && provStr.length>2){
+                provStr = provStr.replace(/(.*)市/, '$1')
               }
-              if (provStr.indexOf('省')!=-1){
-                provStr = provStr.replace('省','')
+              if (provStr.indexOf('省')!=-1 && provStr.length>2){
+                provStr = provStr.replace(/(.*)省/, '$1')
               }
               // provStr = '安徽省'
               var cityStr = res.data.result.addressComponent.city
               // cityStr = '合肥市'
-              if (cityStr.indexOf('市')!=-1){
-                cityStr = cityStr.replace('市','')
+              if (cityStr.indexOf('市')!=-1 && cityStr.length>2){
+                cityStr = cityStr.replace(/(.*)市/, '$1')
               }
               var districtStr = res.data.result.addressComponent.district
               // districtStr = '蜀山区'
+              if (districtStr.indexOf('区')!=-1 && districtStr.length>2){
+                districtStr = districtStr.replace(/(.*)区/, '$1')
+              }
               // 
               that.setData({
-                nowCity:cityStr,
                 nowProv:provStr,
+                nowCity:cityStr,
                 nowDistrict:districtStr,
-                startVal: provStr,
+                startVal: cityStr,
                 start_prov: provStr,
                 start_city: cityStr,
-                start_area: districtStr
+                start_area: ''
               })
 
               if (provStr == cityStr) {
                 // 直辖市的名称作为省份、区作为市
                 that.setData({
-                  start_city: '',
-                  start_area: ''
+                  start_city: ''
                 })
               }
 
@@ -406,14 +381,16 @@ Page({
         start_prov: e.selectedProv,
         start_city: e.selectedCity,
         start_area: e.selectedArea,
-        startVal: cityVal
+        startVal: cityVal,
+        start_record: ''
       })
     } else {
       this.setData({
         point_prov: e.selectedProv,
         point_city: e.selectedCity,
         point_area: e.selectedArea,
-        pointVal: cityVal
+        pointVal: cityVal,
+        point_record: ''
       })
     }
 
@@ -526,8 +503,11 @@ Page({
               // util.showError('识别的内容为：'+jsonData.data.recog.start+' --- '+jsonData.data.recog.end);
               that.setData({
                 startVal: jsonData.data.recog.start,
-                pointVal: jsonData.data.recog.end
+                pointVal: jsonData.data.recog.end,
+                start_record: jsonData.data.recog.start,
+                point_record: jsonData.data.recog.end
               })
+              that.getSearches();
             }
           }
         },

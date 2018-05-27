@@ -22,9 +22,18 @@
         后台的地区要改 -- todo
         定位 -- ok
 
+        城区、郊区 -- ok
+        修改-point未去除  -- ok
+
+        录音查询：用户录入的省市区字符串拼接完整，录音查询的字段  -- ok
+
         truncate table c_zhuanxian;
         truncate table c_sellmsg;
         truncate table c_zhaopin;
+
+
+        https://segmentfault.com/q/1010000007564141?_ea=1384469   --  js 替换最后一个字符
+        https://blog.csdn.net/youbl/article/details/77854736 -- PHP的trim和preg_replace导致乱码的问题及解决
 
     6、发布招聘默认显示当前市 -ok 市内倒短车 默认区
     7、查物流关联公众号
