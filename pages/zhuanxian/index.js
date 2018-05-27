@@ -36,9 +36,9 @@ Page({
       }, */
     ],
     zxCats:app.globalData.zxCats,
+    zxCatsShow:app.globalData.zxCatsShow,
     cat:1,
     isLoaded: false,
-    isCityReturn: false, // 是否选择城市后返回
     recordNowStart: true
     // lastnavtapCat: {}
   },
@@ -58,6 +58,8 @@ Page({
     this.setData({
       cat: e.cat
     })
+    // 用于从选择地区界面返回后不获取当前位置
+    wx.setStorageSync('isCityReturn',false);
   },
   onShow: function(e) {
     // 每次打开小程序时候，获取当前位置
@@ -75,13 +77,9 @@ Page({
         data: showIden2Global
       });
     }*/
-
-    /*wx.showModal({
-      title: 'onshow',
-      content: 'isciti2return::'+this.data.isCityReturn
-    })*/
-    
-    if (this.data.isLoaded && !this.data.isCityReturn) {
+    var isCityReturn = wx.getStorageSync('isCityReturn');
+    console.log('isciti2return::'+isCityReturn)
+    if (this.data.isLoaded && !isCityReturn) {
       // wx.showModal({
       //   title: 'app . tip',
       //   content: 'content:'+JSON.stringify(e)
@@ -97,9 +95,7 @@ Page({
     console.log('onshow end')
   },
   onHide (e) {
-    this.setData({
-      isCityReturn: false
-    })
+    wx.setStorage({key:'isCityReturn',data:false})
     /*wx.showModal({
       title: 'hide tit',
       content: 'on hide::' + JSON.stringify(this.data.isCityReturn)
@@ -140,9 +136,9 @@ Page({
 
     if (catid == app.globalData.zxCatShinei) {
       console.log('shinei::::'+this.data.nowDistrict)
-      this.setData({
+      /*this.setData({
         startVal: this.data.nowDistrict,
-      })
+      })*/
     }
 
 
@@ -349,8 +345,18 @@ Page({
               console.log(res.data.result.addressComponent);
               var provStr = res.data.result.addressComponent.province
               // provStr = '安徽省'
+              if (provStr.indexOf('市')!=-1){
+                provStr = provStr.replace('市','')
+              }
+              if (provStr.indexOf('省')!=-1){
+                provStr = provStr.replace('省','')
+              }
+              // provStr = '安徽省'
               var cityStr = res.data.result.addressComponent.city
               // cityStr = '合肥市'
+              if (cityStr.indexOf('市')!=-1){
+                cityStr = cityStr.replace('市','')
+              }
               var districtStr = res.data.result.addressComponent.district
               // districtStr = '蜀山区'
               // 
@@ -367,7 +373,7 @@ Page({
               if (provStr == cityStr) {
                 // 直辖市的名称作为省份、区作为市
                 that.setData({
-                  start_city: districtStr,
+                  start_city: '',
                   start_area: ''
                 })
               }
@@ -410,10 +416,6 @@ Page({
         pointVal: cityVal
       })
     }
-
-    this.setData({
-      isCityReturn: true
-    })
 
     this.getSearches();
   },

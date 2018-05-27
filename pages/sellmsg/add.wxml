@@ -20,7 +20,8 @@
         <input name="city" hidden value="{{item.city}}"/>
         <input name="area" hidden value="{{item.area}}"/>
         <text class="lbl-left" space="emsp">地  区</text>
-        <input class="inp" id="quyu" name="quyu" maxlength="20" placeholder="请选择" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu"/>
+        <input class="inp inp-quyu" id="quyu" name="quyu" maxlength="20" placeholder="请选择" placeholder-class="locationClass" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu" style="color: green;"/>
+        <text class="lbl-quyu">点击可切换其他地区</text>
     </view>
     <view class="clear"></view>
     <view class="view-mg">

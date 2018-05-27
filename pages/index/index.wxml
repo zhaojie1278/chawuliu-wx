@@ -106,7 +106,7 @@
     <view class="areas-direction">
     <text class="icon iconfont icon-huhuan icon-middle"></text>
     </view>
-    <navigator url="../city/index?direction=pointCity">
+    <navigator url="../city2/index?direction=pointCity">
         <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointVal ? pointVal:'目的地'}}</button>
     </navigator>
   </view>

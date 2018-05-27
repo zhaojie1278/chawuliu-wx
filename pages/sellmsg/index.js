@@ -43,8 +43,7 @@ Page({
     catsKeyVal: app.globalData.sellCatsKeyVal,
     detailUrl:'detail',
     detailFrom: 'sell',
-    isLoaded: false,
-    isCityReturn: false // 是否选择城市后返回
+    isLoaded: false
   },
   onLoad: function (e) {
     // 已加载设置
@@ -62,6 +61,8 @@ Page({
     this.setData({
       cat: cat
     })
+    // 用于从选择地区界面返回后不获取当前位置
+    wx.setStorageSync('isCityReturn',false);
   },
   onShow: function(e) {
     var that = this
@@ -79,8 +80,8 @@ Page({
         data: showIden4Global
       });
     }*/
-
-    if (this.data.isLoaded && !this.data.isCityReturn) {
+    var isCityReturn = wx.getStorageSync('isCityReturn');
+    if (this.data.isLoaded && !isCityReturn) {
       // 是否查询线路操作
       var getLocParam = {
         isget: true
@@ -90,9 +91,7 @@ Page({
     console.log('onshow end')
   },
   onHide (e) {
-    this.setData({
-      isCityReturn: false
-    })
+    wx.setStorage({key:'isCityReturn',data:false})
     /*wx.showModal({
       title: 'hide tit',
       content: 'on hide::' + JSON.stringify(this.data.isCityReturn)
@@ -100,7 +99,7 @@ Page({
   },
   toSelectArea (e) {
     wx.navigateTo({
-      url:"../city/index?direction=quyu"
+      url:"../city2/index?direction=quyu"
     })
   },
   changeCity (e) {
@@ -117,10 +116,6 @@ Page({
         'quyu': cityVal
       })
     }
-    this.setData({
-      isCityReturn: true
-    })
-
     this.getSearches();
   },
   bindNavFirstTaped:function(e) {
@@ -243,6 +238,9 @@ Page({
               that.setData({'nowCity':'位置获取失败'})
             } else {
               var provStr =  res.data.result.addressComponent.province
+              if (provStr.indexOf('市')!=-1){
+                provStr = provStr.replace('市','')
+              }
               /*
               if (provStr.indexOf('市')!=-1){
                 provStr = provStr.replace('市','')
@@ -252,16 +250,21 @@ Page({
               }*/
               var cityStr = res.data.result.addressComponent.city
 
-              /*if (cityStr.indexOf('市')!=-1){
+              if (cityStr.indexOf('市')!=-1){
                 cityStr = cityStr.replace('市','')
-              }*/
+              }
+              var cityStrShow = cityStr;
+              if (provStr == cityStr) {
+                cityStr = '';
+              }
+              
               var cat=that.data.cat
               // provStr = '安徽'
               // cityStr = '合肥'
               that.setData({
                 prov: provStr,
                 city:cityStr,
-                quyu: cityStr,
+                quyu: cityStrShow,
                 cat: cat
               })
 

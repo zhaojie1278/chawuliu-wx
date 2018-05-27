@@ -20,18 +20,18 @@
     <view class="clear"></view>
     <view class="areas-box" style="height: {{winHeight}}px">
         <view class="areas-column areas-prov">
-            <scroll-view scroll-y="true" style="height: {{winHeight}}px; width: 100%;background-color: #e1e1e1;">
-                <view bindtap="provinceTap" data-province-code="{{item.code}}" data-province="{{item.areaname}}" wx:for="{{provinces}}" wx:key="{{code}}" hover-class="areas-item-prov-select" style="{{selectedProv==item.areaname?'color: green; background-color: #fff;' : ''}}" class="areas-item-prov">{{item.areaname}}</view>
+            <scroll-view bindscroll="bindProvScrollFun" scroll-into-view="{{toProvView}}" scroll-with-animation="true" scroll-top="{{scrollProvTop}}" scroll-y="true" style="height: {{winHeight}}px; width: 100%;background-color: #e1e1e1;">
+                <view id="{{'prov_vid_'+item.code}}" bindtap="provinceTap" data-province-code="{{item.code}}" data-province="{{item.areaname}}" wx:for="{{provinces}}" wx:key="{{code}}" hover-class="areas-item-prov-select" style="{{selectedProv==item.areaname?'color: green; background-color: #fff;' : ''}}" class="areas-item-prov">{{item.areaname}}</view>
             </scroll-view>
         </view>
         <view class="areas-column areas-city">
-            <scroll-view scroll-y="true" style="height: {{winHeight}}px; width: 100%;">
-                <view bindtap="cityTap" data-city-code="{{item.code}}" data-city="{{item.areaname}}" wx:for="{{citys}}" wx:key="{{code}}" hover-class="areas-item-select" style="{{selectedCity==item.areaname?'color: green;' : ''}}" class="areas-item-city">{{item.areaname}}</view>
+            <scroll-view bindscroll="bindCityScrollFun" scroll-into-view="{{toCityView}}" scroll-with-animation="true" scroll-top="{{scrollCityTop}}" scroll-y="true" style="height: {{winHeight}}px; width: 100%;">
+                <view id="{{'city_vid_'+item.code}}" bindtap="cityTap" data-city-code="{{item.code}}" data-city="{{item.areaname}}" wx:for="{{citys}}" wx:key="{{code}}" hover-class="areas-item-select" style="{{selectedCity==item.areaname?'color: green;' : ''}}" class="areas-item-city">{{item.areaname}}</view>
             </scroll-view>
         </view>
         <view class="areas-column areas-area">
-            <scroll-view scroll-y="true" style="height: {{winHeight}}px; width: 100%;">
-                <view bindtap="areaTap" data-area-code="{{item.code}}" data-area="{{item.areaname}}" wx:for="{{areas}}" wx:key="{{code}}" style="{{selectedArea==item.areaname?'color: green;' : ''}}" class="areas-item-city">{{item.areaname}}</view>
+            <scroll-view bindscroll="bindDisctrictScrollFun" scroll-into-view="{{toDistrictView}}" scroll-with-animation="true" scroll-top="{{scrollDistrictTop}}" scroll-y="true" style="height: {{winHeight}}px; width: 100%;">
+                <view id="{{'area_vid_'+item.code}}" bindtap="areaTap" data-area-code="{{item.code}}" data-area="{{item.areaname}}" wx:for="{{areas}}" wx:key="{{code}}" style="{{selectedArea==item.areaname?'color: green;' : ''}}" class="areas-item-city">{{item.areaname}}</view>
             </scroll-view>
         </view>
     </view>

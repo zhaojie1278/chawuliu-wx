@@ -380,7 +380,7 @@ Page({
     })*/
     // 选择出发地
     wx.navigateTo({
-      url:"../city/index?direction=item.start&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
+      url:"../city2/index?direction=item.start&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
     })
   },
   toSelectPoint (e) {
@@ -435,7 +435,7 @@ Page({
     // console.log('this.data.nowCity::'+this.data.nowCity)
     // 选择目的地
     wx.navigateTo({
-      url:"../city/index?direction="+pointDirection+"&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
+      url:"../city2/index?direction="+pointDirection+"&cat="+this.data.defAreaCat+"&nowAreaVal="+nowAreaVal+"&nowAreaCatStr="+nowAreaCatStr
     })
   },
   changeCity (e) {
@@ -567,10 +567,22 @@ Page({
               that.setData({'nowCity':'位置获取失败'})
             } else {
               var provStr = res.data.result.addressComponent.province
+              if (provStr.indexOf('市')!=-1){
+                provStr = provStr.replace('市','')
+              }
               // provStr = '安徽省'
               var cityStr = res.data.result.addressComponent.city
+              if (cityStr.indexOf('市')!=-1){
+                cityStr = cityStr.replace('市','')
+              }
               // cityStr = '合肥市'
               var districtStr = res.data.result.addressComponent.district
+              if (districtStr.indexOf('区')!=-1){
+                districtStr = districtStr.replace('区','')
+              }
+              /*if (districtStr.indexOf('县')!=-1){
+                districtStr = districtStr.replace('县','')
+              }*/
               // districtStr = '蜀山区'
               that.setData({
                 nowCity:cityStr,
@@ -578,14 +590,18 @@ Page({
                 nowDistrict:districtStr,
               })
 
+              var cityStrShow = cityStr;
+              if (provStr == cityStr) {
+                cityStr = '';
+              }
               if (that.data.defAreaCat == app.globalData.zxCatShinei) {
-                cityStr = districtStr
+                cityStrShow = districtStr
               }
               that.setData({
                 'item.start_prov': provStr,
                 'item.start_city': cityStr,
                 'item.start_area': districtStr,
-                'item.startVal': cityStr
+                'item.startVal': cityStrShow
               })            
             }
           }

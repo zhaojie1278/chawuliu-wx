@@ -86,7 +86,7 @@ image {
 }
 .navigator .navigator2 .viewdef2 {
   font-size:0.85em;
-  margin: 10rpx 10rpx;
+  margin: 10rpx 8rpx;
   border:1px solid #3573fa;
   border-radius:10rpx;
   padding:0 10rpx;
@@ -112,7 +112,7 @@ image {
 
 .navigator .navigator2 .viewdef-taped2 {
   font-size:0.85em;
-  margin: 10rpx 10rpx;
+  margin: 10rpx 8rpx;
   border:1px solid #3573fa;
   border-radius:10rpx;
   padding:0 10rpx;

@@ -99,8 +99,22 @@ var getZhuanxianShow = e => {
 }
 // module.exports = { formatTime, showBusy, showSuccess, showModel }
 
+// 从集合中获取 地区名的 code
+var getCodeByArea = (areas, area) => {
+    var codeArea = 0;
+    if (areas && areas.length > 0) {
+      for(var i=0,len = areas.length;i<len;i++) {
+        if (areas[i].areaname.indexOf(area) !== -1) {
+          codeArea = areas[i];
+          break;
+        }
+      }
+    }
+    return codeArea;
+}
+
 module.exports = {
-  formatTime, formatDay, showMaskTip1500, showBusy, showSuccess, showMaskSuccess, showError, showModel, showModel2, getZhuanxianShow
+  formatTime, formatDay, showMaskTip1500, showBusy, showSuccess, showMaskSuccess, showError, showModel, showModel2, getZhuanxianShow, getCodeByArea
 }
 
 /** navigateBack with an unexist webviewId */

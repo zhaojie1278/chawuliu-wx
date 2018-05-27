@@ -25,9 +25,11 @@
 }
 
 .view-mg .inp {
-  padding:27rpx 10rpx 0rpx;
+  padding:0 10rpx 0rpx;
   font-size:0.8em;
   /* color:#999; */
+  height: 100rpx;
+  line-height: 100rpx;
 }
 
 .textarea{

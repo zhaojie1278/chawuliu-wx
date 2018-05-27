@@ -35,6 +35,15 @@ var zxCats = [
   {id:5,txt:'配载调车'},
   {id:6,txt:'市内倒短车'},
 ]
+var zxCatsShow = [
+  {id:0,txt:'物流专线'},
+  {id:1,txt:'省 际'},
+  {id:2,txt:'省 内'},
+  {id:3,txt:'空 运'},
+  {id:4,txt:'海 运'},
+  {id:5,txt:'配 载'},
+  {id:6,txt:'市 内'},
+]
 
 var zxCatShengji = 1
 var zxCatShengnei = 2
@@ -297,6 +306,7 @@ App({
     sellCatsIden: sellCatsIden,
     zhaopinCatsIden: zhaopinCatsIden,
     zxCats: zxCats,
+    zxCatsShow: zxCatsShow,
     zxCatsKeyVal: zxCatsKeyVal,
     sellCats: sellCats,
     sellCatsKeyVal: sellCatsKeyVal,

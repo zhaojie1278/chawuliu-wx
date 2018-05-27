@@ -15,6 +15,15 @@
   color:#333;
   font-size:0.9em;
 }
+.view-mg .inp-quyu {
+  width: 121rpx;
+  float: left;
+}
+.view-mg .lbl-quyu {
+  float:left;
+  color:#999;
+  font-size:12px;
+}
 .view-mg .lbl-line {
   width:100%;
   color:#333;
@@ -48,9 +57,11 @@
   font-size:0.8em;
 }
 .view-mg .inp {
-  padding:27rpx 10rpx 0rpx;
+  padding:0 10rpx 0rpx;
   font-size:0.8em;
   /* color:#999; */
+  height: 100rpx;
+  line-height: 100rpx;
 }
 
 .view-mg .btnsub {
@@ -89,7 +100,7 @@
 }
 .view-mg .locationClass {
   /*font-size:em;*/
-  color: #333;
+  color: green;
 }
 .view-mg .radiosex {
   padding-left:10rpx;

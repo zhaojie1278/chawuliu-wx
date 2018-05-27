@@ -2,7 +2,7 @@
 
 <!--导航-->
 <view  class="navigator">
-    <block wx:for="{{zxCats}}" wx:key="{{index}}">
+    <block wx:for="{{zxCatsShow}}" wx:key="{{index}}">
     <view wx:if="{{item.id>0}}" bindtap="bindNavTaped" class="{{cat==item.id?'viewdef-taped':'viewdef'}}" data-cat="{{item.id}}" hover-class="onhover">{{item.txt}}</view>
     </block>
 </view>
@@ -10,13 +10,13 @@
 <!--查询地址-->
 <view class="search-zhuanxian">
   <view class="areas">
-    <navigator url="../city/index?direction=startCity&cat={{cat}}&nowAreaVal={{nowAreaVal}}&nowAreaCatStr={{nowAreaCatStr}}">
+    <navigator url="../city2/index?direction=startCity&cat={{cat}}&nowAreaVal={{nowAreaVal}}&nowAreaCatStr={{nowAreaCatStr}}">
         <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{startVal ? startVal: '出发地'}}</button>
     </navigator>
     <view class="areas-direction">
     <text class="icon iconfont icon-huhuan icon-middle" style="color:#3573fa;"></text>
     </view>
-    <navigator url="../city/index?direction=pointCity&cat={{cat}}&nowAreaVal={{nowAreaVal}}&nowAreaCatStr={{nowAreaCatStr}}">
+    <navigator url="../city2/index?direction=pointCity&cat={{cat}}&nowAreaVal={{nowAreaVal}}&nowAreaCatStr={{nowAreaCatStr}}">
         <button type="default" size="default" loading="{{false}}" class="btn-zhuanxian">{{pointVal ? pointVal:'目的地'}}</button>
     </navigator>
   </view>

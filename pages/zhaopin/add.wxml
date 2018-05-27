@@ -16,7 +16,8 @@
             {{region[0]}}，{{region[1]}}，{{region[2]}}
             </view>
         </picker> -->
-        <input class="inp" id="quyu_inp" name="quyu" maxlength="20" placeholder="请选择" placeholder-class="locationClass" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu"/>
+        <input class="inp inp-quyu" id="quyu_inp" name="quyu" maxlength="20" placeholder="请选择" placeholder-class="locationClass" type="text" value="{{item.quyu}}" catchtap="toSelectQuyu" style="color: green;"/>
+        <text class="lbl-quyu">点击可切换其他地区</text>
     </view>
     <view class="view-mg">
         <text class="lbl-left" space="emsp">性  别</text>

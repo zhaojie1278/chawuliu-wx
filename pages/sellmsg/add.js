@@ -430,7 +430,7 @@ Page({
     // var nowAreaCatStr = 'city'
     // 选择
     wx.navigateTo({
-      url:"../city/index?direction=item.quyu"
+      url:"../city2/index?direction=item.quyu"
     })
   },
   changeCity (e) {
@@ -526,11 +526,22 @@ Page({
               var locationInfo = res.data.result.addressComponent
               // console.log(locationInfo)
               var provStr = locationInfo.province
+              if (provStr.indexOf('市')!=-1){
+                provStr = provStr.replace('市','')
+              }
               var cityStr = locationInfo.city
+
+              if (cityStr.indexOf('市')!=-1){
+                cityStr = cityStr.replace('市','')
+              }
+              var cityStrShow = cityStr
+              if (provStr == cityStr) {
+                cityStr = '辖区';
+              }
               that.setData({
                 "item.prov":provStr,
                 "item.city":cityStr,
-                "item.quyu":cityStr
+                "item.quyu":cityStrShow
               })
             }
           }
