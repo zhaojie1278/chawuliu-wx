@@ -109,7 +109,7 @@
         <input bindblur="bindFuliBlur" class="inp" id="fuli" name="fuli" maxlength="20" placeholder="例如双休、假日补贴等" type="text" value="{{item.fuli}}"/>
     </view>    
     <view class="view-mg" style="height:300rpx;">
-        <view class="lbl-line"><text>发布内容</text></view>
+        <view class="lbl-line"><text>我的信息</text></view>
         <view class="area_box">
         <textarea bindblur="bindWordChg" name="content" class="textarea" placeholder="请手动输入真实有效的内容，不要随意发布虚假消息" maxlength="100" fixed="{{false}}" value="{{item.content}}" />
         </view>

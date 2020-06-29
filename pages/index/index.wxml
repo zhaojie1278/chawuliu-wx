@@ -126,11 +126,14 @@
   <text class="icon iconfont icon-fenxiang icon-min3" style="color: #fff"></text>
 </view>
 <view style="display: {{iscanvas}};position: fixed;width: 100%;height: 100%;top: 0px;left: 0px;z-index:999;background-color:rgba(0,0,0,0.5);">
-  <canvas bindtap="canvasSaveImg1" canvas-id="shareCanvas" style="max-width: 350px; max-height: 425px; width:700rpx;height:850rpx; border: 1px solid #ddd; margin: {{mtop}} auto 0rpx;"></canvas> 
-  <view style="max-width: 350px; margin: 0 auto; padding: 15rpx 20rpx 10rpx;">
-    <button type="default" type="primary" bindtap="canvasSaveImg" style="background-color:#3573fa;">保存图片</button>
+  <!-- <canvas bindtap="hideCanvasTap" canvas-id="shareCanvas" style="max-width: 350px; max-height: 425px; width:700rpx;height:850rpx; border: 1px solid #ddd; margin: {{mtop}} auto 0rpx;"></canvas>  -->
+  <view style="position: relative; top: 0; left: 0;">
+    <canvas bindtouchstart="bindtouchstart" bindtouchmove="bindtouchmove" bindtouchend="bindtouchend" disable-scroll="true" bindtap="hideCanvasTap" canvas-id="shareCanvas" style="width: {{canvaswidth}}px; height: {{canvasheight}}px; border: 0px solid #ddd; margin: {{mtop}} auto 0rpx;"></canvas> 
+    <view hidden="{{canvasBtnHidden}}" style="max-width: {{canvaswidth}}px; margin: 0 auto; padding: 15rpx 20rpx 10rpx;">
+      <button type="default" type="primary" bindtap="canvasSaveImg" style="background-color:#3573fa;">保存图片</button>
+    </view>
   </view>
-  <view class="{{iscanvas == 'block' ? 'noscroll':''}}"></view>
+  <!-- <view class="{{iscanvas == 'block' ? 'noscroll':''}}"></view> -->
 </view>
 
 <!-- 模板引用 -->

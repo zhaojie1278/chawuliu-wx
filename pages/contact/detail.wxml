@@ -31,7 +31,7 @@
     <view class="h-10" style="background:#f7f7fa"></view>
     <!-- 公司介绍 -->
     <view class="msg-intro">
-        <view class="title">公司介绍</view>
+        <view class="title">我的信息</view>
         <view class="detail">
         {{item.descri ? item.descri : '无'}}
         </view>

@@ -48,6 +48,7 @@
         </view>
     </view>
     <view class="address">
+        <text class="title">我的信息：</text>
         <text class="addresstxt">{{item.content}}</text>
     </view>
     <!--<view class="h-10" style="background:#f7f7fa"></view>-->

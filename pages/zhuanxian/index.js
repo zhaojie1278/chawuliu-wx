@@ -8,6 +8,9 @@ const recorderManager = wx.getRecorderManager()
 const innerAudioContext = wx.createInnerAudioContext()
 var tempFilePath; // 临时路径
 
+// 引入Promise
+import Promise from '../../vendors/es6-promise.js';
+
 Page({
   data: {
     start_prov:'',
@@ -41,7 +44,8 @@ Page({
     zxCatsShow:app.globalData.zxCatsShow,
     cat:1,
     isLoaded: false,
-    recordNowStart: true
+    recordNowStart: true,
+    record_img: "../../images/tabBar/record.png"
     // lastnavtapCat: {}
   },
   onLoad: function (e) {
@@ -443,7 +447,7 @@ Page({
       })
       wx.showLoading({
           title: '录音中..',
-          mask: false
+          mask: true
       })
     })
   },
@@ -473,54 +477,57 @@ Page({
           mask: true
       })
 
-      wx.uploadFile({
-        url: app.globalData.config.service.uploadRecordUrl, //仅为示例，非真实的接口地址
-        filePath: tempFilePath,
-        name: 'file',
-        header: {
-          'content-type': 'multipart/form-data'
-        },
-        formData:{
-          'from': 'zhuanxian'
-        },
-        success: function(res){
-          console.log('upload res::')
-          // console.log(res)
-          var data = res.data
-          // console.log(res);
-          var jsonData = JSON.parse(data)
-          console.log('data::',data);
-          // console.log(jsonData.status);
+      var pUpFile = new Promise(function(proSuc,proFail){
+        wx.uploadFile({
+          url: app.globalData.config.service.uploadRecordUrl, //仅为示例，非真实的接口地址
+          filePath: tempFilePath,
+          name: 'file',
+          header: {
+            'content-type': 'multipart/form-data'
+          },
+          formData:{
+            'from': 'zhuanxian'
+          },
+          success: function(res){
+            console.log('upload res::')
+            // console.log(res)
+            var data = res.data
+            // console.log(res);
+            var jsonData = JSON.parse(data)
+            console.log('data::',data);
+            // console.log(jsonData.status);
 
-          if (jsonData.status != 1) {
-            util.showModel2('提示',jsonData.message)
-          } else {
-            // 设置本地展示
-            // console.log(that.data)
-            if (jsonData.data.recog == 0) {
-              util.showModel2('提示','识别失败，请稍后重试，或手动选择地区')
+            if (jsonData.status != 1) {
+              util.showModel2('提示',jsonData.message)
             } else {
-              // util.showError('识别的内容为：'+jsonData.data.recog.start+' --- '+jsonData.data.recog.end);
-              that.setData({
-                startVal: jsonData.data.recog.start,
-                pointVal: jsonData.data.recog.end,
-                start_record: jsonData.data.recog.start,
-                point_record: jsonData.data.recog.end
-              })
-              that.getSearches();
+              // 设置本地展示
+              // console.log(that.data)
+              if (jsonData.data.recog == 0) {
+                util.showModel2('提示','识别失败，请稍后重试，或手动选择地区')
+              } else {
+                // util.showError('识别的内容为：'+jsonData.data.recog.start+' --- '+jsonData.data.recog.end);
+                that.setData({
+                  startVal: jsonData.data.recog.start,
+                  pointVal: jsonData.data.recog.end,
+                  start_record: jsonData.data.recog.start,
+                  point_record: jsonData.data.recog.end
+                })
+                proSuc();
+              }
             }
-          }
-        },
-        fail: function() {
-          util.showModel2('提示','上传失败')
-        },
-        complete (res) {
-          /*setTimeout(function(){
+          },
+          fail: function() {
+            util.showModel2('提示','上传失败')
+          },
+          complete (res) {
+            /*setTimeout(function(){
+              wx.hideLoading();
+            }, 2000)*/
             wx.hideLoading();
-          }, 2000)*/
-          wx.hideLoading();
-        }
+          }
+        })
       })
+      pUpFile.then(that.getSearches);
     })
   },
   recordPlayFun (res) { // 播放录音

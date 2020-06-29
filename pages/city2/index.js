@@ -57,7 +57,7 @@ Page({
     var res = wx.getSystemInfoSync()
     winHeight = res.windowHeight
     console.log('winHeight::',winHeight)
-    winHeight = winHeight - 20;
+    winHeight = winHeight - 55;
     that.setData({
       winHeight: winHeight
     })

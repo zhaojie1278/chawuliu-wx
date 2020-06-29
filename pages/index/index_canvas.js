@@ -37,8 +37,7 @@ wx.getSystemInfo({
   }
 })
 
-// var mtop = winHeight * 0.14; -- old
-var mtop = winHeight * 0.26;
+var mtop = winHeight * 0.14;
 
 // console.log(app);
 Page({
@@ -85,10 +84,7 @@ Page({
     cat: 1, // 默认省际物流
     mtop: mtop+'rpx',
     isDrawCanvas: false,
-    isLoaded: false,
-    canvawidth: 350,
-    canvaheight: 350,
-    canvasBtnHidden: true
+    isLoaded: false
   },
   /*onTabItemTap (item) {
     // 点击 tab 时触发
@@ -367,72 +363,21 @@ Page({
   newsTap (e) {
     util.showError('正在开发中，请耐心等待')
   },
-  bindtouchstart (e) {
-  },
-  bindtouchmove (e) {
-  },
-  bindtouchend (e) {
-    this.hideCanvasTap(e);
-  },
   canvasShowTap (e) {
+    // util.showError('正在开发中，请耐心等待')
     this.setData({
       iscanvas: 'block'
     })
 
-    if (!this.data.isDrawCanvas) {
-      this.canvasShareImg(e)
+    if (this.data.isDrawCanvas) {
+      console.log('yesyes')
+    } else {
+      console.log('nonno')
     }
+    this.canvasShareImg(e)
+  
   },
-  canvasShareImg(e) {
-    wx.showLoading({
-      title: '请稍等',
-      mask: true
-    })
-    // 绘制海报图片
-    var that = this
-
-    // console.log('winWidth',winWidth);
-    // console.log('winHeight',winHeight);
-    if (winWidth == 0 || winHeight == 0) {
-      util.showError('获取设备信息异常，请稍后重试');
-      return
-    }
-
-    // 设置宽高
-    winWidth = winWidth - 20;
-    winHeight = winWidth;
-    that.setData({
-      canvaswidth: winWidth,
-      canvasheight: winHeight
-    })
-
-    const wxGetImageInfo = promisify(wx.getImageInfo)
-
-    Promise.all([
-      wxGetImageInfo({
-        src: app.globalData.config.service.hostM+'uploads/wafer/logo/logo_bg.jpg'
-      })
-    ]).then(res => {
-
-      // var canvaswidth = (winWidth / 750) * 700;
-      // console.log(canvaswidth)
-      const ctx = wx.createCanvasContext('shareCanvas')
-
-      // 底图
-       ctx.drawImage(res[0].path, 0, 0, winWidth, winHeight)
-       ctx.draw()
-
-       // 设置已绘制
-       that.setData({
-          isDrawCanvas: true,
-          canvasBtnHidden: false
-       })
-       wx.hideLoading();
-    })
-
-    /* */
-  },
-  canvasShareImgOld (e) {
+  canvasShareImg (e) {
     var that = this
 
     if (winWidth == 0 || winHeight == 0) {
@@ -550,7 +495,7 @@ Page({
 
     /* */
   },
-  hideCanvasTap (e) {
+  canvasSaveImg1 (e) {
     // console.log('ing1')
     this.setData({
       iscanvas: 'none'

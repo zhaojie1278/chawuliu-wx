@@ -123,18 +123,31 @@ image {
   text-align: center;
   width: 100%;
   background-color:#fff;
-  padding:15rpx 0 0;
+  padding:15rpx 0 5rpx;
 }
 
 .bottom-record .record-txt-intro {
-  color: #999;
+  color: #333;
+  font-size: 15px;
+  padding-bottom: 2rpx;
+  /*border-bottom: 1px solid #ddd;*/
+  width: 70%;
+  margin: 10rpx auto 10rpx;
+}
+.bottom-record .record-txt-intro2 {
+  color: green;
   font-size: 12px;
   padding-bottom: 5rpx;
   /*border-bottom: 1px solid #ddd;*/
   width: 70%;
-  margin: 10rpx auto 15rpx;
+  margin: 0rpx auto 0;
 }
 
 .bottom-record .btn {
   border-top: 0 solid #fff;
+}
+
+.bottom-record image {
+  width:100rpx;
+  height:99rpx;
 }

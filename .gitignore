@@ -3,3 +3,5 @@ help.txt
 account_config.txt
 *.zip
 project.config.json
+
+*.txt

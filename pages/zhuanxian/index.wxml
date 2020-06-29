@@ -26,13 +26,17 @@
 </view>
 <view class="bottom-record">
   <view class="record-txt-intro">
-    点击语音搜索↓↓
+    点击语音搜索
   </view>
   <view>
-    <button wx:if="{{recordNowStart}}" bindtap="recordStartTapFun" class='btn'>语音搜索</button>
+    <!-- <button wx:if="{{recordNowStart}}" bindtap="recordStartTapFun" class='btn'>语音搜索</button> -->
+    <image bindtap="recordStartTapFun" src="{{record_img}}" id="img1"></image>
     <!-- <button bindtap="recordPauseFun" class='btn'>暂停录音</button> -->
-    <button  wx:if="{{!recordNowStart}}" bindtap="recordStopTapFun" class='btn'>说好了</button>
+    <!-- <button  wx:if="{{!recordNowStart}}" bindtap="recordStopTapFun" class='btn'>说好了</button> -->
     <!-- <button bindtap="recordPlayFun" class='btn'>播放录音</button> -->
+  </view>
+  <view class="record-txt-intro2">
+    示例:北京到上海
   </view>
 </view>
 
