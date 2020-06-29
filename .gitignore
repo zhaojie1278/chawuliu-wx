@@ -5,3 +5,9 @@ account_config.txt
 project.config.json
 
 *.txt
+*.doc
+*.xls
+*.xlsx
+*.sql
+*.log
+*.zip
